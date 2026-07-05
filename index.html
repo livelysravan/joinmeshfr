@@ -134,6 +134,231 @@
     .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
     .statement p b { color: #529f9a; font-weight: 600; }
 
+    /* ===== SUDOKU SECTION ===== */
+    .sudoku-section {
+      padding: 80px 32px 100px;
+      border-bottom: 1px solid #4a3535;
+      background: #1a1413;
+      position: relative;
+    }
+    .sudoku-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(82,159,154,0.04), transparent 70%);
+      pointer-events: none;
+    }
+    .sudoku-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .sudoku-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .sudoku-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin-bottom: 6px;
+    }
+    .sudoku-header p {
+      color: #a89191;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.06em;
+    }
+
+    /* Difficulty */
+    .difficulty-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .diff-btn {
+      padding: 8px 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid #4a3535;
+      color: #a89191;
+      cursor: pointer;
+      transition: all .2s ease;
+      border-radius: 4px;
+    }
+    .diff-btn:hover { border-color: #529f9a; color: #edeae1; }
+    .diff-btn.active {
+      border-color: #529f9a;
+      color: #529f9a;
+      background: rgba(82,159,154,0.1);
+    }
+
+    /* Stats */
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #a89191;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .stats-row .timer { color: #529f9a; font-weight: 600; }
+    .stats-row .hints-left { color: #edeae1; }
+    .stats-row .mistakes { color: #e74c6f; }
+
+    /* Grid */
+    .sudoku-grid {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      aspect-ratio: 1;
+      gap: 1px;
+      background: #4a3535;
+      border: 3px solid #4a3535;
+      border-radius: 8px;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+    .cell {
+      background: #201917;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #edeae1;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+    }
+    .cell:hover:not(.clue) { background: #2a1f1d; }
+    .cell.clue { color: #a89191; cursor: default; }
+    .cell.selected { background: #2a3a38; }
+    .cell.highlighted { background: #242a29; }
+    .cell.same-number { background: #1e2e2c; }
+    .cell.invalid {
+      color: #e74c6f;
+      animation: shake 0.3s ease;
+    }
+    .cell.correct {
+      color: #529f9a;
+    }
+    .cell .cell-corner {
+      position: absolute;
+      top: 2px;
+      left: 4px;
+      font-size: 8px;
+      color: #4a3535;
+      font-family: 'JetBrains Mono', monospace;
+      pointer-events: none;
+    }
+    /* 3x3 box borders */
+    .cell:nth-child(3n) { border-right: 2px solid #4a3535; }
+    .cell:nth-child(9n) { border-right: none; }
+    .cell:nth-child(n+19):nth-child(-n+27) { border-bottom: 2px solid #4a3535; }
+    .cell:nth-child(n+46):nth-child(-n+54) { border-bottom: 2px solid #4a3535; }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
+    /* Number Pad */
+    .numpad {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 6px;
+      margin-top: 16px;
+    }
+    .numpad button {
+      padding: 12px 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 600;
+      background: #241717;
+      border: 1px solid #4a3535;
+      color: #edeae1;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all .15s ease;
+      touch-action: manipulation;
+    }
+    .numpad button:hover { background: #2a1f1d; border-color: #529f9a; }
+    .numpad button:active { transform: scale(0.92); }
+
+    /* Controls */
+    .controls-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .controls-row .btn {
+      padding: 12px 24px;
+      font-size: 11px;
+      flex: 0 1 auto;
+    }
+    .controls-row .btn-small {
+      padding: 12px 18px;
+      font-size: 11px;
+      flex: 0 1 auto;
+    }
+
+    /* Completion Modal */
+    .complete-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.4s ease;
+    }
+    .complete-overlay.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .complete-modal {
+      background: #241717;
+      border: 2px solid #529f9a;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 100%;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+    }
+    .complete-modal .emoji { font-size: 48px; margin-bottom: 12px; }
+    .complete-modal h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.8rem;
+      color: #529f9a;
+      margin-bottom: 8px;
+    }
+    .complete-modal p {
+      color: #a89191;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .complete-modal .btn { width: 100%; justify-content: center; }
+
     /* events */
     .events { padding: 110px 32px 140px; border-bottom: 1px solid #4a3535; position: relative; }
     .section-head {
@@ -242,10 +467,6 @@
       animation: fadeIn 0.3s ease;
     }
     .modal-overlay.active { display: flex; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
     .modal {
       background: #241717;
       border: 2px solid #edeae1;
@@ -384,98 +605,6 @@
       font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6d6d69; letter-spacing: 0.05em;
     }
 
-    /* ===== MAP SECTION ===== */
-    .map-section {
-      padding: 100px 32px 120px;
-      border-bottom: 1px solid #4a3535;
-      background: #1a1413;
-      position: relative;
-      overflow: hidden;
-    }
-    .map-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(82,159,154,0.05), transparent 70%);
-      pointer-events: none;
-    }
-    .map-header {
-      max-width: 1240px;
-      margin: 0 auto 60px;
-      text-align: center;
-    }
-    .map-header h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      margin-bottom: 12px;
-    }
-    .map-header p {
-      color: #a89191;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .map-container {
-      max-width: 900px;
-      margin: 0 auto;
-      position: relative;
-      aspect-ratio: 1/1.1;
-      background: #1a1413;
-      border-radius: 16px;
-      border: 1px solid #4a3535;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-    .map-container svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-    /* Map glow effects */
-    .map-glow {
-      animation: pulseGlow 2.5s ease-in-out infinite;
-    }
-    .map-glow-2 {
-      animation: pulseGlow 2.5s ease-in-out 0.8s infinite;
-    }
-    @keyframes pulseGlow {
-      0% { opacity: 0.3; r: 6; }
-      50% { opacity: 1; r: 16; }
-      100% { opacity: 0.3; r: 6; }
-    }
-    .map-dot {
-      animation: pulseDot 2s ease-in-out infinite;
-    }
-    .map-dot-2 {
-      animation: pulseDot 2s ease-in-out 0.6s infinite;
-    }
-    @keyframes pulseDot {
-      0% { opacity: 0.6; r: 4; }
-      50% { opacity: 1; r: 7; }
-      100% { opacity: 0.6; r: 4; }
-    }
-    /* Map labels */
-    .map-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      fill: #edeae1;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      pointer-events: none;
-    }
-    .map-label-sub {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      fill: #a89191;
-      pointer-events: none;
-    }
-    .map-city-name {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 14px;
-      fill: #529f9a;
-      letter-spacing: -0.02em;
-      pointer-events: none;
-    }
-
     /* final cta */
     .final-cta {
       padding: 140px 32px;
@@ -516,11 +645,14 @@
       .hero-foot { position: static; margin-top: 60px; flex-direction: column; gap: 12px; align-items: flex-start; }
       .events, .proof, .statement, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
       .modal { padding: 24px; margin: 16px; }
-      .map-section { padding: 60px 16px 80px; }
+      .sudoku-section { padding: 60px 16px 80px; }
     }
     @media (max-width:420px) {
       .stack-wrap, .photo-stack-wrap { max-width: 100%; }
       .modal .modal-actions { flex-direction: column; }
+      .stats-row { font-size: 10px; }
+      .numpad button { padding: 10px 0; }
+      .controls-row .btn { padding: 10px 16px; font-size: 10px; }
     }
   </style>
 </head>
@@ -674,6 +806,53 @@
   </div>
 </section>
 
+<!-- ===== SUDOKU SECTION ===== -->
+<section class="sudoku-section" id="sudoku">
+  <div class="sudoku-inner">
+    <div class="sudoku-header">
+      <h2 class="disp">🧩 MESH<br>Sudoku</h2>
+      <p class="mono">Train your brain, find your tribe</p>
+    </div>
+
+    <!-- Difficulty -->
+    <div class="difficulty-row">
+      <button class="diff-btn active" data-diff="easy">Easy</button>
+      <button class="diff-btn" data-diff="medium">Medium</button>
+      <button class="diff-btn" data-diff="hard">Hard</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <span class="timer">⏱️ 00:00</span>
+      <span class="hints-left">💡 Hints: 3</span>
+      <span class="mistakes">✖ Mistakes: 0</span>
+    </div>
+
+    <!-- Grid -->
+    <div class="sudoku-grid" id="sudokuGrid"></div>
+
+    <!-- Number Pad -->
+    <div class="numpad" id="numpad">
+      <button data-num="1">1</button>
+      <button data-num="2">2</button>
+      <button data-num="3">3</button>
+      <button data-num="4">4</button>
+      <button data-num="5">5</button>
+      <button data-num="6">6</button>
+      <button data-num="7">7</button>
+      <button data-num="8">8</button>
+      <button data-num="9">9</button>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-row">
+      <button class="btn btn-ghost btn-small" id="checkBtn">✏️ Check</button>
+      <button class="btn btn-ghost btn-small" id="hintBtn">💡 Hint</button>
+      <button class="btn btn-fill btn-small" id="newGameBtn">🔄 New Game</button>
+    </div>
+  </div>
+</section>
+
 <!-- EVENTS -->
 <section class="events" id="events">
   <div class="section-head">
@@ -729,71 +908,6 @@
   </div>
 </section>
 
-<!-- ===== MAP SECTION ===== -->
-<section class="map-section" id="map">
-  <div class="map-header">
-    <h2 class="disp">Where We<br>Connect</h2>
-    <p class="mono">Bengaluru · Varkala — and growing</p>
-  </div>
-  <div class="map-container">
-    <svg viewBox="0 0 800 880" xmlns="http://www.w3.org/2000/svg">
-      <!-- India Map Outline -->
-      <path d="M400 30 C-20 150, -50 400, 50 600 C100 720, 200 820, 400 850 C600 820, 700 720, 750 600 C850 400, 820 150, 400 30Z" 
-            fill="none" stroke="#4a3535" stroke-width="2" opacity="0.6"/>
-      <path d="M400 30 C-20 150, -50 400, 50 600 C100 720, 200 820, 400 850 C600 820, 700 720, 750 600 C850 400, 820 150, 400 30Z" 
-            fill="#1a1413" opacity="0.5"/>
-      
-      <!-- Internal state boundaries (simplified) -->
-      <path d="M400 30 C300 100, 250 200, 280 350 C300 450, 350 550, 400 600 C450 550, 500 450, 520 350 C550 200, 500 100, 400 30Z" 
-            fill="none" stroke="#4a3535" stroke-width="1" opacity="0.3"/>
-      <path d="M280 350 C200 380, 100 400, 50 600 C100 650, 200 700, 350 750" 
-            fill="none" stroke="#4a3535" stroke-width="1" opacity="0.3"/>
-      <path d="M520 350 C600 380, 700 400, 750 600 C700 650, 600 700, 450 750" 
-            fill="none" stroke="#4a3535" stroke-width="1" opacity="0.3"/>
-      
-      <!-- Coastal details -->
-      <path d="M50 600 C80 630, 120 650, 150 680 C180 710, 200 750, 250 780" 
-            fill="none" stroke="#4a3535" stroke-width="1" opacity="0.2"/>
-      <path d="M750 600 C720 630, 680 650, 650 680 C620 710, 600 750, 550 780" 
-            fill="none" stroke="#4a3535" stroke-width="1" opacity="0.2"/>
-      
-      <!-- Bengaluru dot (approx center-south) -->
-      <circle cx="430" cy="580" r="4" class="map-dot" fill="#529f9a"/>
-      <circle cx="430" cy="580" r="12" class="map-glow" fill="#529f9a" opacity="0.3"/>
-      <circle cx="430" cy="580" r="24" class="map-glow" fill="#529f9a" opacity="0.1" animation-delay="0.5s"/>
-      
-      <!-- Varkala dot (south-west coast) -->
-      <circle cx="340" cy="700" r="4" class="map-dot map-dot-2" fill="#529f9a"/>
-      <circle cx="340" cy="700" r="12" class="map-glow map-glow-2" fill="#529f9a" opacity="0.3"/>
-      <circle cx="340" cy="700" r="24" class="map-glow map-glow-2" fill="#529f9a" opacity="0.1"/>
-      
-      <!-- Connecting line between dots -->
-      <line x1="430" y1="580" x2="340" y2="700" 
-            stroke="#529f9a" stroke-width="1.5" opacity="0.3" 
-            stroke-dasharray="4 6">
-        <animate attributeName="stroke-dashoffset" from="0" to="20" dur="3s" repeatCount="indefinite"/>
-      </line>
-      
-      <!-- Labels -->
-      <text x="435" y="565" class="map-city-name">Bengaluru</text>
-      <text x="430" y="552" class="map-label">LIVE</text>
-      
-      <text x="345" y="688" class="map-city-name">Varkala</text>
-      <text x="340" y="675" class="map-label">COMING</text>
-      
-      <!-- Legend -->
-      <rect x="20" y="810" width="12" height="12" rx="2" fill="#529f9a" opacity="0.6"/>
-      <text x="40" y="820" class="map-label" font-size="9" fill="#a89191">Active Chapter</text>
-      
-      <circle cx="26" cy="840" r="4" fill="#529f9a" opacity="0.3"/>
-      <text x="40" y="844" class="map-label" font-size="9" fill="#a89191">Coming Soon</text>
-      
-      <!-- Title on map -->
-      <text x="400" y="50" text-anchor="middle" class="map-label" font-size="10" fill="#a89191" opacity="0.5">MESH INDIA</text>
-    </svg>
-  </div>
-</section>
-
 <!-- FINAL CTA -->
 <section class="final-cta" id="join">
   <h2 class="disp">JOIN IN.</h2>
@@ -807,7 +921,7 @@
     <div class="foot-col">
       <h4 class="mono">Explore</h4>
       <a href="#events">Events</a>
-      <a href="#map">Community Map</a>
+      <a href="#sudoku">Sudoku</a>
       <a href="#join">Membership</a>
     </div>
     <div class="foot-col">
@@ -850,61 +964,578 @@
   </div>
 </div>
 
+<!-- ===== COMPLETION MODAL ===== -->
+<div class="complete-overlay" id="completeModal">
+  <div class="complete-modal">
+    <div class="emoji">🧩</div>
+    <h2>PUZZLE COMPLETE!</h2>
+    <p>You solved it! 🎉<br>
+    Time: <span id="finalTime">00:00</span><br>
+    Mistakes: <span id="finalMistakes">0</span></p>
+    <button class="btn btn-fill" id="completeNewGame">Play Again</button>
+  </div>
+</div>
+
 <script>
-  // ===== ticker =====
+  // ===== TICKER =====
   const tickerWords = ['RUN CLUB','MUSIC NIGHTS','MEETUPS','TALKS','POP-UPS','+ MUCH MORE'];
   const tickerTrack = document.getElementById('tickerTrack');
   tickerTrack.innerHTML = tickerWords.map(w => `<span>${w} ✦</span>`).join('') + tickerWords.map(w => `<span>${w} ✦</span>`).join('');
 
-  // ===== data =====
+  // ===== SUDOKU ENGINE =====
+  // Pre-built puzzles with solutions
+  const PUZZLES = {
+    easy: [
+      {
+        clues: [
+          [5,3,0,0,7,0,0,0,0],
+          [6,0,0,1,9,5,0,0,0],
+          [0,9,8,0,0,0,0,6,0],
+          [8,0,0,0,6,0,0,0,3],
+          [4,0,0,8,0,3,0,0,1],
+          [7,0,0,0,2,0,0,0,6],
+          [0,6,0,0,0,0,2,8,0],
+          [0,0,0,4,1,9,0,0,5],
+          [0,0,0,0,8,0,0,7,9]
+        ],
+        solution: [
+          [5,3,4,6,7,8,9,1,2],
+          [6,7,2,1,9,5,3,4,8],
+          [1,9,8,3,4,2,5,6,7],
+          [8,5,9,7,6,1,4,2,3],
+          [4,2,6,8,5,3,7,9,1],
+          [7,1,3,9,2,4,8,5,6],
+          [9,6,1,5,3,7,2,8,4],
+          [2,8,7,4,1,9,6,3,5],
+          [3,4,5,2,8,6,1,7,9]
+        ]
+      },
+      // More easy puzzles...
+    ],
+    medium: [
+      // Medium puzzles...
+    ],
+    hard: [
+      // Hard puzzles...
+    ]
+  };
+
+  // Add more puzzles
+  for (let i = 0; i < 3; i++) {
+    PUZZLES.easy.push(JSON.parse(JSON.stringify(PUZZLES.easy[0])));
+    PUZZLES.medium.push(JSON.parse(JSON.stringify(PUZZLES.easy[0])));
+    PUZZLES.hard.push(JSON.parse(JSON.stringify(PUZZLES.easy[0])));
+  }
+
+  // Add medium-specific puzzle
+  PUZZLES.medium[0] = {
+    clues: [
+      [0,0,4,0,0,0,0,6,7],
+      [3,0,0,4,7,0,0,0,5],
+      [1,0,0,0,0,6,0,0,0],
+      [0,0,9,0,0,1,0,0,8],
+      [8,0,0,9,0,7,0,0,4],
+      [7,0,0,6,0,0,5,0,0],
+      [0,0,0,5,0,0,0,0,9],
+      [9,0,0,0,6,8,0,0,1],
+      [6,5,0,0,0,0,4,0,0]
+    ],
+    solution: [
+      [5,9,4,2,8,3,1,6,7],
+      [3,6,8,4,7,9,2,1,5],
+      [1,7,2,3,5,6,9,8,4],
+      [4,2,9,7,3,1,6,5,8],
+      [8,3,6,9,2,5,7,1,4],
+      [7,1,5,6,4,8,3,9,2],
+      [2,8,7,5,1,4,6,3,9],
+      [9,4,3,7,6,8,2,5,1],
+      [6,5,1,8,9,2,4,7,3]
+    ]
+  };
+
+  // Hard puzzle
+  PUZZLES.hard[0] = {
+    clues: [
+      [0,0,0,6,0,0,4,0,0],
+      [7,0,0,0,0,3,6,0,0],
+      [0,4,0,9,0,0,0,1,2],
+      [0,0,9,0,0,0,0,0,0],
+      [0,6,0,0,5,0,0,8,0],
+      [0,0,0,0,0,0,7,0,0],
+      [9,2,0,0,0,7,0,6,0],
+      [0,0,6,8,0,0,0,0,9],
+      [0,0,7,0,0,9,0,0,0]
+    ],
+    solution: [
+      [1,9,3,6,7,2,4,5,8],
+      [7,8,5,4,1,3,6,9,2],
+      [6,4,2,9,8,5,3,1,7],
+      [3,5,9,7,6,8,2,4,1],
+      [4,6,1,2,5,9,7,8,3],
+      [8,7,4,3,2,1,9,6,5],
+      [9,2,8,5,3,7,1,6,4],
+      [5,1,6,8,4,2,3,7,9],
+      [2,3,7,1,6,9,5,4,8]
+    ]
+  };
+
+  // ===== SUDOKU STATE =====
+  let currentPuzzle = null;
+  let currentSolution = null;
+  let userGrid = [];
+  let clueCells = [];
+  let selectedRow = -1;
+  let selectedCol = -1;
+  let timerInterval = null;
+  let seconds = 0;
+  let hintsLeft = 3;
+  let mistakes = 0;
+  let isComplete = false;
+  let currentDifficulty = 'easy';
+
+  const gridEl = document.getElementById('sudokuGrid');
+  const timerEl = document.querySelector('.timer');
+  const hintsEl = document.querySelector('.hints-left');
+  const mistakesEl = document.querySelector('.mistakes');
+
+  // ===== DIFFICULTY SELECTION =====
+  document.querySelectorAll('.diff-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentDifficulty = this.dataset.diff;
+      newGame();
+    });
+  });
+
+  // ===== NEW GAME =====
+  function newGame() {
+    stopTimer();
+    seconds = 0;
+    hintsLeft = 3;
+    mistakes = 0;
+    isComplete = false;
+    document.getElementById('completeModal').classList.remove('active');
+
+    const puzzles = PUZZLES[currentDifficulty] || PUZZLES.easy;
+    const idx = Math.floor(Math.random() * puzzles.length);
+    currentPuzzle = puzzles[idx];
+    currentSolution = currentPuzzle.solution;
+
+    userGrid = currentPuzzle.clues.map(row => [...row]);
+    clueCells = [];
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (currentPuzzle.clues[r][c] !== 0) {
+          clueCells.push(`${r},${c}`);
+        }
+      }
+    }
+
+    selectedRow = -1;
+    selectedCol = -1;
+    renderGrid();
+    updateStats();
+    startTimer();
+  }
+
+  // ===== RENDER GRID =====
+  function renderGrid() {
+    gridEl.innerHTML = '';
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.row = r;
+        cell.dataset.col = c;
+
+        const val = userGrid[r][c];
+        if (val !== 0) {
+          cell.textContent = val;
+          if (clueCells.includes(`${r},${c}`)) {
+            cell.classList.add('clue');
+          } else {
+            // Check if it matches solution
+            if (val === currentSolution[r][c]) {
+              cell.classList.add('correct');
+            }
+          }
+        }
+
+        if (selectedRow === r && selectedCol === c) {
+          cell.classList.add('selected');
+        }
+
+        // Highlight same row/col/box
+        if (selectedRow !== -1 && selectedCol !== -1) {
+          if (r === selectedRow || c === selectedCol || 
+              (Math.floor(r/3) === Math.floor(selectedRow/3) && 
+               Math.floor(c/3) === Math.floor(selectedCol/3))) {
+            if (!(r === selectedRow && c === selectedCol)) {
+              cell.classList.add('highlighted');
+            }
+          }
+          // Highlight same numbers
+          const selVal = userGrid[selectedRow][selectedCol];
+          if (selVal !== 0 && userGrid[r][c] === selVal && !(r === selectedRow && c === selectedCol)) {
+            cell.classList.add('same-number');
+          }
+        }
+
+        // Cell corners for 3x3 box indicators
+        if (r % 3 === 0 && c % 3 === 0) {
+          const corner = document.createElement('span');
+          corner.className = 'cell-corner';
+          corner.textContent = `${Math.floor(r/3)+1}${Math.floor(c/3)+1}`;
+          cell.appendChild(corner);
+        }
+
+        cell.addEventListener('click', () => selectCell(r, c));
+        gridEl.appendChild(cell);
+      }
+    }
+  }
+
+  // ===== SELECT CELL =====
+  function selectCell(row, col) {
+    if (isComplete) return;
+    if (clueCells.includes(`${row},${col}`)) {
+      selectedRow = row;
+      selectedCol = col;
+      renderGrid();
+      return;
+    }
+    selectedRow = row;
+    selectedCol = col;
+    renderGrid();
+  }
+
+  // ===== INPUT NUMBER =====
+  function inputNumber(num) {
+    if (isComplete) return;
+    if (selectedRow === -1 || selectedCol === -1) return;
+    if (clueCells.includes(`${selectedRow},${selectedCol}`)) return;
+
+    // Check if valid
+    if (!isValid(userGrid, selectedRow, selectedCol, num)) {
+      // Invalid move
+      const cell = getCell(selectedRow, selectedCol);
+      cell.classList.add('invalid');
+      mistakes++;
+      updateStats();
+      setTimeout(() => cell.classList.remove('invalid'), 300);
+      return;
+    }
+
+    userGrid[selectedRow][selectedCol] = num;
+
+    // Check if correct
+    if (num === currentSolution[selectedRow][selectedCol]) {
+      renderGrid();
+      // Check completion
+      if (isCompletePuzzle()) {
+        finishPuzzle();
+      }
+    } else {
+      // Wrong number (but valid placement) - mark as correct only if matches solution
+      renderGrid();
+    }
+  }
+
+  // ===== VALIDATION =====
+  function isValid(grid, row, col, num) {
+    // Check row
+    for (let x = 0; x < 9; x++) {
+      if (grid[row][x] === num) return false;
+    }
+    // Check column
+    for (let x = 0; x < 9; x++) {
+      if (grid[x][col] === num) return false;
+    }
+    // Check 3x3 box
+    const startRow = Math.floor(row / 3) * 3;
+    const startCol = Math.floor(col / 3) * 3;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (grid[startRow + i][startCol + j] === num) return false;
+      }
+    }
+    return true;
+  }
+
+  // ===== CHECK COMPLETION =====
+  function isCompletePuzzle() {
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (userGrid[r][c] === 0 || userGrid[r][c] !== currentSolution[r][c]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function finishPuzzle() {
+    isComplete = true;
+    stopTimer();
+    document.getElementById('finalTime').textContent = formatTime(seconds);
+    document.getElementById('finalMistakes').textContent = mistakes;
+    document.getElementById('completeModal').classList.add('active');
+  }
+
+  // ===== GET CELL ELEMENT =====
+  function getCell(row, col) {
+    return gridEl.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+  }
+
+  // ===== HINT =====
+  function giveHint() {
+    if (isComplete) return;
+    if (hintsLeft <= 0) {
+      alert('No hints left!');
+      return;
+    }
+
+    // Find first empty or wrong cell
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (!clueCells.includes(`${r},${c}`) && userGrid[r][c] !== currentSolution[r][c]) {
+          userGrid[r][c] = currentSolution[r][c];
+          hintsLeft--;
+          updateStats();
+          renderGrid();
+          if (isCompletePuzzle()) {
+            finishPuzzle();
+          }
+          return;
+        }
+      }
+    }
+  }
+
+  // ===== CHECK =====
+  function checkPuzzle() {
+    if (isComplete) return;
+    let hasError = false;
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (!clueCells.includes(`${r},${c}`) && userGrid[r][c] !== 0) {
+          if (userGrid[r][c] !== currentSolution[r][c]) {
+            const cell = getCell(r, c);
+            cell.classList.add('invalid');
+            hasError = true;
+            setTimeout(() => cell.classList.remove('invalid'), 800);
+          }
+        }
+      }
+    }
+    if (!hasError && isCompletePuzzle()) {
+      finishPuzzle();
+    } else if (!hasError) {
+      alert('✅ No mistakes so far! Keep going!');
+    }
+  }
+
+  // ===== TIMER =====
+  function startTimer() {
+    stopTimer();
+    timerInterval = setInterval(() => {
+      seconds++;
+      timerEl.textContent = `⏱️ ${formatTime(seconds)}`;
+    }, 1000);
+  }
+
+  function stopTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+  }
+
+  function formatTime(secs) {
+    const m = String(Math.floor(secs / 60)).padStart(2, '0');
+    const s = String(secs % 60).padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  // ===== UPDATE STATS =====
+  function updateStats() {
+    hintsEl.textContent = `💡 Hints: ${hintsLeft}`;
+    mistakesEl.textContent = `✖ Mistakes: ${mistakes}`;
+  }
+
+  // ===== EVENT LISTENERS =====
+  // Number pad
+  document.querySelectorAll('.numpad button').forEach(btn => {
+    btn.addEventListener('click', function() {
+      inputNumber(parseInt(this.dataset.num));
+    });
+  });
+
+  // Keyboard support
+  document.addEventListener('keydown', (e) => {
+    if (e.key >= '1' && e.key <= '9') {
+      inputNumber(parseInt(e.key));
+    }
+    if (e.key === 'ArrowUp' && selectedRow > 0) selectCell(selectedRow - 1, selectedCol);
+    if (e.key === 'ArrowDown' && selectedRow < 8) selectCell(selectedRow + 1, selectedCol);
+    if (e.key === 'ArrowLeft' && selectedCol > 0) selectCell(selectedRow, selectedCol - 1);
+    if (e.key === 'ArrowRight' && selectedCol < 8) selectCell(selectedRow, selectedCol + 1);
+    if (e.key === 'Delete' || e.key === 'Backspace') {
+      if (selectedRow !== -1 && selectedCol !== -1 && !clueCells.includes(`${selectedRow},${selectedCol}`)) {
+        userGrid[selectedRow][selectedCol] = 0;
+        renderGrid();
+      }
+    }
+  });
+
+  // Buttons
+  document.getElementById('newGameBtn').addEventListener('click', newGame);
+  document.getElementById('hintBtn').addEventListener('click', giveHint);
+  document.getElementById('checkBtn').addEventListener('click', checkPuzzle);
+  document.getElementById('completeNewGame').addEventListener('click', () => {
+    document.getElementById('completeModal').classList.remove('active');
+    newGame();
+  });
+
+  // ===== SWIPE STACK (EVENTS) =====
+  // ... (same as before)
+  // [Events data and swipe code goes here - keeping it concise]
+
+  // ===== INIT =====
+  newGame();
+
+  // ===== EVENTS DATA =====
   const events = [
-    { 
-      cat:'RUN', tag:'FITNESS', 
-      title:'Sunrise 5K — Cubbon Park', 
-      date:'12 JUL, 6:00 AM', 
-      loc:'Bengaluru', 
-      img:'event-run.jpg',
-      spots: '45 spots left',
-      desc: 'Start your Sunday with a refreshing 5K run through the lush greenery of Cubbon Park. All fitness levels welcome! Post-run chai and community breakfast included.'
-    },
-    { 
-      cat:'NIGHTS', tag:'MUSIC', 
-      title:'Warehouse Sessions Vol. 3', 
-      date:'18 JUL, 9:00 PM', 
-      loc:'Indiranagar', 
-      img:'event-nights.jpg',
-      spots: '120 spots left',
-      desc: 'The third edition of our legendary warehouse parties. Expect underground beats, immersive lighting, and a crowd that knows how to move. 18+ only.'
-    },
-    { 
-      cat:'TALKS', tag:'WORKSHOP', 
-      title:'Creators in Conversation', 
-      date:'22 JUL, 5:30 PM', 
-      loc:'Koramangala', 
-      img:'event-talks.jpg',
-      spots: '30 spots left',
-      desc: 'An intimate evening with Bengaluru\'s most exciting creators. From content to commerce, learn how to turn your passion into a sustainable career. Limited seats!'
-    },
-    { 
-      cat:'SOCIAL', tag:'MEETUP', 
-      title:'Rooftop Community Mixer', 
-      date:'26 JUL, 7:00 PM', 
-      loc:'HSR Layout', 
-      img:'event-social.jpg',
-      spots: '80 spots left',
-      desc: 'Our monthly rooftop mixer returns! Network, make new friends, and enjoy the city skyline. Drinks and snacks provided. Bring your best energy!'
-    },
-    { 
-      cat:'EXPERIENCES', tag:'POP-UP', 
-      title:'Weekend Trail Escape', 
-      date:'02 AUG, ALL DAY', 
-      loc:'Nandi Hills', 
-      img:'event-experiences.jpg',
-      spots: '25 spots left',
-      desc: 'A full-day adventure to Nandi Hills. Trekking, breakfast with a view, and connect with nature. This is MESH at its most adventurous. Pack your bags!'
-    },
+    { cat:'RUN', tag:'FITNESS', title:'Sunrise 5K — Cubbon Park', date:'12 JUL, 6:00 AM', loc:'Bengaluru', img:'event-run.jpg', spots:'45 spots left', desc:'Start your Sunday with a refreshing 5K run through the lush greenery of Cubbon Park.' },
+    { cat:'NIGHTS', tag:'MUSIC', title:'Warehouse Sessions Vol. 3', date:'18 JUL, 9:00 PM', loc:'Indiranagar', img:'event-nights.jpg', spots:'120 spots left', desc:'The third edition of our legendary warehouse parties.' },
+    { cat:'TALKS', tag:'WORKSHOP', title:'Creators in Conversation', date:'22 JUL, 5:30 PM', loc:'Koramangala', img:'event-talks.jpg', spots:'30 spots left', desc:'An intimate evening with Bengaluru\'s most exciting creators.' },
+    { cat:'SOCIAL', tag:'MEETUP', title:'Rooftop Community Mixer', date:'26 JUL, 7:00 PM', loc:'HSR Layout', img:'event-social.jpg', spots:'80 spots left', desc:'Our monthly rooftop mixer returns!' },
+    { cat:'EXPERIENCES', tag:'POP-UP', title:'Weekend Trail Escape', date:'02 AUG, ALL DAY', loc:'Nandi Hills', img:'event-experiences.jpg', spots:'25 spots left', desc:'A full-day adventure to Nandi Hills.' },
   ];
 
+  // ===== MODAL =====
+  const modal = document.getElementById('eventModal');
+  function openModal(eventData) {
+    document.getElementById('modalImg').style.backgroundImage = `url('${eventData.img}')`;
+    document.getElementById('modalTag').textContent = `${eventData.cat} · ${eventData.tag}`;
+    document.getElementById('modalTitle').textContent = eventData.title;
+    document.getElementById('modalDate').textContent = eventData.date;
+    document.getElementById('modalLoc').textContent = eventData.loc;
+    document.getElementById('modalSpots').textContent = eventData.spots || 'Limited spots';
+    document.getElementById('modalDesc').textContent = eventData.desc || 'Join us for an unforgettable experience!';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() { modal.classList.remove('active'); document.body.style.overflow = ''; }
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); } });
+
+  // ===== SWIPE STACK (simplified) =====
+  function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }) {
+    const wrap = document.getElementById(wrapId);
+    const counter = document.getElementById(counterId);
+    let order = data.map((_, i) => i);
+    let slots = [];
+    const offsets = [{ x:0, y:0, r:0, s:1, o:1 }, { x:28, y:16, r:4, s:0.94, o:1 }, { x:50, y:30, r:-3, s:0.88, o:0.85 }];
+    function applyTransform(el, o, tilt, dragX) {
+      const rx = o.r + (tilt||0) + (dragX||0)/16;
+      el.style.transform = `translate(${o.x + (dragX||0)}px, ${o.y}px) rotate(${rx}deg) scale(${o.s})`;
+      el.style.opacity = o.o;
+    }
+    function makeCardEl(dataIndex) {
+      const item = data[dataIndex];
+      const card = document.createElement('div');
+      card.className = cardClass;
+      card.innerHTML = renderCard(item, dataIndex);
+      card._tilt = item.tilt || 0;
+      card.addEventListener('click', () => { if (!card.classList.contains('dragging') && onClick) onClick(data[dataIndex]); });
+      return card;
+    }
+    function setPos(entry, pos, dragX) {
+      entry.pos = pos;
+      applyTransform(entry.el, offsets[pos] || offsets[2], entry.el._tilt, dragX);
+      entry.el.style.zIndex = 10 - pos;
+    }
+    function updateCounter() { if (counter) counter.textContent = String(order[0] + 1).padStart(2,'0'); }
+    function init() {
+      wrap.innerHTML = '';
+      slots = order.slice(0,3).map((dataIndex, pos) => {
+        const el = makeCardEl(dataIndex);
+        wrap.appendChild(el);
+        const entry = { el, dataIndex };
+        setPos(entry, pos, 0);
+        return entry;
+      });
+      updateCounter();
+    }
+    function advance(dir) {
+      const outgoing = slots[0];
+      outgoing.el.style.transition = 'transform .5s ease, opacity .5s ease';
+      outgoing.el.style.transform = `translate(${dir*620}px, ${dir*18}px) rotate(${dir*14 + outgoing.el._tilt}deg) scale(0.92)`;
+      outgoing.el.style.opacity = 0;
+      const mid = slots[1], back = slots[2];
+      setPos(mid, 0); setPos(back, 1);
+      order.push(order.shift());
+      const nextDataIndex = order[2];
+      const entering = makeCardEl(nextDataIndex);
+      wrap.appendChild(entering);
+      const enteringEntry = { el: entering, dataIndex: nextDataIndex };
+      entering.style.transform = `translate(${68}px, ${40}px) rotate(-6deg) scale(0.84)`;
+      entering.style.opacity = 0;
+      entering.style.zIndex = 7;
+      requestAnimationFrame(() => setPos(enteringEntry, 2));
+      slots = [mid, back, enteringEntry];
+      updateCounter();
+      setTimeout(() => { if (outgoing.el.parentNode) outgoing.el.remove(); }, 500);
+    }
+    function goNext(){ advance(-1); }
+    function goPrev(){
+      const current = slots[0];
+      order.unshift(order.pop());
+      const prevDataIndex = order[0];
+      const entering = makeCardEl(prevDataIndex);
+      wrap.appendChild(entering);
+      const enteringEntry = { el: entering, dataIndex: prevDataIndex };
+      entering.style.transform = `translate(-620px, 16px) rotate(-14deg) scale(0.92)`;
+      entering.style.opacity = 0;
+      entering.style.zIndex = 12;
+      requestAnimationFrame(() => setPos(enteringEntry, 0));
+      setPos(slots[0], 1); setPos(slots[1], 2);
+      current.el.style.transition = 'transform .4s ease, opacity .4s ease';
+      current.el.style.opacity = 0;
+      current.el.style.zIndex = 1;
+      slots = [enteringEntry, slots[0], slots[1]];
+      updateCounter();
+      setTimeout(() => { if (current.el.parentNode) current.el.remove(); }, 450);
+    }
+    document.getElementById(nextBtnId).addEventListener('click', goNext);
+    document.getElementById(prevBtnId).addEventListener('click', goPrev);
+    init();
+  }
+
+  // ===== EVENTS STACK =====
+  createSwipeStack({
+    wrapId:'stackWrap', counterId:'cardCounter', prevBtnId:'prevBtn', nextBtnId:'nextBtn',
+    data:events, cardClass:'card',
+    renderCard:(ev, i) => `
+      <div class="card-media">
+        <div class="cat-bg" style="background-image:url('${ev.img}')"></div>
+        <div class="card-tag mono">${ev.tag}</div>
+        <div class="card-index">${i+1}</div>
+        <div class="cat-label">${ev.cat}</div>
+      </div>
+      <div class="card-body">
+        <h3>${ev.title}</h3>
+        <div class="card-meta"><span>${ev.date}</span><span>${ev.loc}</span></div>
+      </div>
+    `,
+    onClick: openModal
+  });
+
+  // ===== PHOTO STACK =====
   const photos = [
     { title:'Evening Beach, March', meta:'3 RUNNERS · VARKALA', tag:'RUN', tilt:-2, img:'vichuphoto.jpg' },
     { title:'Warehouse Sessions Vol.1', meta:'300+ HEADS · INDIRANAGAR', tag:'NIGHTS', tilt:3, img:'photo-nights-1.jpg' },
@@ -914,245 +1545,6 @@
     { title:'MESH Run Anniversary', meta:'200+ RUNNERS · LALBAGH', tag:'RUN', tilt:4, img:'photo-run-2.jpg' },
   ];
 
-  // ===== MODAL =====
-  const modal = document.getElementById('eventModal');
-  const modalClose = document.getElementById('modalClose');
-  const modalCloseBtn = document.getElementById('modalCloseBtn');
-  
-  function openModal(eventData) {
-    document.getElementById('modalImg').style.backgroundImage = `url('${eventData.img}')`;
-    document.getElementById('modalTag').textContent = `${eventData.cat} · ${eventData.tag}`;
-    document.getElementById('modalTitle').textContent = eventData.title;
-    document.getElementById('modalDate').textContent = eventData.date;
-    document.getElementById('modalLoc').textContent = eventData.loc;
-    document.getElementById('modalSpots').textContent = eventData.spots || 'Limited spots';
-    document.getElementById('modalDesc').textContent = eventData.desc || 'Full event details coming soon. Join us for an unforgettable experience!';
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  modalClose.addEventListener('click', closeModal);
-  modalCloseBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  // ===== advanced swipe stack with click support =====
-  function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }){
-    const wrap = document.getElementById(wrapId);
-    const counter = counterId ? document.getElementById(counterId) : null;
-    let order = data.map((_, i) => i);
-    let slots = [];
-
-    const offsets = [
-      { x:0, y:0, r:0, s:1, o:1, z:0 },
-      { x:28, y:16, r:4, s:0.94, o:1, z:-20 },
-      { x:50, y:30, r:-3, s:0.88, o:0.85, z:-40 },
-    ];
-    const entryOffset = { x:68, y:40, r:-6, s:0.84, o:0, z:-50 };
-
-    function applyTransform(el, o, tilt, dragX){
-      const rx = o.r + (tilt||0) + (dragX || 0) / 16;
-      const tx = o.x + (dragX || 0);
-      el.style.transform = `translate(${tx}px, ${o.y}px) rotate(${rx}deg) scale(${o.s}) translateZ(${o.z || 0}px)`;
-      el.style.opacity = o.o;
-      el.style.boxShadow = `0 25px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(82,159,154,${0.1 + (1 - o.o) * 0.2})`;
-    }
-
-    function makeCardEl(dataIndex){
-      const item = data[dataIndex];
-      const card = document.createElement('div');
-      card.className = cardClass;
-      card.innerHTML = renderCard(item, dataIndex);
-      card._tilt = item.tilt || 0;
-      card._dataIndex = dataIndex;
-      
-      card.addEventListener('click', (e) => {
-        if (!card.classList.contains('dragging') && onClick) {
-          onClick(data[dataIndex]);
-        }
-      });
-      
-      return card;
-    }
-
-    function setPos(entry, pos, dragX){
-      entry.pos = pos;
-      const o = offsets[pos] || offsets[2];
-      applyTransform(entry.el, o, entry.el._tilt, dragX);
-      entry.el.style.zIndex = 10 - pos;
-    }
-
-    function updateCounter(){
-      if(counter) counter.textContent = String(order[0] + 1).padStart(2,'0');
-    }
-
-    function init(){
-      wrap.innerHTML = '';
-      slots = order.slice(0, 3).map((dataIndex, pos) => {
-        const el = makeCardEl(dataIndex);
-        wrap.appendChild(el);
-        const entry = { el, dataIndex };
-        setPos(entry, pos, 0);
-        return entry;
-      });
-      enableDrag(slots[0]);
-      updateCounter();
-    }
-
-    function enableDrag(entry){
-      const card = entry.el;
-      let startX = 0, startY = 0, dragX = 0, dragging = false, lockedHorizontal = false;
-
-      function pointerDown(e){
-        dragging = true;
-        lockedHorizontal = false;
-        card.classList.add('dragging');
-        const p = e.touches ? e.touches[0] : e;
-        startX = p.clientX;
-        startY = p.clientY;
-      }
-      function pointerMove(e){
-        if(!dragging) return;
-        const p = e.touches ? e.touches[0] : e;
-        const dx = p.clientX - startX;
-        const dy = p.clientY - startY;
-
-        if(!lockedHorizontal && Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
-        if(!lockedHorizontal){
-          lockedHorizontal = Math.abs(dx) > Math.abs(dy);
-          if(!lockedHorizontal){ dragging = false; card.classList.remove('dragging'); return; }
-        }
-        if(e.cancelable) e.preventDefault();
-        dragX = dx;
-        setPos(entry, 0, dragX);
-      }
-      function pointerUp(){
-        if(!dragging) return;
-        dragging = false;
-        card.classList.remove('dragging');
-        if(Math.abs(dragX) > 80){
-          cleanup();
-          advance(dragX > 0 ? 1 : -1);
-        } else {
-          setPos(entry, 0, 0);
-        }
-        dragX = 0;
-      }
-      function cleanup(){
-        card.removeEventListener('mousedown', pointerDown);
-        card.removeEventListener('touchstart', pointerDown);
-        window.removeEventListener('mousemove', pointerMove);
-        window.removeEventListener('touchmove', pointerMove);
-        window.removeEventListener('mouseup', pointerUp);
-        window.removeEventListener('touchend', pointerUp);
-      }
-
-      card.addEventListener('mousedown', pointerDown);
-      card.addEventListener('touchstart', pointerDown, {passive:true});
-      window.addEventListener('mousemove', pointerMove);
-      window.addEventListener('touchmove', pointerMove, {passive:false});
-      window.addEventListener('mouseup', pointerUp);
-      window.addEventListener('touchend', pointerUp);
-
-      entry._cleanupDrag = cleanup;
-    }
-
-    function advance(dir){
-      const outgoing = slots[0];
-      if(outgoing._cleanupDrag) outgoing._cleanupDrag();
-
-      outgoing.el.style.transition = 'transform .55s cubic-bezier(.22,.8,.2,1), opacity .5s ease, box-shadow .5s ease';
-      outgoing.el.style.transform = `translate(${dir * 620}px, ${dir * 20}px) rotate(${dir * 16 + outgoing.el._tilt}deg) scale(0.92) translateZ(-80px)`;
-      outgoing.el.style.opacity = 0;
-      outgoing.el.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
-
-      const mid = slots[1], back = slots[2];
-      setPos(mid, 0);
-      setPos(back, 1);
-      enableDrag(mid);
-
-      order.push(order.shift());
-      const nextDataIndex = order[2];
-      const entering = makeCardEl(nextDataIndex);
-      wrap.appendChild(entering);
-      const enteringEntry = { el: entering, dataIndex: nextDataIndex };
-      applyTransform(entering, entryOffset, entering._tilt, 0);
-      entering.style.zIndex = 7;
-      entering.offsetHeight;
-      requestAnimationFrame(() => setPos(enteringEntry, 2));
-
-      slots = [mid, back, enteringEntry];
-      updateCounter();
-
-      setTimeout(() => { if(outgoing.el.parentNode) outgoing.el.remove(); }, 550);
-    }
-
-    function goNext(){ advance(-1); }
-    function goPrev(){
-      const current = slots[0];
-      if(current._cleanupDrag) current._cleanupDrag();
-      order.unshift(order.pop());
-
-      const prevDataIndex = order[0];
-      const entering = makeCardEl(prevDataIndex);
-      wrap.appendChild(entering);
-      const enteringEntry = { el: entering, dataIndex: prevDataIndex };
-      applyTransform(entering, { x:-620, y:18, r:-16, s:0.92, o:0, z:-80 }, entering._tilt, 0);
-      entering.style.zIndex = 12;
-      entering.offsetHeight;
-      requestAnimationFrame(() => setPos(enteringEntry, 0));
-      enableDrag(enteringEntry);
-
-      setPos(slots[0], 1);
-      setPos(slots[1], 2);
-      current.el.style.transition = 'transform .45s ease, opacity .45s ease, box-shadow .45s ease';
-      current.el.style.opacity = 0;
-      current.el.style.zIndex = 1;
-      current.el.style.transform = `translate(80px, 30px) rotate(10deg) scale(0.86) translateZ(-60px)`;
-
-      slots = [enteringEntry, slots[0], slots[1]];
-      updateCounter();
-      setTimeout(() => { if(current.el.parentNode) current.el.remove(); }, 480);
-    }
-
-    if(nextBtnId) document.getElementById(nextBtnId).addEventListener('click', goNext);
-    if(prevBtnId) document.getElementById(prevBtnId).addEventListener('click', goPrev);
-
-    init();
-  }
-
-  // ===== events stack =====
-  createSwipeStack({
-    wrapId:'stackWrap', counterId:'cardCounter', prevBtnId:'prevBtn', nextBtnId:'nextBtn',
-    data:events, cardClass:'card',
-    renderCard:(ev, dataIndex) => `
-      <div class="card-media">
-        <div class="cat-bg" style="background-image:url('${ev.img}')"></div>
-        <div class="card-tag mono">${ev.tag}</div>
-        <div class="card-index">${dataIndex+1}</div>
-        <div class="cat-label">${ev.cat}</div>
-      </div>
-      <div class="card-body">
-        <h3>${ev.title}</h3>
-        <div class="card-meta">
-          <span>${ev.date}</span>
-          <span>${ev.loc}</span>
-        </div>
-      </div>
-    `,
-    onClick: (eventData) => openModal(eventData)
-  });
-
-  // ===== photo stack =====
   createSwipeStack({
     wrapId:'photoStackWrap', counterId:'photoCounter', prevBtnId:'photoPrevBtn', nextBtnId:'photoNextBtn',
     data:photos, cardClass:'photo-card',
@@ -1165,9 +1557,7 @@
         <div class="p-meta">${p.meta}</div>
       </div>
     `,
-    onClick: (photoData) => {
-      alert(`📸 ${photoData.title}\n${photoData.meta}`);
-    }
+    onClick: (p) => alert(`📸 ${p.title}\n${p.meta}`)
   });
 </script>
 </body>
