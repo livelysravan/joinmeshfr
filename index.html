@@ -98,6 +98,7 @@
       font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
       padding: 18px 30px; display: inline-flex; align-items: center; gap: 10px;
       border: 1px solid #edeae1; transition: transform .18s ease, background .18s ease, color .18s ease;
+      cursor: pointer;
     }
     .btn-fill { background: #529f9a; color: #201917; border-color: #529f9a; }
     .btn-fill:hover { transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #edeae1; }
@@ -133,7 +134,7 @@
     .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
     .statement p b { color: #529f9a; font-weight: 600; }
 
-    /* events – refined swipe with 3D tilt and glow */
+    /* events */
     .events { padding: 110px 32px 140px; border-bottom: 1px solid #4a3535; position: relative; }
     .section-head {
       display: flex; justify-content: space-between; align-items: flex-end;
@@ -159,7 +160,7 @@
     .arrow-btn:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
     .hint { font-size: 12px; color: #a89191; max-width: 260px; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
 
-    /* card stack with 3D perspective & glow */
+    /* card stack */
     .stack-wrap {
       position: relative;
       width: 100%;
@@ -181,12 +182,16 @@
       touch-action: pan-y;
       transform-style: preserve-3d;
       backface-visibility: hidden;
+      cursor: pointer;
     }
     .card.dragging { transition: none !important; cursor: grabbing; }
     .card:not(.dragging) {
       transition: transform 0.55s cubic-bezier(0.22, 0.8, 0.2, 1), 
                   opacity 0.5s ease,
                   box-shadow 0.5s ease;
+    }
+    .card:hover:not(.dragging) {
+      box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 0 2px rgba(82,159,154,0.3);
     }
     .card-media {
       flex: 1; position: relative; overflow: hidden;
@@ -225,6 +230,86 @@
       border-radius: 4px;
     }
 
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-overlay.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal {
+      background: #241717;
+      border: 2px solid #edeae1;
+      border-radius: 16px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 40px;
+      position: relative;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(82,159,154,0.2);
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px;
+      font-size: 28px; cursor: pointer;
+      color: #a89191;
+      transition: color 0.2s ease;
+      background: none; border: none;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .modal-close:hover { color: #edeae1; }
+    .modal .modal-img {
+      width: 100%; height: 200px;
+      background-size: cover; background-position: center;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    .modal .modal-tag {
+      display: inline-block;
+      background: rgba(82,159,154,0.2);
+      color: #529f9a;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .modal h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .modal .modal-meta {
+      display: flex; gap: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #a89191;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .modal .modal-meta span { display: flex; align-items: center; gap: 6px; }
+    .modal .modal-desc {
+      color: #c9c4b8;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      font-size: 15px;
+    }
+    .modal .modal-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .modal .modal-actions .btn { flex: 1; justify-content: center; }
+
     /* community proof */
     .proof { padding: 120px 32px 0; border-bottom: 1px solid #4a3535; }
     .proof-inner { max-width: 1240px; margin: 0 auto; }
@@ -241,7 +326,7 @@
     .quote p { font-size: clamp(1.4rem,2.6vw,2rem); font-weight: 500; line-height: 1.4; margin-bottom: 24px; }
     .quote .attr { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a89191; }
 
-    /* photo section – polaroid with subtle 3D */
+    /* photo section */
     .photo-section { padding-bottom: 130px; }
     .photo-stack-area {
       display: grid; grid-template-columns: 380px 1fr; gap: 80px; align-items: center;
@@ -264,12 +349,16 @@
       transform-style: preserve-3d;
       backface-visibility: hidden;
       touch-action: pan-y;
+      cursor: pointer;
     }
     .photo-card.dragging { transition: none !important; cursor: grabbing; }
     .photo-card:not(.dragging) {
       transition: transform 0.55s cubic-bezier(0.22, 0.8, 0.2, 1), 
                   opacity 0.5s ease,
                   box-shadow 0.5s ease;
+    }
+    .photo-card:hover:not(.dragging) {
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(82,159,154,0.3);
     }
     .photo-inner {
       height: calc(100% - 92px);
@@ -331,9 +420,11 @@
       .arrow-row { justify-content: center; }
       .hero-foot { position: static; margin-top: 60px; flex-direction: column; gap: 12px; align-items: flex-start; }
       .events, .proof, .statement, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
+      .modal { padding: 24px; margin: 16px; }
     }
     @media (max-width:420px) {
       .stack-wrap, .photo-stack-wrap { max-width: 100%; }
+      .modal .modal-actions { flex-direction: column; }
     }
   </style>
 </head>
@@ -341,7 +432,7 @@
 <div class="noise"></div>
 
 <nav>
-  <div class="logo-mark"><img src="mlogov2.png" alt="MESH Logo" /></div>
+  <div class="logo-mark"><img src="logo.png" alt="MESH Logo" /></div>
   <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="nav-cta">Join</a>
 </nav>
 
@@ -487,7 +578,7 @@
   </div>
 </section>
 
-<!-- EVENTS — refined swipe stack with 3D tilt & glow -->
+<!-- EVENTS -->
 <section class="events" id="events">
   <div class="section-head">
     <h2 class="disp">Upcoming<br>Experiences</h2>
@@ -503,7 +594,7 @@
         <button class="arrow-btn" id="prevBtn" aria-label="Previous">←</button>
         <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
       </div>
-      <p class="hint">Swipe &bull; drag &bull; discover</p>
+      <p class="hint">Swipe &bull; tap &bull; discover</p>
     </div>
   </div>
 </section>
@@ -576,19 +667,81 @@
   </div>
 </footer>
 
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="eventModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-tag" id="modalTag">EVENT</div>
+    <h2 id="modalTitle">Event Title</h2>
+    <div class="modal-meta">
+      <span>📅 <span id="modalDate">Date</span></span>
+      <span>📍 <span id="modalLoc">Location</span></span>
+      <span>👥 <span id="modalSpots">Spots available</span></span>
+    </div>
+    <div class="modal-desc" id="modalDesc">
+      Full event details will be displayed here. Join us for an unforgettable experience!
+    </div>
+    <div class="modal-actions">
+      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20I%20want%20to%20RSVP%20for%20this%20event!" target="_blank" class="btn btn-fill">RSVP Now</a>
+      <button class="btn btn-ghost" id="modalCloseBtn">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
   // ===== ticker =====
   const tickerWords = ['RUN CLUB','MUSIC NIGHTS','MEETUPS','TALKS','POP-UPS','+ MUCH MORE'];
   const tickerTrack = document.getElementById('tickerTrack');
   tickerTrack.innerHTML = tickerWords.map(w => `<span>${w} ✦</span>`).join('') + tickerWords.map(w => `<span>${w} ✦</span>`).join('');
 
-  // ===== data =====
+  // ===== data with full details =====
   const events = [
-    { cat:'RUN', tag:'FITNESS', title:'Sunrise 5K — Cubbon Park', date:'12 JUL, 6:00 AM', loc:'Bengaluru', img:'event-run.jpg' },
-    { cat:'NIGHTS', tag:'MUSIC', title:'Warehouse Sessions Vol. 3', date:'18 JUL, 9:00 PM', loc:'Indiranagar', img:'event-nights.jpg' },
-    { cat:'TALKS', tag:'WORKSHOP', title:'Creators in Conversation', date:'22 JUL, 5:30 PM', loc:'Koramangala', img:'event-talks.jpg' },
-    { cat:'SOCIAL', tag:'MEETUP', title:'Rooftop Community Mixer', date:'26 JUL, 7:00 PM', loc:'HSR Layout', img:'event-social.jpg' },
-    { cat:'EXPERIENCES', tag:'POP-UP', title:'Weekend Trail Escape', date:'02 AUG, ALL DAY', loc:'Nandi Hills', img:'event-experiences.jpg' },
+    { 
+      cat:'RUN', tag:'FITNESS', 
+      title:'Sunrise 5K — Cubbon Park', 
+      date:'12 JUL, 6:00 AM', 
+      loc:'Bengaluru', 
+      img:'event-run.jpg',
+      spots: '45 spots left',
+      desc: 'Start your Sunday with a refreshing 5K run through the lush greenery of Cubbon Park. All fitness levels welcome! Post-run chai and community breakfast included.'
+    },
+    { 
+      cat:'NIGHTS', tag:'MUSIC', 
+      title:'Warehouse Sessions Vol. 3', 
+      date:'18 JUL, 9:00 PM', 
+      loc:'Indiranagar', 
+      img:'event-nights.jpg',
+      spots: '120 spots left',
+      desc: 'The third edition of our legendary warehouse parties. Expect underground beats, immersive lighting, and a crowd that knows how to move. 18+ only.'
+    },
+    { 
+      cat:'TALKS', tag:'WORKSHOP', 
+      title:'Creators in Conversation', 
+      date:'22 JUL, 5:30 PM', 
+      loc:'Koramangala', 
+      img:'event-talks.jpg',
+      spots: '30 spots left',
+      desc: 'An intimate evening with Bengaluru\'s most exciting creators. From content to commerce, learn how to turn your passion into a sustainable career. Limited seats!'
+    },
+    { 
+      cat:'SOCIAL', tag:'MEETUP', 
+      title:'Rooftop Community Mixer', 
+      date:'26 JUL, 7:00 PM', 
+      loc:'HSR Layout', 
+      img:'event-social.jpg',
+      spots: '80 spots left',
+      desc: 'Our monthly rooftop mixer returns! Network, make new friends, and enjoy the city skyline. Drinks and snacks provided. Bring your best energy!'
+    },
+    { 
+      cat:'EXPERIENCES', tag:'POP-UP', 
+      title:'Weekend Trail Escape', 
+      date:'02 AUG, ALL DAY', 
+      loc:'Nandi Hills', 
+      img:'event-experiences.jpg',
+      spots: '25 spots left',
+      desc: 'A full-day adventure to Nandi Hills. Trekking, breakfast with a view, and connect with nature. This is MESH at its most adventurous. Pack your bags!'
+    },
   ];
 
   const photos = [
@@ -600,14 +753,44 @@
     { title:'MESH Run Anniversary', meta:'200+ RUNNERS · LALBAGH', tag:'RUN', tilt:4, img:'photo-run-2.jpg' },
   ];
 
-  // ===== advanced swipe stack with 3D tilt, glow, and momentum =====
-  function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard }){
+  // ===== MODAL =====
+  const modal = document.getElementById('eventModal');
+  const modalClose = document.getElementById('modalClose');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  
+  function openModal(eventData) {
+    document.getElementById('modalImg').style.backgroundImage = `url('${eventData.img}')`;
+    document.getElementById('modalTag').textContent = `${eventData.cat} · ${eventData.tag}`;
+    document.getElementById('modalTitle').textContent = eventData.title;
+    document.getElementById('modalDate').textContent = eventData.date;
+    document.getElementById('modalLoc').textContent = eventData.loc;
+    document.getElementById('modalSpots').textContent = eventData.spots || 'Limited spots';
+    document.getElementById('modalDesc').textContent = eventData.desc || 'Full event details coming soon. Join us for an unforgettable experience!';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modalCloseBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ===== advanced swipe stack with click support =====
+  function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }){
     const wrap = document.getElementById(wrapId);
     const counter = counterId ? document.getElementById(counterId) : null;
     let order = data.map((_, i) => i);
     let slots = [];
 
-    // offscreen + depth offsets – smoother, more spatial
     const offsets = [
       { x:0, y:0, r:0, s:1, o:1, z:0 },
       { x:28, y:16, r:4, s:0.94, o:1, z:-20 },
@@ -629,6 +812,16 @@
       card.className = cardClass;
       card.innerHTML = renderCard(item, dataIndex);
       card._tilt = item.tilt || 0;
+      card._dataIndex = dataIndex;
+      
+      // Click handler
+      card.addEventListener('click', (e) => {
+        // Only trigger if not dragging
+        if (!card.classList.contains('dragging') && onClick) {
+          onClick(data[dataIndex]);
+        }
+      });
+      
       return card;
     }
 
@@ -778,7 +971,7 @@
     init();
   }
 
-  // ===== events stack =====
+  // ===== events stack with click handler =====
   createSwipeStack({
     wrapId:'stackWrap', counterId:'cardCounter', prevBtnId:'prevBtn', nextBtnId:'nextBtn',
     data:events, cardClass:'card',
@@ -796,7 +989,8 @@
           <span>${ev.loc}</span>
         </div>
       </div>
-    `
+    `,
+    onClick: (eventData) => openModal(eventData)
   });
 
   // ===== photo stack =====
@@ -811,7 +1005,11 @@
         <div class="p-title">${p.title}</div>
         <div class="p-meta">${p.meta}</div>
       </div>
-    `
+    `,
+    onClick: (photoData) => {
+      // Photos can also open a modal if you want — or just show an alert
+      alert(`📸 ${photoData.title}\n${photoData.meta}`);
+    }
   });
 </script>
 </body>
