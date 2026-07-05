@@ -139,20 +139,6 @@
       max-width: 500px;
       margin: 0 auto;
     }
-    .sudoku-header {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-    .sudoku-header h2 {
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      margin-bottom: 4px;
-    }
-    .sudoku-header p {
-      color: #a89191;
-      font-size: 12px;
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 0.06em;
-    }
 
     .stats-row {
       display: flex;
@@ -190,7 +176,6 @@
       font-size: clamp(1.2rem, 3vw, 1.8rem);
       font-weight: 600;
       font-family: 'Space Grotesk', sans-serif;
-      color: #edeae1;
       cursor: pointer;
       transition: background 0.15s ease;
       user-select: none;
@@ -207,6 +192,7 @@
       color: #e74c6f;
       animation: shake 0.3s ease;
     }
+    .cell.wrong { color: #e74c6f; }
     .cell.correct { color: #529f9a; }
     .cell .cell-corner {
       position: absolute;
@@ -759,11 +745,6 @@
 <!-- ===== SUDOKU ===== -->
 <section class="sudoku-section" id="sudoku">
   <div class="sudoku-inner">
-    <div class="sudoku-header">
-      <h2 class="disp">🧩 Sudoku</h2>
-      <p class="mono">Take a break, clear your mind</p>
-    </div>
-
     <div class="stats-row">
       <span class="timer">⏱️ 00:00</span>
       <span class="mistakes">✖ 0</span>
@@ -920,7 +901,6 @@
   tickerTrack.innerHTML = tickerWords.map(w => `<span>${w} ✦</span>`).join('') + tickerWords.map(w => `<span>${w} ✦</span>`).join('');
 
   // ===== SUDOKU =====
-  // Medium difficulty puzzle only
   const PUZZLE = {
     clues: [
       [0,0,4,0,0,0,0,6,7],
@@ -999,6 +979,8 @@
             cell.classList.add('clue');
           } else if (val === PUZZLE.solution[r][c]) {
             cell.classList.add('correct');
+          } else {
+            cell.classList.add('wrong');
           }
         }
 
@@ -1049,7 +1031,6 @@
   function inputNumber(num) {
     if (isComplete) return;
     if (selectedRow === -1 || selectedCol === -1) {
-      // Auto-select first empty cell
       for (let r = 0; r < 9; r++) {
         for (let c = 0; c < 9; c++) {
           if (!clueCells.includes(`${r},${c}`) && userGrid[r][c] === 0) {
@@ -1066,12 +1047,9 @@
 
     if (clueCells.includes(`${selectedRow},${selectedCol}`)) return;
 
-    // Check if valid
     if (!isValid(userGrid, selectedRow, selectedCol, num)) {
       const cell = getCell(selectedRow, selectedCol);
       cell.classList.add('invalid');
-      mistakes++;
-      updateStats();
       setTimeout(() => cell.classList.remove('invalid'), 300);
       return;
     }
@@ -1084,6 +1062,8 @@
         finishPuzzle();
       }
     } else {
+      mistakes++;
+      updateStats();
       renderGrid();
     }
   }
@@ -1119,6 +1099,14 @@
   function finishPuzzle() {
     isComplete = true;
     stopTimer();
+    
+    document.querySelectorAll('.cell').forEach(cell => {
+      if (!cell.classList.contains('clue')) {
+        cell.classList.add('correct');
+        cell.classList.remove('wrong');
+      }
+    });
+    
     document.getElementById('finalTime').textContent = formatTime(seconds);
     document.getElementById('finalMistakes').textContent = mistakes;
     document.getElementById('completeModal').classList.add('active');
@@ -1131,6 +1119,7 @@
   function checkPuzzle() {
     if (isComplete) return;
     let hasError = false;
+    
     for (let r = 0; r < 9; r++) {
       for (let c = 0; c < 9; c++) {
         if (!clueCells.includes(`${r},${c}`) && userGrid[r][c] !== 0) {
@@ -1143,6 +1132,7 @@
         }
       }
     }
+    
     if (!hasError && isCompletePuzzle()) {
       finishPuzzle();
     } else if (!hasError) {
