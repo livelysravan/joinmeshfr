@@ -25,12 +25,14 @@
     img { display: block; max-width: 100%; }
     .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
 
+    /* noise texture */
     .noise {
       position: fixed; inset: 0; pointer-events: none; z-index: 999;
       opacity: 0.035; mix-blend-mode: overlay;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
+    /* nav */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -47,6 +49,7 @@
     }
     .nav-cta:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
 
+    /* hero */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -107,6 +110,7 @@
     }
     .hero-foot .scroll-tag { writing-mode: vertical-rl; }
 
+    /* ticker */
     .ticker-band {
       background: #529f9a; color: #201917; overflow: hidden;
       border-bottom: 1px solid #4a3535;
@@ -123,182 +127,12 @@
     }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+    /* statement */
     .statement { padding: 60px 32px; border-bottom: 1px solid #4a3535; }
     .statement-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 140px 1fr; gap: 40px; }
     .statement-inner .num { font-family: 'JetBrains Mono', monospace; color: #529f9a; font-size: 14px; }
     .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
     .statement p b { color: #529f9a; font-weight: 600; }
-
-    /* ===== SUDOKU ===== */
-    .sudoku-section {
-      padding: 60px 32px 80px;
-      border-bottom: 1px solid #4a3535;
-      background: #1a1413;
-    }
-    .sudoku-inner {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .stats-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: #a89191;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .stats-row .timer { color: #529f9a; font-weight: 600; }
-    .stats-row .mistakes { color: #e74c6f; }
-
-    .sudoku-grid {
-      display: grid;
-      grid-template-columns: repeat(9, 1fr);
-      aspect-ratio: 1;
-      gap: 1px;
-      background: #4a3535;
-      border: 3px solid #4a3535;
-      border-radius: 8px;
-      overflow: hidden;
-      touch-action: manipulation;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    .cell {
-      background: #201917;
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      font-weight: 600;
-      font-family: 'Space Grotesk', sans-serif;
-      cursor: pointer;
-      transition: background 0.15s ease;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-      position: relative;
-      touch-action: manipulation;
-    }
-    .cell:hover:not(.clue) { background: #2a1f1d; }
-    .cell.clue { color: #a89191; cursor: default; }
-    .cell.selected { background: #2a3a38; }
-    .cell.highlighted { background: #242a29; }
-    .cell.same-number { background: #1e2e2c; }
-    .cell.invalid {
-      color: #e74c6f;
-      animation: shake 0.3s ease;
-    }
-    .cell.wrong { color: #e74c6f; }
-    .cell.correct { color: #529f9a; }
-    .cell .cell-corner {
-      position: absolute;
-      top: 2px;
-      left: 4px;
-      font-size: 8px;
-      color: #4a3535;
-      font-family: 'JetBrains Mono', monospace;
-      pointer-events: none;
-    }
-    .cell:nth-child(3n) { border-right: 2px solid #4a3535; }
-    .cell:nth-child(9n) { border-right: none; }
-    .cell:nth-child(n+19):nth-child(-n+27) { border-bottom: 2px solid #4a3535; }
-    .cell:nth-child(n+46):nth-child(-n+54) { border-bottom: 2px solid #4a3535; }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-4px); }
-      75% { transform: translateX(4px); }
-    }
-
-    .numpad {
-      display: grid;
-      grid-template-columns: repeat(9, 1fr);
-      gap: 6px;
-      margin-top: 16px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .numpad button {
-      padding: 14px 0;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-      font-weight: 600;
-      background: #241717;
-      border: 1px solid #4a3535;
-      color: #edeae1;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all .15s ease;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .numpad button:hover { background: #2a1f1d; border-color: #529f9a; }
-    .numpad button:active { transform: scale(0.92); background: #529f9a; color: #201917; }
-
-    .controls-row {
-      display: flex;
-      gap: 12px;
-      margin-top: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .controls-row .btn {
-      padding: 12px 24px;
-      font-size: 11px;
-      flex: 1;
-      justify-content: center;
-      min-width: 100px;
-    }
-
-    .complete-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(12px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      animation: fadeIn 0.4s ease;
-    }
-    .complete-overlay.active { display: flex; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .complete-modal {
-      background: #241717;
-      border: 2px solid #529f9a;
-      border-radius: 16px;
-      max-width: 380px;
-      width: 100%;
-      padding: 40px;
-      text-align: center;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.8);
-    }
-    .complete-modal .emoji { font-size: 48px; margin-bottom: 12px; }
-    .complete-modal h2 {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 1.6rem;
-      color: #529f9a;
-      margin-bottom: 8px;
-    }
-    .complete-modal p {
-      color: #a89191;
-      margin-bottom: 24px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .complete-modal .btn { width: 100%; justify-content: center; }
 
     /* events */
     .events { padding: 110px 32px 140px; border-bottom: 1px solid #4a3535; position: relative; }
@@ -326,6 +160,7 @@
     .arrow-btn:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
     .hint { font-size: 12px; color: #a89191; max-width: 260px; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
 
+    /* card stack */
     .stack-wrap {
       position: relative;
       width: 100%;
@@ -395,6 +230,7 @@
       border-radius: 4px;
     }
 
+    /* ===== MODAL ===== */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000;
       background: rgba(0,0,0,0.85);
@@ -406,6 +242,10 @@
       animation: fadeIn 0.3s ease;
     }
     .modal-overlay.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
     .modal {
       background: #241717;
       border: 2px solid #edeae1;
@@ -470,6 +310,7 @@
     }
     .modal .modal-actions .btn { flex: 1; justify-content: center; }
 
+    /* community proof */
     .proof { padding: 120px 32px 0; border-bottom: 1px solid #4a3535; }
     .proof-inner { max-width: 1240px; margin: 0 auto; }
     .stat-row {
@@ -485,6 +326,7 @@
     .quote p { font-size: clamp(1.4rem,2.6vw,2rem); font-weight: 500; line-height: 1.4; margin-bottom: 24px; }
     .quote .attr { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a89191; }
 
+    /* photo section */
     .photo-section { padding-bottom: 130px; }
     .photo-stack-area {
       display: grid; grid-template-columns: 380px 1fr; gap: 80px; align-items: center;
@@ -542,23 +384,22 @@
       font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6d6d69; letter-spacing: 0.05em;
     }
 
+    /* final cta */
     .final-cta {
-      padding: 140px 32px;
-      text-align: center;
-      position: relative;
-      border-bottom: 1px solid #4a3535;
+      padding: 140px 32px; text-align: center; position: relative; border-bottom: 1px solid #4a3535;
     }
     .final-cta h2 { font-size: clamp(2.6rem,8vw,6rem); margin-bottom: 36px; }
     .final-cta h2 span { color: #529f9a; }
     .final-cta .cta-row { justify-content: center; }
 
+    /* footer */
     footer { padding: 60px 32px 40px; }
     .foot-inner {
       max-width: 1240px; margin: 0 auto;
       display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px;
     }
     .foot-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a89191; margin-bottom: 16px; letter-spacing: 0.1em; }
-    .foot-col a { display: block; font-size: 14px; margin-bottom: 10px; color: #edeae1; transition: color 0.2s ease; cursor: pointer; }
+    .foot-col a { display: block; font-size: 14px; margin-bottom: 10px; color: #edeae1; }
     .foot-col a:hover { color: #529f9a; }
     .foot-bottom {
       max-width: 1240px; margin: 60px auto 0; padding-top: 24px; border-top: 1px solid #4a3535;
@@ -580,15 +421,10 @@
       .hero-foot { position: static; margin-top: 60px; flex-direction: column; gap: 12px; align-items: flex-start; }
       .events, .proof, .statement, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
       .modal { padding: 24px; margin: 16px; }
-      .sudoku-section { padding: 40px 16px 60px; }
-      .controls-row .btn { padding: 10px 16px; font-size: 10px; min-width: 80px; }
     }
     @media (max-width:420px) {
       .stack-wrap, .photo-stack-wrap { max-width: 100%; }
       .modal .modal-actions { flex-direction: column; }
-      .stats-row { font-size: 10px; }
-      .numpad button { padding: 12px 0; font-size: 1rem; }
-      .controls-row .btn { padding: 8px 12px; font-size: 9px; min-width: 60px; }
     }
   </style>
 </head>
@@ -742,35 +578,6 @@
   </div>
 </section>
 
-<!-- ===== SUDOKU ===== -->
-<section class="sudoku-section" id="sudoku">
-  <div class="sudoku-inner">
-    <div class="stats-row">
-      <span class="timer">⏱️ 00:00</span>
-      <span class="mistakes">✖ 0</span>
-    </div>
-
-    <div class="sudoku-grid" id="sudokuGrid"></div>
-
-    <div class="numpad" id="numpad">
-      <button data-num="1">1</button>
-      <button data-num="2">2</button>
-      <button data-num="3">3</button>
-      <button data-num="4">4</button>
-      <button data-num="5">5</button>
-      <button data-num="6">6</button>
-      <button data-num="7">7</button>
-      <button data-num="8">8</button>
-      <button data-num="9">9</button>
-    </div>
-
-    <div class="controls-row">
-      <button class="btn btn-ghost" id="checkBtn">✏️ Check</button>
-      <button class="btn btn-fill" id="newGameBtn">🔄 New Game</button>
-    </div>
-  </div>
-</section>
-
 <!-- EVENTS -->
 <section class="events" id="events">
   <div class="section-head">
@@ -839,7 +646,7 @@
     <div class="foot-col">
       <h4 class="mono">Explore</h4>
       <a href="#events">Events</a>
-      <a href="#sudoku">Sudoku</a>
+      <a href="#">About</a>
       <a href="#join">Membership</a>
     </div>
     <div class="foot-col">
@@ -882,458 +689,61 @@
   </div>
 </div>
 
-<!-- ===== COMPLETION MODAL ===== -->
-<div class="complete-overlay" id="completeModal">
-  <div class="complete-modal">
-    <div class="emoji">🧩</div>
-    <h2>PUZZLE COMPLETE!</h2>
-    <p>You solved it! 🎉<br>
-    Time: <span id="finalTime">00:00</span><br>
-    Mistakes: <span id="finalMistakes">0</span></p>
-    <button class="btn btn-fill" id="completeNewGame">Play Again</button>
-  </div>
-</div>
-
 <script>
-  // ===== TICKER =====
+  // ===== ticker =====
   const tickerWords = ['RUN CLUB','MUSIC NIGHTS','MEETUPS','TALKS','POP-UPS','+ MUCH MORE'];
   const tickerTrack = document.getElementById('tickerTrack');
   tickerTrack.innerHTML = tickerWords.map(w => `<span>${w} ✦</span>`).join('') + tickerWords.map(w => `<span>${w} ✦</span>`).join('');
 
-  // ===== SUDOKU =====
-  const PUZZLE = {
-    clues: [
-      [0,0,4,0,0,0,0,6,7],
-      [3,0,0,4,7,0,0,0,5],
-      [1,0,0,0,0,6,0,0,0],
-      [0,0,9,0,0,1,0,0,8],
-      [8,0,0,9,0,7,0,0,4],
-      [7,0,0,6,0,0,5,0,0],
-      [0,0,0,5,0,0,0,0,9],
-      [9,0,0,0,6,8,0,0,1],
-      [6,5,0,0,0,0,4,0,0]
-    ],
-    solution: [
-      [5,9,4,2,8,3,1,6,7],
-      [3,6,8,4,7,9,2,1,5],
-      [1,7,2,3,5,6,9,8,4],
-      [4,2,9,7,3,1,6,5,8],
-      [8,3,6,9,2,5,7,1,4],
-      [7,1,5,6,4,8,3,9,2],
-      [2,8,7,5,1,4,6,3,9],
-      [9,4,3,7,6,8,2,5,1],
-      [6,5,1,8,9,2,4,7,3]
-    ]
-  };
-
-  let userGrid = [];
-  let clueCells = [];
-  let selectedRow = -1;
-  let selectedCol = -1;
-  let timerInterval = null;
-  let seconds = 0;
-  let mistakes = 0;
-  let isComplete = false;
-
-  const gridEl = document.getElementById('sudokuGrid');
-  const timerEl = document.querySelector('.timer');
-  const mistakesEl = document.querySelector('.mistakes');
-
-  function newGame() {
-    stopTimer();
-    seconds = 0;
-    mistakes = 0;
-    isComplete = false;
-    document.getElementById('completeModal').classList.remove('active');
-
-    userGrid = PUZZLE.clues.map(row => [...row]);
-    clueCells = [];
-    for (let r = 0; r < 9; r++) {
-      for (let c = 0; c < 9; c++) {
-        if (PUZZLE.clues[r][c] !== 0) {
-          clueCells.push(`${r},${c}`);
-        }
-      }
-    }
-
-    selectedRow = -1;
-    selectedCol = -1;
-    renderGrid();
-    updateStats();
-    startTimer();
-  }
-
-  function renderGrid() {
-    gridEl.innerHTML = '';
-    for (let r = 0; r < 9; r++) {
-      for (let c = 0; c < 9; c++) {
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        cell.dataset.row = r;
-        cell.dataset.col = c;
-
-        const val = userGrid[r][c];
-        if (val !== 0) {
-          cell.textContent = val;
-          if (clueCells.includes(`${r},${c}`)) {
-            cell.classList.add('clue');
-          } else if (val === PUZZLE.solution[r][c]) {
-            cell.classList.add('correct');
-          } else {
-            cell.classList.add('wrong');
-          }
-        }
-
-        if (selectedRow === r && selectedCol === c) {
-          cell.classList.add('selected');
-        }
-
-        if (selectedRow !== -1 && selectedCol !== -1) {
-          if (r === selectedRow || c === selectedCol || 
-              (Math.floor(r/3) === Math.floor(selectedRow/3) && 
-               Math.floor(c/3) === Math.floor(selectedCol/3))) {
-            if (!(r === selectedRow && c === selectedCol)) {
-              cell.classList.add('highlighted');
-            }
-          }
-          const selVal = userGrid[selectedRow][selectedCol];
-          if (selVal !== 0 && userGrid[r][c] === selVal && !(r === selectedRow && c === selectedCol)) {
-            cell.classList.add('same-number');
-          }
-        }
-
-        if (r % 3 === 0 && c % 3 === 0) {
-          const corner = document.createElement('span');
-          corner.className = 'cell-corner';
-          corner.textContent = `${Math.floor(r/3)+1}${Math.floor(c/3)+1}`;
-          cell.appendChild(corner);
-        }
-
-        cell.addEventListener('click', () => selectCell(r, c));
-        gridEl.appendChild(cell);
-      }
-    }
-  }
-
-  function selectCell(row, col) {
-    if (isComplete) return;
-    if (clueCells.includes(`${row},${col}`)) {
-      selectedRow = row;
-      selectedCol = col;
-      renderGrid();
-      return;
-    }
-    selectedRow = row;
-    selectedCol = col;
-    renderGrid();
-  }
-
-  function inputNumber(num) {
-    if (isComplete) return;
-    if (selectedRow === -1 || selectedCol === -1) {
-      for (let r = 0; r < 9; r++) {
-        for (let c = 0; c < 9; c++) {
-          if (!clueCells.includes(`${r},${c}`) && userGrid[r][c] === 0) {
-            selectedRow = r;
-            selectedCol = c;
-            renderGrid();
-            break;
-          }
-        }
-        if (selectedRow !== -1) break;
-      }
-      if (selectedRow === -1) return;
-    }
-
-    if (clueCells.includes(`${selectedRow},${selectedCol}`)) return;
-
-    if (!isValid(userGrid, selectedRow, selectedCol, num)) {
-      const cell = getCell(selectedRow, selectedCol);
-      cell.classList.add('invalid');
-      setTimeout(() => cell.classList.remove('invalid'), 300);
-      return;
-    }
-
-    userGrid[selectedRow][selectedCol] = num;
-
-    if (num === PUZZLE.solution[selectedRow][selectedCol]) {
-      renderGrid();
-      if (isCompletePuzzle()) {
-        finishPuzzle();
-      }
-    } else {
-      mistakes++;
-      updateStats();
-      renderGrid();
-    }
-  }
-
-  function isValid(grid, row, col, num) {
-    for (let x = 0; x < 9; x++) {
-      if (grid[row][x] === num) return false;
-    }
-    for (let x = 0; x < 9; x++) {
-      if (grid[x][col] === num) return false;
-    }
-    const startRow = Math.floor(row / 3) * 3;
-    const startCol = Math.floor(col / 3) * 3;
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (grid[startRow + i][startCol + j] === num) return false;
-      }
-    }
-    return true;
-  }
-
-  function isCompletePuzzle() {
-    for (let r = 0; r < 9; r++) {
-      for (let c = 0; c < 9; c++) {
-        if (userGrid[r][c] === 0 || userGrid[r][c] !== PUZZLE.solution[r][c]) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  function finishPuzzle() {
-    isComplete = true;
-    stopTimer();
-    
-    document.querySelectorAll('.cell').forEach(cell => {
-      if (!cell.classList.contains('clue')) {
-        cell.classList.add('correct');
-        cell.classList.remove('wrong');
-      }
-    });
-    
-    document.getElementById('finalTime').textContent = formatTime(seconds);
-    document.getElementById('finalMistakes').textContent = mistakes;
-    document.getElementById('completeModal').classList.add('active');
-  }
-
-  function getCell(row, col) {
-    return gridEl.querySelector(`[data-row="${row}"][data-col="${col}"]`);
-  }
-
-  function checkPuzzle() {
-    if (isComplete) return;
-    let hasError = false;
-    
-    for (let r = 0; r < 9; r++) {
-      for (let c = 0; c < 9; c++) {
-        if (!clueCells.includes(`${r},${c}`) && userGrid[r][c] !== 0) {
-          if (userGrid[r][c] !== PUZZLE.solution[r][c]) {
-            const cell = getCell(r, c);
-            cell.classList.add('invalid');
-            hasError = true;
-            setTimeout(() => cell.classList.remove('invalid'), 800);
-          }
-        }
-      }
-    }
-    
-    if (!hasError && isCompletePuzzle()) {
-      finishPuzzle();
-    } else if (!hasError) {
-      alert('✅ No mistakes so far! Keep going!');
-    }
-  }
-
-  function startTimer() {
-    stopTimer();
-    timerInterval = setInterval(() => {
-      seconds++;
-      timerEl.textContent = `⏱️ ${formatTime(seconds)}`;
-    }, 1000);
-  }
-
-  function stopTimer() {
-    if (timerInterval) {
-      clearInterval(timerInterval);
-      timerInterval = null;
-    }
-  }
-
-  function formatTime(secs) {
-    const m = String(Math.floor(secs / 60)).padStart(2, '0');
-    const s = String(secs % 60).padStart(2, '0');
-    return `${m}:${s}`;
-  }
-
-  function updateStats() {
-    mistakesEl.textContent = `✖ ${mistakes}`;
-  }
-
-  // ===== EVENT LISTENERS =====
-  document.querySelectorAll('.numpad button').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      inputNumber(parseInt(this.dataset.num));
-    });
-    btn.addEventListener('touchstart', function(e) {
-      e.preventDefault();
-      inputNumber(parseInt(this.dataset.num));
-    }, { passive: false });
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key >= '1' && e.key <= '9') {
-      inputNumber(parseInt(e.key));
-    }
-    if (e.key === 'ArrowUp' && selectedRow > 0) selectCell(selectedRow - 1, selectedCol);
-    if (e.key === 'ArrowDown' && selectedRow < 8) selectCell(selectedRow + 1, selectedCol);
-    if (e.key === 'ArrowLeft' && selectedCol > 0) selectCell(selectedRow, selectedCol - 1);
-    if (e.key === 'ArrowRight' && selectedCol < 8) selectCell(selectedRow, selectedCol + 1);
-    if (e.key === 'Delete' || e.key === 'Backspace') {
-      if (selectedRow !== -1 && selectedCol !== -1 && !clueCells.includes(`${selectedRow},${selectedCol}`)) {
-        userGrid[selectedRow][selectedCol] = 0;
-        renderGrid();
-      }
-    }
-  });
-
-  document.getElementById('newGameBtn').addEventListener('click', newGame);
-  document.getElementById('checkBtn').addEventListener('click', checkPuzzle);
-  document.getElementById('completeNewGame').addEventListener('click', () => {
-    document.getElementById('completeModal').classList.remove('active');
-    newGame();
-  });
-
-  // ===== INIT =====
-  newGame();
-
-  // ===== EVENTS DATA =====
+  // ===== data with full details =====
   const events = [
-    { cat:'RUN', tag:'FITNESS', title:'Sunrise 5K — Cubbon Park', date:'12 JUL, 6:00 AM', loc:'Bengaluru', img:'event-run.jpg', spots:'45 spots left', desc:'Start your Sunday with a refreshing 5K run through the lush greenery of Cubbon Park.' },
-    { cat:'NIGHTS', tag:'MUSIC', title:'Warehouse Sessions Vol. 3', date:'18 JUL, 9:00 PM', loc:'Indiranagar', img:'event-nights.jpg', spots:'120 spots left', desc:'The third edition of our legendary warehouse parties.' },
-    { cat:'TALKS', tag:'WORKSHOP', title:'Creators in Conversation', date:'22 JUL, 5:30 PM', loc:'Koramangala', img:'event-talks.jpg', spots:'30 spots left', desc:'An intimate evening with Bengaluru\'s most exciting creators.' },
-    { cat:'SOCIAL', tag:'MEETUP', title:'Rooftop Community Mixer', date:'26 JUL, 7:00 PM', loc:'HSR Layout', img:'event-social.jpg', spots:'80 spots left', desc:'Our monthly rooftop mixer returns!' },
-    { cat:'EXPERIENCES', tag:'POP-UP', title:'Weekend Trail Escape', date:'02 AUG, ALL DAY', loc:'Nandi Hills', img:'event-experiences.jpg', spots:'25 spots left', desc:'A full-day adventure to Nandi Hills.' },
+    { 
+      cat:'RUN', tag:'FITNESS', 
+      title:'Sunrise 5K — Cubbon Park', 
+      date:'12 JUL, 6:00 AM', 
+      loc:'Bengaluru', 
+      img:'event-run.jpg',
+      spots: '45 spots left',
+      desc: 'Start your Sunday with a refreshing 5K run through the lush greenery of Cubbon Park. All fitness levels welcome! Post-run chai and community breakfast included.'
+    },
+    { 
+      cat:'NIGHTS', tag:'MUSIC', 
+      title:'Warehouse Sessions Vol. 3', 
+      date:'18 JUL, 9:00 PM', 
+      loc:'Indiranagar', 
+      img:'event-nights.jpg',
+      spots: '120 spots left',
+      desc: 'The third edition of our legendary warehouse parties. Expect underground beats, immersive lighting, and a crowd that knows how to move. 18+ only.'
+    },
+    { 
+      cat:'TALKS', tag:'WORKSHOP', 
+      title:'Creators in Conversation', 
+      date:'22 JUL, 5:30 PM', 
+      loc:'Koramangala', 
+      img:'event-talks.jpg',
+      spots: '30 spots left',
+      desc: 'An intimate evening with Bengaluru\'s most exciting creators. From content to commerce, learn how to turn your passion into a sustainable career. Limited seats!'
+    },
+    { 
+      cat:'SOCIAL', tag:'MEETUP', 
+      title:'Rooftop Community Mixer', 
+      date:'26 JUL, 7:00 PM', 
+      loc:'HSR Layout', 
+      img:'event-social.jpg',
+      spots: '80 spots left',
+      desc: 'Our monthly rooftop mixer returns! Network, make new friends, and enjoy the city skyline. Drinks and snacks provided. Bring your best energy!'
+    },
+    { 
+      cat:'EXPERIENCES', tag:'POP-UP', 
+      title:'Weekend Trail Escape', 
+      date:'02 AUG, ALL DAY', 
+      loc:'Nandi Hills', 
+      img:'event-experiences.jpg',
+      spots: '25 spots left',
+      desc: 'A full-day adventure to Nandi Hills. Trekking, breakfast with a view, and connect with nature. This is MESH at its most adventurous. Pack your bags!'
+    },
   ];
 
-  // ===== MODAL =====
-  const modal = document.getElementById('eventModal');
-  function openModal(eventData) {
-    document.getElementById('modalImg').style.backgroundImage = `url('${eventData.img}')`;
-    document.getElementById('modalTag').textContent = `${eventData.cat} · ${eventData.tag}`;
-    document.getElementById('modalTitle').textContent = eventData.title;
-    document.getElementById('modalDate').textContent = eventData.date;
-    document.getElementById('modalLoc').textContent = eventData.loc;
-    document.getElementById('modalSpots').textContent = eventData.spots || 'Limited spots';
-    document.getElementById('modalDesc').textContent = eventData.desc || 'Join us for an unforgettable experience!';
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() { modal.classList.remove('active'); document.body.style.overflow = ''; }
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); } });
-
-  // ===== SWIPE STACK =====
-  function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }) {
-    const wrap = document.getElementById(wrapId);
-    const counter = document.getElementById(counterId);
-    let order = data.map((_, i) => i);
-    let slots = [];
-    const offsets = [{ x:0, y:0, r:0, s:1, o:1 }, { x:28, y:16, r:4, s:0.94, o:1 }, { x:50, y:30, r:-3, s:0.88, o:0.85 }];
-    function applyTransform(el, o, tilt, dragX) {
-      const rx = o.r + (tilt||0) + (dragX||0)/16;
-      el.style.transform = `translate(${o.x + (dragX||0)}px, ${o.y}px) rotate(${rx}deg) scale(${o.s})`;
-      el.style.opacity = o.o;
-    }
-    function makeCardEl(dataIndex) {
-      const item = data[dataIndex];
-      const card = document.createElement('div');
-      card.className = cardClass;
-      card.innerHTML = renderCard(item, dataIndex);
-      card._tilt = item.tilt || 0;
-      card.addEventListener('click', () => { if (!card.classList.contains('dragging') && onClick) onClick(data[dataIndex]); });
-      return card;
-    }
-    function setPos(entry, pos, dragX) {
-      entry.pos = pos;
-      applyTransform(entry.el, offsets[pos] || offsets[2], entry.el._tilt, dragX);
-      entry.el.style.zIndex = 10 - pos;
-    }
-    function updateCounter() { if (counter) counter.textContent = String(order[0] + 1).padStart(2,'0'); }
-    function init() {
-      wrap.innerHTML = '';
-      slots = order.slice(0,3).map((dataIndex, pos) => {
-        const el = makeCardEl(dataIndex);
-        wrap.appendChild(el);
-        const entry = { el, dataIndex };
-        setPos(entry, pos, 0);
-        return entry;
-      });
-      updateCounter();
-    }
-    function advance(dir) {
-      const outgoing = slots[0];
-      outgoing.el.style.transition = 'transform .5s ease, opacity .5s ease';
-      outgoing.el.style.transform = `translate(${dir*620}px, ${dir*18}px) rotate(${dir*14 + outgoing.el._tilt}deg) scale(0.92)`;
-      outgoing.el.style.opacity = 0;
-      const mid = slots[1], back = slots[2];
-      setPos(mid, 0); setPos(back, 1);
-      order.push(order.shift());
-      const nextDataIndex = order[2];
-      const entering = makeCardEl(nextDataIndex);
-      wrap.appendChild(entering);
-      const enteringEntry = { el: entering, dataIndex: nextDataIndex };
-      entering.style.transform = `translate(${68}px, ${40}px) rotate(-6deg) scale(0.84)`;
-      entering.style.opacity = 0;
-      entering.style.zIndex = 7;
-      requestAnimationFrame(() => setPos(enteringEntry, 2));
-      slots = [mid, back, enteringEntry];
-      updateCounter();
-      setTimeout(() => { if (outgoing.el.parentNode) outgoing.el.remove(); }, 500);
-    }
-    function goNext(){ advance(-1); }
-    function goPrev(){
-      const current = slots[0];
-      order.unshift(order.pop());
-      const prevDataIndex = order[0];
-      const entering = makeCardEl(prevDataIndex);
-      wrap.appendChild(entering);
-      const enteringEntry = { el: entering, dataIndex: prevDataIndex };
-      entering.style.transform = `translate(-620px, 16px) rotate(-14deg) scale(0.92)`;
-      entering.style.opacity = 0;
-      entering.style.zIndex = 12;
-      requestAnimationFrame(() => setPos(enteringEntry, 0));
-      setPos(slots[0], 1); setPos(slots[1], 2);
-      current.el.style.transition = 'transform .4s ease, opacity .4s ease';
-      current.el.style.opacity = 0;
-      current.el.style.zIndex = 1;
-      slots = [enteringEntry, slots[0], slots[1]];
-      updateCounter();
-      setTimeout(() => { if (current.el.parentNode) current.el.remove(); }, 450);
-    }
-    document.getElementById(nextBtnId).addEventListener('click', goNext);
-    document.getElementById(prevBtnId).addEventListener('click', goPrev);
-    init();
-  }
-
-  // ===== EVENTS STACK =====
-  createSwipeStack({
-    wrapId:'stackWrap', counterId:'cardCounter', prevBtnId:'prevBtn', nextBtnId:'nextBtn',
-    data:events, cardClass:'card',
-    renderCard:(ev, i) => `
-      <div class="card-media">
-        <div class="cat-bg" style="background-image:url('${ev.img}')"></div>
-        <div class="card-tag mono">${ev.tag}</div>
-        <div class="card-index">${i+1}</div>
-        <div class="cat-label">${ev.cat}</div>
-      </div>
-      <div class="card-body">
-        <h3>${ev.title}</h3>
-        <div class="card-meta"><span>${ev.date}</span><span>${ev.loc}</span></div>
-      </div>
-    `,
-    onClick: openModal
-  });
-
-  // ===== PHOTO STACK =====
   const photos = [
     { title:'Evening Beach, March', meta:'3 RUNNERS · VARKALA', tag:'RUN', tilt:-2, img:'vichuphoto.jpg' },
     { title:'Warehouse Sessions Vol.1', meta:'300+ HEADS · INDIRANAGAR', tag:'NIGHTS', tilt:3, img:'photo-nights-1.jpg' },
@@ -1343,6 +753,247 @@
     { title:'MESH Run Anniversary', meta:'200+ RUNNERS · LALBAGH', tag:'RUN', tilt:4, img:'photo-run-2.jpg' },
   ];
 
+  // ===== MODAL =====
+  const modal = document.getElementById('eventModal');
+  const modalClose = document.getElementById('modalClose');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  
+  function openModal(eventData) {
+    document.getElementById('modalImg').style.backgroundImage = `url('${eventData.img}')`;
+    document.getElementById('modalTag').textContent = `${eventData.cat} · ${eventData.tag}`;
+    document.getElementById('modalTitle').textContent = eventData.title;
+    document.getElementById('modalDate').textContent = eventData.date;
+    document.getElementById('modalLoc').textContent = eventData.loc;
+    document.getElementById('modalSpots').textContent = eventData.spots || 'Limited spots';
+    document.getElementById('modalDesc').textContent = eventData.desc || 'Full event details coming soon. Join us for an unforgettable experience!';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modalCloseBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ===== advanced swipe stack with click support =====
+  function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }){
+    const wrap = document.getElementById(wrapId);
+    const counter = counterId ? document.getElementById(counterId) : null;
+    let order = data.map((_, i) => i);
+    let slots = [];
+
+    const offsets = [
+      { x:0, y:0, r:0, s:1, o:1, z:0 },
+      { x:28, y:16, r:4, s:0.94, o:1, z:-20 },
+      { x:50, y:30, r:-3, s:0.88, o:0.85, z:-40 },
+    ];
+    const entryOffset = { x:68, y:40, r:-6, s:0.84, o:0, z:-50 };
+
+    function applyTransform(el, o, tilt, dragX){
+      const rx = o.r + (tilt||0) + (dragX || 0) / 16;
+      const tx = o.x + (dragX || 0);
+      el.style.transform = `translate(${tx}px, ${o.y}px) rotate(${rx}deg) scale(${o.s}) translateZ(${o.z || 0}px)`;
+      el.style.opacity = o.o;
+      el.style.boxShadow = `0 25px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(82,159,154,${0.1 + (1 - o.o) * 0.2})`;
+    }
+
+    function makeCardEl(dataIndex){
+      const item = data[dataIndex];
+      const card = document.createElement('div');
+      card.className = cardClass;
+      card.innerHTML = renderCard(item, dataIndex);
+      card._tilt = item.tilt || 0;
+      card._dataIndex = dataIndex;
+      
+      // Click handler
+      card.addEventListener('click', (e) => {
+        // Only trigger if not dragging
+        if (!card.classList.contains('dragging') && onClick) {
+          onClick(data[dataIndex]);
+        }
+      });
+      
+      return card;
+    }
+
+    function setPos(entry, pos, dragX){
+      entry.pos = pos;
+      const o = offsets[pos] || offsets[2];
+      applyTransform(entry.el, o, entry.el._tilt, dragX);
+      entry.el.style.zIndex = 10 - pos;
+    }
+
+    function updateCounter(){
+      if(counter) counter.textContent = String(order[0] + 1).padStart(2,'0');
+    }
+
+    function init(){
+      wrap.innerHTML = '';
+      slots = order.slice(0, 3).map((dataIndex, pos) => {
+        const el = makeCardEl(dataIndex);
+        wrap.appendChild(el);
+        const entry = { el, dataIndex };
+        setPos(entry, pos, 0);
+        return entry;
+      });
+      enableDrag(slots[0]);
+      updateCounter();
+    }
+
+    function enableDrag(entry){
+      const card = entry.el;
+      let startX = 0, startY = 0, dragX = 0, dragging = false, lockedHorizontal = false;
+
+      function pointerDown(e){
+        dragging = true;
+        lockedHorizontal = false;
+        card.classList.add('dragging');
+        const p = e.touches ? e.touches[0] : e;
+        startX = p.clientX;
+        startY = p.clientY;
+      }
+      function pointerMove(e){
+        if(!dragging) return;
+        const p = e.touches ? e.touches[0] : e;
+        const dx = p.clientX - startX;
+        const dy = p.clientY - startY;
+
+        if(!lockedHorizontal && Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        if(!lockedHorizontal){
+          lockedHorizontal = Math.abs(dx) > Math.abs(dy);
+          if(!lockedHorizontal){ dragging = false; card.classList.remove('dragging'); return; }
+        }
+        if(e.cancelable) e.preventDefault();
+        dragX = dx;
+        setPos(entry, 0, dragX);
+      }
+      function pointerUp(){
+        if(!dragging) return;
+        dragging = false;
+        card.classList.remove('dragging');
+        if(Math.abs(dragX) > 80){
+          cleanup();
+          advance(dragX > 0 ? 1 : -1);
+        } else {
+          setPos(entry, 0, 0);
+        }
+        dragX = 0;
+      }
+      function cleanup(){
+        card.removeEventListener('mousedown', pointerDown);
+        card.removeEventListener('touchstart', pointerDown);
+        window.removeEventListener('mousemove', pointerMove);
+        window.removeEventListener('touchmove', pointerMove);
+        window.removeEventListener('mouseup', pointerUp);
+        window.removeEventListener('touchend', pointerUp);
+      }
+
+      card.addEventListener('mousedown', pointerDown);
+      card.addEventListener('touchstart', pointerDown, {passive:true});
+      window.addEventListener('mousemove', pointerMove);
+      window.addEventListener('touchmove', pointerMove, {passive:false});
+      window.addEventListener('mouseup', pointerUp);
+      window.addEventListener('touchend', pointerUp);
+
+      entry._cleanupDrag = cleanup;
+    }
+
+    function advance(dir){
+      const outgoing = slots[0];
+      if(outgoing._cleanupDrag) outgoing._cleanupDrag();
+
+      outgoing.el.style.transition = 'transform .55s cubic-bezier(.22,.8,.2,1), opacity .5s ease, box-shadow .5s ease';
+      outgoing.el.style.transform = `translate(${dir * 620}px, ${dir * 20}px) rotate(${dir * 16 + outgoing.el._tilt}deg) scale(0.92) translateZ(-80px)`;
+      outgoing.el.style.opacity = 0;
+      outgoing.el.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+
+      const mid = slots[1], back = slots[2];
+      setPos(mid, 0);
+      setPos(back, 1);
+      enableDrag(mid);
+
+      order.push(order.shift());
+      const nextDataIndex = order[2];
+      const entering = makeCardEl(nextDataIndex);
+      wrap.appendChild(entering);
+      const enteringEntry = { el: entering, dataIndex: nextDataIndex };
+      applyTransform(entering, entryOffset, entering._tilt, 0);
+      entering.style.zIndex = 7;
+      entering.offsetHeight;
+      requestAnimationFrame(() => setPos(enteringEntry, 2));
+
+      slots = [mid, back, enteringEntry];
+      updateCounter();
+
+      setTimeout(() => { if(outgoing.el.parentNode) outgoing.el.remove(); }, 550);
+    }
+
+    function goNext(){ advance(-1); }
+    function goPrev(){
+      const current = slots[0];
+      if(current._cleanupDrag) current._cleanupDrag();
+      order.unshift(order.pop());
+
+      const prevDataIndex = order[0];
+      const entering = makeCardEl(prevDataIndex);
+      wrap.appendChild(entering);
+      const enteringEntry = { el: entering, dataIndex: prevDataIndex };
+      applyTransform(entering, { x:-620, y:18, r:-16, s:0.92, o:0, z:-80 }, entering._tilt, 0);
+      entering.style.zIndex = 12;
+      entering.offsetHeight;
+      requestAnimationFrame(() => setPos(enteringEntry, 0));
+      enableDrag(enteringEntry);
+
+      setPos(slots[0], 1);
+      setPos(slots[1], 2);
+      current.el.style.transition = 'transform .45s ease, opacity .45s ease, box-shadow .45s ease';
+      current.el.style.opacity = 0;
+      current.el.style.zIndex = 1;
+      current.el.style.transform = `translate(80px, 30px) rotate(10deg) scale(0.86) translateZ(-60px)`;
+
+      slots = [enteringEntry, slots[0], slots[1]];
+      updateCounter();
+      setTimeout(() => { if(current.el.parentNode) current.el.remove(); }, 480);
+    }
+
+    if(nextBtnId) document.getElementById(nextBtnId).addEventListener('click', goNext);
+    if(prevBtnId) document.getElementById(prevBtnId).addEventListener('click', goPrev);
+
+    init();
+  }
+
+  // ===== events stack with click handler =====
+  createSwipeStack({
+    wrapId:'stackWrap', counterId:'cardCounter', prevBtnId:'prevBtn', nextBtnId:'nextBtn',
+    data:events, cardClass:'card',
+    renderCard:(ev, dataIndex) => `
+      <div class="card-media">
+        <div class="cat-bg" style="background-image:url('${ev.img}')"></div>
+        <div class="card-tag mono">${ev.tag}</div>
+        <div class="card-index">${dataIndex+1}</div>
+        <div class="cat-label">${ev.cat}</div>
+      </div>
+      <div class="card-body">
+        <h3>${ev.title}</h3>
+        <div class="card-meta">
+          <span>${ev.date}</span>
+          <span>${ev.loc}</span>
+        </div>
+      </div>
+    `,
+    onClick: (eventData) => openModal(eventData)
+  });
+
+  // ===== photo stack =====
   createSwipeStack({
     wrapId:'photoStackWrap', counterId:'photoCounter', prevBtnId:'photoPrevBtn', nextBtnId:'photoNextBtn',
     data:photos, cardClass:'photo-card',
@@ -1355,7 +1006,10 @@
         <div class="p-meta">${p.meta}</div>
       </div>
     `,
-    onClick: (p) => alert(`📸 ${p.title}\n${p.meta}`)
+    onClick: (photoData) => {
+      // Photos can also open a modal if you want — or just show an alert
+      alert(`📸 ${photoData.title}\n${photoData.meta}`);
+    }
   });
 </script>
 </body>
