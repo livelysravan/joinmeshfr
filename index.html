@@ -25,14 +25,12 @@
     img { display: block; max-width: 100%; }
     .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
 
-    /* noise texture */
     .noise {
       position: fixed; inset: 0; pointer-events: none; z-index: 999;
       opacity: 0.035; mix-blend-mode: overlay;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* nav */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -49,7 +47,6 @@
     }
     .nav-cta:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
 
-    /* hero */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -110,7 +107,6 @@
     }
     .hero-foot .scroll-tag { writing-mode: vertical-rl; }
 
-    /* ticker */
     .ticker-band {
       background: #529f9a; color: #201917; overflow: hidden;
       border-bottom: 1px solid #4a3535;
@@ -127,14 +123,12 @@
     }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* statement */
     .statement { padding: 60px 32px; border-bottom: 1px solid #4a3535; }
     .statement-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 140px 1fr; gap: 40px; }
     .statement-inner .num { font-family: 'JetBrains Mono', monospace; color: #529f9a; font-size: 14px; }
     .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
     .statement p b { color: #529f9a; font-weight: 600; }
 
-    /* events */
     .events { padding: 110px 32px 140px; border-bottom: 1px solid #4a3535; position: relative; }
     .section-head {
       display: flex; justify-content: space-between; align-items: flex-end;
@@ -160,7 +154,6 @@
     .arrow-btn:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
     .hint { font-size: 12px; color: #a89191; max-width: 260px; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
 
-    /* card stack */
     .stack-wrap {
       position: relative;
       width: 100%;
@@ -230,7 +223,6 @@
       border-radius: 4px;
     }
 
-    /* ===== MODAL ===== */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000;
       background: rgba(0,0,0,0.85);
@@ -310,7 +302,6 @@
     }
     .modal .modal-actions .btn { flex: 1; justify-content: center; }
 
-    /* community proof */
     .proof { padding: 120px 32px 0; border-bottom: 1px solid #4a3535; }
     .proof-inner { max-width: 1240px; margin: 0 auto; }
     .stat-row {
@@ -326,7 +317,6 @@
     .quote p { font-size: clamp(1.4rem,2.6vw,2rem); font-weight: 500; line-height: 1.4; margin-bottom: 24px; }
     .quote .attr { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a89191; }
 
-    /* photo section */
     .photo-section { padding-bottom: 130px; }
     .photo-stack-area {
       display: grid; grid-template-columns: 380px 1fr; gap: 80px; align-items: center;
@@ -384,7 +374,6 @@
       font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6d6d69; letter-spacing: 0.05em;
     }
 
-    /* final cta */
     .final-cta {
       padding: 140px 32px; text-align: center; position: relative; border-bottom: 1px solid #4a3535;
     }
@@ -392,7 +381,6 @@
     .final-cta h2 span { color: #529f9a; }
     .final-cta .cta-row { justify-content: center; }
 
-    /* footer */
     footer { padding: 60px 32px 40px; }
     .foot-inner {
       max-width: 1240px; margin: 0 auto;
@@ -695,7 +683,7 @@
   const tickerTrack = document.getElementById('tickerTrack');
   tickerTrack.innerHTML = tickerWords.map(w => `<span>${w} ✦</span>`).join('') + tickerWords.map(w => `<span>${w} ✦</span>`).join('');
 
-  // ===== data with full details =====
+  // ===== data =====
   const events = [
     { 
       cat:'RUN', tag:'FITNESS', 
@@ -784,7 +772,7 @@
     if (e.key === 'Escape') closeModal();
   });
 
-  // ===== advanced swipe stack with click support =====
+  // ===== SWIPE STACK WITH CLICK/DETECTION FIX =====
   function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }){
     const wrap = document.getElementById(wrapId);
     const counter = counterId ? document.getElementById(counterId) : null;
@@ -814,14 +802,68 @@
       card._tilt = item.tilt || 0;
       card._dataIndex = dataIndex;
       
-      // Click handler
+      // Track dragging state for click detection
+      let dragDistance = 0;
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+
+      // Click handler - only fires if not dragging
       card.addEventListener('click', (e) => {
-        // Only trigger if not dragging
-        if (!card.classList.contains('dragging') && onClick) {
+        if (!isDragging && onClick) {
           onClick(data[dataIndex]);
         }
+        // Reset for next interaction
+        isDragging = false;
+        dragDistance = 0;
       });
-      
+
+      // Mouse drag detection
+      card.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        startY = e.clientY;
+        isDragging = false;
+        dragDistance = 0;
+      });
+
+      card.addEventListener('mousemove', (e) => {
+        if (startX === 0 && startY === 0) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        dragDistance = Math.sqrt(dx * dx + dy * dy);
+        if (dragDistance > 10) {
+          isDragging = true;
+        }
+      });
+
+      // Touch drag detection for mobile
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      card.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        isDragging = false;
+        dragDistance = 0;
+      }, { passive: true });
+
+      card.addEventListener('touchmove', (e) => {
+        if (touchStartX === 0 && touchStartY === 0) return;
+        const touch = e.touches[0];
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+        dragDistance = Math.sqrt(dx * dx + dy * dy);
+        if (dragDistance > 10) {
+          isDragging = true;
+        }
+      }, { passive: true });
+
+      card.addEventListener('touchend', () => {
+        touchStartX = 0;
+        touchStartY = 0;
+      }, { passive: true });
+
       return card;
     }
 
@@ -971,7 +1013,7 @@
     init();
   }
 
-  // ===== events stack with click handler =====
+  // ===== events stack =====
   createSwipeStack({
     wrapId:'stackWrap', counterId:'cardCounter', prevBtnId:'prevBtn', nextBtnId:'nextBtn',
     data:events, cardClass:'card',
@@ -1007,7 +1049,6 @@
       </div>
     `,
     onClick: (photoData) => {
-      // Photos can also open a modal if you want — or just show an alert
       alert(`📸 ${photoData.title}\n${photoData.meta}`);
     }
   });
