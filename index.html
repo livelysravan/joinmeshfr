@@ -129,7 +129,7 @@
     .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
     .statement p b { color: #529f9a; font-weight: 600; }
 
-    /* ===== WHATSAPP CHAT SECTION - BUBBLES ONLY ===== */
+    /* ===== WHATSAPP CHAT - BUBBLES ONLY ===== */
     .chat-section {
       padding: 60px 32px 80px;
       border-bottom: 1px solid #4a3535;
@@ -148,7 +148,6 @@
       padding: 16px 18px;
       position: relative;
     }
-    /* WhatsApp subtle pattern */
     .chat-container::before {
       content: '';
       position: absolute;
@@ -164,7 +163,7 @@
       gap: 8px;
       position: relative;
       z-index: 1;
-      min-height: 200px;
+      min-height: 180px;
     }
 
     .message {
@@ -182,18 +181,22 @@
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .message-user {
-      align-self: flex-start;
-      background: #ffffff;
-      color: #303030;
-      border-top-left-radius: 2px;
-    }
-    .message-mesh {
+
+    /* First message - MESH asking (right side) */
+    .message-mesh-ask {
       align-self: flex-end;
       background: #dcf8c6;
       color: #303030;
       border-top-right-radius: 2px;
     }
+    /* Response - Visitor/User (left side) */
+    .message-user-response {
+      align-self: flex-start;
+      background: #ffffff;
+      color: #303030;
+      border-top-left-radius: 2px;
+    }
+
     .message .time {
       font-size: 9px;
       opacity: 0.5;
@@ -203,7 +206,7 @@
       letter-spacing: 0.02em;
       text-align: right;
     }
-    .message-mesh .link-btn {
+    .message-user-response .link-btn {
       display: inline-block;
       margin-top: 8px;
       padding: 8px 18px;
@@ -222,12 +225,13 @@
       width: 100%;
       text-align: center;
     }
-    .message-mesh .link-btn:hover {
+    .message-user-response .link-btn:hover {
       transform: scale(1.02);
       background: #20b85e;
       box-shadow: 0 2px 8px rgba(37,211,102,0.3);
     }
 
+    /* Typing Indicator - on the LEFT (someone typing) */
     .typing-indicator {
       align-self: flex-start;
       background: #ffffff;
@@ -546,7 +550,7 @@
       .modal .modal-actions { flex-direction: column; }
       .chat-body { min-height: 140px; }
       .message { font-size: 12px; padding: 8px 12px; }
-      .message-mesh .link-btn { font-size: 10px; padding: 6px 14px; }
+      .message-user-response .link-btn { font-size: 10px; padding: 6px 14px; }
     }
   </style>
 </head>
@@ -704,21 +708,21 @@
 <section class="chat-section">
   <div class="chat-container">
     <div class="chat-body" id="chatBody">
-      <!-- User Message -->
-      <div class="message message-user" id="userMsg">
+      <!-- First Message: MESH asking (RIGHT side) -->
+      <div class="message message-mesh-ask" id="meshAsk">
         Hey! Is there a WhatsApp group to stay updated about events?
         <span class="time">12:34</span>
       </div>
 
-      <!-- Typing Indicator -->
+      <!-- Typing Indicator (LEFT side) -->
       <div class="typing-indicator" id="typingIndicator">
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
       </div>
 
-      <!-- MESH Response -->
-      <div class="message message-mesh" id="meshResponse" style="display:none;">
+      <!-- Response: User/Visitor replying (LEFT side) -->
+      <div class="message message-user-response" id="userResponse" style="display:none;">
         Absolutely! We have a buzzing WhatsApp community where we share all event updates, last-minute changes, and connect with fellow members. Join us! 👇
         <br>
         <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="link-btn">📲 JOIN WHATSAPP GROUP</a>
@@ -848,17 +852,17 @@
   // ===== WHATSAPP CHAT TYPING ANIMATION =====
   document.addEventListener('DOMContentLoaded', function() {
     const typingIndicator = document.getElementById('typingIndicator');
-    const meshResponse = document.getElementById('meshResponse');
+    const userResponse = document.getElementById('userResponse');
 
-    // After 1.5 seconds, show typing indicator
+    // After 1.5 seconds, show typing indicator on the LEFT
     setTimeout(() => {
       typingIndicator.classList.add('active');
     }, 1500);
 
-    // After 4 seconds total, show response and hide typing
+    // After 4 seconds total, show response (LEFT side) and hide typing
     setTimeout(() => {
       typingIndicator.classList.remove('active');
-      meshResponse.style.display = 'block';
+      userResponse.style.display = 'block';
     }, 4000);
   });
 
