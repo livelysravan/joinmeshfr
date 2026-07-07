@@ -23,7 +23,6 @@
     .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
-    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
 
     .noise {
       position: fixed; inset: 0; pointer-events: none; z-index: 999;
@@ -47,11 +46,12 @@
     }
     .nav-cta:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
 
+    /* ===== HERO ===== */
     .hero {
       position: relative;
       min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 140px 32px 80px;
+      display: flex; flex-direction: column;
+      padding: 140px 32px 60px;
       border-bottom: 1px solid #4a3535;
     }
     .hero-grid {
@@ -64,15 +64,47 @@
     .hero-grid .thread-lit { fill: none; stroke: #529f9a; stroke-linecap: round; }
     .hero-grid .knot { fill: #529f9a; opacity: 0.5; }
     .hero-inner { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; width: 100%; }
+
+    /* ===== MOVING FILMSTRIP (mobile only) ===== */
+    .filmstrip {
+      overflow: hidden;
+      width: 100%;
+      margin-bottom: 32px;
+      display: none; /* hidden on desktop */
+    }
+    .filmstrip-track {
+      display: flex;
+      width: max-content;
+      animation: filmstripScroll 30s linear infinite;
+      gap: 12px;
+    }
+    .filmstrip-track .film-item {
+      flex-shrink: 0;
+      width: 140px;
+      height: 140px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid #4a3535;
+    }
+    .filmstrip-track .film-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @keyframes filmstripScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     .eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
-      font-size: 12px; color: #529f9a; margin-bottom: 28px;
+      font-size: 12px; color: #529f9a; margin-bottom: 20px;
     }
     .eyebrow::before { content: ''; width: 8px; height: 8px; background: #529f9a; display: inline-block; }
     .hero h1 {
       font-size: clamp(3.2rem, 11vw, 9.5rem);
       line-height: 0.86;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .hero h1 .outline {
       -webkit-text-stroke: 2px #edeae1;
@@ -82,14 +114,10 @@
       font-size: clamp(0.95rem, 1.6vw, 1.15rem);
       color: #529f9a;
       letter-spacing: 0.15em;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       font-weight: 500;
     }
     .tagline span { color: #a89191; margin: 0 4px; }
-    .hero-sub {
-      max-width: 560px; font-size: clamp(1.1rem,2.2vw,1.4rem);
-      color: #edeae1; margin-bottom: 48px; font-weight: 600;
-    }
     .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
     .btn {
       font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
@@ -100,65 +128,102 @@
     .btn-fill { background: #529f9a; color: #201917; border-color: #529f9a; }
     .btn-fill:hover { transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #edeae1; }
     .btn-ghost:hover { background: #edeae1; color: #201917; transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #529f9a; }
-    .hero-foot {
-      position: absolute; bottom: 32px; left: 32px; right: 32px;
-      display: flex; justify-content: space-between; align-items: flex-end;
-      font-size: 12px; color: #a89191;
-    }
-    .hero-foot .scroll-tag { writing-mode: vertical-rl; }
 
+    /* ===== TICKER ===== */
     .ticker-band {
       background: #529f9a; color: #201917; overflow: hidden;
       border-bottom: 1px solid #4a3535;
-      padding: 14px 0;
+      padding: 12px 0;
     }
     .ticker-track {
       display: flex; width: max-content;
       animation: scroll 26s linear infinite;
     }
     .ticker-track span {
-      font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px;
+      font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px;
       letter-spacing: 0.08em; text-transform: uppercase; padding: 0 24px;
       white-space: nowrap;
     }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    .statement { padding: 60px 32px; border-bottom: 1px solid #4a3535; }
-    .statement-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 140px 1fr; gap: 40px; }
-    .statement-inner .num { font-family: 'JetBrains Mono', monospace; color: #529f9a; font-size: 14px; }
-    .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
-    .statement p b { color: #529f9a; font-weight: 600; }
+    /* ===== STATS — NEW FORMAT ===== */
+    .stats-section {
+      padding: 40px 32px;
+      border-bottom: 1px solid #4a3535;
+      background: #1a1413;
+    }
+    .stats-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: #4a3535;
+      border: 1px solid #4a3535;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .stat-item {
+      background: #201917;
+      padding: 28px 20px;
+      text-align: center;
+      transition: background 0.3s ease;
+    }
+    .stat-item:hover {
+      background: #241717;
+    }
+    .stat-item .number {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      color: #529f9a;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-item .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #a89191;
+      margin-top: 8px;
+      letter-spacing: 0.08em;
+    }
+    .stat-item .sub {
+      font-size: 11px;
+      color: #4a3535;
+      margin-top: 4px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
 
-    .events { padding: 110px 32px 140px; border-bottom: 1px solid #4a3535; position: relative; }
+    /* ===== EVENTS ===== */
+    .events { padding: 80px 32px 100px; border-bottom: 1px solid #4a3535; }
     .section-head {
       display: flex; justify-content: space-between; align-items: flex-end;
-      max-width: 1240px; margin: 0 auto 64px; flex-wrap: wrap; gap: 24px;
+      max-width: 1240px; margin: 0 auto 48px; flex-wrap: wrap; gap: 20px;
     }
-    .section-head h2 { font-size: clamp(2.2rem,5vw,4rem); }
-    .section-head p { color: #a89191; max-width: 340px; font-size: 14px; }
+    .section-head h2 { font-size: clamp(2rem,4.5vw,3.6rem); }
+    .section-head p { color: #a89191; max-width: 340px; font-size: 13px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; }
 
     .stack-area {
       max-width: 1240px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 380px; gap: 80px; align-items: center;
+      display: grid; grid-template-columns: 1fr 380px; gap: 60px; align-items: center;
     }
-    .stack-controls { display: flex; flex-direction: column; gap: 28px; }
-    .stack-controls .count { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #a89191; }
+    .stack-controls { display: flex; flex-direction: column; gap: 24px; }
+    .stack-controls .count { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #a89191; }
     .stack-controls .count b { color: #529f9a; }
     .arrow-row { display: flex; gap: 12px; }
     .arrow-btn {
-      width: 56px; height: 56px; border: 1px solid #edeae1;
+      width: 52px; height: 52px; border: 1px solid #edeae1;
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px; cursor: pointer; background: transparent; color: #edeae1;
+      font-size: 18px; cursor: pointer; background: transparent; color: #edeae1;
       transition: background .18s ease, color .18s ease;
     }
     .arrow-btn:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
-    .hint { font-size: 12px; color: #a89191; max-width: 260px; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
+    .hint { font-size: 11px; color: #a89191; max-width: 260px; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
 
     .stack-wrap {
       position: relative;
       width: 100%;
       max-width: 400px;
-      height: clamp(380px, 62vw, 520px);
+      height: clamp(360px, 58vw, 500px);
       justify-self: center;
       perspective: 1200px;
       touch-action: pan-y;
@@ -179,9 +244,7 @@
     }
     .card.dragging { transition: none !important; cursor: grabbing; }
     .card:not(.dragging) {
-      transition: transform 0.55s cubic-bezier(0.22, 0.8, 0.2, 1), 
-                  opacity 0.5s ease,
-                  box-shadow 0.5s ease;
+      transition: transform 0.55s cubic-bezier(0.22, 0.8, 0.2, 1), opacity 0.5s ease, box-shadow 0.5s ease;
     }
     .card:hover:not(.dragging) {
       box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 0 2px rgba(82,159,154,0.3);
@@ -203,26 +266,92 @@
       background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0) 55%);
     }
     .card-media .cat-label {
-      position: relative; z-index: 1; padding: 20px;
-      font-family: 'Archivo Black', sans-serif; font-size: 15px; color: #edeae1;
-      letter-spacing: -0.01em;
+      position: relative; z-index: 1; padding: 18px;
+      font-family: 'Archivo Black', sans-serif; font-size: 14px; color: #edeae1;
     }
     .card-tag {
-      position: absolute; top: 16px; right: 16px; z-index: 2;
+      position: absolute; top: 14px; right: 14px; z-index: 2;
       background: rgba(32,25,23,0.85); color: #529f9a; border: 1px solid #529f9a;
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 5px 10px; letter-spacing: 0.06em;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 4px 10px;
       border-radius: 4px;
       backdrop-filter: blur(4px);
     }
-    .card-body { padding: 22px 22px 24px; }
-    .card-body h3 { font-family: 'Archivo Black', sans-serif; font-size: 20px; margin-bottom: 10px; letter-spacing: -0.01em; }
-    .card-meta { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a89191; }
+    .card-body { padding: 18px 20px 20px; }
+    .card-body h3 { font-family: 'Archivo Black', sans-serif; font-size: 18px; margin-bottom: 8px; }
+    .card-meta { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #a89191; }
     .card-index {
-      position: absolute; bottom: 16px; left: 16px; z-index: 2;
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #edeae1; background: rgba(0,0,0,0.5); padding: 3px 8px;
+      position: absolute; bottom: 14px; left: 14px; z-index: 2;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #edeae1; background: rgba(0,0,0,0.5); padding: 2px 8px;
       border-radius: 4px;
     }
 
+    /* ===== IN THE FRAME (desktop only) ===== */
+    .photo-section {
+      padding: 80px 32px 100px;
+      border-bottom: 1px solid #4a3535;
+      background: #1a1413;
+    }
+    .photo-section .section-head {
+      max-width: 1240px;
+      margin: 0 auto 48px;
+    }
+    .photo-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .photo-grid .p-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid #4a3535;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .photo-grid .p-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      border-color: #529f9a;
+    }
+    .photo-grid .p-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .photo-grid .p-item .p-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    .photo-grid .p-item:hover .p-overlay {
+      opacity: 1;
+    }
+    .photo-grid .p-item .p-overlay span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #edeae1;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ===== FINAL CTA ===== */
+    .final-cta {
+      padding: 100px 32px;
+      text-align: center;
+      border-bottom: 1px solid #4a3535;
+    }
+    .final-cta h2 { font-size: clamp(2.6rem,8vw,6rem); margin-bottom: 28px; }
+    .final-cta h2 span { color: #529f9a; }
+    .final-cta .cta-row { justify-content: center; }
+
+    /* ===== MODAL ===== */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000;
       background: rgba(0,0,0,0.85);
@@ -246,13 +375,13 @@
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
-      padding: 40px;
+      padding: 36px;
       position: relative;
       box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(82,159,154,0.2);
     }
     .modal-close {
-      position: absolute; top: 16px; right: 20px;
-      font-size: 28px; cursor: pointer;
+      position: absolute; top: 14px; right: 18px;
+      font-size: 26px; cursor: pointer;
       color: #a89191;
       transition: color 0.2s ease;
       background: none; border: none;
@@ -260,159 +389,93 @@
     }
     .modal-close:hover { color: #edeae1; }
     .modal .modal-img {
-      width: 100%; height: 200px;
+      width: 100%; height: 180px;
       background-size: cover; background-position: center;
       border-radius: 8px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .modal .modal-tag {
       display: inline-block;
       background: rgba(82,159,154,0.2);
       color: #529f9a;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: 10px;
       padding: 4px 12px;
       border-radius: 4px;
       letter-spacing: 0.06em;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .modal h2 {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      margin-bottom: 12px;
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      margin-bottom: 10px;
       letter-spacing: -0.02em;
     }
     .modal .modal-meta {
-      display: flex; gap: 24px;
+      display: flex; gap: 20px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       color: #a89191;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
     .modal .modal-meta span { display: flex; align-items: center; gap: 6px; }
     .modal .modal-desc {
       color: #c9c4b8;
       line-height: 1.6;
-      margin-bottom: 28px;
-      font-size: 15px;
+      margin-bottom: 24px;
+      font-size: 14px;
     }
     .modal .modal-actions {
-      display: flex; gap: 16px; flex-wrap: wrap;
+      display: flex; gap: 14px; flex-wrap: wrap;
     }
     .modal .modal-actions .btn { flex: 1; justify-content: center; }
 
-    .proof { padding: 120px 32px 0; border-bottom: 1px solid #4a3535; }
-    .proof-inner { max-width: 1240px; margin: 0 auto; }
-    .stat-row {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
-      background: #4a3535; border: 1px solid #4a3535; margin-bottom: 90px;
-    }
-    .stat { background: #201917; padding: 40px 24px; text-align: left; }
-    .stat .n { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.2rem,4.5vw,3.6rem); color: #529f9a; line-height: 1; }
-    .stat .l { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a89191; margin-top: 12px; }
-    .quote {
-      max-width: 900px; border-left: 3px solid #529f9a; padding-left: 36px; margin-bottom: 110px;
-    }
-    .quote p { font-size: clamp(1.4rem,2.6vw,2rem); font-weight: 500; line-height: 1.4; margin-bottom: 24px; }
-    .quote .attr { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a89191; }
-
-    .photo-section { padding-bottom: 130px; }
-    .photo-stack-area {
-      display: grid; grid-template-columns: 380px 1fr; gap: 80px; align-items: center;
-    }
-    .photo-controls { display: flex; flex-direction: column; gap: 28px; }
-    .photo-stack-wrap {
-      position: relative; width: 100%; max-width: 380px; height: clamp(340px, 58vw, 460px);
-      justify-self: center;
-      perspective: 1000px;
-      touch-action: pan-y;
-    }
-    .photo-card {
-      position: absolute; inset: 0;
-      background: #edeae1;
-      padding: 14px 14px 0;
-      will-change: transform, opacity;
-      user-select: none;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(82,159,154,0.15);
-      border-radius: 8px;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      touch-action: pan-y;
-      cursor: pointer;
-    }
-    .photo-card.dragging { transition: none !important; cursor: grabbing; }
-    .photo-card:not(.dragging) {
-      transition: transform 0.55s cubic-bezier(0.22, 0.8, 0.2, 1), 
-                  opacity 0.5s ease,
-                  box-shadow 0.5s ease;
-    }
-    .photo-card:hover:not(.dragging) {
-      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(82,159,154,0.3);
-    }
-    .photo-inner {
-      height: calc(100% - 92px);
-      position: relative; overflow: hidden;
-      background-size: cover;
-      background-position: center;
-      border-radius: 4px;
-    }
-    .photo-inner .p-tag {
-      position: absolute; top: 12px; left: 12px;
-      background: rgba(32,25,23,0.85); color: #529f9a;
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 4px 8px; letter-spacing: 0.06em;
-      border-radius: 4px;
-      backdrop-filter: blur(4px);
-    }
-    .photo-caption {
-      height: 78px; display: flex; flex-direction: column; justify-content: center; gap: 4px;
-    }
-    .photo-caption .p-title {
-      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 16px; color: #201917;
-    }
-    .photo-caption .p-meta {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6d6d69; letter-spacing: 0.05em;
-    }
-
-    .final-cta {
-      padding: 140px 32px; text-align: center; position: relative; border-bottom: 1px solid #4a3535;
-    }
-    .final-cta h2 { font-size: clamp(2.6rem,8vw,6rem); margin-bottom: 36px; }
-    .final-cta h2 span { color: #529f9a; }
-    .final-cta .cta-row { justify-content: center; }
-
-    footer { padding: 60px 32px 40px; }
+    /* ===== FOOTER ===== */
+    footer { padding: 50px 32px 32px; }
     .foot-inner {
       max-width: 1240px; margin: 0 auto;
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 28px;
     }
-    .foot-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a89191; margin-bottom: 16px; letter-spacing: 0.1em; }
-    .foot-col a { display: block; font-size: 14px; margin-bottom: 10px; color: #edeae1; }
+    .foot-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #a89191; margin-bottom: 14px; letter-spacing: 0.1em; }
+    .foot-col a { display: block; font-size: 13px; margin-bottom: 8px; color: #edeae1; }
     .foot-col a:hover { color: #529f9a; }
     .foot-bottom {
-      max-width: 1240px; margin: 60px auto 0; padding-top: 24px; border-top: 1px solid #4a3535;
-      display: flex; justify-content: space-between; font-size: 12px; color: #a89191; flex-wrap: wrap; gap: 12px;
+      max-width: 1240px; margin: 40px auto 0; padding-top: 20px; border-top: 1px solid #4a3535;
+      display: flex; justify-content: space-between; font-size: 11px; color: #a89191; flex-wrap: wrap; gap: 12px;
       font-family: 'JetBrains Mono', monospace;
     }
 
-    @media (max-width:860px) {
-      .statement-inner { grid-template-columns: 1fr; gap: 16px; }
-      .stack-area { grid-template-columns: 1fr; gap: 40px; }
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 861px) {
+      .filmstrip { display: none !important; }
+    }
+
+    @media (max-width: 860px) {
+      .hero { padding: 120px 20px 40px; min-height: 80vh; }
+      .filmstrip { display: block !important; }
+      .filmstrip-track .film-item { width: 100px; height: 100px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stack-area { grid-template-columns: 1fr; gap: 30px; }
       .stack-controls { order: 2; align-items: center; text-align: center; }
       .stack-wrap { order: 1; }
-      .photo-stack-area { grid-template-columns: 1fr; gap: 40px; }
-      .photo-controls { order: 2; align-items: center; text-align: center; }
-      .photo-stack-wrap { order: 1; }
-      .hint { max-width: 100%; }
-      .stat-row { grid-template-columns: repeat(2,1fr); }
-      .arrow-row { justify-content: center; }
-      .hero-foot { position: static; margin-top: 60px; flex-direction: column; gap: 12px; align-items: flex-start; }
-      .events, .proof, .statement, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
-      .modal { padding: 24px; margin: 16px; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .photo-section { display: none !important; } /* Hide on mobile */
+      .events, .photo-section, .final-cta, footer, .stats-section { padding-left: 20px; padding-right: 20px; }
+      .modal { padding: 24px; }
     }
-    @media (max-width:420px) {
-      .stack-wrap, .photo-stack-wrap { max-width: 100%; }
+
+    @media (max-width: 420px) {
+      .stack-wrap { max-width: 100%; }
+      .filmstrip-track .film-item { width: 80px; height: 80px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { padding: 20px 12px; }
+      .stat-item .number { font-size: 1.8rem; }
       .modal .modal-actions { flex-direction: column; }
+    }
+
+    @media (min-width: 861px) and (max-width: 1200px) {
+      .photo-grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -538,18 +601,20 @@
     </svg>
   </div>
   <div class="hero-inner">
+    <!-- MOVING FILMSTRIP (mobile only) -->
+    <div class="filmstrip">
+      <div class="filmstrip-track" id="filmstripTrack">
+        <!-- Images will be inserted by JS -->
+      </div>
+    </div>
+
     <div class="eyebrow mono">Bengaluru chapter — live</div>
     <h1 class="disp">JOIN THE<br><span class="outline">MOVEMENT</span></h1>
     <div class="tagline mono">MEET <span>·</span> CONNECT <span>·</span> BELONG</div>
-    <p class="hero-sub"></p>
     <div class="cta-row">
       <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="btn btn-fill">Join Mesh</a>
       <a href="#events" class="btn btn-ghost">See the Events</a>
     </div>
-  </div>
-  <div class="hero-foot mono">
-    <span></span>
-    <span class="scroll-tag"></span>
   </div>
 </section>
 
@@ -558,11 +623,29 @@
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
 
-<!-- STATEMENT -->
-<section class="statement">
-  <div class="statement-inner">
-    <div class="num mono"></div>
-    <p><br><b>Show up. That's the whole idea.</b></p>
+<!-- STATS — NEW FORMAT -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="number">200+</div>
+      <div class="label">Members</div>
+      <div class="sub">and growing</div>
+    </div>
+    <div class="stat-item">
+      <div class="number">02</div>
+      <div class="label">Events</div>
+      <div class="sub">and counting</div>
+    </div>
+    <div class="stat-item">
+      <div class="number">01</div>
+      <div class="label">City</div>
+      <div class="sub">Bengaluru</div>
+    </div>
+    <div class="stat-item">
+      <div class="number">00</div>
+      <div class="label">Sponsors</div>
+      <div class="sub">we're independent</div>
+    </div>
   </div>
 </section>
 
@@ -587,37 +670,14 @@
   </div>
 </section>
 
-<!-- COMMUNITY PROOF -->
-<section class="proof">
-  <div class="proof-inner">
-    <div class="stat-row">
-      <div class="stat"><div class="n">200+</div><div class="l mono">Members</div></div>
-      <div class="stat"><div class="n">02</div><div class="l mono">Events Run</div></div>
-      <div class="stat"><div class="n">01</div><div class="l mono">City</div></div>
-      <div class="stat"><div class="n">00</div><div class="l mono">Sponsors</div></div>
-    </div>
-    <div class="quote">
-      <p>"I came for one run. Stayed for the people. MESH is the only thing on my calendar I never cancel on."</p>
-      <div class="attr mono">— MESH Member, Varkala</div>
-    </div>
+<!-- IN THE FRAME — DESKTOP ONLY -->
+<section class="photo-section" id="frame">
+  <div class="section-head">
+    <h2 class="disp">In The<br>Frame</h2>
+    <p class="mono">Moments from the ground so far.</p>
   </div>
-
-  <div class="proof-inner photo-section">
-    <div class="section-head">
-      <h2 class="disp">In The<br>Frame</h2>
-      <p class="mono">Moments from the ground so far.</p>
-    </div>
-    <div class="photo-stack-area">
-      <div class="photo-controls">
-        <div class="count mono">Viewing <b id="photoCounter" style="color:var(--acid);">01</b> / 06</div>
-        <div class="arrow-row">
-          <button class="arrow-btn" id="photoPrevBtn" aria-label="Previous">←</button>
-          <button class="arrow-btn" id="photoNextBtn" aria-label="Next">→</button>
-        </div>
-        <p class="hint">swipe · polaroid memories</p>
-      </div>
-      <div class="photo-stack-wrap" id="photoStackWrap"></div>
-    </div>
+  <div class="photo-grid" id="photoGrid">
+    <!-- Images will be inserted by JS -->
   </div>
 </section>
 
@@ -634,7 +694,7 @@
     <div class="foot-col">
       <h4 class="mono">Explore</h4>
       <a href="#events">Events</a>
-      <a href="#">About</a>
+      <a href="#frame">In The Frame</a>
       <a href="#join">Membership</a>
     </div>
     <div class="foot-col">
@@ -678,12 +738,59 @@
 </div>
 
 <script>
-  // ===== ticker =====
+  // ===== TICKER =====
   const tickerWords = ['RUN CLUB','MUSIC NIGHTS','MEETUPS','TALKS','POP-UPS','+ MUCH MORE'];
   const tickerTrack = document.getElementById('tickerTrack');
   tickerTrack.innerHTML = tickerWords.map(w => `<span>${w} ✦</span>`).join('') + tickerWords.map(w => `<span>${w} ✦</span>`).join('');
 
-  // ===== data =====
+  // ===== FILMSTRIP IMAGES (mobile) =====
+  // Replace these with your actual image URLs
+  const filmstripImages = [
+    'vichuphoto.jpg',
+    'photo-nights-1.jpg',
+    'photo-talks-1.jpg',
+    'photo-social-1.jpg',
+    'photo-experiences-1.jpg',
+    'photo-run-2.jpg',
+    'vichuphoto.jpg',
+    'photo-nights-1.jpg',
+    'photo-talks-1.jpg',
+    'photo-social-1.jpg',
+    'photo-experiences-1.jpg',
+    'photo-run-2.jpg'
+  ];
+
+  const filmstripTrack = document.getElementById('filmstripTrack');
+  filmstripImages.forEach(src => {
+    const item = document.createElement('div');
+    item.className = 'film-item';
+    item.innerHTML = `<img src="${src}" alt="MESH memory" loading="lazy" />`;
+    filmstripTrack.appendChild(item);
+  });
+
+  // ===== PHOTO GRID (desktop) =====
+  // Replace these with your actual image URLs
+  const gridPhotos = [
+    { src: 'vichuphoto.jpg', tag: 'RUN' },
+    { src: 'photo-nights-1.jpg', tag: 'NIGHTS' },
+    { src: 'photo-talks-1.jpg', tag: 'TALKS' },
+    { src: 'photo-social-1.jpg', tag: 'SOCIAL' },
+    { src: 'photo-experiences-1.jpg', tag: 'EXPERIENCES' },
+    { src: 'photo-run-2.jpg', tag: 'RUN' }
+  ];
+
+  const photoGrid = document.getElementById('photoGrid');
+  gridPhotos.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'p-item';
+    item.innerHTML = `
+      <img src="${p.src}" alt="${p.tag}" loading="lazy" />
+      <div class="p-overlay"><span>${p.tag}</span></div>
+    `;
+    photoGrid.appendChild(item);
+  });
+
+  // ===== EVENTS DATA =====
   const events = [
     { 
       cat:'RUN', tag:'FITNESS', 
@@ -732,15 +839,6 @@
     },
   ];
 
-  const photos = [
-    { title:'Evening Beach, March', meta:'3 RUNNERS · VARKALA', tag:'RUN', tilt:-2, img:'vichuphoto.jpg' },
-    { title:'Warehouse Sessions Vol.1', meta:'300+ HEADS · INDIRANAGAR', tag:'NIGHTS', tilt:3, img:'photo-nights-1.jpg' },
-    { title:'Creator Roundtable', meta:'40 CREATORS · KORAMANGALA', tag:'TALKS', tilt:-3, img:'photo-talks-1.jpg' },
-    { title:'Rooftop Mixer, Jan', meta:'80 MEMBERS · HSR LAYOUT', tag:'SOCIAL', tilt:2, img:'photo-social-1.jpg' },
-    { title:'Trail Escape, Nandi Hills', meta:'60 EXPLORERS · WEEKEND TRIP', tag:'EXPERIENCES', tilt:-4, img:'photo-experiences-1.jpg' },
-    { title:'MESH Run Anniversary', meta:'200+ RUNNERS · LALBAGH', tag:'RUN', tilt:4, img:'photo-run-2.jpg' },
-  ];
-
   // ===== MODAL =====
   const modal = document.getElementById('eventModal');
   const modalClose = document.getElementById('modalClose');
@@ -772,7 +870,7 @@
     if (e.key === 'Escape') closeModal();
   });
 
-  // ===== SWIPE STACK WITH CLICK/DETECTION FIX =====
+  // ===== SWIPE STACK =====
   function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }){
     const wrap = document.getElementById(wrapId);
     const counter = counterId ? document.getElementById(counterId) : null;
@@ -802,23 +900,19 @@
       card._tilt = item.tilt || 0;
       card._dataIndex = dataIndex;
       
-      // Track dragging state for click detection
       let dragDistance = 0;
       let isDragging = false;
       let startX = 0;
       let startY = 0;
 
-      // Click handler - only fires if not dragging
       card.addEventListener('click', (e) => {
         if (!isDragging && onClick) {
           onClick(data[dataIndex]);
         }
-        // Reset for next interaction
         isDragging = false;
         dragDistance = 0;
       });
 
-      // Mouse drag detection
       card.addEventListener('mousedown', (e) => {
         startX = e.clientX;
         startY = e.clientY;
@@ -831,12 +925,9 @@
         const dx = e.clientX - startX;
         const dy = e.clientY - startY;
         dragDistance = Math.sqrt(dx * dx + dy * dy);
-        if (dragDistance > 10) {
-          isDragging = true;
-        }
+        if (dragDistance > 10) isDragging = true;
       });
 
-      // Touch drag detection for mobile
       let touchStartX = 0;
       let touchStartY = 0;
 
@@ -854,9 +945,7 @@
         const dx = touch.clientX - touchStartX;
         const dy = touch.clientY - touchStartY;
         dragDistance = Math.sqrt(dx * dx + dy * dy);
-        if (dragDistance > 10) {
-          isDragging = true;
-        }
+        if (dragDistance > 10) isDragging = true;
       }, { passive: true });
 
       card.addEventListener('touchend', () => {
@@ -1013,7 +1102,7 @@
     init();
   }
 
-  // ===== events stack =====
+  // ===== EVENTS STACK =====
   createSwipeStack({
     wrapId:'stackWrap', counterId:'cardCounter', prevBtnId:'prevBtn', nextBtnId:'nextBtn',
     data:events, cardClass:'card',
@@ -1033,24 +1122,6 @@
       </div>
     `,
     onClick: (eventData) => openModal(eventData)
-  });
-
-  // ===== photo stack =====
-  createSwipeStack({
-    wrapId:'photoStackWrap', counterId:'photoCounter', prevBtnId:'photoPrevBtn', nextBtnId:'photoNextBtn',
-    data:photos, cardClass:'photo-card',
-    renderCard:(p) => `
-      <div class="photo-inner" style="background-image:url('${p.img}')">
-        <div class="p-tag">${p.tag}</div>
-      </div>
-      <div class="photo-caption">
-        <div class="p-title">${p.title}</div>
-        <div class="p-meta">${p.meta}</div>
-      </div>
-    `,
-    onClick: (photoData) => {
-      alert(`📸 ${photoData.title}\n${photoData.meta}`);
-    }
   });
 </script>
 </body>
