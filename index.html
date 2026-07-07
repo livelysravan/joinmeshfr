@@ -123,12 +123,9 @@
     }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    .statement { padding: 60px 32px; border-bottom: 1px solid #4a3535; }
-    .statement-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 140px 1fr; gap: 40px; }
-    .statement-inner .num { font-family: 'JetBrains Mono', monospace; color: #529f9a; font-size: 14px; }
-    .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
-    .statement p b { color: #529f9a; font-weight: 600; }
+    /* ===== STATEMENT - REMOVED ===== */
 
+    /* ===== EVENTS ===== */
     .events { padding: 110px 32px 140px; border-bottom: 1px solid #4a3535; position: relative; }
     .section-head {
       display: flex; justify-content: space-between; align-items: flex-end;
@@ -302,28 +299,93 @@
     }
     .modal .modal-actions .btn { flex: 1; justify-content: center; }
 
-    .proof { padding: 120px 32px 0; border-bottom: 1px solid #4a3535; }
-    .proof-inner { max-width: 1240px; margin: 0 auto; }
-    .stat-row {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
-      background: #4a3535; border: 1px solid #4a3535; margin-bottom: 90px;
+    /* ===== PROOF WITH NEW STATS ===== */
+    .proof { 
+      padding: 80px 32px 60px; 
+      border-bottom: 1px solid #4a3535; 
+      background: #1a1413;
     }
-    .stat { background: #201917; padding: 40px 24px; text-align: left; }
-    .stat .n { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.2rem,4.5vw,3.6rem); color: #529f9a; line-height: 1; }
-    .stat .l { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a89191; margin-top: 12px; }
-    .quote {
-      max-width: 900px; border-left: 3px solid #529f9a; padding-left: 36px; margin-bottom: 110px;
+    .proof-inner { 
+      max-width: 1240px; 
+      margin: 0 auto; 
     }
-    .quote p { font-size: clamp(1.4rem,2.6vw,2rem); font-weight: 500; line-height: 1.4; margin-bottom: 24px; }
-    .quote .attr { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a89191; }
 
-    .photo-section { padding-bottom: 130px; }
+    /* NEW STATS ROW - Horizontal, clean */
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      padding: 10px 0 20px 0;
+    }
+    .stats-row .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .stats-row .stat .number {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      color: #529f9a;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .stats-row .stat .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #a89191;
+      margin-top: 4px;
+      letter-spacing: 0.08em;
+    }
+    .stats-row .stat .sub {
+      font-size: 11px;
+      color: #4a3535;
+      margin-top: 2px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .quote {
+      max-width: 900px;
+      border-left: 3px solid #529f9a;
+      padding-left: 36px;
+      margin: 40px auto 0;
+    }
+    .quote p { 
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem); 
+      font-weight: 500; 
+      line-height: 1.4; 
+      margin-bottom: 16px; 
+    }
+    .quote .attr { 
+      font-family: 'JetBrains Mono', monospace; 
+      font-size: 11px; 
+      color: #a89191; 
+    }
+
+    /* ===== IN THE FRAME - KEPT ===== */
+    .photo-section { 
+      padding: 80px 32px 100px; 
+      border-bottom: 1px solid #4a3535; 
+    }
+    .photo-section .section-head {
+      max-width: 1240px;
+      margin: 0 auto 48px;
+    }
     .photo-stack-area {
-      display: grid; grid-template-columns: 380px 1fr; gap: 80px; align-items: center;
+      max-width: 1240px; 
+      margin: 0 auto;
+      display: grid; 
+      grid-template-columns: 380px 1fr; 
+      gap: 80px; 
+      align-items: center;
     }
     .photo-controls { display: flex; flex-direction: column; gap: 28px; }
     .photo-stack-wrap {
-      position: relative; width: 100%; max-width: 380px; height: clamp(340px, 58vw, 460px);
+      position: relative; 
+      width: 100%; 
+      max-width: 380px; 
+      height: clamp(340px, 58vw, 460px);
       justify-self: center;
       perspective: 1000px;
       touch-action: pan-y;
@@ -374,6 +436,7 @@
       font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6d6d69; letter-spacing: 0.05em;
     }
 
+    /* ===== FINAL CTA ===== */
     .final-cta {
       padding: 140px 32px; text-align: center; position: relative; border-bottom: 1px solid #4a3535;
     }
@@ -396,7 +459,6 @@
     }
 
     @media (max-width:860px) {
-      .statement-inner { grid-template-columns: 1fr; gap: 16px; }
       .stack-area { grid-template-columns: 1fr; gap: 40px; }
       .stack-controls { order: 2; align-items: center; text-align: center; }
       .stack-wrap { order: 1; }
@@ -404,15 +466,19 @@
       .photo-controls { order: 2; align-items: center; text-align: center; }
       .photo-stack-wrap { order: 1; }
       .hint { max-width: 100%; }
-      .stat-row { grid-template-columns: repeat(2,1fr); }
+      .stats-row { gap: 24px; }
       .arrow-row { justify-content: center; }
       .hero-foot { position: static; margin-top: 60px; flex-direction: column; gap: 12px; align-items: flex-start; }
       .events, .proof, .statement, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
       .modal { padding: 24px; margin: 16px; }
+      .quote { padding-left: 20px; }
     }
     @media (max-width:420px) {
       .stack-wrap, .photo-stack-wrap { max-width: 100%; }
       .modal .modal-actions { flex-direction: column; }
+      .stats-row { gap: 16px; }
+      .stats-row .stat .number { font-size: 1.6rem; }
+      .stats-row .stat .label { font-size: 8px; }
     }
   </style>
 </head>
@@ -558,11 +624,56 @@
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
 
-<!-- STATEMENT -->
-<section class="statement">
-  <div class="statement-inner">
-    <div class="num mono"></div>
-    <p><br><b>Show up. That's the whole idea.</b></p>
+<!-- ===== PROOF WITH NEW STATS ===== -->
+<section class="proof">
+  <div class="proof-inner">
+    <!-- NEW STATS ROW -->
+    <div class="stats-row">
+      <div class="stat">
+        <div class="number">200+</div>
+        <div class="label">Members</div>
+        <div class="sub">and growing</div>
+      </div>
+      <div class="stat">
+        <div class="number">02</div>
+        <div class="label">Events</div>
+        <div class="sub">and counting</div>
+      </div>
+      <div class="stat">
+        <div class="number">01</div>
+        <div class="label">City</div>
+        <div class="sub">Bengaluru</div>
+      </div>
+      <div class="stat">
+        <div class="number">00</div>
+        <div class="label">Sponsors</div>
+        <div class="sub">we're independent</div>
+      </div>
+    </div>
+
+    <div class="quote">
+      <p>"I came for one run. Stayed for the people. MESH is the only thing on my calendar I never cancel on."</p>
+      <div class="attr mono">— MESH Member, Varkala</div>
+    </div>
+  </div>
+
+  <!-- IN THE FRAME -->
+  <div class="proof-inner photo-section">
+    <div class="section-head">
+      <h2 class="disp">In The<br>Frame</h2>
+      <p class="mono">Moments from the ground so far.</p>
+    </div>
+    <div class="photo-stack-area">
+      <div class="photo-controls">
+        <div class="count mono">Viewing <b id="photoCounter" style="color:var(--acid);">01</b> / 06</div>
+        <div class="arrow-row">
+          <button class="arrow-btn" id="photoPrevBtn" aria-label="Previous">←</button>
+          <button class="arrow-btn" id="photoNextBtn" aria-label="Next">→</button>
+        </div>
+        <p class="hint">swipe · polaroid memories</p>
+      </div>
+      <div class="photo-stack-wrap" id="photoStackWrap"></div>
+    </div>
   </div>
 </section>
 
@@ -583,40 +694,6 @@
         <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
       </div>
       <p class="hint">Swipe &bull; tap &bull; discover</p>
-    </div>
-  </div>
-</section>
-
-<!-- COMMUNITY PROOF -->
-<section class="proof">
-  <div class="proof-inner">
-    <div class="stat-row">
-      <div class="stat"><div class="n">200+</div><div class="l mono">Members</div></div>
-      <div class="stat"><div class="n">02</div><div class="l mono">Events Run</div></div>
-      <div class="stat"><div class="n">01</div><div class="l mono">City</div></div>
-      <div class="stat"><div class="n">00</div><div class="l mono">Sponsors</div></div>
-    </div>
-    <div class="quote">
-      <p>"I came for one run. Stayed for the people. MESH is the only thing on my calendar I never cancel on."</p>
-      <div class="attr mono">— MESH Member, Varkala</div>
-    </div>
-  </div>
-
-  <div class="proof-inner photo-section">
-    <div class="section-head">
-      <h2 class="disp">In The<br>Frame</h2>
-      <p class="mono">Moments from the ground so far.</p>
-    </div>
-    <div class="photo-stack-area">
-      <div class="photo-controls">
-        <div class="count mono">Viewing <b id="photoCounter" style="color:var(--acid);">01</b> / 06</div>
-        <div class="arrow-row">
-          <button class="arrow-btn" id="photoPrevBtn" aria-label="Previous">←</button>
-          <button class="arrow-btn" id="photoNextBtn" aria-label="Next">→</button>
-        </div>
-        <p class="hint">swipe · polaroid memories</p>
-      </div>
-      <div class="photo-stack-wrap" id="photoStackWrap"></div>
     </div>
   </div>
 </section>
@@ -802,23 +879,19 @@
       card._tilt = item.tilt || 0;
       card._dataIndex = dataIndex;
       
-      // Track dragging state for click detection
       let dragDistance = 0;
       let isDragging = false;
       let startX = 0;
       let startY = 0;
 
-      // Click handler - only fires if not dragging
       card.addEventListener('click', (e) => {
         if (!isDragging && onClick) {
           onClick(data[dataIndex]);
         }
-        // Reset for next interaction
         isDragging = false;
         dragDistance = 0;
       });
 
-      // Mouse drag detection
       card.addEventListener('mousedown', (e) => {
         startX = e.clientX;
         startY = e.clientY;
@@ -836,7 +909,6 @@
         }
       });
 
-      // Touch drag detection for mobile
       let touchStartX = 0;
       let touchStartY = 0;
 
