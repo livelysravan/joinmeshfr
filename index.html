@@ -129,7 +129,7 @@
     .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
     .statement p b { color: #529f9a; font-weight: 600; }
 
-    /* ===== WHATSAPP CHAT SECTION ===== */
+    /* ===== WHATSAPP CHAT SECTION - BUBBLES ONLY ===== */
     .chat-section {
       padding: 60px 32px 80px;
       border-bottom: 1px solid #4a3535;
@@ -139,74 +139,17 @@
       align-items: center;
     }
     .chat-container {
-      max-width: 520px;
+      max-width: 480px;
       width: 100%;
       background: #ece5dd;
-      border-radius: 16px;
+      border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-    }
-    /* Chat Header - Real WhatsApp colors */
-    .chat-header {
-      background: #075e54;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .chat-header .avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #25d366;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 700;
-      color: #075e54;
-      font-family: 'Archivo Black', sans-serif;
-    }
-    .chat-header .info {
-      flex: 1;
-    }
-    .chat-header .info .name {
-      font-weight: 600;
-      font-size: 15px;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-    }
-    .chat-header .info .status {
-      font-size: 11px;
-      color: rgba(255,255,255,0.7);
-      font-family: 'Space Grotesk', sans-serif;
-    }
-    .chat-header .info .status .dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      background: #25d366;
-      border-radius: 50%;
-      margin-right: 5px;
-      animation: pulseDot 1.5s ease-in-out infinite;
-    }
-    @keyframes pulseDot {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
-
-    /* Chat Body - Real WhatsApp colors */
-    .chat-body {
       padding: 16px 18px;
-      min-height: 260px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      background: #ece5dd;
       position: relative;
     }
     /* WhatsApp subtle pattern */
-    .chat-body::before {
+    .chat-container::before {
       content: '';
       position: absolute;
       inset: 0;
@@ -215,7 +158,15 @@
       pointer-events: none;
     }
 
-    /* Messages - Real WhatsApp styles */
+    .chat-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+      min-height: 200px;
+    }
+
     .message {
       max-width: 82%;
       padding: 9px 14px;
@@ -277,7 +228,6 @@
       box-shadow: 0 2px 8px rgba(37,211,102,0.3);
     }
 
-    /* Typing Indicator - Real WhatsApp style */
     .typing-indicator {
       align-self: flex-start;
       background: #ffffff;
@@ -304,47 +254,6 @@
     @keyframes typingBounce {
       0%, 60%, 100% { transform: translateY(0); }
       30% { transform: translateY(-6px); }
-    }
-
-    /* Chat Footer - Real WhatsApp */
-    .chat-footer {
-      padding: 8px 14px;
-      background: #f0f0f0;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .chat-footer input {
-      flex: 1;
-      background: #ffffff;
-      border: none;
-      border-radius: 20px;
-      padding: 9px 16px;
-      color: #303030;
-      font-size: 13px;
-      outline: none;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-    .chat-footer input::placeholder {
-      color: #a0a0a0;
-    }
-    .chat-footer .send-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #25d366;
-      border: none;
-      color: #ffffff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .chat-footer .send-btn:hover {
-      transform: scale(1.05);
-      background: #20b85e;
     }
 
     .events { padding: 110px 32px 140px; border-bottom: 1px solid #4a3535; position: relative; }
@@ -629,16 +538,15 @@
       .modal { padding: 24px; margin: 16px; }
       .chat-section { padding: 40px 16px 60px; }
       .chat-container { max-width: 100%; }
-      .chat-body { min-height: 200px; padding: 14px; }
+      .chat-body { min-height: 160px; }
       .message { font-size: 13px; max-width: 88%; }
     }
     @media (max-width:420px) {
       .stack-wrap, .photo-stack-wrap { max-width: 100%; }
       .modal .modal-actions { flex-direction: column; }
-      .chat-body { min-height: 180px; padding: 12px; }
+      .chat-body { min-height: 140px; }
       .message { font-size: 12px; padding: 8px 12px; }
       .message-mesh .link-btn { font-size: 10px; padding: 6px 14px; }
-      .chat-footer input { font-size: 12px; padding: 7px 12px; }
     }
   </style>
 </head>
@@ -792,19 +700,9 @@
   </div>
 </section>
 
-<!-- ===== WHATSAPP CHAT SECTION ===== -->
+<!-- ===== WHATSAPP CHAT - BUBBLES ONLY ===== -->
 <section class="chat-section">
   <div class="chat-container">
-    <!-- Chat Header -->
-    <div class="chat-header">
-      <div class="avatar">M</div>
-      <div class="info">
-        <div class="name">MESH Community</div>
-        <div class="status"><span class="dot"></span>Online — usually replies instantly</div>
-      </div>
-    </div>
-
-    <!-- Chat Body -->
     <div class="chat-body" id="chatBody">
       <!-- User Message -->
       <div class="message message-user" id="userMsg">
@@ -826,12 +724,6 @@
         <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="link-btn">📲 JOIN WHATSAPP GROUP</a>
         <span class="time">12:35</span>
       </div>
-    </div>
-
-    <!-- Chat Footer -->
-    <div class="chat-footer">
-      <input type="text" placeholder="Type a message..." id="chatInput" disabled />
-      <button class="send-btn" id="sendBtn" disabled>➤</button>
     </div>
   </div>
 </section>
@@ -955,12 +847,8 @@
 
   // ===== WHATSAPP CHAT TYPING ANIMATION =====
   document.addEventListener('DOMContentLoaded', function() {
-    const userMsg = document.getElementById('userMsg');
     const typingIndicator = document.getElementById('typingIndicator');
     const meshResponse = document.getElementById('meshResponse');
-
-    // Show user message first
-    userMsg.style.opacity = '1';
 
     // After 1.5 seconds, show typing indicator
     setTimeout(() => {
@@ -971,10 +859,6 @@
     setTimeout(() => {
       typingIndicator.classList.remove('active');
       meshResponse.style.display = 'block';
-      
-      // Auto-scroll to show the new message
-      const chatBody = document.getElementById('chatBody');
-      chatBody.scrollTop = chatBody.scrollHeight;
     }, 4000);
   });
 
