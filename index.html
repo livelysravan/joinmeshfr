@@ -23,6 +23,7 @@
     .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
 
     .noise {
       position: fixed; inset: 0; pointer-events: none; z-index: 999;
@@ -30,26 +31,34 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
+    /* ===== TRANSPARENT NAV ===== */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       height: 72px; padding: 0 32px;
-      backdrop-filter: blur(10px);
-      background: rgba(11,11,12,0.75);
+      background: transparent;
+      border-bottom: none;
     }
     .logo-mark img { height: 120px; width: auto; }
     .nav-cta {
-      border: 1px solid #edeae1; padding: 10px 20px; font-size: 12px;
-      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid #edeae1;
+      padding: 10px 20px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       transition: background .2s ease, color .2s ease;
+      background: transparent;
     }
     .nav-cta:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
 
+    /* ===== HERO (OG code, preserved) ===== */
     .hero {
       position: relative;
       min-height: 100vh;
       display: flex; flex-direction: column; justify-content: center;
       padding: 140px 32px 80px;
+      border-bottom: 1px solid #4a3535;
     }
     .hero-grid {
       position: absolute; inset: 0; z-index: 0;
@@ -61,11 +70,8 @@
     .hero-grid .thread-lit { fill: none; stroke: #529f9a; stroke-linecap: round; }
     .hero-grid .knot { fill: #529f9a; opacity: 0.5; }
     .hero-inner { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; width: 100%; }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 12px; color: #529f9a; margin-bottom: 28px;
-    }
-    .eyebrow::before { content: ''; width: 8px; height: 8px; background: #529f9a; display: inline-block; }
+    
+    /* Removed eyebrow */
     .hero h1 {
       font-size: clamp(3.2rem, 11vw, 9.5rem);
       line-height: 0.86;
@@ -106,6 +112,7 @@
 
     .ticker-band {
       background: #529f9a; color: #201917; overflow: hidden;
+      border-bottom: 1px solid #4a3535;
       padding: 14px 0;
     }
     .ticker-track {
@@ -119,136 +126,16 @@
     }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* ===== WHATSAPP BUBBLES - NO CONTAINER ===== */
-    .chat-section {
-      padding: 40px 32px 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .chat-body {
-      max-width: 480px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      position: relative;
-      z-index: 1;
-      min-height: 180px;
-      padding: 0 10px;
-    }
+    .statement { padding: 60px 32px; border-bottom: 1px solid #4a3535; }
+    .statement-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 140px 1fr; gap: 40px; }
+    .statement-inner .num { font-family: 'JetBrains Mono', monospace; color: #529f9a; font-size: 14px; }
+    .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
+    .statement p b { color: #529f9a; font-weight: 600; }
 
-    .message-mesh-ask {
-      align-self: flex-end;
-      background: #dcf8c6;
-      color: #303030;
-      border-top-right-radius: 2px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .message-mesh-ask.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .message-user-response {
-      align-self: flex-start;
-      background: #ffffff;
-      color: #303030;
-      border-top-left-radius: 2px;
-    }
-
-    .message {
-      max-width: 82%;
-      padding: 9px 14px;
-      border-radius: 10px;
-      font-size: 14px;
-      line-height: 1.5;
-      position: relative;
-      word-wrap: break-word;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-    }
-    .message .time {
-      font-size: 9px;
-      opacity: 0.5;
-      margin-top: 3px;
-      display: block;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      letter-spacing: 0.02em;
-      text-align: right;
-    }
-    .message-user-response .link-btn {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 8px 18px;
-      background: #25d366;
-      color: #ffffff;
-      border-radius: 20px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 12px;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      transition: all 0.2s ease;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      width: 100%;
-      text-align: center;
-    }
-    .message-user-response .link-btn:hover {
-      transform: scale(1.02);
-      background: #20b85e;
-      box-shadow: 0 2px 8px rgba(37,211,102,0.3);
-    }
-
-    .typing-indicator {
-      align-self: flex-start;
-      background: #ffffff;
-      padding: 10px 16px;
-      border-radius: 10px;
-      border-top-left-radius: 2px;
-      display: none;
-      align-items: center;
-      gap: 5px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .typing-indicator.active {
-      display: flex;
-      opacity: 1;
-    }
-    .typing-indicator .dot {
-      width: 7px;
-      height: 7px;
-      background: #a0a0a0;
-      border-radius: 50%;
-      animation: typingBounce 1.3s ease-in-out infinite;
-    }
-    .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
-    .typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typingBounce {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-6px); }
-    }
-
-    .message-user-response {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .message-user-response.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ===== EVENTS ===== */
-    .events { padding: 80px 32px 60px; }
+    .events { padding: 110px 32px 140px; border-bottom: 1px solid #4a3535; position: relative; }
     .section-head {
       display: flex; justify-content: space-between; align-items: flex-end;
-      max-width: 1240px; margin: 0 auto 48px; flex-wrap: wrap; gap: 20px;
+      max-width: 1240px; margin: 0 auto 64px; flex-wrap: wrap; gap: 24px;
     }
     .section-head h2 { font-size: clamp(2.2rem,5vw,4rem); }
     .section-head p { color: #a89191; max-width: 340px; font-size: 14px; }
@@ -418,8 +305,7 @@
     }
     .modal .modal-actions .btn { flex: 1; justify-content: center; }
 
-    /* ===== PROOF ===== */
-    .proof { padding: 80px 32px 0; }
+    .proof { padding: 120px 32px 0; border-bottom: 1px solid #4a3535; }
     .proof-inner { max-width: 1240px; margin: 0 auto; }
     .stat-row {
       display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
@@ -492,7 +378,7 @@
     }
 
     .final-cta {
-      padding: 140px 32px; text-align: center;
+      padding: 140px 32px; text-align: center; position: relative; border-bottom: 1px solid #4a3535;
     }
     .final-cta h2 { font-size: clamp(2.6rem,8vw,6rem); margin-bottom: 36px; }
     .final-cta h2 span { color: #529f9a; }
@@ -512,29 +398,9 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 860px) {
-      .arrow-row { display: none !important; }
-      
-      /* Hero spacing on mobile - more breathing room */
-      .hero { 
-        padding: 130px 20px 50px; 
-        min-height: 85vh;
-      }
-      .hero h1 {
-        margin-bottom: 20px;
-      }
-      .tagline {
-        margin-bottom: 24px;
-      }
-      .hero-sub {
-        margin-bottom: 32px;
-      }
-      .eyebrow {
-        margin-bottom: 20px;
-      }
-      
-      .stack-area { grid-template-columns: 1fr; gap: 30px; }
+    @media (max-width:860px) {
+      .statement-inner { grid-template-columns: 1fr; gap: 16px; }
+      .stack-area { grid-template-columns: 1fr; gap: 40px; }
       .stack-controls { order: 2; align-items: center; text-align: center; }
       .stack-wrap { order: 1; }
       .photo-stack-area { grid-template-columns: 1fr; gap: 40px; }
@@ -542,53 +408,28 @@
       .photo-stack-wrap { order: 1; }
       .hint { max-width: 100%; }
       .stat-row { grid-template-columns: repeat(2,1fr); }
-      .hero-foot { position: static; margin-top: 40px; flex-direction: column; gap: 10px; align-items: flex-start; }
-      .events, .proof, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
+      .arrow-row { justify-content: center; }
+      .hero-foot { position: static; margin-top: 60px; flex-direction: column; gap: 12px; align-items: flex-start; }
+      .events, .proof, .statement, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
       .modal { padding: 24px; margin: 16px; }
-      .chat-section { padding: 30px 16px 40px; }
-      .chat-body { min-height: 160px; }
-      .message { font-size: 13px; max-width: 88%; }
-      
-      /* Make buttons more touch-friendly on mobile */
-      .btn {
-        padding: 16px 24px;
-        font-size: 12px;
-      }
+      nav { padding: 0 20px; }
     }
-
-    @media (max-width: 420px) {
+    @media (max-width:420px) {
       .stack-wrap, .photo-stack-wrap { max-width: 100%; }
       .modal .modal-actions { flex-direction: column; }
-      .chat-body { min-height: 140px; padding: 0 4px; }
-      .message { font-size: 12px; padding: 8px 12px; }
-      .message-user-response .link-btn { font-size: 10px; padding: 6px 14px; }
-      
-      .hero { 
-        padding: 120px 16px 40px; 
-        min-height: 80vh;
-      }
-      .hero h1 {
-        font-size: clamp(2.8rem, 10vw, 4rem);
-        margin-bottom: 16px;
-      }
-      .cta-row .btn {
-        padding: 14px 20px;
-        font-size: 11px;
-        width: 100%;
-        justify-content: center;
-      }
     }
   </style>
 </head>
 <body>
 <div class="noise"></div>
 
+<!-- ===== TRANSPARENT NAV ===== -->
 <nav>
   <div class="logo-mark"><img src="logo.png" alt="MESH Logo" /></div>
   <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="nav-cta">Join</a>
 </nav>
 
-<!-- HERO -->
+<!-- ===== HERO (OG code, eyebrow removed) ===== -->
 <section class="hero">
   <div class="hero-grid">
     <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
@@ -702,7 +543,6 @@
     </svg>
   </div>
   <div class="hero-inner">
-    <div class="eyebrow mono">Bengaluru chapter — live</div>
     <h1 class="disp">JOIN THE<br><span class="outline">MOVEMENT</span></h1>
     <div class="tagline mono">MEET <span>·</span> CONNECT <span>·</span> BELONG</div>
     <p class="hero-sub"></p>
@@ -722,6 +562,14 @@
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
 
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="statement-inner">
+    <div class="num mono"></div>
+    <p><br><b>Show up. That's the whole idea.</b></p>
+  </div>
+</section>
+
 <!-- EVENTS -->
 <section class="events" id="events">
   <div class="section-head">
@@ -739,29 +587,6 @@
         <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
       </div>
       <p class="hint">Swipe &bull; tap &bull; discover</p>
-    </div>
-  </div>
-</section>
-
-<!-- WHATSAPP BUBBLES -->
-<section class="chat-section" id="chatSection">
-  <div class="chat-body" id="chatBody">
-    <div class="message message-mesh-ask" id="meshAsk">
-      Hey! Is there a WhatsApp group to stay updated about events?
-      <span class="time">12:34</span>
-    </div>
-
-    <div class="typing-indicator" id="typingIndicator">
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-
-    <div class="message message-user-response" id="userResponse">
-      Absolutely! We have a buzzing WhatsApp community where we share all event updates, last-minute changes, and connect with fellow members. Join us! 👇
-      <br>
-      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="link-btn">📲 JOIN WHATSAPP GROUP</a>
-      <span class="time">12:35</span>
     </div>
   </div>
 </section>
@@ -862,42 +687,6 @@
   const tickerTrack = document.getElementById('tickerTrack');
   tickerTrack.innerHTML = tickerWords.map(w => `<span>${w} ✦</span>`).join('') + tickerWords.map(w => `<span>${w} ✦</span>`).join('');
 
-  // ===== WHATSAPP CHAT - SCROLL TRIGGERED =====
-  document.addEventListener('DOMContentLoaded', function() {
-    const chatSection = document.getElementById('chatSection');
-    const meshAsk = document.getElementById('meshAsk');
-    const typingIndicator = document.getElementById('typingIndicator');
-    const userResponse = document.getElementById('userResponse');
-    
-    let animationTriggered = false;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !animationTriggered) {
-          animationTriggered = true;
-          startChatAnimation();
-        }
-      });
-    }, {
-      threshold: 0.3
-    });
-
-    observer.observe(chatSection);
-
-    function startChatAnimation() {
-      meshAsk.classList.add('visible');
-
-      setTimeout(() => {
-        typingIndicator.classList.add('active');
-      }, 1500);
-
-      setTimeout(() => {
-        typingIndicator.classList.remove('active');
-        userResponse.classList.add('visible');
-      }, 4000);
-    }
-  });
-
   // ===== data =====
   const events = [
     { 
@@ -987,7 +776,7 @@
     if (e.key === 'Escape') closeModal();
   });
 
-  // ===== SWIPE STACK =====
+  // ===== SWIPE STACK WITH CLICK/DETECTION FIX =====
   function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }){
     const wrap = document.getElementById(wrapId);
     const counter = counterId ? document.getElementById(counterId) : null;
