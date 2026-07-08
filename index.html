@@ -558,9 +558,10 @@
       background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
     }
     .proof-inner { max-width: 1240px; margin: 0 auto; }
+    
     .stat-row {
       display: grid;
-      grid-template-columns: repeat(4,1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1px;
       background: #4a3535;
       border: 1px solid #4a3535;
@@ -576,20 +577,29 @@
     .stat {
       background: #201917;
       padding: 40px 24px;
-      text-align: left;
+      text-align: center;
     }
     .stat .n {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-size: clamp(2.8rem, 5vw, 4rem);
       color: #529f9a;
       line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .stat .n .icon {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
     }
     .stat .l {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       color: #a89191;
       margin-top: 12px;
+      letter-spacing: 0.06em;
     }
+
     .quote {
       max-width: 900px;
       border-left: 3px solid #529f9a;
@@ -821,7 +831,7 @@
         max-width: 100%;
       }
       .stat-row {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
       .hero-foot {
         position: static;
@@ -855,7 +865,14 @@
       }
     }
 
-    @media (max-width: 420px) {
+    @media (max-width: 480px) {
+      .stat-row {
+        grid-template-columns: 1fr;
+        gap: 1px;
+      }
+      .stat {
+        padding: 24px 16px;
+      }
       .stack-wrap {
         max-width: 100%;
         height: clamp(450px, 75vw, 520px);
@@ -1082,12 +1099,32 @@
 <!-- COMMUNITY PROOF -->
 <section class="proof">
   <div class="proof-inner">
+    <!-- Stats Grid - 3 Columns -->
     <div class="stat-row" id="statsRow">
-      <div class="stat"><div class="n" data-target="200">200+</div><div class="l mono">Members</div></div>
-      <div class="stat"><div class="n" data-target="2">02</div><div class="l mono">Events Run</div></div>
-      <div class="stat"><div class="n" data-target="1">01</div><div class="l mono">City</div></div>
-      <div class="stat"><div class="n" data-target="0">00</div><div class="l mono">Sponsors</div></div>
+      <div class="stat">
+        <div class="n">
+          <span class="icon">👥</span>
+          <span class="num" data-target="200">0</span><span>+</span>
+        </div>
+        <div class="l mono">Members</div>
+      </div>
+      <div class="stat">
+        <div class="n">
+          <span class="icon">📍</span>
+          <span class="num" data-target="2">0</span>
+        </div>
+        <div class="l mono">Cities</div>
+      </div>
+      <div class="stat">
+        <div class="n">
+          <span class="icon">💬</span>
+          <span class="num" data-target="500">0</span><span>+</span>
+        </div>
+        <div class="l mono">Community Messages</div>
+      </div>
     </div>
+
+    <!-- Testimonial -->
     <div class="quote" id="testimonial">
       <p>"I came for one run. Stayed for the people. MESH is the only thing on my calendar I never cancel on."</p>
       <div class="attr mono">— MESH Member, Varkala</div>
@@ -1230,7 +1267,7 @@
     headingObserver.observe(heading);
     if (sub) headingObserver.observe(sub);
 
-    // Stats row
+    // Stats row with counter animation
     const stats = document.getElementById('statsRow');
     const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1258,39 +1295,22 @@
 
   // ===== COUNTER ANIMATION =====
   function animateNumbers() {
-    const stats = document.querySelectorAll('.stat .n');
-    stats.forEach(stat => {
-      const target = stat.getAttribute('data-target');
-      // For 200+, we animate to 200
-      if (target === '200') {
-        let current = 0;
-        const interval = setInterval(() => {
-          current += 4;
-          if (current >= 200) {
-            stat.textContent = '200+';
-            clearInterval(interval);
-          } else {
-            stat.textContent = current + '+';
-          }
-        }, 20);
-      } else if (target === '2') {
-        let current = 0;
-        const interval = setInterval(() => {
-          current += 1;
-          if (current >= 2) {
-            stat.textContent = '02';
-            clearInterval(interval);
-          } else {
-            stat.textContent = '0' + current;
-          }
-        }, 300);
-      } else if (target === '1') {
-        setTimeout(() => {
-          stat.textContent = '01';
-        }, 300);
-      } else {
-        stat.textContent = '00';
-      }
+    const numElements = document.querySelectorAll('.stat .num');
+    
+    numElements.forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'));
+      let current = 0;
+      const increment = Math.ceil(target / 60); // Smooth animation over ~60 frames
+      
+      const interval = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          el.textContent = target;
+          clearInterval(interval);
+        } else {
+          el.textContent = current;
+        }
+      }, 20);
     });
   }
 
