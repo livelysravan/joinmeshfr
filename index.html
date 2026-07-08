@@ -91,20 +91,21 @@
     }
     .tagline span { color: #a89191; margin: 0 4px; }
     .hero-sub {
-      max-width: 560px; font-size: clamp(1.1rem,2.2vw,1.4rem);
-      color: #edeae1; margin-bottom: 48px; font-weight: 600;
+      max-width: 560px;
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      color: #edeae1;
+      margin-bottom: 32px;
+      font-weight: 500;
     }
-    .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn {
-      font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 18px 30px; display: inline-flex; align-items: center; gap: 10px;
-      border: 1px solid #edeae1; transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
-      cursor: pointer;
+    .hero-sub a {
+      color: #529f9a;
+      border-bottom: 1px solid #529f9a;
+      padding-bottom: 2px;
+      transition: opacity 0.2s ease;
     }
-    .btn:active { transform: scale(0.95); }
-    .btn-fill { background: #529f9a; color: #201917; border-color: #529f9a; }
-    .btn-fill:hover { transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #edeae1; }
-    .btn-ghost:hover { background: #edeae1; color: #201917; transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #529f9a; }
+    .hero-sub a:hover {
+      opacity: 0.7;
+    }
     .hero-foot {
       position: absolute; bottom: 32px; left: 32px; right: 32px;
       display: flex; justify-content: space-between; align-items: flex-end;
@@ -128,139 +129,9 @@
     }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* ===== WHATSAPP BUBBLES ===== */
-    .chat-section {
-      padding: 80px 24px 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #201917;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .chat-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .chat-body {
-      max-width: 480px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      position: relative;
-      z-index: 1;
-      min-height: 170px;
-      padding: 0 6px;
-    }
-
-    .message-mesh-ask {
-      align-self: flex-end;
-      background: #dcf8c6;
-      color: #303030;
-      border-top-right-radius: 2px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .message-mesh-ask.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .message-user-response {
-      align-self: flex-start;
-      background: #ffffff;
-      color: #303030;
-      border-top-left-radius: 2px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .message-user-response.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .message {
-      max-width: 85%;
-      padding: 9px 14px;
-      border-radius: 10px;
-      font-size: 14px;
-      line-height: 1.5;
-      position: relative;
-      word-wrap: break-word;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-    }
-    .message .time {
-      font-size: 9px;
-      opacity: 0.5;
-      margin-top: 3px;
-      display: block;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      letter-spacing: 0.02em;
-      text-align: right;
-    }
-    .message-user-response .link-btn {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 8px 16px;
-      background: #25d366;
-      color: #ffffff;
-      border-radius: 20px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 11px;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      transition: all 0.2s ease;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      width: 100%;
-      text-align: center;
-    }
-    .message-user-response .link-btn:hover {
-      transform: scale(1.02);
-      background: #20b85e;
-      box-shadow: 0 2px 8px rgba(37,211,102,0.3);
-    }
-
-    .typing-indicator {
-      align-self: flex-start;
-      background: #ffffff;
-      padding: 10px 16px;
-      border-radius: 10px;
-      border-top-left-radius: 2px;
-      display: none;
-      align-items: center;
-      gap: 5px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .typing-indicator.active {
-      display: flex;
-      opacity: 1;
-    }
-    .typing-indicator .dot {
-      width: 7px;
-      height: 7px;
-      background: #a0a0a0;
-      border-radius: 50%;
-      animation: typingBounce 1.3s ease-in-out infinite;
-    }
-    .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
-    .typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typingBounce {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-6px); }
-    }
-
     /* ===== EVENTS ===== */
     .events {
-      padding: 60px 32px 60px;
+      padding: 60px 32px 40px;
       position: relative;
     }
     .events::before {
@@ -278,7 +149,7 @@
       justify-content: space-between;
       align-items: flex-end;
       max-width: 1240px;
-      margin: 0 auto 80px;
+      margin: 0 auto 64px;
       flex-wrap: wrap;
       gap: 24px;
     }
@@ -463,6 +334,147 @@
       color: #edeae1;
     }
 
+    /* ===== WHATSAPP BUBBLES ===== */
+    .chat-section {
+      padding: 40px 24px 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #201917;
+      position: relative;
+    }
+    .chat-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,53,53,0.3), transparent);
+    }
+    .chat-body {
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+      min-height: 170px;
+      padding: 0 6px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .chat-body.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .message-mesh-ask {
+      align-self: flex-end;
+      background: #dcf8c6;
+      color: #303030;
+      border-top-right-radius: 2px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .message-mesh-ask.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .message-user-response {
+      align-self: flex-start;
+      background: #ffffff;
+      color: #303030;
+      border-top-left-radius: 2px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .message-user-response.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+      position: relative;
+      word-wrap: break-word;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+    .message .time {
+      font-size: 9px;
+      opacity: 0.5;
+      margin-top: 3px;
+      display: block;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      letter-spacing: 0.02em;
+      text-align: right;
+    }
+    .message-user-response .link-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 16px;
+      background: #25d366;
+      color: #ffffff;
+      border-radius: 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      width: 100%;
+      text-align: center;
+    }
+    .message-user-response .link-btn:hover {
+      transform: scale(1.02);
+      background: #20b85e;
+      box-shadow: 0 2px 8px rgba(37,211,102,0.3);
+    }
+
+    .typing-indicator {
+      align-self: flex-start;
+      background: #ffffff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border-top-left-radius: 2px;
+      display: none;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .typing-indicator.active {
+      display: flex;
+      opacity: 1;
+    }
+    .typing-indicator .dot {
+      width: 7px;
+      height: 7px;
+      background: #a0a0a0;
+      border-radius: 50%;
+      animation: typingBounce 1.3s ease-in-out infinite;
+    }
+    .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+    }
+
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000;
       background: rgba(0,0,0,0.85);
@@ -544,7 +556,7 @@
 
     /* ===== PROOF ===== */
     .proof {
-      padding: 80px 32px 0;
+      padding: 60px 32px 0;
       position: relative;
     }
     .proof::before {
@@ -732,31 +744,10 @@
       letter-spacing: 0.05em;
     }
 
-    .final-cta {
-      padding: 120px 32px;
-      text-align: center;
-      position: relative;
-    }
-    .final-cta::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
-    }
-    .final-cta h2 {
-      font-size: clamp(2.6rem, 8vw, 6rem);
-      margin-bottom: 36px;
-    }
-    .final-cta h2 span { color: #529f9a; }
-    .final-cta .cta-row { justify-content: center; }
-
     footer {
       padding: 60px 32px 40px;
       border-top: 1px solid rgba(74,53,53,0.3);
+      margin-top: 0;
     }
     .foot-inner {
       max-width: 1240px;
@@ -840,12 +831,12 @@
         gap: 12px;
         align-items: flex-start;
       }
-      .events, .proof, .final-cta, footer, nav, .hero {
+      .events, .proof, footer, nav, .hero {
         padding-left: 20px;
         padding-right: 20px;
       }
       .chat-section {
-        padding: 60px 20px 30px;
+        padding: 30px 20px 50px;
       }
       .modal {
         padding: 24px;
@@ -858,10 +849,6 @@
         width: 64px;
         height: 64px;
         font-size: 24px;
-      }
-      .btn {
-        padding: 16px 28px;
-        font-size: 14px;
       }
     }
 
@@ -896,7 +883,7 @@
         padding: 12px 20px;
       }
       .events {
-        padding: 40px 14px 40px;
+        padding: 40px 14px 30px;
       }
       .proof {
         padding: 40px 14px 0;
@@ -906,6 +893,9 @@
       }
       .card-body {
         padding: 20px 20px 24px;
+      }
+      .chat-section {
+        padding: 20px 14px 40px;
       }
     }
   </style>
@@ -919,7 +909,7 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-grid">
     <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
       <g class="thread-track">
@@ -1035,10 +1025,9 @@
     <div class="eyebrow mono">Bengaluru chapter — live</div>
     <h1 class="disp">JOIN THE<br><span class="outline">MOVEMENT</span></h1>
     <div class="tagline mono">MEET <span>·</span> CONNECT <span>·</span> BELONG</div>
-    <p class="hero-sub"></p>
-    <div class="cta-row">
-      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="btn btn-fill">Join Mesh</a>
-      <a href="#events" class="btn btn-ghost">The Lineup</a>
+    <div class="hero-sub">
+      A community of runners, creators, and night owls.<br>
+      <a href="#events">See what's happening →</a>
     </div>
   </div>
   <div class="hero-foot mono">
@@ -1052,7 +1041,28 @@
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
 
-<!-- WHATSAPP BUBBLES -->
+<!-- EVENTS -->
+<section class="events" id="events">
+  <div class="section-head">
+    <h2 class="disp" id="eventsHeading">The Lineup</h2>
+    <p class="mono" id="eventsSub">Join the movement</p>
+  </div>
+
+  <div class="stack-area">
+    <div class="stack-wrap" id="stackWrap"></div>
+
+    <div class="stack-controls">
+      <div class="count mono">Viewing <b id="cardCounter">01</b> / 05</div>
+      <div class="arrow-row">
+        <button class="arrow-btn" id="prevBtn" aria-label="Previous">←</button>
+        <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
+      </div>
+      <p class="hint">Swipe &bull; tap &bull; discover</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP BUBBLES (MOVED BELOW EVENTS) -->
 <section class="chat-section" id="chatSection">
   <div class="chat-body" id="chatBody">
     <div class="message message-mesh-ask" id="meshAsk">
@@ -1071,27 +1081,6 @@
       <br>
       <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="link-btn">📲 JOIN WHATSAPP GROUP</a>
       <span class="time">12:35</span>
-    </div>
-  </div>
-</section>
-
-<!-- EVENTS -->
-<section class="events" id="events">
-  <div class="section-head">
-    <h2 class="disp" id="eventsHeading">Upcoming<br>Experiences</h2>
-    <p class="mono" id="eventsSub">Join the movement</p>
-  </div>
-
-  <div class="stack-area">
-    <div class="stack-wrap" id="stackWrap"></div>
-
-    <div class="stack-controls">
-      <div class="count mono">Viewing <b id="cardCounter">01</b> / 05</div>
-      <div class="arrow-row">
-        <button class="arrow-btn" id="prevBtn" aria-label="Previous">←</button>
-        <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
-      </div>
-      <p class="hint">Swipe &bull; tap &bull; discover</p>
     </div>
   </div>
 </section>
@@ -1150,21 +1139,13 @@
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="final-cta" id="join">
-  <h2 class="disp">READY TO <br><span>MESH IN?</span></h2>
-  <div class="cta-row">
-    <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="btn btn-fill">Join Mesh</a>
-  </div>
-</section>
-
 <footer>
   <div class="foot-inner">
     <div class="foot-col">
       <h4 class="mono">Explore</h4>
       <a href="#events">Events</a>
       <a href="#">About</a>
-      <a href="#join">Membership</a>
+      <a href="#">Membership</a>
     </div>
     <div class="foot-col">
       <h4 class="mono">Chapters</h4>
@@ -1214,7 +1195,7 @@
 
   // ===== WHATSAPP CHAT - SCROLL TRIGGERED =====
   document.addEventListener('DOMContentLoaded', function() {
-    const chatSection = document.getElementById('chatSection');
+    const chatBody = document.getElementById('chatBody');
     const meshAsk = document.getElementById('meshAsk');
     const typingIndicator = document.getElementById('typingIndicator');
     const userResponse = document.getElementById('userResponse');
@@ -1225,7 +1206,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting && !animationTriggered) {
           animationTriggered = true;
-          chatSection.classList.add('visible');
+          chatBody.classList.add('visible');
           startChatAnimation();
         }
       });
@@ -1233,7 +1214,7 @@
       threshold: 0.3
     });
 
-    observer.observe(chatSection);
+    observer.observe(chatBody);
 
     function startChatAnimation() {
       meshAsk.classList.add('visible');
@@ -1300,7 +1281,7 @@
     numElements.forEach(el => {
       const target = parseInt(el.getAttribute('data-target'));
       let current = 0;
-      const increment = Math.ceil(target / 60); // Smooth animation over ~60 frames
+      const increment = Math.ceil(target / 60);
       
       const interval = setInterval(() => {
         current += increment;
