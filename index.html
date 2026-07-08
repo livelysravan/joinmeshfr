@@ -122,7 +122,7 @@
 
     /* ===== WHATSAPP BUBBLES ===== */
     .chat-section {
-      padding: 60px 24px 80px;
+      padding: 60px 24px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -243,7 +243,7 @@
       30% { transform: translateY(-6px); }
     }
 
-    .events { padding: 80px 32px 100px; }
+    .events { padding: 40px 32px 40px; }
     .section-head {
       display: flex; justify-content: space-between; align-items: flex-end;
       max-width: 1240px; margin: 0 auto 64px; flex-wrap: wrap; gap: 24px;
@@ -416,7 +416,7 @@
     }
     .modal .modal-actions .btn { flex: 1; justify-content: center; }
 
-    .proof { padding: 80px 32px 0; }
+    .proof { padding: 40px 32px 0; }
     .proof-inner { max-width: 1240px; margin: 0 auto; }
     .stat-row {
       display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
@@ -509,6 +509,7 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width:860px) {
       .stack-area { grid-template-columns: 1fr; gap: 40px; }
       .stack-controls { order: 2; align-items: center; text-align: center; }
@@ -518,17 +519,22 @@
       .photo-stack-wrap { order: 1; }
       .hint { max-width: 100%; }
       .stat-row { grid-template-columns: repeat(2,1fr); }
-      .arrow-row { justify-content: center; }
       .hero-foot { position: static; margin-top: 60px; flex-direction: column; gap: 12px; align-items: flex-start; }
       .events, .proof, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
       .modal { padding: 24px; margin: 16px; }
-      .chat-section { padding: 40px 20px 60px; }
+      .chat-section { padding: 40px 20px 20px; }
+      
+      /* Hide arrow buttons on mobile */
+      .arrow-row { display: none !important; }
     }
+
     @media (max-width:420px) {
       .stack-wrap, .photo-stack-wrap { max-width: 100%; }
       .modal .modal-actions { flex-direction: column; }
       .chat-body { min-height: 150px; }
       .message { font-size: 13px; max-width: 88%; padding: 8px 12px; }
+      .events { padding: 30px 14px 30px; }
+      .proof { padding: 30px 14px 0; }
     }
   </style>
 </head>
@@ -754,7 +760,7 @@
 
 <!-- FINAL CTA -->
 <section class="final-cta" id="join">
-  <h2 class="disp">JOIN IN.</h2>
+  <h2 class="disp">READY TO <br><span>MESH IN?</span></h2>
   <div class="cta-row">
     <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="btn btn-fill">Join Mesh</a>
   </div>
