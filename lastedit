@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MESH — Join the Movement</title>
+  <link rel="icon" type="image/png" href="mlogov2.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+    body {
+      background: #201917;
+      color: #edeae1;
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+      width: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+    .disp { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -0.02em; }
+    .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .noise {
+      position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      opacity: 0.035; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; padding: 0 32px;
+      backdrop-filter: blur(10px);
+      background: rgba(11,11,12,0.75);
+      border-bottom: 1px solid rgba(74,53,53,0.3);
+    }
+    .logo-mark img { height: 120px; width: auto; }
+    .nav-cta {
+      border: 1px solid #edeae1; padding: 10px 20px; font-size: 12px;
+      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-cta:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 140px 32px 80px;
+      opacity: 0;
+      animation: heroFadeIn 1.2s ease forwards;
+    }
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+      overflow: hidden;
+    }
+    .hero-grid svg { width: 100%; height: 100%; }
+    .hero-grid .thread { fill: none; stroke: #4a3535; stroke-linecap: round; }
+    .hero-grid .thread-lit { fill: none; stroke: #529f9a; stroke-linecap: round; }
+    .hero-grid .knot { fill: #529f9a; opacity: 0.5; }
+    .hero-inner { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; width: 100%; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; color: #529f9a; margin-bottom: 28px;
+    }
+    .eyebrow::before { content: ''; width: 8px; height: 8px; background: #529f9a; display: inline-block; }
+    .hero h1 {
+      font-size: clamp(3.2rem, 11vw, 9.5rem);
+      line-height: 0.86;
+      margin-bottom: 24px;
+    }
+    .hero h1 .outline {
+      -webkit-text-stroke: 2px #edeae1;
+      color: transparent;
+    }
+    .tagline {
+      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+      color: #529f9a;
+      letter-spacing: 0.15em;
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+    .tagline span { color: #a89191; margin: 0 4px; }
+    .hero-sub {
+      max-width: 560px; font-size: clamp(1.1rem,2.2vw,1.4rem);
+      color: #edeae1; margin-bottom: 48px; font-weight: 600;
+    }
+    .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 18px 30px; display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid #edeae1; transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+      cursor: pointer;
+    }
+    .btn:active { transform: scale(0.95); }
+    .btn-fill { background: #529f9a; color: #201917; border-color: #529f9a; }
+    .btn-fill:hover { transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #edeae1; }
+    .btn-ghost:hover { background: #edeae1; color: #201917; transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #529f9a; }
+    .hero-foot {
+      position: absolute; bottom: 32px; left: 32px; right: 32px;
+      display: flex; justify-content: space-between; align-items: flex-end;
+      font-size: 12px; color: #a89191;
+    }
+    .hero-foot .scroll-tag { writing-mode: vertical-rl; }
+
+    .ticker-band {
+      background: #529f9a; color: #201917; overflow: hidden;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(74,53,53,0.3);
+    }
+    .ticker-track {
+      display: flex; width: max-content;
+      animation: scroll 26s linear infinite;
+    }
+    .ticker-track span {
+      font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px;
+      letter-spacing: 0.08em; text-transform: uppercase; padding: 0 24px;
+      white-space: nowrap;
+    }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ===== WHATSAPP BUBBLES ===== */
+    .chat-section {
+      padding: 80px 24px 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #201917;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .chat-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .chat-body {
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+      min-height: 170px;
+      padding: 0 6px;
+    }
+
+    .message-mesh-ask {
+      align-self: flex-end;
+      background: #dcf8c6;
+      color: #303030;
+      border-top-right-radius: 2px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .message-mesh-ask.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .message-user-response {
+      align-self: flex-start;
+      background: #ffffff;
+      color: #303030;
+      border-top-left-radius: 2px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .message-user-response.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+      position: relative;
+      word-wrap: break-word;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+    .message .time {
+      font-size: 9px;
+      opacity: 0.5;
+      margin-top: 3px;
+      display: block;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      letter-spacing: 0.02em;
+      text-align: right;
+    }
+    .message-user-response .link-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 16px;
+      background: #25d366;
+      color: #ffffff;
+      border-radius: 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      width: 100%;
+      text-align: center;
+    }
+    .message-user-response .link-btn:hover {
+      transform: scale(1.02);
+      background: #20b85e;
+      box-shadow: 0 2px 8px rgba(37,211,102,0.3);
+    }
+
+    .typing-indicator {
+      align-self: flex-start;
+      background: #ffffff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border-top-left-radius: 2px;
+      display: none;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .typing-indicator.active {
+      display: flex;
+      opacity: 1;
+    }
+    .typing-indicator .dot {
+      width: 7px;
+      height: 7px;
+      background: #a0a0a0;
+      border-radius: 50%;
+      animation: typingBounce 1.3s ease-in-out infinite;
+    }
+    .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+    }
+
+    /* ===== EVENTS ===== */
+    .events {
+      padding: 60px 32px 60px;
+      position: relative;
+    }
+    .events::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
+    }
+    .events .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      max-width: 1240px;
+      margin: 0 auto 80px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .events .section-head h2 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .events .section-head h2.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .events .section-head p {
+      color: #a89191;
+      max-width: 340px;
+      font-size: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+    }
+    .events .section-head p.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stack-area {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 80px;
+      align-items: center;
+    }
+    .stack-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .stack-controls .count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: #a89191;
+    }
+    .stack-controls .count b { color: #529f9a; }
+    .arrow-row {
+      display: flex;
+      gap: 12px;
+    }
+    .arrow-btn {
+      width: 56px;
+      height: 56px;
+      border: 1px solid #edeae1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      background: transparent;
+      color: #edeae1;
+      transition: background .18s ease, color .18s ease, transform .2s ease;
+    }
+    .arrow-btn:hover {
+      background: #529f9a;
+      color: #201917;
+      border-color: #529f9a;
+    }
+    .arrow-btn:active {
+      transform: scale(0.92);
+    }
+    .hint {
+      font-size: 12px;
+      color: #a89191;
+      max-width: 260px;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.6;
+    }
+
+    .stack-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: clamp(420px, 65vw, 540px);
+      justify-self: center;
+      perspective: 1200px;
+      touch-action: pan-y;
+    }
+    .card {
+      position: absolute;
+      inset: 0;
+      background: #241717;
+      border: 2px solid #edeae1;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      will-change: transform, opacity, box-shadow;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(82,159,154,0.1);
+      touch-action: pan-y;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:not(.dragging):hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(82,159,154,0.3);
+    }
+    .card.dragging { transition: none !important; cursor: grabbing; }
+    .card:not(.dragging) {
+      transition: transform 0.55s cubic-bezier(0.22, 0.8, 0.2, 1), 
+                  opacity 0.5s ease,
+                  box-shadow 0.5s ease;
+    }
+
+    .card-media {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .card-media .cat-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.8s ease;
+    }
+    .card:not(.dragging):hover .cat-bg {
+      transform: scale(1.05);
+    }
+    .card-media .cat-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 50%);
+    }
+
+    .card-body {
+      position: relative;
+      z-index: 1;
+      padding: 28px 28px 30px;
+      width: 100%;
+      background: linear-gradient(to top, rgba(32,25,23,0.95), rgba(32,25,23,0.6) 60%, transparent);
+    }
+    .card-body h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 22px;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+      color: #edeae1;
+    }
+    .card-body .card-sub {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      color: #a89191;
+      margin-bottom: 12px;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #a89191;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .card-meta .tag {
+      background: rgba(82,159,154,0.15);
+      color: #529f9a;
+      padding: 3px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(82,159,154,0.2);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+    }
+    .card-meta .date {
+      color: #edeae1;
+    }
+
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-overlay.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal {
+      background: #241717;
+      border: 2px solid #edeae1;
+      border-radius: 16px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 40px;
+      position: relative;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(82,159,154,0.2);
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px;
+      font-size: 28px; cursor: pointer;
+      color: #a89191;
+      transition: color 0.2s ease;
+      background: none; border: none;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .modal-close:hover { color: #edeae1; }
+    .modal .modal-img {
+      width: 100%; height: 200px;
+      background-size: cover; background-position: center;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    .modal .modal-tag {
+      display: inline-block;
+      background: rgba(82,159,154,0.2);
+      color: #529f9a;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .modal h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .modal .modal-meta {
+      display: flex; gap: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #a89191;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .modal .modal-meta span { display: flex; align-items: center; gap: 6px; }
+    .modal .modal-desc {
+      color: #c9c4b8;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      font-size: 15px;
+    }
+    .modal .modal-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .modal .modal-actions .btn { flex: 1; justify-content: center; }
+
+    /* ===== PROOF ===== */
+    .proof {
+      padding: 80px 32px 0;
+      position: relative;
+    }
+    .proof::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
+    }
+    .proof-inner { max-width: 1240px; margin: 0 auto; }
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 1px;
+      background: #4a3535;
+      border: 1px solid #4a3535;
+      margin-bottom: 90px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .stat-row.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stat {
+      background: #201917;
+      padding: 40px 24px;
+      text-align: left;
+    }
+    .stat .n {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      color: #529f9a;
+      line-height: 1;
+    }
+    .stat .l {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #a89191;
+      margin-top: 12px;
+    }
+    .quote {
+      max-width: 900px;
+      border-left: 3px solid #529f9a;
+      padding-left: 36px;
+      margin-bottom: 110px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+    }
+    .quote.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .quote p {
+      font-size: clamp(1.4rem, 2.6vw, 2rem);
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+    .quote .attr {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #a89191;
+    }
+
+    .photo-section {
+      padding-bottom: 100px;
+    }
+    .photo-section .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      max-width: 1240px;
+      margin: 0 auto 64px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .photo-section .section-head h2 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+    }
+    .photo-section .section-head p {
+      color: #a89191;
+      max-width: 340px;
+      font-size: 14px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .photo-stack-area {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .photo-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .photo-stack-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      height: clamp(340px, 58vw, 460px);
+      justify-self: center;
+      perspective: 1000px;
+      touch-action: pan-y;
+    }
+    .photo-card {
+      position: absolute;
+      inset: 0;
+      background: #edeae1;
+      padding: 14px 14px 0;
+      will-change: transform, opacity;
+      user-select: none;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(82,159,154,0.15);
+      border-radius: 8px;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      touch-action: pan-y;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .photo-card:not(.dragging):hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(82,159,154,0.3);
+    }
+    .photo-card.dragging { transition: none !important; cursor: grabbing; }
+    .photo-card:not(.dragging) {
+      transition: transform 0.55s cubic-bezier(0.22, 0.8, 0.2, 1), 
+                  opacity 0.5s ease,
+                  box-shadow 0.5s ease;
+    }
+    .photo-inner {
+      height: calc(100% - 92px);
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      border-radius: 4px;
+    }
+    .photo-inner .p-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(32,25,23,0.85);
+      color: #529f9a;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 4px 8px;
+      letter-spacing: 0.06em;
+      border-radius: 4px;
+      backdrop-filter: blur(4px);
+    }
+    .photo-caption {
+      height: 78px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+    .photo-caption .p-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #201917;
+    }
+    .photo-caption .p-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #6d6d69;
+      letter-spacing: 0.05em;
+    }
+
+    .final-cta {
+      padding: 120px 32px;
+      text-align: center;
+      position: relative;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
+    }
+    .final-cta h2 {
+      font-size: clamp(2.6rem, 8vw, 6rem);
+      margin-bottom: 36px;
+    }
+    .final-cta h2 span { color: #529f9a; }
+    .final-cta .cta-row { justify-content: center; }
+
+    footer {
+      padding: 60px 32px 40px;
+      border-top: 1px solid rgba(74,53,53,0.3);
+    }
+    .foot-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .foot-col h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #a89191;
+      margin-bottom: 16px;
+      letter-spacing: 0.1em;
+    }
+    .foot-col a {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #edeae1;
+      transition: color 0.2s ease;
+    }
+    .foot-col a:hover { color: #529f9a; }
+    .foot-bottom {
+      max-width: 1240px;
+      margin: 60px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(74,53,53,0.3);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #a89191;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 860px) {
+      .stack-area {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .stack-controls {
+        order: 2;
+        align-items: center;
+        text-align: center;
+      }
+      .stack-wrap {
+        order: 1;
+        max-width: 100%;
+        height: clamp(480px, 70vw, 560px);
+      }
+      .card-body h3 {
+        font-size: 24px;
+      }
+      .photo-stack-area {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .photo-controls {
+        order: 2;
+        align-items: center;
+        text-align: center;
+      }
+      .photo-stack-wrap {
+        order: 1;
+        max-width: 100%;
+      }
+      .hint {
+        max-width: 100%;
+      }
+      .stat-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-foot {
+        position: static;
+        margin-top: 60px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .events, .proof, .final-cta, footer, nav, .hero {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .chat-section {
+        padding: 60px 20px 30px;
+      }
+      .modal {
+        padding: 24px;
+        margin: 16px;
+      }
+      .arrow-row {
+        display: none !important;
+      }
+      .arrow-btn {
+        width: 64px;
+        height: 64px;
+        font-size: 24px;
+      }
+      .btn {
+        padding: 16px 28px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .stack-wrap {
+        max-width: 100%;
+        height: clamp(450px, 75vw, 520px);
+      }
+      .photo-stack-wrap {
+        max-width: 100%;
+      }
+      .modal .modal-actions {
+        flex-direction: column;
+      }
+      .chat-body {
+        min-height: 180px;
+      }
+      .message {
+        font-size: 15px;
+        max-width: 88%;
+        padding: 10px 16px;
+      }
+      .message-user-response .link-btn {
+        font-size: 13px;
+        padding: 12px 20px;
+      }
+      .events {
+        padding: 40px 14px 40px;
+      }
+      .proof {
+        padding: 40px 14px 0;
+      }
+      .card-body h3 {
+        font-size: 20px;
+      }
+      .card-body {
+        padding: 20px 20px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+
+<nav>
+  <div class="logo-mark"><img src="logo.png" alt="MESH Logo" /></div>
+  <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="nav-cta">Join</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g class="thread-track">
+        <g>
+          <path class="thread" d="M 34,334 C 67,466 88,599 70,739" style="stroke-width:1.07;opacity:0.62" />
+          <path class="thread" d="M 1408,-0 C 1121,219 878,487 611,744" style="stroke-width:0.78;opacity:0.51" />
+          <path class="thread" d="M 1406,143 C 1207,128 1008,105 802,120" style="stroke-width:1.03;opacity:0.49" />
+          <path class="thread" d="M 854,-3 C 738,154 648,327 536,493" style="stroke-width:0.65;opacity:0.36" />
+          <path class="thread" d="M -24,916 C 142,676 335,459 521,224" style="stroke-width:1.22;opacity:0.31" />
+          <path class="thread" d="M 8,217 C 471,179 930,86 1411,106" style="stroke-width:1.21;opacity:0.34" />
+          <path class="thread" d="M 27,927 C 399,898 751,753 1136,737" style="stroke-width:0.88;opacity:0.46" />
+          <path class="thread" d="M 1449,-23 C 1278,-52 1130,65 956,55" style="stroke-width:1.12;opacity:0.65" />
+          <path class="thread" d="M 1506,282 C 1464,327 1397,270 1355,320" style="stroke-width:0.99;opacity:0.36" />
+          <path class="thread" d="M 1447,859 C 1025,658 558,590 116,404" style="stroke-width:1.31;opacity:0.58" />
+          <path class="thread" d="M 1518,651 C 1183,537 888,336 548,208" style="stroke-width:0.72;opacity:0.52" />
+          <path class="thread" d="M 331,860 C 423,687 526,520 603,332" style="stroke-width:1.36;opacity:0.54" />
+          <path class="thread" d="M 1113,915 C 1153,879 1205,874 1254,857" style="stroke-width:1.05;opacity:0.43" />
+          <path class="thread" d="M 1407,-26 C 1048,70 684,133 301,146" style="stroke-width:0.64;opacity:0.28" />
+          <path class="thread" d="M -6,-23 C 98,94 243,176 299,339" style="stroke-width:1.36;opacity:0.5" />
+          <path class="thread" d="M 1519,413 C 1257,279 967,215 697,77" style="stroke-width:0.87;opacity:0.38" />
+          <path class="thread" d="M 237,34 C 304,241 500,385 521,621" style="stroke-width:1.21;opacity:0.39" />
+          <path class="thread" d="M -18,899 C 170,679 366,464 512,201" style="stroke-width:1.0;opacity:0.52" />
+          <path class="thread" d="M 1222,958 C 1104,723 1088,467 1065,204" style="stroke-width:0.88;opacity:0.29" />
+          <path class="thread" d="M -57,566 C 146,548 328,606 496,728" style="stroke-width:0.88;opacity:0.64" />
+          <path class="thread" d="M 1424,125 C 1204,316 1141,626 899,810" style="stroke-width:0.98;opacity:0.52" />
+          <path class="thread" d="M 97,907 C 351,601 765,498 1025,179" style="stroke-width:0.95;opacity:0.52" />
+          <path class="thread" d="M 549,908 C 828,857 1095,765 1363,652" style="stroke-width:0.7;opacity:0.34" />
+          <path class="thread" d="M 903,932 C 840,879 765,856 683,844" style="stroke-width:1.04;opacity:0.29" />
+          <path class="thread" d="M 764,32 C 757,288 721,538 625,785" style="stroke-width:0.77;opacity:0.37" />
+          <path class="thread" d="M 435,-15 C 683,64 940,34 1201,55" style="stroke-width:1.32;opacity:0.53" />
+          <path class="thread" d="M 114,-62 C 371,180 577,458 735,786" style="stroke-width:1.09;opacity:0.57" />
+          <path class="thread" d="M 1089,-13 C 879,138 703,333 469,467" style="stroke-width:1.23;opacity:0.32" />
+          <path class="thread" d="M -75,8 C 162,109 404,41 651,25" style="stroke-width:0.65;opacity:0.4" />
+          <path class="thread" d="M 1036,914 C 1029,709 815,619 768,430" style="stroke-width:1.16;opacity:0.6" />
+          <path class="thread" d="M 1364,-56 C 1131,94 907,259 644,375" style="stroke-width:0.85;opacity:0.53" />
+          <path class="thread" d="M 14,887 C 142,857 116,697 222,645" style="stroke-width:0.71;opacity:0.61" />
+          <path class="thread" d="M 553,-22 C 850,222 1146,468 1425,749" style="stroke-width:0.95;opacity:0.47" />
+          <path class="thread" d="M -69,303 C 121,304 282,453 487,413" style="stroke-width:0.91;opacity:0.47" />
+          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:0.93;opacity:0.62" />
+          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.26;opacity:0.52" />
+          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.08;opacity:0.56" />
+          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:0.99;opacity:0.53" />
+          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.04;opacity:0.51" />
+          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.26;opacity:0.44" />
+          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.38;opacity:0.69" />
+          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:0.91;opacity:0.57" />
+          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.07;opacity:0.45" />
+          <circle class="knot" cx="521" cy="224" r="2.5" />
+          <circle class="knot" cx="697" cy="77" r="3.0" />
+          <circle class="knot" cx="899" cy="810" r="2.5" />
+          <circle class="knot" cx="1025" cy="179" r="3.0" />
+          <circle class="knot" cx="768" cy="430" r="2.5" />
+          <circle class="knot" cx="433" cy="112" r="2.0" />
+          <circle class="knot" cx="1135" cy="375" r="2.5" />
+        </g>
+        <g transform="translate(1440,0)">
+          <path class="thread" d="M 34,334 C 67,466 88,599 70,739" style="stroke-width:1.07;opacity:0.62" />
+          <path class="thread" d="M 1408,-0 C 1121,219 878,487 611,744" style="stroke-width:0.78;opacity:0.51" />
+          <path class="thread" d="M 1406,143 C 1207,128 1008,105 802,120" style="stroke-width:1.03;opacity:0.49" />
+          <path class="thread" d="M 854,-3 C 738,154 648,327 536,493" style="stroke-width:0.65;opacity:0.36" />
+          <path class="thread" d="M -24,916 C 142,676 335,459 521,224" style="stroke-width:1.22;opacity:0.31" />
+          <path class="thread" d="M 8,217 C 471,179 930,86 1411,106" style="stroke-width:1.21;opacity:0.34" />
+          <path class="thread" d="M 27,927 C 399,898 751,753 1136,737" style="stroke-width:0.88;opacity:0.46" />
+          <path class="thread" d="M 1449,-23 C 1278,-52 1130,65 956,55" style="stroke-width:1.12;opacity:0.65" />
+          <path class="thread" d="M 1506,282 C 1464,327 1397,270 1355,320" style="stroke-width:0.99;opacity:0.36" />
+          <path class="thread" d="M 1447,859 C 1025,658 558,590 116,404" style="stroke-width:1.31;opacity:0.58" />
+          <path class="thread" d="M 1518,651 C 1183,537 888,336 548,208" style="stroke-width:0.72;opacity:0.52" />
+          <path class="thread" d="M 331,860 C 423,687 526,520 603,332" style="stroke-width:1.36;opacity:0.54" />
+          <path class="thread" d="M 1113,915 C 1153,879 1205,874 1254,857" style="stroke-width:1.05;opacity:0.43" />
+          <path class="thread" d="M 1407,-26 C 1048,70 684,133 301,146" style="stroke-width:0.64;opacity:0.28" />
+          <path class="thread" d="M -6,-23 C 98,94 243,176 299,339" style="stroke-width:1.36;opacity:0.5" />
+          <path class="thread" d="M 1519,413 C 1257,279 967,215 697,77" style="stroke-width:0.87;opacity:0.38" />
+          <path class="thread" d="M 237,34 C 304,241 500,385 521,621" style="stroke-width:1.21;opacity:0.39" />
+          <path class="thread" d="M -18,899 C 170,679 366,464 512,201" style="stroke-width:1.0;opacity:0.52" />
+          <path class="thread" d="M 1222,958 C 1104,723 1088,467 1065,204" style="stroke-width:0.88;opacity:0.29" />
+          <path class="thread" d="M -57,566 C 146,548 328,606 496,728" style="stroke-width:0.88;opacity:0.64" />
+          <path class="thread" d="M 1424,125 C 1204,316 1141,626 899,810" style="stroke-width:0.98;opacity:0.52" />
+          <path class="thread" d="M 97,907 C 351,601 765,498 1025,179" style="stroke-width:0.95;opacity:0.52" />
+          <path class="thread" d="M 549,908 C 828,857 1095,765 1363,652" style="stroke-width:0.7;opacity:0.34" />
+          <path class="thread" d="M 903,932 C 840,879 765,856 683,844" style="stroke-width:1.04;opacity:0.29" />
+          <path class="thread" d="M 764,32 C 757,288 721,538 625,785" style="stroke-width:0.77;opacity:0.37" />
+          <path class="thread" d="M 435,-15 C 683,64 940,34 1201,55" style="stroke-width:1.32;opacity:0.53" />
+          <path class="thread" d="M 114,-62 C 371,180 577,458 735,786" style="stroke-width:1.09;opacity:0.57" />
+          <path class="thread" d="M 1089,-13 C 879,138 703,333 469,467" style="stroke-width:1.23;opacity:0.32" />
+          <path class="thread" d="M -75,8 C 162,109 404,41 651,25" style="stroke-width:0.65;opacity:0.4" />
+          <path class="thread" d="M 1036,914 C 1029,709 815,619 768,430" style="stroke-width:1.16;opacity:0.6" />
+          <path class="thread" d="M 1364,-56 C 1131,94 907,259 644,375" style="stroke-width:0.85;opacity:0.53" />
+          <path class="thread" d="M 14,887 C 142,857 116,697 222,645" style="stroke-width:0.71;opacity:0.61" />
+          <path class="thread" d="M 553,-22 C 850,222 1146,468 1425,749" style="stroke-width:0.95;opacity:0.47" />
+          <path class="thread" d="M -69,303 C 121,304 282,453 487,413" style="stroke-width:0.91;opacity:0.47" />
+          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:0.93;opacity:0.62" />
+          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.26;opacity:0.52" />
+          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.08;opacity:0.56" />
+          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:0.99;opacity:0.53" />
+          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.04;opacity:0.51" />
+          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.26;opacity:0.44" />
+          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.38;opacity:0.69" />
+          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:0.91;opacity:0.57" />
+          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.07;opacity:0.45" />
+          <circle class="knot" cx="521" cy="224" r="2.5" />
+          <circle class="knot" cx="697" cy="77" r="3.0" />
+          <circle class="knot" cx="899" cy="810" r="2.5" />
+          <circle class="knot" cx="1025" cy="179" r="3.0" />
+          <circle class="knot" cx="768" cy="430" r="2.5" />
+          <circle class="knot" cx="433" cy="112" r="2.0" />
+          <circle class="knot" cx="1135" cy="375" r="2.5" />
+        </g>
+        <animateTransform attributeName="transform" type="translate" from="0 0" to="-1440 0" dur="120s" repeatCount="indefinite" />
+      </g>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <div class="eyebrow mono">Bengaluru chapter — live</div>
+    <h1 class="disp">JOIN THE<br><span class="outline">MOVEMENT</span></h1>
+    <div class="tagline mono">MEET <span>·</span> CONNECT <span>·</span> BELONG</div>
+    <p class="hero-sub"></p>
+    <div class="cta-row">
+      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="btn btn-fill">Join Mesh</a>
+      <a href="#events" class="btn btn-ghost">See the Events</a>
+    </div>
+  </div>
+  <div class="hero-foot mono">
+    <span></span>
+    <span class="scroll-tag"></span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-band">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- WHATSAPP BUBBLES -->
+<section class="chat-section" id="chatSection">
+  <div class="chat-body" id="chatBody">
+    <div class="message message-mesh-ask" id="meshAsk">
+      Hey! Is there a WhatsApp group to stay updated about events?
+      <span class="time">12:34</span>
+    </div>
+
+    <div class="typing-indicator" id="typingIndicator">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <div class="message message-user-response" id="userResponse">
+      Absolutely! We have a buzzing WhatsApp community where we share all event updates, last-minute changes, and connect with fellow members. Join us! 👇
+      <br>
+      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="link-btn">📲 JOIN WHATSAPP GROUP</a>
+      <span class="time">12:35</span>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events" id="events">
+  <div class="section-head">
+    <h2 class="disp" id="eventsHeading">Upcoming<br>Experiences</h2>
+    <p class="mono" id="eventsSub">Join the movement</p>
+  </div>
+
+  <div class="stack-area">
+    <div class="stack-wrap" id="stackWrap"></div>
+
+    <div class="stack-controls">
+      <div class="count mono">Viewing <b id="cardCounter">01</b> / 05</div>
+      <div class="arrow-row">
+        <button class="arrow-btn" id="prevBtn" aria-label="Previous">←</button>
+        <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
+      </div>
+      <p class="hint">Swipe &bull; tap &bull; discover</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY PROOF -->
+<section class="proof">
+  <div class="proof-inner">
+    <div class="stat-row" id="statsRow">
+      <div class="stat"><div class="n" data-target="200">200+</div><div class="l mono">Members</div></div>
+      <div class="stat"><div class="n" data-target="2">02</div><div class="l mono">Events Run</div></div>
+      <div class="stat"><div class="n" data-target="1">01</div><div class="l mono">City</div></div>
+      <div class="stat"><div class="n" data-target="0">00</div><div class="l mono">Sponsors</div></div>
+    </div>
+    <div class="quote" id="testimonial">
+      <p>"I came for one run. Stayed for the people. MESH is the only thing on my calendar I never cancel on."</p>
+      <div class="attr mono">— MESH Member, Varkala</div>
+    </div>
+  </div>
+
+  <div class="proof-inner photo-section">
+    <div class="section-head">
+      <h2 class="disp">In The<br>Frame</h2>
+      <p class="mono">Moments from the ground so far.</p>
+    </div>
+    <div class="photo-stack-area">
+      <div class="photo-controls">
+        <div class="count mono">Viewing <b id="photoCounter">01</b> / 06</div>
+        <div class="arrow-row">
+          <button class="arrow-btn" id="photoPrevBtn" aria-label="Previous">←</button>
+          <button class="arrow-btn" id="photoNextBtn" aria-label="Next">→</button>
+        </div>
+        <p class="hint">swipe · polaroid memories</p>
+      </div>
+      <div class="photo-stack-wrap" id="photoStackWrap"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="join">
+  <h2 class="disp">READY TO <br><span>MESH IN?</span></h2>
+  <div class="cta-row">
+    <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="btn btn-fill">Join Mesh</a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-col">
+      <h4 class="mono">Explore</h4>
+      <a href="#events">Events</a>
+      <a href="#">About</a>
+      <a href="#join">Membership</a>
+    </div>
+    <div class="foot-col">
+      <h4 class="mono">Chapters</h4>
+      <a href="#">Bengaluru</a>
+      <a href="#">Kochi — soon</a>
+      <a href="#">Delhi — soon</a>
+    </div>
+    <div class="foot-col">
+      <h4 class="mono">Follow</h4>
+      <a href="#">Instagram</a>
+      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer">WhatsApp Community</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 MESH. JOINMESH.IN</span>
+    <span>MEET. CONNECT. BELONG.</span>
+  </div>
+</footer>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="eventModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-tag" id="modalTag">EVENT</div>
+    <h2 id="modalTitle">Event Title</h2>
+    <div class="modal-meta">
+      <span>📅 <span id="modalDate">Date</span></span>
+      <span>📍 <span id="modalLoc">Location</span></span>
+      <span>👥 <span id="modalSpots">Spots available</span></span>
+    </div>
+    <div class="modal-desc" id="modalDesc">
+      Full event details will be displayed here. Join us for an unforgettable experience!
+    </div>
+    <div class="modal-actions">
+      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20I%20want%20to%20RSVP%20for%20this%20event!" target="_blank" class="btn btn-fill">RSVP Now</a>
+      <button class="btn btn-ghost" id="modalCloseBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== ticker =====
+  const tickerWords = ['RUN CLUB','MUSIC NIGHTS','MEETUPS','TALKS','POP-UPS','+ MUCH MORE'];
+  const tickerTrack = document.getElementById('tickerTrack');
+  tickerTrack.innerHTML = tickerWords.map(w => `<span>${w} ✦</span>`).join('') + tickerWords.map(w => `<span>${w} ✦</span>`).join('');
+
+  // ===== WHATSAPP CHAT - SCROLL TRIGGERED =====
+  document.addEventListener('DOMContentLoaded', function() {
+    const chatSection = document.getElementById('chatSection');
+    const meshAsk = document.getElementById('meshAsk');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const userResponse = document.getElementById('userResponse');
+    
+    let animationTriggered = false;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !animationTriggered) {
+          animationTriggered = true;
+          chatSection.classList.add('visible');
+          startChatAnimation();
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    observer.observe(chatSection);
+
+    function startChatAnimation() {
+      meshAsk.classList.add('visible');
+
+      setTimeout(() => {
+        typingIndicator.classList.add('active');
+      }, 1500);
+
+      setTimeout(() => {
+        typingIndicator.classList.remove('active');
+        userResponse.classList.add('visible');
+      }, 4000);
+    }
+  });
+
+  // ===== SCROLL ANIMATIONS =====
+  document.addEventListener('DOMContentLoaded', function() {
+    // Events heading
+    const heading = document.getElementById('eventsHeading');
+    const sub = document.getElementById('eventsSub');
+    
+    const headingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          heading.classList.add('visible');
+          sub.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    headingObserver.observe(heading);
+    if (sub) headingObserver.observe(sub);
+
+    // Stats row
+    const stats = document.getElementById('statsRow');
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          stats.classList.add('visible');
+          animateNumbers();
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    if (stats) statsObserver.observe(stats);
+
+    // Testimonial
+    const testimonial = document.getElementById('testimonial');
+    const testimonialObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          testimonial.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    if (testimonial) testimonialObserver.observe(testimonial);
+  });
+
+  // ===== COUNTER ANIMATION =====
+  function animateNumbers() {
+    const stats = document.querySelectorAll('.stat .n');
+    stats.forEach(stat => {
+      const target = stat.getAttribute('data-target');
+      // For 200+, we animate to 200
+      if (target === '200') {
+        let current = 0;
+        const interval = setInterval(() => {
+          current += 4;
+          if (current >= 200) {
+            stat.textContent = '200+';
+            clearInterval(interval);
+          } else {
+            stat.textContent = current + '+';
+          }
+        }, 20);
+      } else if (target === '2') {
+        let current = 0;
+        const interval = setInterval(() => {
+          current += 1;
+          if (current >= 2) {
+            stat.textContent = '02';
+            clearInterval(interval);
+          } else {
+            stat.textContent = '0' + current;
+          }
+        }, 300);
+      } else if (target === '1') {
+        setTimeout(() => {
+          stat.textContent = '01';
+        }, 300);
+      } else {
+        stat.textContent = '00';
+      }
+    });
+  }
+
+  // ===== data =====
+  const events = [
+    { 
+      cat:'RUN', tag:'FITNESS', 
+      title:'Sunrise 5K', 
+      sub:'Cubbon Park, Bengaluru',
+      date:'12 JUL, 6:00 AM', 
+      loc:'Bengaluru', 
+      img:'event-run.jpg',
+      spots: '45 spots left',
+      desc: 'Start your Sunday with a refreshing 5K run through the lush greenery of Cubbon Park. All fitness levels welcome! Post-run chai and community breakfast included.'
+    },
+    { 
+      cat:'NIGHTS', tag:'MUSIC', 
+      title:'Warehouse Sessions Vol. 3', 
+      sub:'Indiranagar, Bengaluru',
+      date:'18 JUL, 9:00 PM', 
+      loc:'Indiranagar', 
+      img:'event-nights.jpg',
+      spots: '120 spots left',
+      desc: 'The third edition of our legendary warehouse parties. Expect underground beats, immersive lighting, and a crowd that knows how to move. 18+ only.'
+    },
+    { 
+      cat:'TALKS', tag:'WORKSHOP', 
+      title:'Creators in Conversation', 
+      sub:'Koramangala, Bengaluru',
+      date:'22 JUL, 5:30 PM', 
+      loc:'Koramangala', 
+      img:'event-talks.jpg',
+      spots: '30 spots left',
+      desc: 'An intimate evening with Bengaluru\'s most exciting creators. From content to commerce, learn how to turn your passion into a sustainable career. Limited seats!'
+    },
+    { 
+      cat:'SOCIAL', tag:'MEETUP', 
+      title:'Rooftop Community Mixer', 
+      sub:'HSR Layout, Bengaluru',
+      date:'26 JUL, 7:00 PM', 
+      loc:'HSR Layout', 
+      img:'event-social.jpg',
+      spots: '80 spots left',
+      desc: 'Our monthly rooftop mixer returns! Network, make new friends, and enjoy the city skyline. Drinks and snacks provided. Bring your best energy!'
+    },
+    { 
+      cat:'EXPERIENCES', tag:'POP-UP', 
+      title:'Weekend Trail Escape', 
+      sub:'Nandi Hills, Bengaluru',
+      date:'02 AUG, ALL DAY', 
+      loc:'Nandi Hills', 
+      img:'event-experiences.jpg',
+      spots: '25 spots left',
+      desc: 'A full-day adventure to Nandi Hills. Trekking, breakfast with a view, and connect with nature. This is MESH at its most adventurous. Pack your bags!'
+    },
+  ];
+
+  const photos = [
+    { title:'Evening Beach, March', meta:'3 RUNNERS · VARKALA', tag:'RUN', tilt:-2, img:'vichuphoto.jpg' },
+    { title:'Warehouse Sessions Vol.1', meta:'300+ HEADS · INDIRANAGAR', tag:'NIGHTS', tilt:3, img:'photo-nights-1.jpg' },
+    { title:'Creator Roundtable', meta:'40 CREATORS · KORAMANGALA', tag:'TALKS', tilt:-3, img:'photo-talks-1.jpg' },
+    { title:'Rooftop Mixer, Jan', meta:'80 MEMBERS · HSR LAYOUT', tag:'SOCIAL', tilt:2, img:'photo-social-1.jpg' },
+    { title:'Trail Escape, Nandi Hills', meta:'60 EXPLORERS · WEEKEND TRIP', tag:'EXPERIENCES', tilt:-4, img:'photo-experiences-1.jpg' },
+    { title:'MESH Run Anniversary', meta:'200+ RUNNERS · LALBAGH', tag:'RUN', tilt:4, img:'photo-run-2.jpg' },
+  ];
+
+  // ===== MODAL =====
+  const modal = document.getElementById('eventModal');
+  const modalClose = document.getElementById('modalClose');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  
+  function openModal(eventData) {
+    document.getElementById('modalImg').style.backgroundImage = `url('${eventData.img}')`;
+    document.getElementById('modalTag').textContent = `${eventData.cat} · ${eventData.tag}`;
+    document.getElementById('modalTitle').textContent = eventData.title;
+    document.getElementById('modalDate').textContent = eventData.date;
+    document.getElementById('modalLoc').textContent = eventData.loc;
+    document.getElementById('modalSpots').textContent = eventData.spots || 'Limited spots';
+    document.getElementById('modalDesc').textContent = eventData.desc || 'Full event details coming soon. Join us for an unforgettable experience!';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modalCloseBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ===== SWIPE STACK =====
+  function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }){
+    const wrap = document.getElementById(wrapId);
+    const counter = counterId ? document.getElementById(counterId) : null;
+    let order = data.map((_, i) => i);
+    let slots = [];
+
+    const offsets = [
+      { x:0, y:0, r:0, s:1, o:1, z:0 },
+      { x:28, y:16, r:4, s:0.94, o:1, z:-20 },
+      { x:50, y:30, r:-3, s:0.88, o:0.85, z:-40 },
+    ];
+    const entryOffset = { x:68, y:40, r:-6, s:0.84, o:0, z:-50 };
+
+    function applyTransform(el, o, tilt, dragX){
+      const rx = o.r + (tilt||0) + (dragX || 0) / 16;
+      const tx = o.x + (dragX || 0);
+      el.style.transform = `translate(${tx}px, ${o.y}px) rotate(${rx}deg) scale(${o.s}) translateZ(${o.z || 0}px)`;
+      el.style.opacity = o.o;
+      el.style.boxShadow = `0 25px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(82,159,154,${0.1 + (1 - o.o) * 0.2})`;
+    }
+
+    function makeCardEl(dataIndex){
+      const item = data[dataIndex];
+      const card = document.createElement('div');
+      card.className = cardClass;
+      card.innerHTML = renderCard(item, dataIndex);
+      card._tilt = item.tilt || 0;
+      card._dataIndex = dataIndex;
+      
+      let dragDistance = 0;
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+
+      card.addEventListener('click', (e) => {
+        if (!isDragging && onClick) {
+          onClick(data[dataIndex]);
+        }
+        isDragging = false;
+        dragDistance = 0;
+      });
+
+      card.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        startY = e.clientY;
+        isDragging = false;
+        dragDistance = 0;
+      });
+
+      card.addEventListener('mousemove', (e) => {
+        if (startX === 0 && startY === 0) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        dragDistance = Math.sqrt(dx * dx + dy * dy);
+        if (dragDistance > 10) {
+          isDragging = true;
+        }
+      });
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      card.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        isDragging = false;
+        dragDistance = 0;
+      }, { passive: true });
+
+      card.addEventListener('touchmove', (e) => {
+        if (touchStartX === 0 && touchStartY === 0) return;
+        const touch = e.touches[0];
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+        dragDistance = Math.sqrt(dx * dx + dy * dy);
+        if (dragDistance > 10) {
+          isDragging = true;
+        }
+      }, { passive: true });
+
+      card.addEventListener('touchend', () => {
+        touchStartX = 0;
+        touchStartY = 0;
+      }, { passive: true });
+
+      return card;
+    }
+
+    function setPos(entry, pos, dragX){
+      entry.pos = pos;
+      const o = offsets[pos] || offsets[2];
+      applyTransform(entry.el, o, entry.el._tilt, dragX);
+      entry.el.style.zIndex = 10 - pos;
+    }
+
+    function updateCounter(){
+      if(counter) counter.textContent = String(order[0] + 1).padStart(2,'0');
+    }
+
+    function init(){
+      wrap.innerHTML = '';
+      slots = order.slice(0, 3).map((dataIndex, pos) => {
+        const el = makeCardEl(dataIndex);
+        wrap.appendChild(el);
+        const entry = { el, dataIndex };
+        setPos(entry, pos, 0);
+        return entry;
+      });
+      enableDrag(slots[0]);
+      updateCounter();
+    }
+
+    function enableDrag(entry){
+      const card = entry.el;
+      let startX = 0, startY = 0, dragX = 0, dragging = false, lockedHorizontal = false;
+
+      function pointerDown(e){
+        dragging = true;
+        lockedHorizontal = false;
+        card.classList.add('dragging');
+        const p = e.touches ? e.touches[0] : e;
+        startX = p.clientX;
+        startY = p.clientY;
+      }
+      function pointerMove(e){
+        if(!dragging) return;
+        const p = e.touches ? e.touches[0] : e;
+        const dx = p.clientX - startX;
+        const dy = p.clientY - startY;
+
+        if(!lockedHorizontal && Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        if(!lockedHorizontal){
+          lockedHorizontal = Math.abs(dx) > Math.abs(dy);
+          if(!lockedHorizontal){ dragging = false; card.classList.remove('dragging'); return; }
+        }
+        if(e.cancelable) e.preventDefault();
+        dragX = dx;
+        setPos(entry, 0, dragX);
+      }
+      function pointerUp(){
+        if(!dragging) return;
+        dragging = false;
+        card.classList.remove('dragging');
+        if(Math.abs(dragX) > 80){
+          cleanup();
+          advance(dragX > 0 ? 1 : -1);
+        } else {
+          setPos(entry, 0, 0);
+        }
+        dragX = 0;
+      }
+      function cleanup(){
+        card.removeEventListener('mousedown', pointerDown);
+        card.removeEventListener('touchstart', pointerDown);
+        window.removeEventListener('mousemove', pointerMove);
+        window.removeEventListener('touchmove', pointerMove);
+        window.removeEventListener('mouseup', pointerUp);
+        window.removeEventListener('touchend', pointerUp);
+      }
+
+      card.addEventListener('mousedown', pointerDown);
+      card.addEventListener('touchstart', pointerDown, {passive:true});
+      window.addEventListener('mousemove', pointerMove);
+      window.addEventListener('touchmove', pointerMove, {passive:false});
+      window.addEventListener('mouseup', pointerUp);
+      window.addEventListener('touchend', pointerUp);
+
+      entry._cleanupDrag = cleanup;
+    }
+
+    function advance(dir){
+      const outgoing = slots[0];
+      if(outgoing._cleanupDrag) outgoing._cleanupDrag();
+
+      outgoing.el.style.transition = 'transform .55s cubic-bezier(.22,.8,.2,1), opacity .5s ease, box-shadow .5s ease';
+      outgoing.el.style.transform = `translate(${dir * 620}px, ${dir * 20}px) rotate(${dir * 16 + outgoing.el._tilt}deg) scale(0.92) translateZ(-80px)`;
+      outgoing.el.style.opacity = 0;
+      outgoing.el.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+
+      const mid = slots[1], back = slots[2];
+      setPos(mid, 0);
+      setPos(back, 1);
+      enableDrag(mid);
+
+      order.push(order.shift());
+      const nextDataIndex = order[2];
+      const entering = makeCardEl(nextDataIndex);
+      wrap.appendChild(entering);
+      const enteringEntry = { el: entering, dataIndex: nextDataIndex };
+      applyTransform(entering, entryOffset, entering._tilt, 0);
+      entering.style.zIndex = 7;
+      entering.offsetHeight;
+      requestAnimationFrame(() => setPos(enteringEntry, 2));
+
+      slots = [mid, back, enteringEntry];
+      updateCounter();
+
+      setTimeout(() => { if(outgoing.el.parentNode) outgoing.el.remove(); }, 550);
+    }
+
+    function goNext(){ advance(-1); }
+    function goPrev(){
+      const current = slots[0];
+      if(current._cleanupDrag) current._cleanupDrag();
+      order.unshift(order.pop());
+
+      const prevDataIndex = order[0];
+      const entering = makeCardEl(prevDataIndex);
+      wrap.appendChild(entering);
+      const enteringEntry = { el: entering, dataIndex: prevDataIndex };
+      applyTransform(entering, { x:-620, y:18, r:-16, s:0.92, o:0, z:-80 }, entering._tilt, 0);
+      entering.style.zIndex = 12;
+      entering.offsetHeight;
+      requestAnimationFrame(() => setPos(enteringEntry, 0));
+      enableDrag(enteringEntry);
+
+      setPos(slots[0], 1);
+      setPos(slots[1], 2);
+      current.el.style.transition = 'transform .45s ease, opacity .45s ease, box-shadow .45s ease';
+      current.el.style.opacity = 0;
+      current.el.style.zIndex = 1;
+      current.el.style.transform = `translate(80px, 30px) rotate(10deg) scale(0.86) translateZ(-60px)`;
+
+      slots = [enteringEntry, slots[0], slots[1]];
+      updateCounter();
+      setTimeout(() => { if(current.el.parentNode) current.el.remove(); }, 480);
+    }
+
+    if(nextBtnId) document.getElementById(nextBtnId).addEventListener('click', goNext);
+    if(prevBtnId) document.getElementById(prevBtnId).addEventListener('click', goPrev);
+
+    init();
+  }
+
+  // ===== events stack =====
+  createSwipeStack({
+    wrapId:'stackWrap', counterId:'cardCounter', prevBtnId:'prevBtn', nextBtnId:'nextBtn',
+    data:events, cardClass:'card',
+    renderCard:(ev, dataIndex) => `
+      <div class="card-media">
+        <div class="cat-bg" style="background-image:url('${ev.img}')"></div>
+      </div>
+      <div class="card-body">
+        <h3>${ev.title}</h3>
+        <div class="card-sub">${ev.sub}</div>
+        <div class="card-meta">
+          <span class="tag">${ev.tag}</span>
+          <span class="date">${ev.date}</span>
+        </div>
+      </div>
+    `,
+    onClick: (eventData) => openModal(eventData)
+  });
+
+  // ===== photo stack =====
+  createSwipeStack({
+    wrapId:'photoStackWrap', counterId:'photoCounter', prevBtnId:'photoPrevBtn', nextBtnId:'photoNextBtn',
+    data:photos, cardClass:'photo-card',
+    renderCard:(p) => `
+      <div class="photo-inner" style="background-image:url('${p.img}')">
+        <div class="p-tag">${p.tag}</div>
+      </div>
+      <div class="photo-caption">
+        <div class="p-title">${p.title}</div>
+        <div class="p-meta">${p.meta}</div>
+      </div>
+    `,
+    onClick: (photoData) => {
+      alert(`📸 ${photoData.title}\n${photoData.meta}`);
+    }
+  });
+</script>
+</body>
+</html>
