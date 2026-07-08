@@ -35,7 +35,6 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       height: 72px; padding: 0 32px;
-      border-bottom: 1px solid #4a3535;
       backdrop-filter: blur(10px);
       background: rgba(11,11,12,0.75);
     }
@@ -52,7 +51,6 @@
       min-height: 100vh;
       display: flex; flex-direction: column; justify-content: center;
       padding: 140px 32px 80px;
-      border-bottom: 1px solid #4a3535;
     }
     .hero-grid {
       position: absolute; inset: 0; z-index: 0;
@@ -109,7 +107,6 @@
 
     .ticker-band {
       background: #529f9a; color: #201917; overflow: hidden;
-      border-bottom: 1px solid #4a3535;
       padding: 14px 0;
     }
     .ticker-track {
@@ -123,19 +120,12 @@
     }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    .statement { padding: 60px 32px; border-bottom: 1px solid #4a3535; }
-    .statement-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 140px 1fr; gap: 40px; }
-    .statement-inner .num { font-family: 'JetBrains Mono', monospace; color: #529f9a; font-size: 14px; }
-    .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
-    .statement p b { color: #529f9a; font-weight: 600; }
-
     /* ===== WHATSAPP BUBBLES ===== */
     .chat-section {
       padding: 60px 24px 80px;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-bottom: 1px solid #4a3535;
       background: #201917;
     }
     .chat-body {
@@ -253,7 +243,7 @@
       30% { transform: translateY(-6px); }
     }
 
-    .events { padding: 110px 32px 140px; border-bottom: 1px solid #4a3535; position: relative; }
+    .events { padding: 80px 32px 100px; }
     .section-head {
       display: flex; justify-content: space-between; align-items: flex-end;
       max-width: 1240px; margin: 0 auto 64px; flex-wrap: wrap; gap: 24px;
@@ -426,7 +416,7 @@
     }
     .modal .modal-actions .btn { flex: 1; justify-content: center; }
 
-    .proof { padding: 120px 32px 0; border-bottom: 1px solid #4a3535; }
+    .proof { padding: 80px 32px 0; }
     .proof-inner { max-width: 1240px; margin: 0 auto; }
     .stat-row {
       display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
@@ -441,7 +431,7 @@
     .quote p { font-size: clamp(1.4rem,2.6vw,2rem); font-weight: 500; line-height: 1.4; margin-bottom: 24px; }
     .quote .attr { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a89191; }
 
-    .photo-section { padding-bottom: 130px; }
+    .photo-section { padding-bottom: 100px; }
     .photo-stack-area {
       display: grid; grid-template-columns: 380px 1fr; gap: 80px; align-items: center;
     }
@@ -499,7 +489,7 @@
     }
 
     .final-cta {
-      padding: 140px 32px; text-align: center; position: relative; border-bottom: 1px solid #4a3535;
+      padding: 120px 32px; text-align: center; position: relative;
     }
     .final-cta h2 { font-size: clamp(2.6rem,8vw,6rem); margin-bottom: 36px; }
     .final-cta h2 span { color: #529f9a; }
@@ -520,7 +510,6 @@
     }
 
     @media (max-width:860px) {
-      .statement-inner { grid-template-columns: 1fr; gap: 16px; }
       .stack-area { grid-template-columns: 1fr; gap: 40px; }
       .stack-controls { order: 2; align-items: center; text-align: center; }
       .stack-wrap { order: 1; }
@@ -531,7 +520,7 @@
       .stat-row { grid-template-columns: repeat(2,1fr); }
       .arrow-row { justify-content: center; }
       .hero-foot { position: static; margin-top: 60px; flex-direction: column; gap: 12px; align-items: flex-start; }
-      .events, .proof, .statement, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
+      .events, .proof, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
       .modal { padding: 24px; margin: 16px; }
       .chat-section { padding: 40px 20px 60px; }
     }
@@ -684,14 +673,6 @@
 <div class="ticker-band">
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
-
-<!-- STATEMENT -->
-<section class="statement">
-  <div class="statement-inner">
-    <div class="num mono"></div>
-    <p><br><b>Show up. That's the whole idea.</b></p>
-  </div>
-</section>
 
 <!-- WHATSAPP BUBBLES -->
 <section class="chat-section" id="chatSection">
