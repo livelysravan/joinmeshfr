@@ -23,6 +23,7 @@
     .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
 
     .noise {
       position: fixed; inset: 0; pointer-events: none; z-index: 999;
@@ -33,101 +34,109 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      height: 68px; padding: 0 24px;
-      backdrop-filter: blur(12px);
-      background: rgba(11,11,12,0.6);
-      border-bottom: 1px solid rgba(74,53,53,0.3);
+      height: 72px; padding: 0 32px;
+      border-bottom: 1px solid #4a3535;
+      backdrop-filter: blur(10px);
+      background: rgba(11,11,12,0.75);
     }
-    .logo-mark img { height: 100px; width: auto; }
+    .logo-mark img { height: 120px; width: auto; }
     .nav-cta {
-      border: 1px solid #edeae1; padding: 8px 18px; font-size: 11px;
-      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase;
+      border: 1px solid #edeae1; padding: 10px 20px; font-size: 12px;
+      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase;
       transition: background .2s ease, color .2s ease;
-      background: transparent;
     }
     .nav-cta:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
 
     .hero {
       position: relative;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 120px 24px 60px;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 140px 32px 80px;
       border-bottom: 1px solid #4a3535;
-      overflow: hidden;
     }
     .hero-grid {
       position: absolute; inset: 0; z-index: 0;
       mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
       overflow: hidden;
-      pointer-events: none;
     }
     .hero-grid svg { width: 100%; height: 100%; }
     .hero-grid .thread { fill: none; stroke: #4a3535; stroke-linecap: round; }
     .hero-grid .thread-lit { fill: none; stroke: #529f9a; stroke-linecap: round; }
     .hero-grid .knot { fill: #529f9a; opacity: 0.5; }
     .hero-inner { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; width: 100%; }
-
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; color: #529f9a; margin-bottom: 28px;
+    }
+    .eyebrow::before { content: ''; width: 8px; height: 8px; background: #529f9a; display: inline-block; }
     .hero h1 {
-      font-size: clamp(2.8rem, 10vw, 7rem);
-      line-height: 0.9;
-      margin-bottom: 20px;
+      font-size: clamp(3.2rem, 11vw, 9.5rem);
+      line-height: 0.86;
+      margin-bottom: 24px;
     }
     .hero h1 .outline {
       -webkit-text-stroke: 2px #edeae1;
       color: transparent;
     }
     .tagline {
-      font-size: clamp(0.85rem, 1.5vw, 1.1rem);
-      color: #a89191;
-      letter-spacing: 0.12em;
-      margin-bottom: 24px;
-      font-weight: 400;
+      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+      color: #529f9a;
+      letter-spacing: 0.15em;
+      margin-bottom: 28px;
+      font-weight: 500;
     }
-    .tagline span { margin: 0 4px; color: #4a3535; }
+    .tagline span { color: #a89191; margin: 0 4px; }
     .hero-sub {
-      max-width: 560px; font-size: clamp(1rem,2vw,1.3rem);
-      color: #edeae1; margin-bottom: 40px; font-weight: 500;
+      max-width: 560px; font-size: clamp(1.1rem,2.2vw,1.4rem);
+      color: #edeae1; margin-bottom: 48px; font-weight: 600;
     }
-    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
     .btn {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 14px 24px; display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 18px 30px; display: inline-flex; align-items: center; gap: 10px;
       border: 1px solid #edeae1; transition: transform .18s ease, background .18s ease, color .18s ease;
       cursor: pointer;
     }
     .btn-fill { background: #529f9a; color: #201917; border-color: #529f9a; }
-    .btn-fill:hover { transform: translate(-2px,-2px); box-shadow: 3px 3px 0 #edeae1; }
-    .btn-ghost:hover { background: #edeae1; color: #201917; transform: translate(-2px,-2px); box-shadow: 3px 3px 0 #529f9a; }
+    .btn-fill:hover { transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #edeae1; }
+    .btn-ghost:hover { background: #edeae1; color: #201917; transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #529f9a; }
     .hero-foot {
-      position: absolute; bottom: 24px; left: 24px; right: 24px;
+      position: absolute; bottom: 32px; left: 32px; right: 32px;
       display: flex; justify-content: space-between; align-items: flex-end;
-      font-size: 11px; color: #a89191;
+      font-size: 12px; color: #a89191;
     }
     .hero-foot .scroll-tag { writing-mode: vertical-rl; }
 
     .ticker-band {
       background: #529f9a; color: #201917; overflow: hidden;
-      padding: 12px 0;
+      border-bottom: 1px solid #4a3535;
+      padding: 14px 0;
     }
     .ticker-track {
       display: flex; width: max-content;
       animation: scroll 26s linear infinite;
     }
     .ticker-track span {
-      font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px;
-      letter-spacing: 0.08em; text-transform: uppercase; padding: 0 20px;
+      font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px;
+      letter-spacing: 0.08em; text-transform: uppercase; padding: 0 24px;
       white-space: nowrap;
     }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+    .statement { padding: 60px 32px; border-bottom: 1px solid #4a3535; }
+    .statement-inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 140px 1fr; gap: 40px; }
+    .statement-inner .num { font-family: 'JetBrains Mono', monospace; color: #529f9a; font-size: 14px; }
+    .statement p { font-size: clamp(1.6rem,3.4vw,2.6rem); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
+    .statement p b { color: #529f9a; font-weight: 600; }
+
     /* ===== WHATSAPP BUBBLES ===== */
     .chat-section {
-      padding: 40px 24px 60px;
+      padding: 60px 24px 80px;
       display: flex;
       justify-content: center;
       align-items: center;
+      border-bottom: 1px solid #4a3535;
+      background: #201917;
     }
     .chat-body {
       max-width: 480px;
@@ -244,37 +253,36 @@
       30% { transform: translateY(-6px); }
     }
 
-    /* ===== EVENTS ===== */
-    .events { padding: 60px 24px 40px; }
+    .events { padding: 110px 32px 140px; border-bottom: 1px solid #4a3535; position: relative; }
     .section-head {
       display: flex; justify-content: space-between; align-items: flex-end;
-      max-width: 1240px; margin: 0 auto 40px; flex-wrap: wrap; gap: 16px;
+      max-width: 1240px; margin: 0 auto 64px; flex-wrap: wrap; gap: 24px;
     }
-    .section-head h2 { font-size: clamp(2rem,4.5vw,3.6rem); }
-    .section-head p { color: #a89191; max-width: 340px; font-size: 12px; letter-spacing: 0.06em; font-family: 'JetBrains Mono', monospace; }
+    .section-head h2 { font-size: clamp(2.2rem,5vw,4rem); }
+    .section-head p { color: #a89191; max-width: 340px; font-size: 14px; }
 
     .stack-area {
       max-width: 1240px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 340px; gap: 60px; align-items: center;
+      display: grid; grid-template-columns: 1fr 380px; gap: 80px; align-items: center;
     }
-    .stack-controls { display: flex; flex-direction: column; gap: 24px; }
-    .stack-controls .count { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #a89191; }
+    .stack-controls { display: flex; flex-direction: column; gap: 28px; }
+    .stack-controls .count { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #a89191; }
     .stack-controls .count b { color: #529f9a; }
-    .arrow-row { display: flex; gap: 10px; }
+    .arrow-row { display: flex; gap: 12px; }
     .arrow-btn {
-      width: 50px; height: 50px; border: 1px solid #edeae1;
+      width: 56px; height: 56px; border: 1px solid #edeae1;
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; cursor: pointer; background: transparent; color: #edeae1;
+      font-size: 20px; cursor: pointer; background: transparent; color: #edeae1;
       transition: background .18s ease, color .18s ease;
     }
     .arrow-btn:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
-    .hint { font-size: 11px; color: #a89191; max-width: 260px; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
+    .hint { font-size: 12px; color: #a89191; max-width: 260px; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
 
     .stack-wrap {
       position: relative;
       width: 100%;
-      max-width: 380px;
-      height: clamp(340px, 55vw, 480px);
+      max-width: 400px;
+      height: clamp(380px, 62vw, 520px);
       justify-self: center;
       perspective: 1200px;
       touch-action: pan-y;
@@ -319,22 +327,23 @@
       background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0) 55%);
     }
     .card-media .cat-label {
-      position: relative; z-index: 1; padding: 18px;
-      font-family: 'Archivo Black', sans-serif; font-size: 14px; color: #edeae1;
+      position: relative; z-index: 1; padding: 20px;
+      font-family: 'Archivo Black', sans-serif; font-size: 15px; color: #edeae1;
+      letter-spacing: -0.01em;
     }
     .card-tag {
-      position: absolute; top: 14px; right: 14px; z-index: 2;
+      position: absolute; top: 16px; right: 16px; z-index: 2;
       background: rgba(32,25,23,0.85); color: #529f9a; border: 1px solid #529f9a;
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 4px 10px;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 5px 10px; letter-spacing: 0.06em;
       border-radius: 4px;
       backdrop-filter: blur(4px);
     }
-    .card-body { padding: 18px 18px 20px; }
-    .card-body h3 { font-family: 'Archivo Black', sans-serif; font-size: 18px; margin-bottom: 8px; letter-spacing: -0.01em; }
-    .card-meta { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #a89191; }
+    .card-body { padding: 22px 22px 24px; }
+    .card-body h3 { font-family: 'Archivo Black', sans-serif; font-size: 20px; margin-bottom: 10px; letter-spacing: -0.01em; }
+    .card-meta { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a89191; }
     .card-index {
-      position: absolute; bottom: 14px; left: 14px; z-index: 2;
-      font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #edeae1; background: rgba(0,0,0,0.5); padding: 2px 8px;
+      position: absolute; bottom: 16px; left: 16px; z-index: 2;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #edeae1; background: rgba(0,0,0,0.5); padding: 3px 8px;
       border-radius: 4px;
     }
 
@@ -357,17 +366,17 @@
       background: #241717;
       border: 2px solid #edeae1;
       border-radius: 16px;
-      max-width: 520px;
+      max-width: 560px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
-      padding: 32px;
+      padding: 40px;
       position: relative;
       box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(82,159,154,0.2);
     }
     .modal-close {
-      position: absolute; top: 14px; right: 18px;
-      font-size: 26px; cursor: pointer;
+      position: absolute; top: 16px; right: 20px;
+      font-size: 28px; cursor: pointer;
       color: #a89191;
       transition: color 0.2s ease;
       background: none; border: none;
@@ -375,71 +384,70 @@
     }
     .modal-close:hover { color: #edeae1; }
     .modal .modal-img {
-      width: 100%; height: 170px;
+      width: 100%; height: 200px;
       background-size: cover; background-position: center;
       border-radius: 8px;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
     }
     .modal .modal-tag {
       display: inline-block;
       background: rgba(82,159,154,0.2);
       color: #529f9a;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
+      font-size: 11px;
       padding: 4px 12px;
       border-radius: 4px;
       letter-spacing: 0.06em;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .modal h2 {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
-      margin-bottom: 10px;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      margin-bottom: 12px;
       letter-spacing: -0.02em;
     }
     .modal .modal-meta {
-      display: flex; gap: 18px;
+      display: flex; gap: 24px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: 12px;
       color: #a89191;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
     }
-    .modal .modal-meta span { display: flex; align-items: center; gap: 5px; }
+    .modal .modal-meta span { display: flex; align-items: center; gap: 6px; }
     .modal .modal-desc {
       color: #c9c4b8;
       line-height: 1.6;
-      margin-bottom: 24px;
-      font-size: 14px;
+      margin-bottom: 28px;
+      font-size: 15px;
     }
     .modal .modal-actions {
-      display: flex; gap: 12px; flex-wrap: wrap;
+      display: flex; gap: 16px; flex-wrap: wrap;
     }
     .modal .modal-actions .btn { flex: 1; justify-content: center; }
 
-    /* ===== PROOF ===== */
-    .proof { padding: 60px 24px 0; }
+    .proof { padding: 120px 32px 0; border-bottom: 1px solid #4a3535; }
     .proof-inner { max-width: 1240px; margin: 0 auto; }
     .stat-row {
       display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
-      background: #4a3535; border: 1px solid #4a3535; margin-bottom: 70px;
+      background: #4a3535; border: 1px solid #4a3535; margin-bottom: 90px;
     }
-    .stat { background: #201917; padding: 32px 18px; text-align: left; }
-    .stat .n { font-family: 'Archivo Black', sans-serif; font-size: clamp(2rem,4vw,3.2rem); color: #529f9a; line-height: 1; }
-    .stat .l { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #a89191; margin-top: 8px; letter-spacing: 0.06em; }
+    .stat { background: #201917; padding: 40px 24px; text-align: left; }
+    .stat .n { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.2rem,4.5vw,3.6rem); color: #529f9a; line-height: 1; }
+    .stat .l { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a89191; margin-top: 12px; }
     .quote {
-      max-width: 900px; border-left: 3px solid #529f9a; padding-left: 28px; margin-bottom: 80px;
+      max-width: 900px; border-left: 3px solid #529f9a; padding-left: 36px; margin-bottom: 110px;
     }
-    .quote p { font-size: clamp(1.2rem,2.2vw,1.6rem); font-weight: 500; line-height: 1.4; margin-bottom: 16px; }
-    .quote .attr { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a89191; }
+    .quote p { font-size: clamp(1.4rem,2.6vw,2rem); font-weight: 500; line-height: 1.4; margin-bottom: 24px; }
+    .quote .attr { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a89191; }
 
-    .photo-section { padding-bottom: 100px; }
+    .photo-section { padding-bottom: 130px; }
     .photo-stack-area {
-      display: grid; grid-template-columns: 340px 1fr; gap: 60px; align-items: center;
+      display: grid; grid-template-columns: 380px 1fr; gap: 80px; align-items: center;
     }
-    .photo-controls { display: flex; flex-direction: column; gap: 24px; }
+    .photo-controls { display: flex; flex-direction: column; gap: 28px; }
     .photo-stack-wrap {
-      position: relative; width: 100%; max-width: 360px; height: clamp(320px, 52vw, 440px);
+      position: relative; width: 100%; max-width: 380px; height: clamp(340px, 58vw, 460px);
       justify-self: center;
       perspective: 1000px;
       touch-action: pan-y;
@@ -447,7 +455,7 @@
     .photo-card {
       position: absolute; inset: 0;
       background: #edeae1;
-      padding: 12px 12px 0;
+      padding: 14px 14px 0;
       will-change: transform, opacity;
       user-select: none;
       box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(82,159,154,0.15);
@@ -467,99 +475,77 @@
       box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(82,159,154,0.3);
     }
     .photo-inner {
-      height: calc(100% - 82px);
+      height: calc(100% - 92px);
       position: relative; overflow: hidden;
       background-size: cover;
       background-position: center;
       border-radius: 4px;
     }
     .photo-inner .p-tag {
-      position: absolute; top: 10px; left: 10px;
+      position: absolute; top: 12px; left: 12px;
       background: rgba(32,25,23,0.85); color: #529f9a;
-      font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 3px 8px; letter-spacing: 0.06em;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 4px 8px; letter-spacing: 0.06em;
       border-radius: 4px;
       backdrop-filter: blur(4px);
     }
     .photo-caption {
-      height: 70px; display: flex; flex-direction: column; justify-content: center; gap: 2px;
+      height: 78px; display: flex; flex-direction: column; justify-content: center; gap: 4px;
     }
     .photo-caption .p-title {
-      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; color: #201917;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 16px; color: #201917;
     }
     .photo-caption .p-meta {
-      font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #6d6d69; letter-spacing: 0.05em;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6d6d69; letter-spacing: 0.05em;
     }
 
     .final-cta {
-      padding: 100px 24px; text-align: center;
+      padding: 140px 32px; text-align: center; position: relative; border-bottom: 1px solid #4a3535;
     }
-    .final-cta h2 { font-size: clamp(2.4rem,7vw,5rem); margin-bottom: 28px; }
+    .final-cta h2 { font-size: clamp(2.6rem,8vw,6rem); margin-bottom: 36px; }
     .final-cta h2 span { color: #529f9a; }
     .final-cta .cta-row { justify-content: center; }
 
-    footer { padding: 50px 24px 30px; }
+    footer { padding: 60px 32px 40px; }
     .foot-inner {
       max-width: 1240px; margin: 0 auto;
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 28px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 32px;
     }
-    .foot-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #a89191; margin-bottom: 12px; letter-spacing: 0.1em; }
-    .foot-col a { display: block; font-size: 13px; margin-bottom: 8px; color: #edeae1; }
+    .foot-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a89191; margin-bottom: 16px; letter-spacing: 0.1em; }
+    .foot-col a { display: block; font-size: 14px; margin-bottom: 10px; color: #edeae1; }
     .foot-col a:hover { color: #529f9a; }
     .foot-bottom {
-      max-width: 1240px; margin: 40px auto 0; padding-top: 20px; border-top: 1px solid #4a3535;
-      display: flex; justify-content: space-between; font-size: 10px; color: #a89191; flex-wrap: wrap; gap: 12px;
+      max-width: 1240px; margin: 60px auto 0; padding-top: 24px; border-top: 1px solid #4a3535;
+      display: flex; justify-content: space-between; font-size: 12px; color: #a89191; flex-wrap: wrap; gap: 12px;
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 860px) {
-      .arrow-row { display: none !important; }
-      .hero { padding: 110px 20px 50px; min-height: 85vh; }
-      .hero h1 { font-size: clamp(2.6rem, 10vw, 4rem); margin-bottom: 16px; }
-      .tagline { font-size: 0.8rem; margin-bottom: 20px; }
-      .hero-sub { margin-bottom: 32px; }
-      .cta-row .btn { padding: 12px 20px; font-size: 10px; }
-      .stack-area { grid-template-columns: 1fr; gap: 30px; }
+    @media (max-width:860px) {
+      .statement-inner { grid-template-columns: 1fr; gap: 16px; }
+      .stack-area { grid-template-columns: 1fr; gap: 40px; }
       .stack-controls { order: 2; align-items: center; text-align: center; }
-      .stack-wrap { order: 1; max-width: 100%; }
-      .photo-stack-area { grid-template-columns: 1fr; gap: 30px; }
+      .stack-wrap { order: 1; }
+      .photo-stack-area { grid-template-columns: 1fr; gap: 40px; }
       .photo-controls { order: 2; align-items: center; text-align: center; }
-      .photo-stack-wrap { order: 1; max-width: 100%; }
+      .photo-stack-wrap { order: 1; }
       .hint { max-width: 100%; }
       .stat-row { grid-template-columns: repeat(2,1fr); }
-      .hero-foot { position: static; margin-top: 40px; flex-direction: column; gap: 10px; align-items: flex-start; }
-      .events, .proof, .final-cta, footer, nav, .hero { padding-left: 16px; padding-right: 16px; }
-      .modal { padding: 24px; margin: 12px; }
-      .chat-section { padding: 30px 16px 40px; }
-      .chat-body { min-height: 150px; }
-      .message { font-size: 13px; max-width: 88%; padding: 8px 12px; }
-      nav { padding: 0 16px; height: 62px; }
-      .logo-mark img { height: 80px; }
-      .stat { padding: 24px 14px; }
-      .stat .n { font-size: 1.8rem; }
+      .arrow-row { justify-content: center; }
+      .hero-foot { position: static; margin-top: 60px; flex-direction: column; gap: 12px; align-items: flex-start; }
+      .events, .proof, .statement, .final-cta, footer, nav, .hero { padding-left: 20px; padding-right: 20px; }
+      .modal { padding: 24px; margin: 16px; }
+      .chat-section { padding: 40px 20px 60px; }
     }
-
-    @media (max-width: 420px) {
+    @media (max-width:420px) {
       .stack-wrap, .photo-stack-wrap { max-width: 100%; }
       .modal .modal-actions { flex-direction: column; }
-      .chat-body { min-height: 130px; padding: 0 2px; }
-      .message { font-size: 12px; padding: 7px 10px; }
-      .message-user-response .link-btn { font-size: 9px; padding: 6px 12px; }
-      .hero { padding: 100px 14px 40px; min-height: 80vh; }
-      .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
-      .tagline { font-size: 0.7rem; margin-bottom: 16px; }
-      .cta-row { gap: 8px; }
-      .cta-row .btn { padding: 10px 16px; font-size: 9px; width: 100%; justify-content: center; }
-      .nav-cta { padding: 6px 14px; font-size: 9px; }
-      .events { padding: 40px 14px 30px; }
-      .section-head h2 { font-size: 1.8rem; }
+      .chat-body { min-height: 150px; }
+      .message { font-size: 13px; max-width: 88%; padding: 8px 12px; }
     }
   </style>
 </head>
 <body>
 <div class="noise"></div>
 
-<!-- NAV -->
 <nav>
   <div class="logo-mark"><img src="logo.png" alt="MESH Logo" /></div>
   <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="nav-cta">Join</a>
@@ -679,6 +665,7 @@
     </svg>
   </div>
   <div class="hero-inner">
+    <div class="eyebrow mono">Bengaluru chapter — live</div>
     <h1 class="disp">JOIN THE<br><span class="outline">MOVEMENT</span></h1>
     <div class="tagline mono">MEET <span>·</span> CONNECT <span>·</span> BELONG</div>
     <p class="hero-sub"></p>
@@ -698,24 +685,11 @@
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
 
-<!-- EVENTS -->
-<section class="events" id="events">
-  <div class="section-head">
-    <h2 class="disp">Upcoming<br>Experiences</h2>
-    <p class="mono"></p>
-  </div>
-
-  <div class="stack-area">
-    <div class="stack-wrap" id="stackWrap"></div>
-
-    <div class="stack-controls">
-      <div class="count mono">Viewing <b id="cardCounter">01</b> / 05</div>
-      <div class="arrow-row" id="arrowRow">
-        <button class="arrow-btn" id="prevBtn" aria-label="Previous">←</button>
-        <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
-      </div>
-      <p class="hint">Swipe &bull; tap &bull; discover</p>
-    </div>
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="statement-inner">
+    <div class="num mono"></div>
+    <p><br><b>Show up. That's the whole idea.</b></p>
   </div>
 </section>
 
@@ -742,7 +716,28 @@
   </div>
 </section>
 
-<!-- PROOF -->
+<!-- EVENTS -->
+<section class="events" id="events">
+  <div class="section-head">
+    <h2 class="disp">Upcoming<br>Experiences</h2>
+    <p class="mono"></p>
+  </div>
+
+  <div class="stack-area">
+    <div class="stack-wrap" id="stackWrap"></div>
+
+    <div class="stack-controls">
+      <div class="count mono">Viewing <b id="cardCounter">01</b> / 05</div>
+      <div class="arrow-row">
+        <button class="arrow-btn" id="prevBtn" aria-label="Previous">←</button>
+        <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
+      </div>
+      <p class="hint">Swipe &bull; tap &bull; discover</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY PROOF -->
 <section class="proof">
   <div class="proof-inner">
     <div class="stat-row">
@@ -810,7 +805,7 @@
   </div>
 </footer>
 
-<!-- MODAL -->
+<!-- ===== MODAL ===== -->
 <div class="modal-overlay" id="eventModal">
   <div class="modal">
     <button class="modal-close" id="modalClose">✕</button>
@@ -963,7 +958,7 @@
     if (e.key === 'Escape') closeModal();
   });
 
-  // ===== SWIPE STACK =====
+  // ===== SWIPE STACK WITH CLICK/DETECTION FIX =====
   function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }){
     const wrap = document.getElementById(wrapId);
     const counter = counterId ? document.getElementById(counterId) : null;
