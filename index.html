@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="mlogov2.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=HK+Guise:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
@@ -21,6 +21,7 @@
     }
     .disp { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -0.02em; }
     .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+    .serif { font-family: 'HK Guise', sans-serif; }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
@@ -118,6 +119,86 @@
       white-space: nowrap;
     }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ===== CRED-STYLE SCROLL TYPOGRAPHY ===== */
+    .about-typography {
+      padding: 120px 32px 160px;
+      background: #241D22;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-typography::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,53,53,0.3), transparent);
+    }
+    .about-typography::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,53,53,0.3), transparent);
+    }
+    .typo-container {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .typo-line {
+      display: block;
+      font-family: 'HK Guise', sans-serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.4;
+      color: rgba(237, 234, 225, 0.12);
+      transition: color 0.1s ease;
+      padding: 6px 0;
+      letter-spacing: -0.03em;
+    }
+    .typo-line.visible {
+      color: rgba(237, 234, 225, 1);
+    }
+    .typo-line .accent {
+      color: #7BCBC5;
+    }
+    .typo-line .highlight {
+      font-weight: 600;
+    }
+    .typo-spacer {
+      display: block;
+      height: 20px;
+    }
+    .typo-progress {
+      position: fixed;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      z-index: 50;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .typo-progress.visible {
+      opacity: 1;
+    }
+    .typo-progress-bar {
+      width: 100%;
+      height: 0%;
+      background: #7BCBC5;
+      border-radius: 4px;
+      transition: height 0.1s ease;
+    }
 
     /* ===== EVENTS ===== */
     .events {
@@ -805,6 +886,18 @@
       .photo-controls .arrow-row {
         display: none !important;
       }
+      .about-typography {
+        padding: 80px 20px 120px;
+      }
+      .typo-line {
+        font-size: clamp(2rem, 4.5vw, 3rem);
+        line-height: 1.5;
+      }
+      .typo-progress {
+        right: 16px;
+        height: 120px;
+        top: 50%;
+      }
     }
 
     @media (max-width: 480px) {
@@ -851,6 +944,18 @@
       }
       .chat-section {
         padding: 20px 14px 40px;
+      }
+      .about-typography {
+        padding: 60px 16px 100px;
+      }
+      .typo-line {
+        font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+        line-height: 1.6;
+      }
+      .typo-progress {
+        right: 12px;
+        height: 100px;
+        width: 2px;
       }
     }
   </style>
@@ -977,7 +1082,7 @@
     </svg>
   </div>
   <div class="hero-inner">
-    <h1 class="disp">JOIN THE<br><span class="outline">MOVEMENT</span></h1>
+    <h1 class="disp">SHOW UP.</h1>
     <div class="tagline mono">MEET <span>·</span> CONNECT <span>·</span> BELONG</div>
     <div class="hero-sub">
       <a href="#events">See what's happening →</a>
@@ -989,6 +1094,28 @@
 <div class="ticker-band">
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
+
+<!-- ===== CRED-STYLE SCROLL TYPOGRAPHY ===== -->
+<section class="about-typography" id="about">
+  <div class="typo-container" id="typoContainer">
+    <span class="typo-line">MESH is built on three simple ideas:</span>
+    <span class="typo-line"><span class="accent">meet</span>, <span class="accent">connect</span>, <span class="accent">belong</span>.</span>
+    <span class="typo-spacer"></span>
+    <span class="typo-line">No hierarchies. No gatekeeping.</span>
+    <span class="typo-line">Just people who <span class="highlight">show up</span>.</span>
+    <span class="typo-spacer"></span>
+    <span class="typo-line">Sunrise runs. Warehouse parties.</span>
+    <span class="typo-line">Conversations with creators.</span>
+    <span class="typo-line">This is where <span class="accent">real connections</span> happen.</span>
+    <span class="typo-spacer"></span>
+    <span class="typo-line" style="color: rgba(123,203,197,0.12); font-weight: 600;">
+      Show up. That's the whole idea.
+    </span>
+  </div>
+  <div class="typo-progress" id="typoProgress">
+    <div class="typo-progress-bar" id="typoProgressBar"></div>
+  </div>
+</section>
 
 <!-- EVENTS -->
 <section class="events" id="events">
@@ -1149,6 +1276,66 @@
 </div>
 
 <script>
+  // ===== CRED-STYLE SCROLL TYPOGRAPHY =====
+  document.addEventListener('DOMContentLoaded', function() {
+    const lines = document.querySelectorAll('.typo-line');
+    const progressBar = document.getElementById('typoProgressBar');
+    const progressContainer = document.getElementById('typoProgress');
+    const typoSection = document.querySelector('.about-typography');
+
+    function updateTypography() {
+      const sectionRect = typoSection.getBoundingClientRect();
+      const sectionHeight = sectionRect.height;
+      const windowHeight = window.innerHeight;
+      
+      let progress = 0;
+      const topOffset = sectionRect.top;
+      const startPos = windowHeight * 0.3;
+      const endPos = -sectionHeight + windowHeight * 0.7;
+      
+      if (topOffset < startPos && topOffset > endPos) {
+        progress = (startPos - topOffset) / (startPos - endPos);
+      } else if (topOffset <= endPos) {
+        progress = 1;
+      }
+      
+      progressBar.style.height = `${progress * 100}%`;
+      
+      if (progress > 0 && progress < 1) {
+        progressContainer.classList.add('visible');
+      } else {
+        progressContainer.classList.remove('visible');
+      }
+      
+      const totalLines = lines.length;
+      lines.forEach((line, index) => {
+        const lineProgress = (progress * totalLines - index) / 1.5;
+        const clampedProgress = Math.min(Math.max(lineProgress, 0), 1);
+        const eased = 1 - Math.pow(1 - clampedProgress, 3);
+        const opacity = 0.12 + (eased * 0.88);
+        
+        if (line.textContent.includes('Show up. That\'s the whole idea.')) {
+          line.style.color = `rgba(123, 203, 197, ${opacity})`;
+        } else {
+          line.style.color = `rgba(237, 234, 225, ${opacity})`;
+        }
+      });
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          updateTypography();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    updateTypography();
+  });
+
   // ===== ABOUT PAGE TOGGLE =====
   document.getElementById('aboutLink').addEventListener('click', function(e) {
     e.preventDefault();
