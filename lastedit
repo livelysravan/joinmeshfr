@@ -12,7 +12,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
     body {
-      background: #201917;
+      background: #241D22;
       color: #edeae1;
       font-family: 'Space Grotesk', sans-serif;
       overflow-x: hidden;
@@ -35,7 +35,7 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 72px; padding: 0 32px;
       backdrop-filter: blur(10px);
-      background: rgba(11,11,12,0.75);
+      background: rgba(36,29,34,0.75);
       border-bottom: 1px solid rgba(74,53,53,0.3);
     }
     .logo-mark img { height: 120px; width: auto; }
@@ -44,7 +44,7 @@
       font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase;
       transition: background .2s ease, color .2s ease;
     }
-    .nav-cta:hover { background: #529f9a; color: #201917; border-color: #529f9a; }
+    .nav-cta:hover { background: #7BCBC5; color: #241D22; border-color: #7BCBC5; }
 
     .hero {
       position: relative;
@@ -64,15 +64,10 @@
       overflow: hidden;
     }
     .hero-grid svg { width: 100%; height: 100%; }
-    .hero-grid .thread { fill: none; stroke: #4a3535; stroke-linecap: round; }
-    .hero-grid .thread-lit { fill: none; stroke: #529f9a; stroke-linecap: round; }
-    .hero-grid .knot { fill: #529f9a; opacity: 0.5; }
+    .hero-grid .thread { fill: none; stroke: #6a4f4f; stroke-linecap: round; }
+    .hero-grid .thread-lit { fill: none; stroke: #7BCBC5; stroke-linecap: round; }
+    .hero-grid .knot { fill: #7BCBC5; opacity: 0.5; }
     .hero-inner { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; width: 100%; }
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 12px; color: #529f9a; margin-bottom: 28px;
-    }
-    .eyebrow::before { content: ''; width: 8px; height: 8px; background: #529f9a; display: inline-block; }
     .hero h1 {
       font-size: clamp(3.2rem, 11vw, 9.5rem);
       line-height: 0.86;
@@ -84,36 +79,32 @@
     }
     .tagline {
       font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-      color: #529f9a;
+      color: #7BCBC5;
       letter-spacing: 0.15em;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
       font-weight: 500;
     }
     .tagline span { color: #a89191; margin: 0 4px; }
     .hero-sub {
-      max-width: 560px; font-size: clamp(1.1rem,2.2vw,1.4rem);
-      color: #edeae1; margin-bottom: 48px; font-weight: 600;
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      color: #edeae1;
+      font-weight: 500;
     }
-    .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn {
-      font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 18px 30px; display: inline-flex; align-items: center; gap: 10px;
-      border: 1px solid #edeae1; transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
-      cursor: pointer;
+    .hero-sub a {
+      color: #edeae1;
+      border-bottom: 1px solid #edeae1;
+      padding-bottom: 2px;
+      transition: opacity 0.2s ease;
     }
-    .btn:active { transform: scale(0.95); }
-    .btn-fill { background: #529f9a; color: #201917; border-color: #529f9a; }
-    .btn-fill:hover { transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #edeae1; }
-    .btn-ghost:hover { background: #edeae1; color: #201917; transform: translate(-3px,-3px); box-shadow: 4px 4px 0 #529f9a; }
+    .hero-sub a:hover {
+      opacity: 0.6;
+    }
     .hero-foot {
-      position: absolute; bottom: 32px; left: 32px; right: 32px;
-      display: flex; justify-content: space-between; align-items: flex-end;
-      font-size: 12px; color: #a89191;
+      display: none;
     }
-    .hero-foot .scroll-tag { writing-mode: vertical-rl; }
 
     .ticker-band {
-      background: #529f9a; color: #201917; overflow: hidden;
+      background: #7BCBC5; color: #241D22; overflow: hidden;
       padding: 14px 0;
       border-bottom: 1px solid rgba(74,53,53,0.3);
     }
@@ -128,20 +119,204 @@
     }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+    /* ===== EVENTS ===== */
+    .events {
+      padding: 60px 32px 40px;
+      position: relative;
+    }
+    .events::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
+    }
+    .events .section-head {
+      max-width: 1240px;
+      margin: 0 auto 64px;
+    }
+    .events .section-head h2 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .events .section-head h2.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stack-area {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 80px;
+      align-items: center;
+    }
+    .stack-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .stack-controls .count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: #a89191;
+    }
+    .stack-controls .count b { color: #7BCBC5; }
+    .arrow-row {
+      display: flex;
+      gap: 12px;
+    }
+    .arrow-btn {
+      width: 56px;
+      height: 56px;
+      border: 1px solid #edeae1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      background: transparent;
+      color: #edeae1;
+      transition: background .18s ease, color .18s ease, transform .2s ease;
+    }
+    .arrow-btn:hover {
+      background: #7BCBC5;
+      color: #241D22;
+      border-color: #7BCBC5;
+    }
+    .arrow-btn:active {
+      transform: scale(0.92);
+    }
+
+    .stack-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: clamp(420px, 65vw, 540px);
+      justify-self: center;
+      perspective: 1200px;
+      touch-action: pan-y;
+    }
+    .card {
+      position: absolute;
+      inset: 0;
+      background: #3a2f35;
+      border: 2px solid #edeae1;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      will-change: transform, opacity, box-shadow;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(123,203,197,0.1);
+      touch-action: pan-y;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:not(.dragging):hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(123,203,197,0.3);
+    }
+    .card.dragging { transition: none !important; cursor: grabbing; }
+    .card:not(.dragging) {
+      transition: transform 0.55s cubic-bezier(0.22, 0.8, 0.2, 1), 
+                  opacity 0.5s ease,
+                  box-shadow 0.5s ease;
+    }
+
+    .card-media {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .card-media .cat-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.8s ease;
+    }
+    .card:not(.dragging):hover .cat-bg {
+      transform: scale(1.05);
+    }
+    .card-media .cat-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 50%);
+    }
+
+    .card-body {
+      position: relative;
+      z-index: 1;
+      padding: 28px 28px 30px;
+      width: 100%;
+      background: linear-gradient(to top, rgba(36,29,34,0.95), rgba(36,29,34,0.6) 60%, transparent);
+    }
+    .card-body h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 22px;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+      color: #edeae1;
+    }
+    .card-body .card-sub {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      color: #a89191;
+      margin-bottom: 12px;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #a89191;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .card-meta .tag {
+      background: rgba(123,203,197,0.15);
+      color: #7BCBC5;
+      padding: 3px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(123,203,197,0.2);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+    }
+    .card-meta .date {
+      color: #edeae1;
+    }
+
     /* ===== WHATSAPP BUBBLES ===== */
     .chat-section {
-      padding: 80px 24px 40px;
+      padding: 40px 24px 60px;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #201917;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      background: #241D22;
+      position: relative;
     }
-    .chat-section.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .chat-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,53,53,0.3), transparent);
     }
     .chat-body {
       max-width: 480px;
@@ -153,6 +328,13 @@
       z-index: 1;
       min-height: 170px;
       padding: 0 6px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .chat-body.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .message-mesh-ask {
@@ -258,211 +440,6 @@
       30% { transform: translateY(-6px); }
     }
 
-    /* ===== EVENTS ===== */
-    .events {
-      padding: 60px 32px 60px;
-      position: relative;
-    }
-    .events::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
-    }
-    .events .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      max-width: 1240px;
-      margin: 0 auto 80px;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-    .events .section-head h2 {
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .events .section-head h2.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .events .section-head p {
-      color: #a89191;
-      max-width: 340px;
-      font-size: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
-    }
-    .events .section-head p.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .stack-area {
-      max-width: 1240px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 80px;
-      align-items: center;
-    }
-    .stack-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-    .stack-controls .count {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      color: #a89191;
-    }
-    .stack-controls .count b { color: #529f9a; }
-    .arrow-row {
-      display: flex;
-      gap: 12px;
-    }
-    .arrow-btn {
-      width: 56px;
-      height: 56px;
-      border: 1px solid #edeae1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      cursor: pointer;
-      background: transparent;
-      color: #edeae1;
-      transition: background .18s ease, color .18s ease, transform .2s ease;
-    }
-    .arrow-btn:hover {
-      background: #529f9a;
-      color: #201917;
-      border-color: #529f9a;
-    }
-    .arrow-btn:active {
-      transform: scale(0.92);
-    }
-    .hint {
-      font-size: 12px;
-      color: #a89191;
-      max-width: 260px;
-      font-family: 'JetBrains Mono', monospace;
-      line-height: 1.6;
-    }
-
-    .stack-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 400px;
-      height: clamp(420px, 65vw, 540px);
-      justify-self: center;
-      perspective: 1200px;
-      touch-action: pan-y;
-    }
-    .card {
-      position: absolute;
-      inset: 0;
-      background: #241717;
-      border: 2px solid #edeae1;
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      user-select: none;
-      will-change: transform, opacity, box-shadow;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(82,159,154,0.1);
-      touch-action: pan-y;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      cursor: pointer;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:not(.dragging):hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(82,159,154,0.3);
-    }
-    .card.dragging { transition: none !important; cursor: grabbing; }
-    .card:not(.dragging) {
-      transition: transform 0.55s cubic-bezier(0.22, 0.8, 0.2, 1), 
-                  opacity 0.5s ease,
-                  box-shadow 0.5s ease;
-    }
-
-    .card-media {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-    }
-    .card-media .cat-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      transition: transform 0.8s ease;
-    }
-    .card:not(.dragging):hover .cat-bg {
-      transform: scale(1.05);
-    }
-    .card-media .cat-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 50%);
-    }
-
-    .card-body {
-      position: relative;
-      z-index: 1;
-      padding: 28px 28px 30px;
-      width: 100%;
-      background: linear-gradient(to top, rgba(32,25,23,0.95), rgba(32,25,23,0.6) 60%, transparent);
-    }
-    .card-body h3 {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 22px;
-      margin-bottom: 6px;
-      letter-spacing: -0.01em;
-      color: #edeae1;
-    }
-    .card-body .card-sub {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      color: #a89191;
-      margin-bottom: 12px;
-    }
-    .card-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: #a89191;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .card-meta .tag {
-      background: rgba(82,159,154,0.15);
-      color: #529f9a;
-      padding: 3px 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(82,159,154,0.2);
-      font-size: 9px;
-      letter-spacing: 0.06em;
-    }
-    .card-meta .date {
-      color: #edeae1;
-    }
-
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000;
       background: rgba(0,0,0,0.85);
@@ -479,7 +456,7 @@
       to { opacity: 1; transform: scale(1); }
     }
     .modal {
-      background: #241717;
+      background: #3a2f35;
       border: 2px solid #edeae1;
       border-radius: 16px;
       max-width: 560px;
@@ -488,7 +465,7 @@
       overflow-y: auto;
       padding: 40px;
       position: relative;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(82,159,154,0.2);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(123,203,197,0.2);
     }
     .modal-close {
       position: absolute; top: 16px; right: 20px;
@@ -507,8 +484,8 @@
     }
     .modal .modal-tag {
       display: inline-block;
-      background: rgba(82,159,154,0.2);
-      color: #529f9a;
+      background: rgba(123,203,197,0.2);
+      color: #7BCBC5;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       padding: 4px 12px;
@@ -544,7 +521,7 @@
 
     /* ===== PROOF ===== */
     .proof {
-      padding: 80px 32px 0;
+      padding: 60px 32px 0;
       position: relative;
     }
     .proof::before {
@@ -558,9 +535,10 @@
       background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
     }
     .proof-inner { max-width: 1240px; margin: 0 auto; }
+    
     .stat-row {
       display: grid;
-      grid-template-columns: repeat(4,1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1px;
       background: #4a3535;
       border: 1px solid #4a3535;
@@ -574,25 +552,31 @@
       transform: translateY(0);
     }
     .stat {
-      background: #201917;
+      background: #241D22;
       padding: 40px 24px;
-      text-align: left;
+      text-align: center;
     }
     .stat .n {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
-      color: #529f9a;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      color: #7BCBC5;
       line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
     }
     .stat .l {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       color: #a89191;
       margin-top: 12px;
+      letter-spacing: 0.06em;
     }
+
     .quote {
       max-width: 900px;
-      border-left: 3px solid #529f9a;
+      border-left: 3px solid #7BCBC5;
       padding-left: 36px;
       margin-bottom: 110px;
       opacity: 0;
@@ -663,7 +647,7 @@
       padding: 14px 14px 0;
       will-change: transform, opacity;
       user-select: none;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(82,159,154,0.15);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(123,203,197,0.15);
       border-radius: 8px;
       transform-style: preserve-3d;
       backface-visibility: hidden;
@@ -673,7 +657,7 @@
     }
     .photo-card:not(.dragging):hover {
       transform: translateY(-4px);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(82,159,154,0.3);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(123,203,197,0.3);
     }
     .photo-card.dragging { transition: none !important; cursor: grabbing; }
     .photo-card:not(.dragging) {
@@ -693,8 +677,8 @@
       position: absolute;
       top: 12px;
       left: 12px;
-      background: rgba(32,25,23,0.85);
-      color: #529f9a;
+      background: rgba(36,29,34,0.85);
+      color: #7BCBC5;
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       padding: 4px 8px;
@@ -722,31 +706,10 @@
       letter-spacing: 0.05em;
     }
 
-    .final-cta {
-      padding: 120px 32px;
-      text-align: center;
-      position: relative;
-    }
-    .final-cta::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
-    }
-    .final-cta h2 {
-      font-size: clamp(2.6rem, 8vw, 6rem);
-      margin-bottom: 36px;
-    }
-    .final-cta h2 span { color: #529f9a; }
-    .final-cta .cta-row { justify-content: center; }
-
     footer {
       padding: 60px 32px 40px;
       border-top: 1px solid rgba(74,53,53,0.3);
+      margin-top: 0;
     }
     .foot-inner {
       max-width: 1240px;
@@ -770,7 +733,7 @@
       color: #edeae1;
       transition: color 0.2s ease;
     }
-    .foot-col a:hover { color: #529f9a; }
+    .foot-col a:hover { color: #7BCBC5; }
     .foot-bottom {
       max-width: 1240px;
       margin: 60px auto 0;
@@ -817,25 +780,15 @@
         order: 1;
         max-width: 100%;
       }
-      .hint {
-        max-width: 100%;
-      }
       .stat-row {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
-      .hero-foot {
-        position: static;
-        margin-top: 60px;
-        flex-direction: column;
-        gap: 12px;
-        align-items: flex-start;
-      }
-      .events, .proof, .final-cta, footer, nav, .hero {
+      .events, .proof, footer, nav, .hero {
         padding-left: 20px;
         padding-right: 20px;
       }
       .chat-section {
-        padding: 60px 20px 30px;
+        padding: 30px 20px 50px;
       }
       .modal {
         padding: 24px;
@@ -849,13 +802,19 @@
         height: 64px;
         font-size: 24px;
       }
-      .btn {
-        padding: 16px 28px;
-        font-size: 14px;
+      .photo-controls .arrow-row {
+        display: none !important;
       }
     }
 
-    @media (max-width: 420px) {
+    @media (max-width: 480px) {
+      .stat-row {
+        grid-template-columns: 1fr;
+        gap: 1px;
+      }
+      .stat {
+        padding: 24px 16px;
+      }
       .stack-wrap {
         max-width: 100%;
         height: clamp(450px, 75vw, 520px);
@@ -879,7 +838,7 @@
         padding: 12px 20px;
       }
       .events {
-        padding: 40px 14px 40px;
+        padding: 40px 14px 30px;
       }
       .proof {
         padding: 40px 14px 0;
@@ -889,6 +848,9 @@
       }
       .card-body {
         padding: 20px 20px 24px;
+      }
+      .chat-section {
+        padding: 20px 14px 40px;
       }
     }
   </style>
@@ -902,131 +864,124 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-grid">
     <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
       <g class="thread-track">
         <g>
-          <path class="thread" d="M 34,334 C 67,466 88,599 70,739" style="stroke-width:1.07;opacity:0.62" />
-          <path class="thread" d="M 1408,-0 C 1121,219 878,487 611,744" style="stroke-width:0.78;opacity:0.51" />
-          <path class="thread" d="M 1406,143 C 1207,128 1008,105 802,120" style="stroke-width:1.03;opacity:0.49" />
-          <path class="thread" d="M 854,-3 C 738,154 648,327 536,493" style="stroke-width:0.65;opacity:0.36" />
-          <path class="thread" d="M -24,916 C 142,676 335,459 521,224" style="stroke-width:1.22;opacity:0.31" />
-          <path class="thread" d="M 8,217 C 471,179 930,86 1411,106" style="stroke-width:1.21;opacity:0.34" />
-          <path class="thread" d="M 27,927 C 399,898 751,753 1136,737" style="stroke-width:0.88;opacity:0.46" />
-          <path class="thread" d="M 1449,-23 C 1278,-52 1130,65 956,55" style="stroke-width:1.12;opacity:0.65" />
-          <path class="thread" d="M 1506,282 C 1464,327 1397,270 1355,320" style="stroke-width:0.99;opacity:0.36" />
-          <path class="thread" d="M 1447,859 C 1025,658 558,590 116,404" style="stroke-width:1.31;opacity:0.58" />
-          <path class="thread" d="M 1518,651 C 1183,537 888,336 548,208" style="stroke-width:0.72;opacity:0.52" />
-          <path class="thread" d="M 331,860 C 423,687 526,520 603,332" style="stroke-width:1.36;opacity:0.54" />
-          <path class="thread" d="M 1113,915 C 1153,879 1205,874 1254,857" style="stroke-width:1.05;opacity:0.43" />
-          <path class="thread" d="M 1407,-26 C 1048,70 684,133 301,146" style="stroke-width:0.64;opacity:0.28" />
-          <path class="thread" d="M -6,-23 C 98,94 243,176 299,339" style="stroke-width:1.36;opacity:0.5" />
-          <path class="thread" d="M 1519,413 C 1257,279 967,215 697,77" style="stroke-width:0.87;opacity:0.38" />
-          <path class="thread" d="M 237,34 C 304,241 500,385 521,621" style="stroke-width:1.21;opacity:0.39" />
-          <path class="thread" d="M -18,899 C 170,679 366,464 512,201" style="stroke-width:1.0;opacity:0.52" />
-          <path class="thread" d="M 1222,958 C 1104,723 1088,467 1065,204" style="stroke-width:0.88;opacity:0.29" />
-          <path class="thread" d="M -57,566 C 146,548 328,606 496,728" style="stroke-width:0.88;opacity:0.64" />
-          <path class="thread" d="M 1424,125 C 1204,316 1141,626 899,810" style="stroke-width:0.98;opacity:0.52" />
-          <path class="thread" d="M 97,907 C 351,601 765,498 1025,179" style="stroke-width:0.95;opacity:0.52" />
-          <path class="thread" d="M 549,908 C 828,857 1095,765 1363,652" style="stroke-width:0.7;opacity:0.34" />
-          <path class="thread" d="M 903,932 C 840,879 765,856 683,844" style="stroke-width:1.04;opacity:0.29" />
-          <path class="thread" d="M 764,32 C 757,288 721,538 625,785" style="stroke-width:0.77;opacity:0.37" />
-          <path class="thread" d="M 435,-15 C 683,64 940,34 1201,55" style="stroke-width:1.32;opacity:0.53" />
-          <path class="thread" d="M 114,-62 C 371,180 577,458 735,786" style="stroke-width:1.09;opacity:0.57" />
-          <path class="thread" d="M 1089,-13 C 879,138 703,333 469,467" style="stroke-width:1.23;opacity:0.32" />
-          <path class="thread" d="M -75,8 C 162,109 404,41 651,25" style="stroke-width:0.65;opacity:0.4" />
-          <path class="thread" d="M 1036,914 C 1029,709 815,619 768,430" style="stroke-width:1.16;opacity:0.6" />
-          <path class="thread" d="M 1364,-56 C 1131,94 907,259 644,375" style="stroke-width:0.85;opacity:0.53" />
-          <path class="thread" d="M 14,887 C 142,857 116,697 222,645" style="stroke-width:0.71;opacity:0.61" />
-          <path class="thread" d="M 553,-22 C 850,222 1146,468 1425,749" style="stroke-width:0.95;opacity:0.47" />
-          <path class="thread" d="M -69,303 C 121,304 282,453 487,413" style="stroke-width:0.91;opacity:0.47" />
-          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:0.93;opacity:0.62" />
-          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.26;opacity:0.52" />
-          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.08;opacity:0.56" />
-          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:0.99;opacity:0.53" />
-          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.04;opacity:0.51" />
-          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.26;opacity:0.44" />
-          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.38;opacity:0.69" />
-          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:0.91;opacity:0.57" />
-          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.07;opacity:0.45" />
-          <circle class="knot" cx="521" cy="224" r="2.5" />
-          <circle class="knot" cx="697" cy="77" r="3.0" />
-          <circle class="knot" cx="899" cy="810" r="2.5" />
-          <circle class="knot" cx="1025" cy="179" r="3.0" />
-          <circle class="knot" cx="768" cy="430" r="2.5" />
-          <circle class="knot" cx="433" cy="112" r="2.0" />
-          <circle class="knot" cx="1135" cy="375" r="2.5" />
+          <path class="thread" d="M 34,334 C 67,466 88,599 70,739" style="stroke-width:1.5;opacity:0.62" />
+          <path class="thread" d="M 1408,-0 C 1121,219 878,487 611,744" style="stroke-width:1.2;opacity:0.51" />
+          <path class="thread" d="M 1406,143 C 1207,128 1008,105 802,120" style="stroke-width:1.3;opacity:0.49" />
+          <path class="thread" d="M 854,-3 C 738,154 648,327 536,493" style="stroke-width:1.0;opacity:0.36" />
+          <path class="thread" d="M -24,916 C 142,676 335,459 521,224" style="stroke-width:1.5;opacity:0.31" />
+          <path class="thread" d="M 8,217 C 471,179 930,86 1411,106" style="stroke-width:1.5;opacity:0.34" />
+          <path class="thread" d="M 27,927 C 399,898 751,753 1136,737" style="stroke-width:1.2;opacity:0.46" />
+          <path class="thread" d="M 1449,-23 C 1278,-52 1130,65 956,55" style="stroke-width:1.4;opacity:0.65" />
+          <path class="thread" d="M 1506,282 C 1464,327 1397,270 1355,320" style="stroke-width:1.3;opacity:0.36" />
+          <path class="thread" d="M 1447,859 C 1025,658 558,590 116,404" style="stroke-width:1.5;opacity:0.58" />
+          <path class="thread" d="M 1518,651 C 1183,537 888,336 548,208" style="stroke-width:1.2;opacity:0.52" />
+          <path class="thread" d="M 331,860 C 423,687 526,520 603,332" style="stroke-width:1.5;opacity:0.54" />
+          <path class="thread" d="M 1113,915 C 1153,879 1205,874 1254,857" style="stroke-width:1.3;opacity:0.43" />
+          <path class="thread" d="M 1407,-26 C 1048,70 684,133 301,146" style="stroke-width:1.0;opacity:0.28" />
+          <path class="thread" d="M -6,-23 C 98,94 243,176 299,339" style="stroke-width:1.5;opacity:0.5" />
+          <path class="thread" d="M 1519,413 C 1257,279 967,215 697,77" style="stroke-width:1.2;opacity:0.38" />
+          <path class="thread" d="M 237,34 C 304,241 500,385 521,621" style="stroke-width:1.4;opacity:0.39" />
+          <path class="thread" d="M -18,899 C 170,679 366,464 512,201" style="stroke-width:1.3;opacity:0.52" />
+          <path class="thread" d="M 1222,958 C 1104,723 1088,467 1065,204" style="stroke-width:1.2;opacity:0.29" />
+          <path class="thread" d="M -57,566 C 146,548 328,606 496,728" style="stroke-width:1.2;opacity:0.64" />
+          <path class="thread" d="M 1424,125 C 1204,316 1141,626 899,810" style="stroke-width:1.3;opacity:0.52" />
+          <path class="thread" d="M 97,907 C 351,601 765,498 1025,179" style="stroke-width:1.3;opacity:0.52" />
+          <path class="thread" d="M 549,908 C 828,857 1095,765 1363,652" style="stroke-width:1.1;opacity:0.34" />
+          <path class="thread" d="M 903,932 C 840,879 765,856 683,844" style="stroke-width:1.3;opacity:0.29" />
+          <path class="thread" d="M 764,32 C 757,288 721,538 625,785" style="stroke-width:1.1;opacity:0.37" />
+          <path class="thread" d="M 435,-15 C 683,64 940,34 1201,55" style="stroke-width:1.5;opacity:0.53" />
+          <path class="thread" d="M 114,-62 C 371,180 577,458 735,786" style="stroke-width:1.4;opacity:0.57" />
+          <path class="thread" d="M 1089,-13 C 879,138 703,333 469,467" style="stroke-width:1.5;opacity:0.32" />
+          <path class="thread" d="M -75,8 C 162,109 404,41 651,25" style="stroke-width:1.0;opacity:0.4" />
+          <path class="thread" d="M 1036,914 C 1029,709 815,619 768,430" style="stroke-width:1.4;opacity:0.6" />
+          <path class="thread" d="M 1364,-56 C 1131,94 907,259 644,375" style="stroke-width:1.2;opacity:0.53" />
+          <path class="thread" d="M 14,887 C 142,857 116,697 222,645" style="stroke-width:1.1;opacity:0.61" />
+          <path class="thread" d="M 553,-22 C 850,222 1146,468 1425,749" style="stroke-width:1.3;opacity:0.47" />
+          <path class="thread" d="M -69,303 C 121,304 282,453 487,413" style="stroke-width:1.2;opacity:0.47" />
+          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:1.3;opacity:0.62" />
+          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.5;opacity:0.52" />
+          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.4;opacity:0.56" />
+          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:1.3;opacity:0.53" />
+          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.4;opacity:0.51" />
+          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.5;opacity:0.44" />
+          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.5;opacity:0.69" />
+          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:1.2;opacity:0.57" />
+          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.4;opacity:0.45" />
+          <circle class="knot" cx="521" cy="224" r="3.5" />
+          <circle class="knot" cx="697" cy="77" r="4.0" />
+          <circle class="knot" cx="899" cy="810" r="3.5" />
+          <circle class="knot" cx="1025" cy="179" r="4.0" />
+          <circle class="knot" cx="768" cy="430" r="3.5" />
+          <circle class="knot" cx="433" cy="112" r="3.0" />
+          <circle class="knot" cx="1135" cy="375" r="3.5" />
         </g>
         <g transform="translate(1440,0)">
-          <path class="thread" d="M 34,334 C 67,466 88,599 70,739" style="stroke-width:1.07;opacity:0.62" />
-          <path class="thread" d="M 1408,-0 C 1121,219 878,487 611,744" style="stroke-width:0.78;opacity:0.51" />
-          <path class="thread" d="M 1406,143 C 1207,128 1008,105 802,120" style="stroke-width:1.03;opacity:0.49" />
-          <path class="thread" d="M 854,-3 C 738,154 648,327 536,493" style="stroke-width:0.65;opacity:0.36" />
-          <path class="thread" d="M -24,916 C 142,676 335,459 521,224" style="stroke-width:1.22;opacity:0.31" />
-          <path class="thread" d="M 8,217 C 471,179 930,86 1411,106" style="stroke-width:1.21;opacity:0.34" />
-          <path class="thread" d="M 27,927 C 399,898 751,753 1136,737" style="stroke-width:0.88;opacity:0.46" />
-          <path class="thread" d="M 1449,-23 C 1278,-52 1130,65 956,55" style="stroke-width:1.12;opacity:0.65" />
-          <path class="thread" d="M 1506,282 C 1464,327 1397,270 1355,320" style="stroke-width:0.99;opacity:0.36" />
-          <path class="thread" d="M 1447,859 C 1025,658 558,590 116,404" style="stroke-width:1.31;opacity:0.58" />
-          <path class="thread" d="M 1518,651 C 1183,537 888,336 548,208" style="stroke-width:0.72;opacity:0.52" />
-          <path class="thread" d="M 331,860 C 423,687 526,520 603,332" style="stroke-width:1.36;opacity:0.54" />
-          <path class="thread" d="M 1113,915 C 1153,879 1205,874 1254,857" style="stroke-width:1.05;opacity:0.43" />
-          <path class="thread" d="M 1407,-26 C 1048,70 684,133 301,146" style="stroke-width:0.64;opacity:0.28" />
-          <path class="thread" d="M -6,-23 C 98,94 243,176 299,339" style="stroke-width:1.36;opacity:0.5" />
-          <path class="thread" d="M 1519,413 C 1257,279 967,215 697,77" style="stroke-width:0.87;opacity:0.38" />
-          <path class="thread" d="M 237,34 C 304,241 500,385 521,621" style="stroke-width:1.21;opacity:0.39" />
-          <path class="thread" d="M -18,899 C 170,679 366,464 512,201" style="stroke-width:1.0;opacity:0.52" />
-          <path class="thread" d="M 1222,958 C 1104,723 1088,467 1065,204" style="stroke-width:0.88;opacity:0.29" />
-          <path class="thread" d="M -57,566 C 146,548 328,606 496,728" style="stroke-width:0.88;opacity:0.64" />
-          <path class="thread" d="M 1424,125 C 1204,316 1141,626 899,810" style="stroke-width:0.98;opacity:0.52" />
-          <path class="thread" d="M 97,907 C 351,601 765,498 1025,179" style="stroke-width:0.95;opacity:0.52" />
-          <path class="thread" d="M 549,908 C 828,857 1095,765 1363,652" style="stroke-width:0.7;opacity:0.34" />
-          <path class="thread" d="M 903,932 C 840,879 765,856 683,844" style="stroke-width:1.04;opacity:0.29" />
-          <path class="thread" d="M 764,32 C 757,288 721,538 625,785" style="stroke-width:0.77;opacity:0.37" />
-          <path class="thread" d="M 435,-15 C 683,64 940,34 1201,55" style="stroke-width:1.32;opacity:0.53" />
-          <path class="thread" d="M 114,-62 C 371,180 577,458 735,786" style="stroke-width:1.09;opacity:0.57" />
-          <path class="thread" d="M 1089,-13 C 879,138 703,333 469,467" style="stroke-width:1.23;opacity:0.32" />
-          <path class="thread" d="M -75,8 C 162,109 404,41 651,25" style="stroke-width:0.65;opacity:0.4" />
-          <path class="thread" d="M 1036,914 C 1029,709 815,619 768,430" style="stroke-width:1.16;opacity:0.6" />
-          <path class="thread" d="M 1364,-56 C 1131,94 907,259 644,375" style="stroke-width:0.85;opacity:0.53" />
-          <path class="thread" d="M 14,887 C 142,857 116,697 222,645" style="stroke-width:0.71;opacity:0.61" />
-          <path class="thread" d="M 553,-22 C 850,222 1146,468 1425,749" style="stroke-width:0.95;opacity:0.47" />
-          <path class="thread" d="M -69,303 C 121,304 282,453 487,413" style="stroke-width:0.91;opacity:0.47" />
-          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:0.93;opacity:0.62" />
-          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.26;opacity:0.52" />
-          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.08;opacity:0.56" />
-          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:0.99;opacity:0.53" />
-          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.04;opacity:0.51" />
-          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.26;opacity:0.44" />
-          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.38;opacity:0.69" />
-          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:0.91;opacity:0.57" />
-          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.07;opacity:0.45" />
-          <circle class="knot" cx="521" cy="224" r="2.5" />
-          <circle class="knot" cx="697" cy="77" r="3.0" />
-          <circle class="knot" cx="899" cy="810" r="2.5" />
-          <circle class="knot" cx="1025" cy="179" r="3.0" />
-          <circle class="knot" cx="768" cy="430" r="2.5" />
-          <circle class="knot" cx="433" cy="112" r="2.0" />
-          <circle class="knot" cx="1135" cy="375" r="2.5" />
+          <path class="thread" d="M 34,334 C 67,466 88,599 70,739" style="stroke-width:1.5;opacity:0.62" />
+          <path class="thread" d="M 1408,-0 C 1121,219 878,487 611,744" style="stroke-width:1.2;opacity:0.51" />
+          <path class="thread" d="M 1406,143 C 1207,128 1008,105 802,120" style="stroke-width:1.3;opacity:0.49" />
+          <path class="thread" d="M 854,-3 C 738,154 648,327 536,493" style="stroke-width:1.0;opacity:0.36" />
+          <path class="thread" d="M -24,916 C 142,676 335,459 521,224" style="stroke-width:1.5;opacity:0.31" />
+          <path class="thread" d="M 8,217 C 471,179 930,86 1411,106" style="stroke-width:1.5;opacity:0.34" />
+          <path class="thread" d="M 27,927 C 399,898 751,753 1136,737" style="stroke-width:1.2;opacity:0.46" />
+          <path class="thread" d="M 1449,-23 C 1278,-52 1130,65 956,55" style="stroke-width:1.4;opacity:0.65" />
+          <path class="thread" d="M 1506,282 C 1464,327 1397,270 1355,320" style="stroke-width:1.3;opacity:0.36" />
+          <path class="thread" d="M 1447,859 C 1025,658 558,590 116,404" style="stroke-width:1.5;opacity:0.58" />
+          <path class="thread" d="M 1518,651 C 1183,537 888,336 548,208" style="stroke-width:1.2;opacity:0.52" />
+          <path class="thread" d="M 331,860 C 423,687 526,520 603,332" style="stroke-width:1.5;opacity:0.54" />
+          <path class="thread" d="M 1113,915 C 1153,879 1205,874 1254,857" style="stroke-width:1.3;opacity:0.43" />
+          <path class="thread" d="M 1407,-26 C 1048,70 684,133 301,146" style="stroke-width:1.0;opacity:0.28" />
+          <path class="thread" d="M -6,-23 C 98,94 243,176 299,339" style="stroke-width:1.5;opacity:0.5" />
+          <path class="thread" d="M 1519,413 C 1257,279 967,215 697,77" style="stroke-width:1.2;opacity:0.38" />
+          <path class="thread" d="M 237,34 C 304,241 500,385 521,621" style="stroke-width:1.4;opacity:0.39" />
+          <path class="thread" d="M -18,899 C 170,679 366,464 512,201" style="stroke-width:1.3;opacity:0.52" />
+          <path class="thread" d="M 1222,958 C 1104,723 1088,467 1065,204" style="stroke-width:1.2;opacity:0.29" />
+          <path class="thread" d="M -57,566 C 146,548 328,606 496,728" style="stroke-width:1.2;opacity:0.64" />
+          <path class="thread" d="M 1424,125 C 1204,316 1141,626 899,810" style="stroke-width:1.3;opacity:0.52" />
+          <path class="thread" d="M 97,907 C 351,601 765,498 1025,179" style="stroke-width:1.3;opacity:0.52" />
+          <path class="thread" d="M 549,908 C 828,857 1095,765 1363,652" style="stroke-width:1.1;opacity:0.34" />
+          <path class="thread" d="M 903,932 C 840,879 765,856 683,844" style="stroke-width:1.3;opacity:0.29" />
+          <path class="thread" d="M 764,32 C 757,288 721,538 625,785" style="stroke-width:1.1;opacity:0.37" />
+          <path class="thread" d="M 435,-15 C 683,64 940,34 1201,55" style="stroke-width:1.5;opacity:0.53" />
+          <path class="thread" d="M 114,-62 C 371,180 577,458 735,786" style="stroke-width:1.4;opacity:0.57" />
+          <path class="thread" d="M 1089,-13 C 879,138 703,333 469,467" style="stroke-width:1.5;opacity:0.32" />
+          <path class="thread" d="M -75,8 C 162,109 404,41 651,25" style="stroke-width:1.0;opacity:0.4" />
+          <path class="thread" d="M 1036,914 C 1029,709 815,619 768,430" style="stroke-width:1.4;opacity:0.6" />
+          <path class="thread" d="M 1364,-56 C 1131,94 907,259 644,375" style="stroke-width:1.2;opacity:0.53" />
+          <path class="thread" d="M 14,887 C 142,857 116,697 222,645" style="stroke-width:1.1;opacity:0.61" />
+          <path class="thread" d="M 553,-22 C 850,222 1146,468 1425,749" style="stroke-width:1.3;opacity:0.47" />
+          <path class="thread" d="M -69,303 C 121,304 282,453 487,413" style="stroke-width:1.2;opacity:0.47" />
+          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:1.3;opacity:0.62" />
+          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.5;opacity:0.52" />
+          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.4;opacity:0.56" />
+          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:1.3;opacity:0.53" />
+          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.4;opacity:0.51" />
+          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.5;opacity:0.44" />
+          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.5;opacity:0.69" />
+          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:1.2;opacity:0.57" />
+          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.4;opacity:0.45" />
+          <circle class="knot" cx="521" cy="224" r="3.5" />
+          <circle class="knot" cx="697" cy="77" r="4.0" />
+          <circle class="knot" cx="899" cy="810" r="3.5" />
+          <circle class="knot" cx="1025" cy="179" r="4.0" />
+          <circle class="knot" cx="768" cy="430" r="3.5" />
+          <circle class="knot" cx="433" cy="112" r="3.0" />
+          <circle class="knot" cx="1135" cy="375" r="3.5" />
         </g>
         <animateTransform attributeName="transform" type="translate" from="0 0" to="-1440 0" dur="120s" repeatCount="indefinite" />
       </g>
     </svg>
   </div>
   <div class="hero-inner">
-    <div class="eyebrow mono">Bengaluru chapter — live</div>
     <h1 class="disp">JOIN THE<br><span class="outline">MOVEMENT</span></h1>
     <div class="tagline mono">MEET <span>·</span> CONNECT <span>·</span> BELONG</div>
-    <p class="hero-sub"></p>
-    <div class="cta-row">
-      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="btn btn-fill">Join Mesh</a>
-      <a href="#events" class="btn btn-ghost">See the Events</a>
+    <div class="hero-sub">
+      <a href="#events">See what's happening →</a>
     </div>
-  </div>
-  <div class="hero-foot mono">
-    <span></span>
-    <span class="scroll-tag"></span>
   </div>
 </section>
 
@@ -1034,6 +989,25 @@
 <div class="ticker-band">
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
+
+<!-- EVENTS -->
+<section class="events" id="events">
+  <div class="section-head">
+    <h2 class="disp" id="eventsHeading">The Lineup</h2>
+  </div>
+
+  <div class="stack-area">
+    <div class="stack-wrap" id="stackWrap"></div>
+
+    <div class="stack-controls">
+      <div class="count mono">Viewing <b id="cardCounter">01</b> / 05</div>
+      <div class="arrow-row">
+        <button class="arrow-btn" id="prevBtn" aria-label="Previous">←</button>
+        <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- WHATSAPP BUBBLES -->
 <section class="chat-section" id="chatSection">
@@ -1050,31 +1024,10 @@
     </div>
 
     <div class="message message-user-response" id="userResponse">
-      Absolutely! We have a buzzing WhatsApp community where we share all event updates, last-minute changes, and connect with fellow members. Join us! 👇
+      Absolutely! We have a buzzing WhatsApp community where we share all event updates, last-minute changes, and connect with fellow members. Join us!
       <br>
-      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="link-btn">📲 JOIN WHATSAPP GROUP</a>
+      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="link-btn">JOIN WHATSAPP GROUP</a>
       <span class="time">12:35</span>
-    </div>
-  </div>
-</section>
-
-<!-- EVENTS -->
-<section class="events" id="events">
-  <div class="section-head">
-    <h2 class="disp" id="eventsHeading">Upcoming<br>Experiences</h2>
-    <p class="mono" id="eventsSub">Join the movement</p>
-  </div>
-
-  <div class="stack-area">
-    <div class="stack-wrap" id="stackWrap"></div>
-
-    <div class="stack-controls">
-      <div class="count mono">Viewing <b id="cardCounter">01</b> / 05</div>
-      <div class="arrow-row">
-        <button class="arrow-btn" id="prevBtn" aria-label="Previous">←</button>
-        <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
-      </div>
-      <p class="hint">Swipe &bull; tap &bull; discover</p>
     </div>
   </div>
 </section>
@@ -1082,12 +1035,29 @@
 <!-- COMMUNITY PROOF -->
 <section class="proof">
   <div class="proof-inner">
+    <!-- Stats Grid - 3 Columns -->
     <div class="stat-row" id="statsRow">
-      <div class="stat"><div class="n" data-target="200">200+</div><div class="l mono">Members</div></div>
-      <div class="stat"><div class="n" data-target="2">02</div><div class="l mono">Events Run</div></div>
-      <div class="stat"><div class="n" data-target="1">01</div><div class="l mono">City</div></div>
-      <div class="stat"><div class="n" data-target="0">00</div><div class="l mono">Sponsors</div></div>
+      <div class="stat">
+        <div class="n">
+          <span class="num" data-target="200">0</span><span>+</span>
+        </div>
+        <div class="l mono">Members</div>
+      </div>
+      <div class="stat">
+        <div class="n">
+          <span class="num" data-target="2">0</span>
+        </div>
+        <div class="l mono">Cities</div>
+      </div>
+      <div class="stat">
+        <div class="n">
+          <span class="num" data-target="500">0</span><span>+</span>
+        </div>
+        <div class="l mono">Community Messages</div>
+      </div>
     </div>
+
+    <!-- Testimonial -->
     <div class="quote" id="testimonial">
       <p>"I came for one run. Stayed for the people. MESH is the only thing on my calendar I never cancel on."</p>
       <div class="attr mono">— MESH Member, Varkala</div>
@@ -1106,18 +1076,9 @@
           <button class="arrow-btn" id="photoPrevBtn" aria-label="Previous">←</button>
           <button class="arrow-btn" id="photoNextBtn" aria-label="Next">→</button>
         </div>
-        <p class="hint">swipe · polaroid memories</p>
       </div>
       <div class="photo-stack-wrap" id="photoStackWrap"></div>
     </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta" id="join">
-  <h2 class="disp">READY TO <br><span>MESH IN?</span></h2>
-  <div class="cta-row">
-    <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="btn btn-fill">Join Mesh</a>
   </div>
 </section>
 
@@ -1126,8 +1087,8 @@
     <div class="foot-col">
       <h4 class="mono">Explore</h4>
       <a href="#events">Events</a>
-      <a href="#">About</a>
-      <a href="#join">Membership</a>
+      <a href="#about" id="aboutLink">About</a>
+      <a href="#">Membership</a>
     </div>
     <div class="foot-col">
       <h4 class="mono">Chapters</h4>
@@ -1146,6 +1107,24 @@
     <span>MEET. CONNECT. BELONG.</span>
   </div>
 </footer>
+
+<!-- ABOUT PAGE (hidden by default) -->
+<div id="aboutPage" style="display: none; padding: 120px 32px 60px; max-width: 800px; margin: 0 auto;">
+  <h2 class="disp" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 24px;">About MESH</h2>
+  <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 20px;">
+    MESH is a community built on three simple ideas: <strong style="color: #7BCBC5;">meet</strong>, <strong style="color: #7BCBC5;">connect</strong>, and <strong style="color: #7BCBC5;">belong</strong>.
+  </p>
+  <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 20px;">
+    We started in Bengaluru with a simple belief — that the best experiences happen when people show up. Whether it's a sunrise run, a warehouse party, or a quiet conversation with creators, MESH is where real connections happen.
+  </p>
+  <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 20px;">
+    No hierarchies. No gatekeeping. Just people who want to meet, connect, and belong.
+  </p>
+  <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 40px;">
+    <strong style="color: #7BCBC5;">Show up. That's the whole idea.</strong>
+  </p>
+  <a href="#" onclick="closeAbout(); return false;" class="btn btn-fill" style="display: inline-block;">← Back</a>
+</div>
 
 <!-- ===== MODAL ===== -->
 <div class="modal-overlay" id="eventModal">
@@ -1170,6 +1149,24 @@
 </div>
 
 <script>
+  // ===== ABOUT PAGE TOGGLE =====
+  document.getElementById('aboutLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector('body > *:not(#aboutPage):not(.noise):not(nav)').style.display = 'none';
+    document.getElementById('aboutPage').style.display = 'block';
+    document.getElementById('aboutPage').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  function closeAbout() {
+    document.querySelectorAll('body > *:not(#aboutPage):not(.noise):not(nav)').forEach(el => {
+      if (el.id !== 'aboutPage' && el.tagName !== 'NAV' && !el.classList.contains('noise')) {
+        el.style.display = '';
+      }
+    });
+    document.getElementById('aboutPage').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   // ===== ticker =====
   const tickerWords = ['RUN CLUB','MUSIC NIGHTS','MEETUPS','TALKS','POP-UPS','+ MUCH MORE'];
   const tickerTrack = document.getElementById('tickerTrack');
@@ -1177,7 +1174,7 @@
 
   // ===== WHATSAPP CHAT - SCROLL TRIGGERED =====
   document.addEventListener('DOMContentLoaded', function() {
-    const chatSection = document.getElementById('chatSection');
+    const chatBody = document.getElementById('chatBody');
     const meshAsk = document.getElementById('meshAsk');
     const typingIndicator = document.getElementById('typingIndicator');
     const userResponse = document.getElementById('userResponse');
@@ -1188,7 +1185,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting && !animationTriggered) {
           animationTriggered = true;
-          chatSection.classList.add('visible');
+          chatBody.classList.add('visible');
           startChatAnimation();
         }
       });
@@ -1196,7 +1193,7 @@
       threshold: 0.3
     });
 
-    observer.observe(chatSection);
+    observer.observe(chatBody);
 
     function startChatAnimation() {
       meshAsk.classList.add('visible');
@@ -1216,21 +1213,18 @@
   document.addEventListener('DOMContentLoaded', function() {
     // Events heading
     const heading = document.getElementById('eventsHeading');
-    const sub = document.getElementById('eventsSub');
     
     const headingObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           heading.classList.add('visible');
-          sub.classList.add('visible');
         }
       });
     }, { threshold: 0.3 });
     
     headingObserver.observe(heading);
-    if (sub) headingObserver.observe(sub);
 
-    // Stats row
+    // Stats row with counter animation
     const stats = document.getElementById('statsRow');
     const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1258,39 +1252,22 @@
 
   // ===== COUNTER ANIMATION =====
   function animateNumbers() {
-    const stats = document.querySelectorAll('.stat .n');
-    stats.forEach(stat => {
-      const target = stat.getAttribute('data-target');
-      // For 200+, we animate to 200
-      if (target === '200') {
-        let current = 0;
-        const interval = setInterval(() => {
-          current += 4;
-          if (current >= 200) {
-            stat.textContent = '200+';
-            clearInterval(interval);
-          } else {
-            stat.textContent = current + '+';
-          }
-        }, 20);
-      } else if (target === '2') {
-        let current = 0;
-        const interval = setInterval(() => {
-          current += 1;
-          if (current >= 2) {
-            stat.textContent = '02';
-            clearInterval(interval);
-          } else {
-            stat.textContent = '0' + current;
-          }
-        }, 300);
-      } else if (target === '1') {
-        setTimeout(() => {
-          stat.textContent = '01';
-        }, 300);
-      } else {
-        stat.textContent = '00';
-      }
+    const numElements = document.querySelectorAll('.stat .num');
+    
+    numElements.forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'));
+      let current = 0;
+      const increment = Math.ceil(target / 60);
+      
+      const interval = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          el.textContent = target;
+          clearInterval(interval);
+        } else {
+          el.textContent = current;
+        }
+      }, 20);
     });
   }
 
@@ -1407,7 +1384,7 @@
       const tx = o.x + (dragX || 0);
       el.style.transform = `translate(${tx}px, ${o.y}px) rotate(${rx}deg) scale(${o.s}) translateZ(${o.z || 0}px)`;
       el.style.opacity = o.o;
-      el.style.boxShadow = `0 25px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(82,159,154,${0.1 + (1 - o.o) * 0.2})`;
+      el.style.boxShadow = `0 25px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(123,203,197,${0.1 + (1 - o.o) * 0.2})`;
     }
 
     function makeCardEl(dataIndex){
