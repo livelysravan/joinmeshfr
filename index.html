@@ -12,7 +12,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
     body {
-      background: #32292F;
+      background: #241D22;
       color: #edeae1;
       font-family: 'Space Grotesk', sans-serif;
       overflow-x: hidden;
@@ -35,7 +35,7 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 72px; padding: 0 32px;
       backdrop-filter: blur(10px);
-      background: rgba(50,41,47,0.75);
+      background: rgba(36,29,34,0.75);
       border-bottom: 1px solid rgba(74,53,53,0.3);
     }
     .logo-mark img { height: 120px; width: auto; }
@@ -44,7 +44,7 @@
       font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase;
       transition: background .2s ease, color .2s ease;
     }
-    .nav-cta:hover { background: #99E1D9; color: #32292F; border-color: #99E1D9; }
+    .nav-cta:hover { background: #7BCBC5; color: #241D22; border-color: #7BCBC5; }
 
     .hero {
       position: relative;
@@ -65,8 +65,8 @@
     }
     .hero-grid svg { width: 100%; height: 100%; }
     .hero-grid .thread { fill: none; stroke: #6a4f4f; stroke-linecap: round; }
-    .hero-grid .thread-lit { fill: none; stroke: #99E1D9; stroke-linecap: round; }
-    .hero-grid .knot { fill: #99E1D9; opacity: 0.5; }
+    .hero-grid .thread-lit { fill: none; stroke: #7BCBC5; stroke-linecap: round; }
+    .hero-grid .knot { fill: #7BCBC5; opacity: 0.5; }
     .hero-inner { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; width: 100%; }
     .hero h1 {
       font-size: clamp(3.2rem, 11vw, 9.5rem);
@@ -79,7 +79,7 @@
     }
     .tagline {
       font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-      color: #99E1D9;
+      color: #7BCBC5;
       letter-spacing: 0.15em;
       margin-bottom: 32px;
       font-weight: 500;
@@ -104,7 +104,7 @@
     }
 
     .ticker-band {
-      background: #99E1D9; color: #32292F; overflow: hidden;
+      background: #7BCBC5; color: #241D22; overflow: hidden;
       padding: 14px 0;
       border-bottom: 1px solid rgba(74,53,53,0.3);
     }
@@ -167,7 +167,7 @@
       font-size: 14px;
       color: #a89191;
     }
-    .stack-controls .count b { color: #99E1D9; }
+    .stack-controls .count b { color: #7BCBC5; }
     .arrow-row {
       display: flex;
       gap: 12px;
@@ -186,9 +186,9 @@
       transition: background .18s ease, color .18s ease, transform .2s ease;
     }
     .arrow-btn:hover {
-      background: #99E1D9;
-      color: #32292F;
-      border-color: #99E1D9;
+      background: #7BCBC5;
+      color: #241D22;
+      border-color: #7BCBC5;
     }
     .arrow-btn:active {
       transform: scale(0.92);
@@ -213,7 +213,7 @@
       flex-direction: column;
       user-select: none;
       will-change: transform, opacity, box-shadow;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(153,225,217,0.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(123,203,197,0.1);
       touch-action: pan-y;
       transform-style: preserve-3d;
       backface-visibility: hidden;
@@ -223,7 +223,7 @@
     }
     .card:not(.dragging):hover {
       transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(153,225,217,0.3);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(123,203,197,0.3);
     }
     .card.dragging { transition: none !important; cursor: grabbing; }
     .card:not(.dragging) {
@@ -261,7 +261,7 @@
       z-index: 1;
       padding: 28px 28px 30px;
       width: 100%;
-      background: linear-gradient(to top, rgba(50,41,47,0.95), rgba(50,41,47,0.6) 60%, transparent);
+      background: linear-gradient(to top, rgba(36,29,34,0.95), rgba(36,29,34,0.6) 60%, transparent);
     }
     .card-body h3 {
       font-family: 'Archivo Black', sans-serif;
@@ -287,11 +287,11 @@
       gap: 8px;
     }
     .card-meta .tag {
-      background: rgba(153,225,217,0.15);
-      color: #99E1D9;
+      background: rgba(123,203,197,0.15);
+      color: #7BCBC5;
       padding: 3px 10px;
       border-radius: 12px;
-      border: 1px solid rgba(153,225,217,0.2);
+      border: 1px solid rgba(123,203,197,0.2);
       font-size: 9px;
       letter-spacing: 0.06em;
     }
@@ -305,7 +305,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #32292F;
+      background: #241D22;
       position: relative;
     }
     .chat-section::before {
@@ -465,7 +465,7 @@
       overflow-y: auto;
       padding: 40px;
       position: relative;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(153,225,217,0.2);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(123,203,197,0.2);
     }
     .modal-close {
       position: absolute; top: 16px; right: 20px;
@@ -484,8 +484,8 @@
     }
     .modal .modal-tag {
       display: inline-block;
-      background: rgba(153,225,217,0.2);
-      color: #99E1D9;
+      background: rgba(123,203,197,0.2);
+      color: #7BCBC5;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       padding: 4px 12px;
@@ -552,14 +552,14 @@
       transform: translateY(0);
     }
     .stat {
-      background: #32292F;
+      background: #241D22;
       padding: 40px 24px;
       text-align: center;
     }
     .stat .n {
       font-family: 'Archivo Black', sans-serif;
       font-size: clamp(2.8rem, 5vw, 4rem);
-      color: #99E1D9;
+      color: #7BCBC5;
       line-height: 1;
       display: flex;
       align-items: center;
@@ -576,7 +576,7 @@
 
     .quote {
       max-width: 900px;
-      border-left: 3px solid #99E1D9;
+      border-left: 3px solid #7BCBC5;
       padding-left: 36px;
       margin-bottom: 110px;
       opacity: 0;
@@ -647,7 +647,7 @@
       padding: 14px 14px 0;
       will-change: transform, opacity;
       user-select: none;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(153,225,217,0.15);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(123,203,197,0.15);
       border-radius: 8px;
       transform-style: preserve-3d;
       backface-visibility: hidden;
@@ -657,7 +657,7 @@
     }
     .photo-card:not(.dragging):hover {
       transform: translateY(-4px);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(153,225,217,0.3);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 2px rgba(123,203,197,0.3);
     }
     .photo-card.dragging { transition: none !important; cursor: grabbing; }
     .photo-card:not(.dragging) {
@@ -677,8 +677,8 @@
       position: absolute;
       top: 12px;
       left: 12px;
-      background: rgba(50,41,47,0.85);
-      color: #99E1D9;
+      background: rgba(36,29,34,0.85);
+      color: #7BCBC5;
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       padding: 4px 8px;
@@ -733,7 +733,7 @@
       color: #edeae1;
       transition: color 0.2s ease;
     }
-    .foot-col a:hover { color: #99E1D9; }
+    .foot-col a:hover { color: #7BCBC5; }
     .foot-bottom {
       max-width: 1240px;
       margin: 60px auto 0;
@@ -1112,7 +1112,7 @@
 <div id="aboutPage" style="display: none; padding: 120px 32px 60px; max-width: 800px; margin: 0 auto;">
   <h2 class="disp" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 24px;">About MESH</h2>
   <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 20px;">
-    MESH is a community built on three simple ideas: <strong style="color: #99E1D9;">meet</strong>, <strong style="color: #99E1D9;">connect</strong>, and <strong style="color: #99E1D9;">belong</strong>.
+    MESH is a community built on three simple ideas: <strong style="color: #7BCBC5;">meet</strong>, <strong style="color: #7BCBC5;">connect</strong>, and <strong style="color: #7BCBC5;">belong</strong>.
   </p>
   <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 20px;">
     We started in Bengaluru with a simple belief — that the best experiences happen when people show up. Whether it's a sunrise run, a warehouse party, or a quiet conversation with creators, MESH is where real connections happen.
@@ -1121,7 +1121,7 @@
     No hierarchies. No gatekeeping. Just people who want to meet, connect, and belong.
   </p>
   <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 40px;">
-    <strong style="color: #99E1D9;">Show up. That's the whole idea.</strong>
+    <strong style="color: #7BCBC5;">Show up. That's the whole idea.</strong>
   </p>
   <a href="#" onclick="closeAbout(); return false;" class="btn btn-fill" style="display: inline-block;">← Back</a>
 </div>
@@ -1384,7 +1384,7 @@
       const tx = o.x + (dragX || 0);
       el.style.transform = `translate(${tx}px, ${o.y}px) rotate(${rx}deg) scale(${o.s}) translateZ(${o.z || 0}px)`;
       el.style.opacity = o.o;
-      el.style.boxShadow = `0 25px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(153,225,217,${0.1 + (1 - o.o) * 0.2})`;
+      el.style.boxShadow = `0 25px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(123,203,197,${0.1 + (1 - o.o) * 0.2})`;
     }
 
     function makeCardEl(dataIndex){
