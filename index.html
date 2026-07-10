@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MESH — Join the Movement</title>
+  <title>MESH — Meet. Connect. Belong.</title>
   <link rel="icon" type="image/png" href="mlogov2.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=HK+Guise:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=HK+Guise:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
@@ -19,9 +19,13 @@
       width: 100%;
       -webkit-font-smoothing: antialiased;
     }
+    
+    /* ===== TYPOGRAPHY SYSTEM ===== */
     .disp { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -0.02em; }
     .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
-    .serif { font-family: 'HK Guise', sans-serif; }
+    .body-font { font-family: 'Space Grotesk', sans-serif; }
+    .display-font { font-family: 'HK Guise', sans-serif; }
+    
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
@@ -31,6 +35,7 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
+    /* ===== NAVIGATION ===== */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -41,12 +46,24 @@
     }
     .logo-mark img { height: 120px; width: auto; }
     .nav-cta {
-      border: 1px solid #edeae1; padding: 10px 20px; font-size: 12px;
-      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase;
-      transition: background .2s ease, color .2s ease;
+      background: #7BCBC5;
+      color: #241D22;
+      padding: 12px 28px;
+      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: all .25s ease;
+      border: none;
+      cursor: pointer;
     }
-    .nav-cta:hover { background: #7BCBC5; color: #241D22; border-color: #7BCBC5; }
+    .nav-cta:hover {
+      background: #edeae1;
+      transform: scale(1.02);
+    }
 
+    /* ===== HERO ===== */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -70,59 +87,134 @@
     .hero-grid .knot { fill: #7BCBC5; opacity: 0.5; }
     .hero-inner { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; width: 100%; }
     .hero h1 {
-      font-size: clamp(3.2rem, 11vw, 9.5rem);
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(4rem, 12vw, 10rem);
       line-height: 0.86;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
     }
     .hero h1 .outline {
       -webkit-text-stroke: 2px #edeae1;
       color: transparent;
     }
-    .tagline {
-      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    .hero-sub-line {
+      font-family: 'HK Guise', sans-serif;
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+      font-weight: 300;
       color: #7BCBC5;
-      letter-spacing: 0.15em;
-      margin-bottom: 32px;
-      font-weight: 500;
+      letter-spacing: 0.2em;
+      margin-bottom: 40px;
     }
-    .tagline span { color: #a89191; margin: 0 4px; }
-    .hero-sub {
-      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    .hero-cta {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
       color: #edeae1;
-      font-weight: 500;
+      font-weight: 400;
     }
-    .hero-sub a {
+    .hero-cta a {
       color: #edeae1;
       border-bottom: 1px solid #edeae1;
       padding-bottom: 2px;
       transition: opacity 0.2s ease;
     }
-    .hero-sub a:hover {
+    .hero-cta a:hover {
       opacity: 0.6;
     }
-    .hero-foot {
-      display: none;
+
+    /* ===== TRIPLE CROSSING MARQUEE ===== */
+    .triple-marquee {
+      position: relative;
+      background: #241D22;
+      padding: 20px 0 70px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .tm-strip {
+      position: relative;
+      width: 140%;
+      left: -20%;
+      overflow: hidden;
+      padding: 22px 0;
+      white-space: nowrap;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+      border-top: 1px solid rgba(36,29,34,0.15);
+      border-bottom: 1px solid rgba(36,29,34,0.15);
+    }
+    .tm-strip-1 {
+      background: #edeae1;
+      transform: rotate(-4deg);
+      margin-bottom: -32px;
+      z-index: 1;
+    }
+    .tm-strip-2 {
+      background: #7BCBC5;
+      transform: rotate(3.5deg);
+      margin-bottom: -32px;
+      z-index: 3;
+      box-shadow: 0 22px 44px rgba(0,0,0,0.55);
+    }
+    .tm-strip-3 {
+      background: #cba7e8;
+      transform: rotate(-6deg);
+      z-index: 2;
+    }
+    .tm-track {
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      animation: tmScroll 140s linear infinite;
+    }
+    .tm-strip-2 .tm-track { animation-duration: 110s; animation-direction: reverse; }
+    .tm-strip-3 .tm-track { animation-duration: 170s; }
+
+    .tm-track span {
+      display: inline-block;
+      white-space: nowrap;
+      padding: 0 20px;
+    }
+    .tm-strip-1 .tm-track .tm-word {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(1.4rem, 2.8vw, 2.5rem);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: #241D22;
+    }
+    .tm-strip-2 .tm-track .tm-word {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(1.4rem, 2.8vw, 2.5rem);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: #241D22;
+    }
+    .tm-strip-3 .tm-track .tm-word {
+      font-family: 'HK Guise', sans-serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(1.2rem, 2.4vw, 2.1rem);
+      color: #241D22;
+    }
+    .tm-strip-1 .tm-sep { color: #7BCBC5; font-size: clamp(1.2rem, 2.4vw, 2rem); }
+    .tm-strip-2 .tm-sep { color: #241D22; opacity: 0.45; font-size: clamp(1.2rem, 2.4vw, 2rem); }
+    .tm-strip-3 .tm-sep { color: #6a4f4f; font-size: clamp(1.1rem, 2.2vw, 1.8rem); }
+
+    @keyframes tmScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
-    .ticker-band {
-      background: #7BCBC5; color: #241D22; overflow: hidden;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(74,53,53,0.3);
+    @media (max-width: 860px) {
+      .triple-marquee { padding: 20px 0 50px; }
+      .tm-strip { width: 180%; left: -40%; padding: 16px 0; }
+      .tm-strip-1 .tm-track .tm-word,
+      .tm-strip-2 .tm-track .tm-word { font-size: clamp(1.1rem, 4.5vw, 1.6rem); }
+      .tm-strip-3 .tm-track .tm-word { font-size: clamp(1rem, 4vw, 1.4rem); }
+      .tm-track span { padding: 0 12px; }
     }
-    .ticker-track {
-      display: flex; width: max-content;
-      animation: scroll 26s linear infinite;
-    }
-    .ticker-track span {
-      font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px;
-      letter-spacing: 0.08em; text-transform: uppercase; padding: 0 24px;
-      white-space: nowrap;
-    }
-    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* ===== CRED-STYLE SCROLL TYPOGRAPHY ===== */
     .about-typography {
-      padding: 120px 32px 160px;
+      padding: 120px 32px 140px;
       background: #241D22;
       position: relative;
       overflow: hidden;
@@ -155,26 +247,20 @@
     .typo-line {
       display: block;
       font-family: 'HK Guise', sans-serif;
-      font-size: clamp(2.6rem, 5.5vw, 4.5rem);
-      font-weight: 400;
-      line-height: 1.4;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 300;
+      line-height: 1.3;
       color: rgba(237, 234, 225, 0.12);
       transition: color 0.1s ease;
-      padding: 6px 0;
-      letter-spacing: -0.03em;
-    }
-    .typo-line.visible {
-      color: rgba(237, 234, 225, 1);
+      padding: 4px 0;
+      letter-spacing: -0.02em;
     }
     .typo-line .accent {
       color: #7BCBC5;
     }
-    .typo-line .highlight {
-      font-weight: 600;
-    }
     .typo-spacer {
       display: block;
-      height: 20px;
+      height: 24px;
     }
     .typo-progress {
       position: fixed;
@@ -220,7 +306,10 @@
       margin: 0 auto 64px;
     }
     .events .section-head h2 {
+      font-family: 'Archivo Black', sans-serif;
       font-size: clamp(2.2rem, 5vw, 4rem);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
@@ -346,16 +435,11 @@
     }
     .card-body h3 {
       font-family: 'Archivo Black', sans-serif;
-      font-size: 22px;
-      margin-bottom: 6px;
+      font-size: 24px;
+      margin-bottom: 4px;
       letter-spacing: -0.01em;
       color: #edeae1;
-    }
-    .card-body .card-sub {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      color: #a89191;
-      margin-bottom: 12px;
+      text-transform: uppercase;
     }
     .card-meta {
       display: flex;
@@ -366,6 +450,7 @@
       color: #a89191;
       flex-wrap: wrap;
       gap: 8px;
+      margin-top: 4px;
     }
     .card-meta .tag {
       background: rgba(123,203,197,0.15);
@@ -378,18 +463,19 @@
     }
     .card-meta .date {
       color: #edeae1;
+      font-size: 12px;
     }
 
-    /* ===== WHATSAPP BUBBLES ===== */
-    .chat-section {
-      padding: 40px 24px 60px;
+    /* ===== COMMUNITY CARD (BRANDED) ===== */
+    .community-card-section {
+      padding: 60px 24px 80px;
       display: flex;
       justify-content: center;
       align-items: center;
       background: #241D22;
       position: relative;
     }
-    .chat-section::before {
+    .community-card-section::before {
       content: '';
       position: absolute;
       top: 0;
@@ -399,128 +485,90 @@
       height: 1px;
       background: linear-gradient(to right, transparent, rgba(74,53,53,0.3), transparent);
     }
-    .chat-body {
-      max-width: 480px;
+    .community-card {
+      max-width: 560px;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      background: #2d2429;
+      border: 1px solid rgba(123,203,197,0.15);
+      border-radius: 16px;
+      padding: 48px 40px;
+      text-align: center;
       position: relative;
-      z-index: 1;
-      min-height: 170px;
-      padding: 0 6px;
+      overflow: hidden;
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .chat-body.visible {
+    .community-card.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
-    .message-mesh-ask {
-      align-self: flex-end;
-      background: #dcf8c6;
-      color: #303030;
-      border-top-right-radius: 2px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+    .community-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(123,203,197,0.03) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .message-mesh-ask.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .message-user-response {
-      align-self: flex-start;
-      background: #ffffff;
-      color: #303030;
-      border-top-left-radius: 2px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .message-user-response.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .message {
-      max-width: 85%;
-      padding: 9px 14px;
-      border-radius: 10px;
-      font-size: 14px;
-      line-height: 1.5;
-      position: relative;
-      word-wrap: break-word;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-    }
-    .message .time {
-      font-size: 9px;
-      opacity: 0.5;
-      margin-top: 3px;
+    .community-card .card-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
       display: block;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      letter-spacing: 0.02em;
-      text-align: right;
     }
-    .message-user-response .link-btn {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 8px 16px;
-      background: #25d366;
-      color: #ffffff;
-      border-radius: 20px;
+    .community-card h3 {
+      font-family: 'HK Guise', sans-serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 400;
+      color: #edeae1;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .community-card h3 span {
+      color: #7BCBC5;
+    }
+    .community-card p {
       font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 11px;
-      letter-spacing: 0.02em;
+      font-size: 15px;
+      color: #a89191;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .community-card .community-cta {
+      display: inline-block;
+      background: #7BCBC5;
+      color: #241D22;
+      padding: 14px 40px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: all 0.2s ease;
+      font-weight: 600;
       border: none;
       cursor: pointer;
-      text-decoration: none;
-      width: 100%;
-      text-align: center;
+      transition: all .25s ease;
+      position: relative;
+      z-index: 1;
     }
-    .message-user-response .link-btn:hover {
-      transform: scale(1.02);
-      background: #20b85e;
-      box-shadow: 0 2px 8px rgba(37,211,102,0.3);
+    .community-card .community-cta:hover {
+      background: #edeae1;
+      transform: scale(1.03);
     }
-
-    .typing-indicator {
-      align-self: flex-start;
-      background: #ffffff;
-      padding: 10px 16px;
-      border-radius: 10px;
-      border-top-left-radius: 2px;
-      display: none;
-      align-items: center;
-      gap: 5px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .typing-indicator.active {
-      display: flex;
-      opacity: 1;
-    }
-    .typing-indicator .dot {
-      width: 7px;
-      height: 7px;
-      background: #a0a0a0;
-      border-radius: 50%;
-      animation: typingBounce 1.3s ease-in-out infinite;
-    }
-    .typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
-    .typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typingBounce {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-6px); }
+    .community-card .member-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #7BCBC5;
+      margin-top: 20px;
+      display: block;
+      opacity: 0.6;
     }
 
+    /* ===== MODAL ===== */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000;
       background: rgba(0,0,0,0.85);
@@ -579,6 +627,7 @@
       font-size: clamp(1.8rem, 3vw, 2.4rem);
       margin-bottom: 12px;
       letter-spacing: -0.02em;
+      text-transform: uppercase;
     }
     .modal .modal-meta {
       display: flex; gap: 24px;
@@ -594,18 +643,19 @@
       line-height: 1.6;
       margin-bottom: 28px;
       font-size: 15px;
+      font-family: 'Space Grotesk', sans-serif;
     }
     .modal .modal-actions {
       display: flex; gap: 16px; flex-wrap: wrap;
     }
     .modal .modal-actions .btn { flex: 1; justify-content: center; }
 
-    /* ===== PROOF ===== */
-    .proof {
-      padding: 60px 32px 0;
+    /* ===== PHOTO SECTION ===== */
+    .photo-section {
+      padding: 0 32px 100px;
       position: relative;
     }
-    .proof::before {
+    .photo-section::before {
       content: '';
       position: absolute;
       top: 0;
@@ -615,74 +665,6 @@
       height: 1px;
       background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
     }
-    .proof-inner { max-width: 1240px; margin: 0 auto; }
-    
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: #4a3535;
-      border: 1px solid #4a3535;
-      margin-bottom: 90px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .stat-row.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .stat {
-      background: #241D22;
-      padding: 40px 24px;
-      text-align: center;
-    }
-    .stat .n {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(2.8rem, 5vw, 4rem);
-      color: #7BCBC5;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-    }
-    .stat .l {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: #a89191;
-      margin-top: 12px;
-      letter-spacing: 0.06em;
-    }
-
-    .quote {
-      max-width: 900px;
-      border-left: 3px solid #7BCBC5;
-      padding-left: 36px;
-      margin-bottom: 110px;
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
-    }
-    .quote.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .quote p {
-      font-size: clamp(1.4rem, 2.6vw, 2rem);
-      font-weight: 500;
-      line-height: 1.4;
-      margin-bottom: 24px;
-    }
-    .quote .attr {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: #a89191;
-    }
-
-    .photo-section {
-      padding-bottom: 100px;
-    }
     .photo-section .section-head {
       display: flex;
       justify-content: space-between;
@@ -691,9 +673,13 @@
       margin: 0 auto 64px;
       flex-wrap: wrap;
       gap: 24px;
+      padding-top: 60px;
     }
     .photo-section .section-head h2 {
+      font-family: 'Archivo Black', sans-serif;
       font-size: clamp(2.2rem, 5vw, 4rem);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
     }
     .photo-section .section-head p {
       color: #a89191;
@@ -776,7 +762,7 @@
     }
     .photo-caption .p-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 16px;
       color: #201917;
     }
@@ -787,6 +773,7 @@
       letter-spacing: 0.05em;
     }
 
+    /* ===== FOOTER ===== */
     footer {
       padding: 60px 32px 40px;
       border-top: 1px solid rgba(74,53,53,0.3);
@@ -812,6 +799,7 @@
       font-size: 14px;
       margin-bottom: 10px;
       color: #edeae1;
+      font-family: 'Space Grotesk', sans-serif;
       transition: color 0.2s ease;
     }
     .foot-col a:hover { color: #7BCBC5; }
@@ -845,9 +833,6 @@
         max-width: 100%;
         height: clamp(480px, 70vw, 560px);
       }
-      .card-body h3 {
-        font-size: 24px;
-      }
       .photo-stack-area {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -861,53 +846,44 @@
         order: 1;
         max-width: 100%;
       }
-      .stat-row {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .events, .proof, footer, nav, .hero {
+      .events, .photo-section, footer, nav, .hero {
         padding-left: 20px;
         padding-right: 20px;
       }
-      .chat-section {
-        padding: 30px 20px 50px;
+      .community-card-section {
+        padding: 40px 20px 60px;
+      }
+      .community-card {
+        padding: 36px 28px;
       }
       .modal {
         padding: 24px;
         margin: 16px;
       }
-      .arrow-row {
-        display: none !important;
-      }
-      .arrow-btn {
-        width: 64px;
-        height: 64px;
-        font-size: 24px;
-      }
-      .photo-controls .arrow-row {
-        display: none !important;
-      }
       .about-typography {
-        padding: 80px 20px 120px;
+        padding: 80px 20px 100px;
       }
       .typo-line {
-        font-size: clamp(2rem, 4.5vw, 3rem);
-        line-height: 1.5;
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        line-height: 1.4;
       }
       .typo-progress {
         right: 16px;
         height: 120px;
         top: 50%;
       }
+      .arrow-row {
+        display: flex !important;
+      }
+      .photo-controls .arrow-row {
+        display: flex !important;
+      }
+      .hero h1 {
+        font-size: clamp(3rem, 10vw, 5rem);
+      }
     }
 
     @media (max-width: 480px) {
-      .stat-row {
-        grid-template-columns: 1fr;
-        gap: 1px;
-      }
-      .stat {
-        padding: 24px 16px;
-      }
       .stack-wrap {
         max-width: 100%;
         height: clamp(450px, 75vw, 520px);
@@ -918,23 +894,14 @@
       .modal .modal-actions {
         flex-direction: column;
       }
-      .chat-body {
-        min-height: 180px;
-      }
-      .message {
-        font-size: 15px;
-        max-width: 88%;
-        padding: 10px 16px;
-      }
-      .message-user-response .link-btn {
-        font-size: 13px;
-        padding: 12px 20px;
-      }
       .events {
         padding: 40px 14px 30px;
       }
-      .proof {
-        padding: 40px 14px 0;
+      .photo-section {
+        padding: 0 14px 60px;
+      }
+      .photo-section .section-head {
+        padding-top: 40px;
       }
       .card-body h3 {
         font-size: 20px;
@@ -942,20 +909,41 @@
       .card-body {
         padding: 20px 20px 24px;
       }
-      .chat-section {
-        padding: 20px 14px 40px;
+      .community-card-section {
+        padding: 30px 14px 50px;
+      }
+      .community-card {
+        padding: 28px 20px;
+      }
+      .community-card h3 {
+        font-size: 1.4rem;
+      }
+      .community-card p {
+        font-size: 14px;
+      }
+      .community-card .community-cta {
+        padding: 12px 28px;
+        font-size: 12px;
+        width: 100%;
       }
       .about-typography {
-        padding: 60px 16px 100px;
+        padding: 60px 16px 80px;
       }
       .typo-line {
-        font-size: clamp(1.4rem, 4.5vw, 1.8rem);
-        line-height: 1.6;
+        font-size: clamp(1.6rem, 5vw, 2rem);
+        line-height: 1.5;
       }
       .typo-progress {
         right: 12px;
         height: 100px;
         width: 2px;
+      }
+      .hero h1 {
+        font-size: clamp(2.5rem, 8vw, 3.5rem);
+      }
+      .hero-sub-line {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        letter-spacing: 0.15em;
       }
     }
   </style>
@@ -1082,34 +1070,38 @@
     </svg>
   </div>
   <div class="hero-inner">
-    <h1 class="disp">SHOW UP.</h1>
-    <div class="tagline mono">MEET <span>·</span> CONNECT <span>·</span> BELONG</div>
-    <div class="hero-sub">
+    <h1>SHOW UP.</h1>
+    <div class="hero-sub-line">MEET. CONNECT. BELONG.</div>
+    <div class="hero-cta">
       <a href="#events">See what's happening →</a>
     </div>
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker-band">
-  <div class="ticker-track" id="tickerTrack"></div>
-</div>
+<!-- ===== TRIPLE CROSSING MARQUEE ===== -->
+<section class="triple-marquee" id="triple-marquee">
+  <div class="tm-strip tm-strip-1">
+    <div class="tm-track" id="tmTrack1"></div>
+  </div>
+  <div class="tm-strip tm-strip-2">
+    <div class="tm-track" id="tmTrack2"></div>
+  </div>
+  <div class="tm-strip tm-strip-3">
+    <div class="tm-track" id="tmTrack3"></div>
+  </div>
+</section>
 
 <!-- ===== CRED-STYLE SCROLL TYPOGRAPHY ===== -->
 <section class="about-typography" id="about">
   <div class="typo-container" id="typoContainer">
-    <span class="typo-line">MESH is built on three simple ideas:</span>
-    <span class="typo-line"><span class="accent">meet</span>, <span class="accent">connect</span>, <span class="accent">belong</span>.</span>
+    <span class="typo-line">Show up. Someone smiles.</span>
+    <span class="typo-line">A conversation starts.</span>
+    <span class="typo-line">A connection forms.</span>
+    <span class="typo-line">A community grows.</span>
     <span class="typo-spacer"></span>
-    <span class="typo-line">No hierarchies. No gatekeeping.</span>
-    <span class="typo-line">Just people who <span class="highlight">show up</span>.</span>
-    <span class="typo-spacer"></span>
-    <span class="typo-line">Sunrise runs. Warehouse parties.</span>
-    <span class="typo-line">Conversations with creators.</span>
-    <span class="typo-line">This is where <span class="accent">real connections</span> happen.</span>
-    <span class="typo-spacer"></span>
-    <span class="typo-line" style="color: rgba(123,203,197,0.12); font-weight: 600;">
-      Show up. That's the whole idea.
+    <span class="typo-line">Meet. Connect. Belong.</span>
+    <span class="typo-line" style="color: rgba(123,203,197,0.12); font-weight: 400;">
+      Welcome to MESH.
     </span>
   </div>
   <div class="typo-progress" id="typoProgress">
@@ -1136,76 +1128,32 @@
   </div>
 </section>
 
-<!-- WHATSAPP BUBBLES -->
-<section class="chat-section" id="chatSection">
-  <div class="chat-body" id="chatBody">
-    <div class="message message-mesh-ask" id="meshAsk">
-      Hey! Is there a WhatsApp group to stay updated about events?
-      <span class="time">12:34</span>
-    </div>
-
-    <div class="typing-indicator" id="typingIndicator">
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-
-    <div class="message message-user-response" id="userResponse">
-      Absolutely! We have a buzzing WhatsApp community where we share all event updates, last-minute changes, and connect with fellow members. Join us!
-      <br>
-      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="link-btn">JOIN WHATSAPP GROUP</a>
-      <span class="time">12:35</span>
-    </div>
+<!-- ===== COMMUNITY CARD (BRANDED) ===== -->
+<section class="community-card-section" id="community">
+  <div class="community-card" id="communityCard">
+    <span class="card-icon">💬</span>
+    <h3>Join the <span>MESH</span> community</h3>
+    <p>Get event updates, last-minute changes, and connect with 200+ members on WhatsApp.</p>
+    <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="community-cta">Join WhatsApp →</a>
+    <span class="member-count">✦ 200+ members already here</span>
   </div>
 </section>
 
-<!-- COMMUNITY PROOF -->
-<section class="proof">
-  <div class="proof-inner">
-    <!-- Stats Grid - 3 Columns -->
-    <div class="stat-row" id="statsRow">
-      <div class="stat">
-        <div class="n">
-          <span class="num" data-target="200">0</span><span>+</span>
-        </div>
-        <div class="l mono">Members</div>
-      </div>
-      <div class="stat">
-        <div class="n">
-          <span class="num" data-target="2">0</span>
-        </div>
-        <div class="l mono">Cities</div>
-      </div>
-      <div class="stat">
-        <div class="n">
-          <span class="num" data-target="500">0</span><span>+</span>
-        </div>
-        <div class="l mono">Community Messages</div>
-      </div>
-    </div>
-
-    <!-- Testimonial -->
-    <div class="quote" id="testimonial">
-      <p>"I came for one run. Stayed for the people. MESH is the only thing on my calendar I never cancel on."</p>
-      <div class="attr mono">— MESH Member, Varkala</div>
-    </div>
+<!-- PHOTO SECTION -->
+<section class="photo-section">
+  <div class="section-head">
+    <h2 class="disp">In The<br>Frame</h2>
+    <p class="mono">Moments from the ground so far.</p>
   </div>
-
-  <div class="proof-inner photo-section">
-    <div class="section-head">
-      <h2 class="disp">In The<br>Frame</h2>
-      <p class="mono">Moments from the ground so far.</p>
-    </div>
-    <div class="photo-stack-area">
-      <div class="photo-controls">
-        <div class="count mono">Viewing <b id="photoCounter">01</b> / 06</div>
-        <div class="arrow-row">
-          <button class="arrow-btn" id="photoPrevBtn" aria-label="Previous">←</button>
-          <button class="arrow-btn" id="photoNextBtn" aria-label="Next">→</button>
-        </div>
+  <div class="photo-stack-area">
+    <div class="photo-controls">
+      <div class="count mono">Viewing <b id="photoCounter">01</b> / 06</div>
+      <div class="arrow-row">
+        <button class="arrow-btn" id="photoPrevBtn" aria-label="Previous">←</button>
+        <button class="arrow-btn" id="photoNextBtn" aria-label="Next">→</button>
       </div>
-      <div class="photo-stack-wrap" id="photoStackWrap"></div>
     </div>
+    <div class="photo-stack-wrap" id="photoStackWrap"></div>
   </div>
 </section>
 
@@ -1214,7 +1162,7 @@
     <div class="foot-col">
       <h4 class="mono">Explore</h4>
       <a href="#events">Events</a>
-      <a href="#about" id="aboutLink">About</a>
+      <a href="#about">About</a>
       <a href="#">Membership</a>
     </div>
     <div class="foot-col">
@@ -1234,24 +1182,6 @@
     <span>MEET. CONNECT. BELONG.</span>
   </div>
 </footer>
-
-<!-- ABOUT PAGE (hidden by default) -->
-<div id="aboutPage" style="display: none; padding: 120px 32px 60px; max-width: 800px; margin: 0 auto;">
-  <h2 class="disp" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 24px;">About MESH</h2>
-  <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 20px;">
-    MESH is a community built on three simple ideas: <strong style="color: #7BCBC5;">meet</strong>, <strong style="color: #7BCBC5;">connect</strong>, and <strong style="color: #7BCBC5;">belong</strong>.
-  </p>
-  <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 20px;">
-    We started in Bengaluru with a simple belief — that the best experiences happen when people show up. Whether it's a sunrise run, a warehouse party, or a quiet conversation with creators, MESH is where real connections happen.
-  </p>
-  <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 20px;">
-    No hierarchies. No gatekeeping. Just people who want to meet, connect, and belong.
-  </p>
-  <p style="font-size: 1.2rem; line-height: 1.8; color: #c9c4b8; margin-bottom: 40px;">
-    <strong style="color: #7BCBC5;">Show up. That's the whole idea.</strong>
-  </p>
-  <a href="#" onclick="closeAbout(); return false;" class="btn btn-fill" style="display: inline-block;">← Back</a>
-</div>
 
 <!-- ===== MODAL ===== -->
 <div class="modal-overlay" id="eventModal">
@@ -1314,7 +1244,7 @@
         const eased = 1 - Math.pow(1 - clampedProgress, 3);
         const opacity = 0.12 + (eased * 0.88);
         
-        if (line.textContent.includes('Show up. That\'s the whole idea.')) {
+        if (line.textContent.includes('Welcome to MESH.')) {
           line.style.color = `rgba(123, 203, 197, ${opacity})`;
         } else {
           line.style.color = `rgba(237, 234, 225, ${opacity})`;
@@ -1336,69 +1266,25 @@
     updateTypography();
   });
 
-  // ===== ABOUT PAGE TOGGLE =====
-  document.getElementById('aboutLink').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.querySelector('body > *:not(#aboutPage):not(.noise):not(nav)').style.display = 'none';
-    document.getElementById('aboutPage').style.display = 'block';
-    document.getElementById('aboutPage').scrollIntoView({ behavior: 'smooth' });
-  });
-
-  function closeAbout() {
-    document.querySelectorAll('body > *:not(#aboutPage):not(.noise):not(nav)').forEach(el => {
-      if (el.id !== 'aboutPage' && el.tagName !== 'NAV' && !el.classList.contains('noise')) {
-        el.style.display = '';
-      }
-    });
-    document.getElementById('aboutPage').style.display = 'none';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // ===== ticker =====
-  const tickerWords = ['RUN CLUB','MUSIC NIGHTS','MEETUPS','TALKS','POP-UPS','+ MUCH MORE'];
-  const tickerTrack = document.getElementById('tickerTrack');
-  tickerTrack.innerHTML = tickerWords.map(w => `<span>${w} ✦</span>`).join('') + tickerWords.map(w => `<span>${w} ✦</span>`).join('');
-
-  // ===== WHATSAPP CHAT - SCROLL TRIGGERED =====
+  // ===== COMMUNITY CARD ANIMATION =====
   document.addEventListener('DOMContentLoaded', function() {
-    const chatBody = document.getElementById('chatBody');
-    const meshAsk = document.getElementById('meshAsk');
-    const typingIndicator = document.getElementById('typingIndicator');
-    const userResponse = document.getElementById('userResponse');
+    const card = document.getElementById('communityCard');
     
-    let animationTriggered = false;
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && !animationTriggered) {
-          animationTriggered = true;
-          chatBody.classList.add('visible');
-          startChatAnimation();
+        if (entry.isIntersecting) {
+          card.classList.add('visible');
         }
       });
     }, {
       threshold: 0.3
     });
 
-    observer.observe(chatBody);
-
-    function startChatAnimation() {
-      meshAsk.classList.add('visible');
-
-      setTimeout(() => {
-        typingIndicator.classList.add('active');
-      }, 1500);
-
-      setTimeout(() => {
-        typingIndicator.classList.remove('active');
-        userResponse.classList.add('visible');
-      }, 4000);
-    }
+    observer.observe(card);
   });
 
   // ===== SCROLL ANIMATIONS =====
   document.addEventListener('DOMContentLoaded', function() {
-    // Events heading
     const heading = document.getElementById('eventsHeading');
     
     const headingObserver = new IntersectionObserver((entries) => {
@@ -1410,60 +1296,13 @@
     }, { threshold: 0.3 });
     
     headingObserver.observe(heading);
-
-    // Stats row with counter animation
-    const stats = document.getElementById('statsRow');
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          stats.classList.add('visible');
-          animateNumbers();
-        }
-      });
-    }, { threshold: 0.3 });
-    
-    if (stats) statsObserver.observe(stats);
-
-    // Testimonial
-    const testimonial = document.getElementById('testimonial');
-    const testimonialObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          testimonial.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.3 });
-    
-    if (testimonial) testimonialObserver.observe(testimonial);
   });
-
-  // ===== COUNTER ANIMATION =====
-  function animateNumbers() {
-    const numElements = document.querySelectorAll('.stat .num');
-    
-    numElements.forEach(el => {
-      const target = parseInt(el.getAttribute('data-target'));
-      let current = 0;
-      const increment = Math.ceil(target / 60);
-      
-      const interval = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          el.textContent = target;
-          clearInterval(interval);
-        } else {
-          el.textContent = current;
-        }
-      }, 20);
-    });
-  }
 
   // ===== data =====
   const events = [
     { 
       cat:'RUN', tag:'FITNESS', 
       title:'Sunrise 5K', 
-      sub:'Cubbon Park, Bengaluru',
       date:'12 JUL, 6:00 AM', 
       loc:'Bengaluru', 
       img:'event-run.jpg',
@@ -1473,7 +1312,6 @@
     { 
       cat:'NIGHTS', tag:'MUSIC', 
       title:'Warehouse Sessions Vol. 3', 
-      sub:'Indiranagar, Bengaluru',
       date:'18 JUL, 9:00 PM', 
       loc:'Indiranagar', 
       img:'event-nights.jpg',
@@ -1483,7 +1321,6 @@
     { 
       cat:'TALKS', tag:'WORKSHOP', 
       title:'Creators in Conversation', 
-      sub:'Koramangala, Bengaluru',
       date:'22 JUL, 5:30 PM', 
       loc:'Koramangala', 
       img:'event-talks.jpg',
@@ -1493,7 +1330,6 @@
     { 
       cat:'SOCIAL', tag:'MEETUP', 
       title:'Rooftop Community Mixer', 
-      sub:'HSR Layout, Bengaluru',
       date:'26 JUL, 7:00 PM', 
       loc:'HSR Layout', 
       img:'event-social.jpg',
@@ -1503,7 +1339,6 @@
     { 
       cat:'EXPERIENCES', tag:'POP-UP', 
       title:'Weekend Trail Escape', 
-      sub:'Nandi Hills, Bengaluru',
       date:'02 AUG, ALL DAY', 
       loc:'Nandi Hills', 
       img:'event-experiences.jpg',
@@ -1798,7 +1633,6 @@
       </div>
       <div class="card-body">
         <h3>${ev.title}</h3>
-        <div class="card-sub">${ev.sub}</div>
         <div class="card-meta">
           <span class="tag">${ev.tag}</span>
           <span class="date">${ev.date}</span>
@@ -1825,6 +1659,37 @@
       alert(`📸 ${photoData.title}\n${photoData.meta}`);
     }
   });
+</script>
+
+<script>
+  // ===== TRIPLE CROSSING MARQUEE (standalone, does not touch other scripts) =====
+  (function(){
+    const tmWords1 = ['RUN','NIGHT','MEET','TALK','POP'];
+    const tmWords2 = ['SHOW UP.','MEET.','CONNECT.','BELONG.','REPEAT.'];
+    const tmWords3 = ['"Found my people."','"The city feels smaller."','"I actually showed up."'];
+
+    // Builds one "half" of the track by repeating the word list enough times
+    // that it comfortably exceeds any viewport width, then duplicates that
+    // half once more so the -50% translateX loop never reveals a blank gap.
+    function buildHalf(words, sep, repeats){
+      let out = '';
+      for(let i = 0; i < repeats; i++){
+        out += words.map(w => `<span class="tm-word">${w}</span><span class="tm-sep">${sep}</span>`).join('');
+      }
+      return out;
+    }
+
+    function fillTrack(id, words, sep, repeats){
+      const track = document.getElementById(id);
+      if(!track) return;
+      const half = buildHalf(words, sep, repeats);
+      track.innerHTML = half + half;
+    }
+
+    fillTrack('tmTrack1', tmWords1, '·', 8);
+    fillTrack('tmTrack2', tmWords2, '✦', 8);
+    fillTrack('tmTrack3', tmWords3, '✦', 8);
+  })();
 </script>
 </body>
 </html>
