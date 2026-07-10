@@ -67,6 +67,7 @@
     .hero {
       position: relative;
       min-height: 100vh;
+      min-height: 100svh;
       display: flex; flex-direction: column; justify-content: center;
       padding: 140px 32px 80px;
       opacity: 0;
@@ -129,6 +130,8 @@
       padding: 20px 0 70px;
       overflow: hidden;
       isolation: isolate;
+      contain: layout paint;
+      transform: translateZ(0);
     }
     .tm-strip {
       position: relative;
