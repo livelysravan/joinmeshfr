@@ -1694,5 +1694,30 @@
     fillTrack('tmTrack3', tmWords3, '✦', 8);
   })();
 </script>
+
+<script>
+  // ===== LOCK HERO HEIGHT (prevents mobile toolbar show/hide from resizing
+  // the hero on scroll, which was making the thread background appear to
+  // "zoom" and glitching the marquee strips below it) =====
+  (function(){
+    const hero = document.getElementById('hero');
+    if(!hero) return;
+
+    function lockHeroHeight(){
+      hero.style.minHeight = window.innerHeight + 'px';
+    }
+
+    lockHeroHeight();
+
+    // Only recompute on real orientation/size changes, never on the
+    // scroll-driven resize events mobile browsers fire when their
+    // address bar collapses or expands.
+    let resizeTimer;
+    window.addEventListener('orientationchange', function(){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(lockHeroHeight, 300);
+    });
+  })();
+</script>
 </body>
 </html>
