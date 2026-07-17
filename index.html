@@ -2,15 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>MESH — Meet. Connect. Belong.</title>
   <link rel="icon" type="image/png" href="mlogov2.png" />
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=HK+Guise:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="MESH — Meet. Connect. Belong." />
+  <meta property="og:description" content="A community for the curious. Events, connections, and belonging." />
+  <meta property="og:image" content="og-image.jpg" />
+  <meta name="theme-color" content="#241D22" />
+  
   <style>
+    /* ============================================================ */
+    /* RESET & BASE */
+    /* ============================================================ */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+    html { 
+      scroll-behavior: smooth; 
+      overflow-x: hidden; 
+      width: 100%; 
+    }
     body {
       background: #241D22;
       color: #edeae1;
@@ -18,9 +34,12 @@
       overflow-x: hidden;
       width: 100%;
       -webkit-font-smoothing: antialiased;
+      cursor: auto;
     }
     
-    /* ===== TYPOGRAPHY SYSTEM ===== */
+    /* ============================================================ */
+    /* TYPOGRAPHY */
+    /* ============================================================ */
     .disp { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; letter-spacing: -0.02em; }
     .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
     .body-font { font-family: 'Space Grotesk', sans-serif; }
@@ -29,23 +48,117 @@
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
+    /* ============================================================ */
+    /* NOISE OVERLAY */
+    /* ============================================================ */
     .noise {
       position: fixed; inset: 0; pointer-events: none; z-index: 999;
       opacity: 0.035; mix-blend-mode: overlay;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* ===== NAVIGATION ===== */
+    /* ============================================================ */
+    /* LOADER */
+    /* ============================================================ */
+    .loader {
+      position: fixed;
+      inset: 0;
+      background: #241D22;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-logo {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 4rem;
+      color: #7BCBC5;
+      letter-spacing: 0.1em;
+      animation: loaderPulse 1.5s ease-in-out infinite;
+      position: relative;
+    }
+    .loader-logo span {
+      display: inline-block;
+      animation: loaderLetter 1.5s ease-in-out infinite;
+    }
+    .loader-logo span:nth-child(1) { animation-delay: 0s; }
+    .loader-logo span:nth-child(2) { animation-delay: 0.1s; }
+    .loader-logo span:nth-child(3) { animation-delay: 0.2s; }
+    .loader-logo span:nth-child(4) { animation-delay: 0.3s; }
+    
+    @keyframes loaderPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+    @keyframes loaderLetter {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+    .loader-bar {
+      width: 200px;
+      height: 2px;
+      background: rgba(123,203,197,0.1);
+      border-radius: 2px;
+      margin-top: 40px;
+      overflow: hidden;
+      position: relative;
+    }
+    .loader-bar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      width: 0%;
+      background: linear-gradient(90deg, #7BCBC5, #cba7e8);
+      border-radius: 2px;
+      animation: loaderBar 2s ease-in-out forwards;
+    }
+    @keyframes loaderBar {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+    .loader-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #a89191;
+      letter-spacing: 0.2em;
+      margin-top: 16px;
+      opacity: 0.5;
+    }
+
+    /* ============================================================ */
+    /* NAVIGATION */
+    /* ============================================================ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       height: 72px; padding: 0 32px;
-      backdrop-filter: blur(10px);
-      background: rgba(36,29,34,0.75);
+      backdrop-filter: blur(20px);
+      background: rgba(36,29,34,0.85);
       border-bottom: 1px solid rgba(74,53,53,0.3);
+      transition: background 0.3s ease, box-shadow 0.3s ease, height 0.3s ease;
     }
-    .logo-mark img { height: 120px; width: auto; }
+    nav.scrolled {
+      background: rgba(36,29,34,0.95);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      height: 60px;
+    }
+    .logo-mark img { 
+      height: 120px; 
+      width: auto; 
+      transition: height 0.3s ease; 
+    }
+    nav.scrolled .logo-mark img { height: 80px; }
+    
     .nav-cta {
+      position: relative;
+      overflow: hidden;
       background: #7BCBC5;
       color: #241D22;
       padding: 12px 28px;
@@ -54,76 +167,148 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-weight: 600;
-      transition: all .25s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       border: none;
       cursor: pointer;
     }
+    .nav-cta::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
     .nav-cta:hover {
       background: #edeae1;
-      transform: scale(1.02);
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(123,203,197,0.3);
+    }
+    .nav-cta:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+    .nav-cta:active {
+      transform: scale(0.95);
     }
 
-    /* ===== HERO ===== */
+    /* ============================================================ */
+    /* HERO — Left-Aligned, Ultra Clean */
+    /* ============================================================ */
     .hero {
       position: relative;
       min-height: 100vh;
       min-height: 100svh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 140px 32px 80px;
-      opacity: 0;
-      animation: heroFadeIn 1.2s ease forwards;
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center;
+      padding: 120px 32px 80px;
+      overflow: hidden;
+      text-align: left;
     }
-    @keyframes heroFadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, 
+        rgba(123,203,197,0.05) 0%, 
+        rgba(36,29,34,0.9) 50%,
+        rgba(123,203,197,0.05) 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      pointer-events: none;
+      z-index: 0;
     }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
     .hero-grid {
       position: absolute; inset: 0; z-index: 0;
       mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
       overflow: hidden;
+      will-change: transform;
     }
     .hero-grid svg { width: 100%; height: 100%; }
     .hero-grid .thread { fill: none; stroke: #6a4f4f; stroke-linecap: round; }
     .hero-grid .thread-lit { fill: none; stroke: #7BCBC5; stroke-linecap: round; }
     .hero-grid .knot { fill: #7BCBC5; opacity: 0.5; }
-    .hero-inner { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; width: 100%; }
-    .hero h1 {
+    .hero-grid .knot-glow { fill: #7BCBC5; opacity: 0.3; filter: blur(4px); }
+    
+    .hero-inner {
+      position: relative; 
+      z-index: 1; 
+      max-width: 1240px; 
+      margin: 0 auto; 
+      width: 100%;
+    }
+    
+    /* ===== HERO WORDS — Left-Aligned ===== */
+    .hero-words {
+      display: flex;
+      flex-direction: column;
+      gap: 0.05em;
+      text-align: left;
+      align-items: flex-start;
+    }
+    .hero-word {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(4rem, 12vw, 10rem);
-      line-height: 0.86;
-      margin-bottom: 16px;
+      font-size: clamp(4rem, 14vw, 11rem);
+      line-height: 0.9;
       text-transform: uppercase;
       letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #edeae1 30%, #7BCBC5 50%, #edeae1 70%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmerText 4s ease-in-out infinite;
+      will-change: background-position;
+      opacity: 0;
+      transform: translateX(-40px);
     }
-    .hero h1 .outline {
-      -webkit-text-stroke: 2px #edeae1;
-      color: transparent;
+    .hero-word:nth-child(1) {
+      animation: shimmerText 4s ease-in-out infinite, wordReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
     }
-    .hero-sub-line {
-      font-family: 'HK Guise', sans-serif;
-      font-size: clamp(1.2rem, 2vw, 1.8rem);
-      font-weight: 300;
-      color: #7BCBC5;
-      letter-spacing: 0.2em;
-      margin-bottom: 40px;
+    .hero-word:nth-child(2) {
+      animation: shimmerText 4s ease-in-out infinite, wordReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
     }
-    .hero-cta {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1rem, 1.4vw, 1.2rem);
-      color: #edeae1;
-      font-weight: 400;
+    .hero-word:nth-child(3) {
+      animation: shimmerText 4s ease-in-out infinite, wordReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
     }
-    .hero-cta a {
-      color: #edeae1;
-      border-bottom: 1px solid #edeae1;
-      padding-bottom: 2px;
-      transition: opacity 0.2s ease;
+    
+    @keyframes shimmerText {
+      0%, 100% { background-position: -200% center; }
+      50% { background-position: 200% center; }
     }
-    .hero-cta a:hover {
-      opacity: 0.6;
+    @keyframes wordReveal {
+      0% { opacity: 0; transform: translateX(-40px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      animation: bounce 2s infinite;
+      opacity: 0.3;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
     }
 
-    /* ===== TRIPLE CROSSING MARQUEE ===== */
+    /* ============================================================ */
+    /* TRIPLE CROSSING MARQUEE */
+    /* ============================================================ */
     .triple-marquee {
       position: relative;
       background: #241D22;
@@ -143,6 +328,10 @@
       box-shadow: 0 16px 36px rgba(0,0,0,0.5);
       border-top: 1px solid rgba(36,29,34,0.15);
       border-bottom: 1px solid rgba(36,29,34,0.15);
+      transition: transform 0.3s ease;
+    }
+    .tm-strip:hover {
+      transform: scale(1.02) !important;
     }
     .tm-strip-1 {
       background: #edeae1;
@@ -170,7 +359,6 @@
     }
     .tm-strip-2 .tm-track { animation-duration: 110s; animation-direction: reverse; }
     .tm-strip-3 .tm-track { animation-duration: 170s; }
-
     .tm-track span {
       display: inline-block;
       white-space: nowrap;
@@ -206,16 +394,9 @@
       to { transform: translateX(-50%); }
     }
 
-    @media (max-width: 860px) {
-      .triple-marquee { padding: 20px 0 50px; }
-      .tm-strip { width: 180%; left: -40%; padding: 16px 0; }
-      .tm-strip-1 .tm-track .tm-word,
-      .tm-strip-2 .tm-track .tm-word { font-size: clamp(1.1rem, 4.5vw, 1.6rem); }
-      .tm-strip-3 .tm-track .tm-word { font-size: clamp(1rem, 4vw, 1.4rem); }
-      .tm-track span { padding: 0 12px; }
-    }
-
-    /* ===== CRED-STYLE SCROLL TYPOGRAPHY ===== */
+    /* ============================================================ */
+    /* CRED-STYLE SCROLL TYPOGRAPHY */
+    /* ============================================================ */
     .about-typography {
       padding: 120px 32px 140px;
       background: #241D22;
@@ -254,9 +435,10 @@
       font-weight: 300;
       line-height: 1.3;
       color: rgba(237, 234, 225, 0.12);
-      transition: color 0.1s ease;
+      transition: color 0.1s ease, transform 0.3s ease;
       padding: 4px 0;
       letter-spacing: -0.02em;
+      transform: translateX(0);
     }
     .typo-line .accent {
       color: #7BCBC5;
@@ -287,9 +469,12 @@
       background: #7BCBC5;
       border-radius: 4px;
       transition: height 0.1s ease;
+      box-shadow: 0 0 20px rgba(123,203,197,0.3);
     }
 
-    /* ===== EVENTS ===== */
+    /* ============================================================ */
+    /* EVENTS */
+    /* ============================================================ */
     .events {
       padding: 60px 32px 40px;
       position: relative;
@@ -356,12 +541,30 @@
       cursor: pointer;
       background: transparent;
       color: #edeae1;
-      transition: background .18s ease, color .18s ease, transform .2s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .arrow-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #7BCBC5;
+      transform: scale(0);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border-radius: 50%;
     }
     .arrow-btn:hover {
-      background: #7BCBC5;
-      color: #241D22;
       border-color: #7BCBC5;
+      transform: scale(1.1);
+    }
+    .arrow-btn:hover::after {
+      transform: scale(1);
+    }
+    .arrow-btn:hover span {
+      position: relative;
+      z-index: 1;
+      color: #241D22;
     }
     .arrow-btn:active {
       transform: scale(0.92);
@@ -376,6 +579,10 @@
       perspective: 1200px;
       touch-action: pan-y;
     }
+
+    /* ============================================================ */
+    /* CARD */
+    /* ============================================================ */
     .card {
       position: absolute;
       inset: 0;
@@ -469,7 +676,9 @@
       font-size: 12px;
     }
 
-    /* ===== COMMUNITY CARD (BRANDED) ===== */
+    /* ============================================================ */
+    /* COMMUNITY CARD */
+    /* ============================================================ */
     .community-card-section {
       padding: 60px 24px 80px;
       display: flex;
@@ -543,6 +752,8 @@
       margin-right: auto;
     }
     .community-card .community-cta {
+      position: relative;
+      overflow: hidden;
       display: inline-block;
       background: #7BCBC5;
       color: #241D22;
@@ -554,13 +765,33 @@
       font-weight: 600;
       border: none;
       cursor: pointer;
-      transition: all .25s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       z-index: 1;
     }
+    .community-card .community-cta::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
     .community-card .community-cta:hover {
       background: #edeae1;
-      transform: scale(1.03);
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(123,203,197,0.3);
+    }
+    .community-card .community-cta:hover::after {
+      width: 400px;
+      height: 400px;
+    }
+    .community-card .community-cta:active {
+      transform: scale(0.95);
     }
     .community-card .member-count {
       font-family: 'JetBrains Mono', monospace;
@@ -571,89 +802,9 @@
       opacity: 0.6;
     }
 
-    /* ===== MODAL ===== */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 1000;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(12px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      animation: fadeIn 0.3s ease;
-    }
-    .modal-overlay.active { display: flex; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .modal {
-      background: #3a2f35;
-      border: 2px solid #edeae1;
-      border-radius: 16px;
-      max-width: 560px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 40px;
-      position: relative;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(123,203,197,0.2);
-    }
-    .modal-close {
-      position: absolute; top: 16px; right: 20px;
-      font-size: 28px; cursor: pointer;
-      color: #a89191;
-      transition: color 0.2s ease;
-      background: none; border: none;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-    .modal-close:hover { color: #edeae1; }
-    .modal .modal-img {
-      width: 100%; height: 200px;
-      background-size: cover; background-position: center;
-      border-radius: 8px;
-      margin-bottom: 24px;
-    }
-    .modal .modal-tag {
-      display: inline-block;
-      background: rgba(123,203,197,0.2);
-      color: #7BCBC5;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      padding: 4px 12px;
-      border-radius: 4px;
-      letter-spacing: 0.06em;
-      margin-bottom: 12px;
-    }
-    .modal h2 {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-    }
-    .modal .modal-meta {
-      display: flex; gap: 24px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: #a89191;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .modal .modal-meta span { display: flex; align-items: center; gap: 6px; }
-    .modal .modal-desc {
-      color: #c9c4b8;
-      line-height: 1.6;
-      margin-bottom: 28px;
-      font-size: 15px;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-    .modal .modal-actions {
-      display: flex; gap: 16px; flex-wrap: wrap;
-    }
-    .modal .modal-actions .btn { flex: 1; justify-content: center; }
-
-    /* ===== PHOTO SECTION ===== */
+    /* ============================================================ */
+    /* PHOTO SECTION */
+    /* ============================================================ */
     .photo-section {
       padding: 0 32px 100px;
       position: relative;
@@ -776,11 +927,31 @@
       letter-spacing: 0.05em;
     }
 
-    /* ===== FOOTER ===== */
+    /* ============================================================ */
+    /* FOOTER */
+    /* ============================================================ */
     footer {
       padding: 60px 32px 40px;
       border-top: 1px solid rgba(74,53,53,0.3);
       margin-top: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #7BCBC5, #cba7e8, #7BCBC5, transparent);
+      background-size: 200% 100%;
+      animation: borderMove 3s linear infinite;
+    }
+    @keyframes borderMove {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
     .foot-inner {
       max-width: 1240px;
@@ -796,6 +967,17 @@
       color: #a89191;
       margin-bottom: 16px;
       letter-spacing: 0.1em;
+      position: relative;
+    }
+    .foot-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 20px;
+      height: 2px;
+      background: #7BCBC5;
+      border-radius: 1px;
     }
     .foot-col a {
       display: block;
@@ -803,9 +985,25 @@
       margin-bottom: 10px;
       color: #edeae1;
       font-family: 'Space Grotesk', sans-serif;
-      transition: color 0.2s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      padding-left: 0;
     }
-    .foot-col a:hover { color: #7BCBC5; }
+    .foot-col a::before {
+      content: '→';
+      opacity: 0;
+      margin-right: 0;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    .foot-col a:hover {
+      color: #7BCBC5;
+      padding-left: 20px;
+    }
+    .foot-col a:hover::before {
+      opacity: 1;
+      margin-right: 8px;
+    }
     .foot-bottom {
       max-width: 1240px;
       margin: 60px auto 0;
@@ -820,7 +1018,142 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* ===== RESPONSIVE ===== */
+    /* ============================================================ */
+    /* MODAL */
+    /* ============================================================ */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-overlay.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal {
+      background: rgba(58, 47, 53, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(123,203,197,0.2);
+      border-radius: 16px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 40px;
+      position: relative;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(123,203,197,0.1);
+      animation: modalSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes modalSlide {
+      from { opacity: 0; transform: translateY(40px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px;
+      font-size: 28px; cursor: pointer;
+      color: #a89191;
+      transition: all 0.3s ease;
+      background: none; border: none;
+      font-family: 'Space Grotesk', sans-serif;
+      padding: 8px;
+      line-height: 1;
+    }
+    .modal-close:hover { color: #edeae1; transform: rotate(90deg); }
+    .modal .modal-img {
+      width: 100%; height: 200px;
+      background-size: cover; background-position: center;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .modal .modal-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(36,29,34,0.4), transparent);
+    }
+    .modal .modal-tag {
+      display: inline-block;
+      background: rgba(123,203,197,0.2);
+      color: #7BCBC5;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .modal h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .modal .modal-meta {
+      display: flex; gap: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #a89191;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .modal .modal-meta span { display: flex; align-items: center; gap: 6px; }
+    .modal .modal-desc {
+      color: #c9c4b8;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      font-size: 15px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .modal .modal-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .modal .modal-actions .btn {
+      flex: 1; 
+      justify-content: center;
+      padding: 14px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-align: center;
+    }
+    .modal .modal-actions .btn-fill {
+      background: #7BCBC5;
+      color: #241D22;
+    }
+    .modal .modal-actions .btn-fill:hover {
+      background: #edeae1;
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(123,203,197,0.3);
+    }
+    .modal .modal-actions .btn-ghost {
+      background: transparent;
+      color: #edeae1;
+      border: 1px solid rgba(237,234,225,0.2);
+    }
+    .modal .modal-actions .btn-ghost:hover {
+      background: rgba(237,234,225,0.1);
+      transform: scale(1.05);
+    }
+
+    /* ============================================================ */
+    /* RESPONSIVE */
+    /* ============================================================ */
     @media (max-width: 860px) {
       .stack-area {
         grid-template-columns: 1fr;
@@ -881,8 +1214,8 @@
       .photo-controls .arrow-row {
         display: flex !important;
       }
-      .hero h1 {
-        font-size: clamp(3rem, 10vw, 5rem);
+      .hero-word {
+        font-size: clamp(3rem, 12vw, 6rem);
       }
     }
 
@@ -941,28 +1274,58 @@
         height: 100px;
         width: 2px;
       }
-      .hero h1 {
-        font-size: clamp(2.5rem, 8vw, 3.5rem);
+      .hero-word {
+        font-size: clamp(2.8rem, 10vw, 4rem);
       }
-      .hero-sub-line {
-        font-size: clamp(1rem, 2.5vw, 1.2rem);
-        letter-spacing: 0.15em;
+      .hero-words {
+        gap: 0.02em;
       }
     }
   </style>
 </head>
 <body>
+
+<!-- ============================================================ -->
+<!-- LOADER -->
+<!-- ============================================================ -->
+<div class="loader" id="loader">
+  <div class="loader-logo">
+    <span>M</span><span>E</span><span>S</span><span>H</span>
+  </div>
+  <div class="loader-bar"></div>
+  <div class="loader-text">Loading experience...</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- NOISE -->
+<!-- ============================================================ -->
 <div class="noise"></div>
 
-<nav>
-  <div class="logo-mark"><img src="logo.png" alt="MESH Logo" /></div>
-  <a href="https://chat.whatsapp.com/HbKU59fdMoU7SXzJgGwBAD" target="_blank" rel="noopener noreferrer" class="nav-cta">Join</a>
+<!-- ============================================================ -->
+<!-- NAVIGATION -->
+<!-- ============================================================ -->
+<nav id="nav">
+  <div class="logo-mark">
+    <img src="logo.png" alt="MESH Logo" />
+  </div>
+  <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="nav-cta">Join</a>
 </nav>
 
-<!-- HERO -->
+<!-- ============================================================ -->
+<!-- HERO — Left-Aligned, Ultra Clean -->
+<!-- ============================================================ -->
 <section class="hero" id="hero">
-  <div class="hero-grid">
+  <div class="hero-grid" id="heroGrid">
     <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
       <g class="thread-track">
         <g>
           <path class="thread" d="M 34,334 C 67,466 88,599 70,739" style="stroke-width:1.5;opacity:0.62" />
@@ -999,15 +1362,15 @@
           <path class="thread" d="M 14,887 C 142,857 116,697 222,645" style="stroke-width:1.1;opacity:0.61" />
           <path class="thread" d="M 553,-22 C 850,222 1146,468 1425,749" style="stroke-width:1.3;opacity:0.47" />
           <path class="thread" d="M -69,303 C 121,304 282,453 487,413" style="stroke-width:1.2;opacity:0.47" />
-          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:1.3;opacity:0.62" />
-          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.5;opacity:0.52" />
-          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.4;opacity:0.56" />
-          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:1.3;opacity:0.53" />
-          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.4;opacity:0.51" />
-          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.5;opacity:0.44" />
-          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.5;opacity:0.69" />
-          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:1.2;opacity:0.57" />
-          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.4;opacity:0.45" />
+          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:1.3;opacity:0.62" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.5;opacity:0.52" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.4;opacity:0.56" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:1.3;opacity:0.53" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.4;opacity:0.51" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.5;opacity:0.44" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.5;opacity:0.69" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:1.2;opacity:0.57" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.4;opacity:0.45" filter="url(#glow)"/>
           <circle class="knot" cx="521" cy="224" r="3.5" />
           <circle class="knot" cx="697" cy="77" r="4.0" />
           <circle class="knot" cx="899" cy="810" r="3.5" />
@@ -1015,6 +1378,13 @@
           <circle class="knot" cx="768" cy="430" r="3.5" />
           <circle class="knot" cx="433" cy="112" r="3.0" />
           <circle class="knot" cx="1135" cy="375" r="3.5" />
+          <circle class="knot-glow" cx="521" cy="224" r="8" />
+          <circle class="knot-glow" cx="697" cy="77" r="9" />
+          <circle class="knot-glow" cx="899" cy="810" r="8" />
+          <circle class="knot-glow" cx="1025" cy="179" r="9" />
+          <circle class="knot-glow" cx="768" cy="430" r="8" />
+          <circle class="knot-glow" cx="433" cy="112" r="7" />
+          <circle class="knot-glow" cx="1135" cy="375" r="8" />
         </g>
         <g transform="translate(1440,0)">
           <path class="thread" d="M 34,334 C 67,466 88,599 70,739" style="stroke-width:1.5;opacity:0.62" />
@@ -1051,15 +1421,15 @@
           <path class="thread" d="M 14,887 C 142,857 116,697 222,645" style="stroke-width:1.1;opacity:0.61" />
           <path class="thread" d="M 553,-22 C 850,222 1146,468 1425,749" style="stroke-width:1.3;opacity:0.47" />
           <path class="thread" d="M -69,303 C 121,304 282,453 487,413" style="stroke-width:1.2;opacity:0.47" />
-          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:1.3;opacity:0.62" />
-          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.5;opacity:0.52" />
-          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.4;opacity:0.56" />
-          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:1.3;opacity:0.53" />
-          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.4;opacity:0.51" />
-          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.5;opacity:0.44" />
-          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.5;opacity:0.69" />
-          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:1.2;opacity:0.57" />
-          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.4;opacity:0.45" />
+          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:1.3;opacity:0.62" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.5;opacity:0.52" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.4;opacity:0.56" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:1.3;opacity:0.53" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.4;opacity:0.51" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.5;opacity:0.44" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.5;opacity:0.69" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:1.2;opacity:0.57" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.4;opacity:0.45" filter="url(#glow)"/>
           <circle class="knot" cx="521" cy="224" r="3.5" />
           <circle class="knot" cx="697" cy="77" r="4.0" />
           <circle class="knot" cx="899" cy="810" r="3.5" />
@@ -1067,21 +1437,39 @@
           <circle class="knot" cx="768" cy="430" r="3.5" />
           <circle class="knot" cx="433" cy="112" r="3.0" />
           <circle class="knot" cx="1135" cy="375" r="3.5" />
+          <circle class="knot-glow" cx="521" cy="224" r="8" />
+          <circle class="knot-glow" cx="697" cy="77" r="9" />
+          <circle class="knot-glow" cx="899" cy="810" r="8" />
+          <circle class="knot-glow" cx="1025" cy="179" r="9" />
+          <circle class="knot-glow" cx="768" cy="430" r="8" />
+          <circle class="knot-glow" cx="433" cy="112" r="7" />
+          <circle class="knot-glow" cx="1135" cy="375" r="8" />
         </g>
         <animateTransform attributeName="transform" type="translate" from="0 0" to="-1440 0" dur="120s" repeatCount="indefinite" />
       </g>
     </svg>
   </div>
   <div class="hero-inner">
-    <h1>SHOW UP.</h1>
-    <div class="hero-sub-line">MEET. CONNECT. BELONG.</div>
-    <div class="hero-cta">
-      <a href="#events">See what's happening →</a>
+    <div class="hero-words">
+      <span class="hero-word">MEET.</span>
+      <span class="hero-word">CONNECT.</span>
+      <span class="hero-word">BELONG.</span>
     </div>
+  </div>
+  <div class="scroll-indicator">
+    <svg width="24" height="40" viewBox="0 0 24 40" fill="none">
+      <rect x="1" y="1" width="22" height="38" rx="11" stroke="rgba(237,234,225,0.3)" stroke-width="2"/>
+      <circle cx="12" cy="12" r="3" fill="#7BCBC5">
+        <animate attributeName="cy" values="12;28;12" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
   </div>
 </section>
 
-<!-- ===== TRIPLE CROSSING MARQUEE ===== -->
+<!-- ============================================================ -->
+<!-- TRIPLE CROSSING MARQUEE -->
+<!-- ============================================================ -->
 <section class="triple-marquee" id="triple-marquee">
   <div class="tm-strip tm-strip-1">
     <div class="tm-track" id="tmTrack1"></div>
@@ -1094,7 +1482,9 @@
   </div>
 </section>
 
-<!-- ===== CRED-STYLE SCROLL TYPOGRAPHY ===== -->
+<!-- ============================================================ -->
+<!-- CRED-STYLE SCROLL TYPOGRAPHY -->
+<!-- ============================================================ -->
 <section class="about-typography" id="about">
   <div class="typo-container" id="typoContainer">
     <span class="typo-line">Show up. Someone smiles.</span>
@@ -1112,7 +1502,9 @@
   </div>
 </section>
 
+<!-- ============================================================ -->
 <!-- EVENTS -->
+<!-- ============================================================ -->
 <section class="events" id="events">
   <div class="section-head">
     <h2 class="disp" id="eventsHeading">The Lineup</h2>
@@ -1124,25 +1516,29 @@
     <div class="stack-controls">
       <div class="count mono">Viewing <b id="cardCounter">01</b> / 05</div>
       <div class="arrow-row">
-        <button class="arrow-btn" id="prevBtn" aria-label="Previous">←</button>
-        <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
+        <button class="arrow-btn" id="prevBtn" aria-label="Previous"><span>←</span></button>
+        <button class="arrow-btn" id="nextBtn" aria-label="Next"><span>→</span></button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== COMMUNITY CARD (BRANDED) ===== -->
+<!-- ============================================================ -->
+<!-- COMMUNITY CARD -->
+<!-- ============================================================ -->
 <section class="community-card-section" id="community">
   <div class="community-card" id="communityCard">
-    <span class="card-icon"></span>
+    <span class="card-icon">💬</span>
     <h3>Join the <span>MESH</span> community</h3>
     <p>Get event updates, last-minute changes, and connect with 200+ members on WhatsApp.</p>
-    <a href="https://chat.whatsapp.com/HbKU59fdMoU7SXzJgGwBAD" target="_blank" rel="noopener noreferrer" class="community-cta">Join WhatsApp →</a>
-    <span class="member-count">✦ 200+ members already here</span>
+    <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="community-cta">Join WhatsApp →</a>
+    <span class="member-count" id="memberCount">✦ 0 members already here</span>
   </div>
 </section>
 
+<!-- ============================================================ -->
 <!-- PHOTO SECTION -->
+<!-- ============================================================ -->
 <section class="photo-section">
   <div class="section-head">
     <h2 class="disp">In The<br>Frame</h2>
@@ -1152,14 +1548,17 @@
     <div class="photo-controls">
       <div class="count mono">Viewing <b id="photoCounter">01</b> / 06</div>
       <div class="arrow-row">
-        <button class="arrow-btn" id="photoPrevBtn" aria-label="Previous">←</button>
-        <button class="arrow-btn" id="photoNextBtn" aria-label="Next">→</button>
+        <button class="arrow-btn" id="photoPrevBtn" aria-label="Previous"><span>←</span></button>
+        <button class="arrow-btn" id="photoNextBtn" aria-label="Next"><span>→</span></button>
       </div>
     </div>
     <div class="photo-stack-wrap" id="photoStackWrap"></div>
   </div>
 </section>
 
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
 <footer>
   <div class="foot-inner">
     <div class="foot-col">
@@ -1177,7 +1576,7 @@
     <div class="foot-col">
       <h4 class="mono">Follow</h4>
       <a href="#">Instagram</a>
-      <a href="https://chat.whatsapp.com/HbKU59fdMoU7SXzJgGwBAD" target="_blank" rel="noopener noreferrer">WhatsApp Community</a>
+      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer">WhatsApp Community</a>
     </div>
   </div>
   <div class="foot-bottom">
@@ -1186,7 +1585,9 @@
   </div>
 </footer>
 
-<!-- ===== MODAL ===== -->
+<!-- ============================================================ -->
+<!-- MODAL -->
+<!-- ============================================================ -->
 <div class="modal-overlay" id="eventModal">
   <div class="modal">
     <button class="modal-close" id="modalClose">✕</button>
@@ -1202,15 +1603,62 @@
       Full event details will be displayed here. Join us for an unforgettable experience!
     </div>
     <div class="modal-actions">
-      <a href="https://chat.whatsapp.com/HbKU59fdMoU7SXzJgGwBAD" target="_blank" class="btn btn-fill">RSVP Now</a>
+      <a href="https://wa.me/919778423214?text=Hey%20MESH!%20I%20want%20to%20RSVP%20for%20this%20event!" target="_blank" class="btn btn-fill">RSVP Now</a>
       <button class="btn btn-ghost" id="modalCloseBtn">Close</button>
     </div>
   </div>
 </div>
 
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
 <script>
-  // ===== CRED-STYLE SCROLL TYPOGRAPHY =====
-  document.addEventListener('DOMContentLoaded', function() {
+  // ============================================================
+  // 1. LOADER
+  // ============================================================
+  (function() {
+    const loader = document.getElementById('loader');
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 2500);
+  })();
+
+  // ============================================================
+  // 2. NAVIGATION SCROLL EFFECT
+  // ============================================================
+  (function() {
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => {
+      const scroll = window.pageYOffset;
+      
+      if (scroll > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  })();
+
+  // ============================================================
+  // 3. HERO PARALLAX
+  // ============================================================
+  (function() {
+    const heroGrid = document.getElementById('heroGrid');
+    if (!heroGrid) return;
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const opacity = Math.max(1 - scrolled / 800, 0.3);
+      heroGrid.style.transform = `translateY(${scrolled * 0.15}px) scale(${1 + scrolled * 0.0001})`;
+      heroGrid.style.opacity = opacity;
+    });
+  })();
+
+  // ============================================================
+  // 4. CRED-STYLE SCROLL TYPOGRAPHY
+  // ============================================================
+  (function() {
     const lines = document.querySelectorAll('.typo-line');
     const progressBar = document.getElementById('typoProgressBar');
     const progressContainer = document.getElementById('typoProgress');
@@ -1223,7 +1671,7 @@
       
       let progress = 0;
       const topOffset = sectionRect.top;
-      const startPos = windowHeight * 0.75;
+      const startPos = windowHeight * 0.3;
       const endPos = -sectionHeight + windowHeight * 0.7;
       
       if (topOffset < startPos && topOffset > endPos) {
@@ -1252,6 +1700,9 @@
         } else {
           line.style.color = `rgba(237, 234, 225, ${opacity})`;
         }
+        
+        const slide = (1 - eased) * 30;
+        line.style.transform = `translateX(${slide}px)`;
       });
     }
 
@@ -1267,48 +1718,52 @@
     });
 
     updateTypography();
-  });
+  })();
 
-  // ===== COMMUNITY CARD ANIMATION =====
-  document.addEventListener('DOMContentLoaded', function() {
+  // ============================================================
+  // 5. COMMUNITY CARD ANIMATION + COUNTER
+  // ============================================================
+  (function() {
     const card = document.getElementById('communityCard');
+    const memberCount = document.getElementById('memberCount');
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           card.classList.add('visible');
-        }
-      });
-    }, {
-      threshold: 0.3
-    });
-
-    observer.observe(card);
-  });
-
-  // ===== SCROLL ANIMATIONS =====
-  document.addEventListener('DOMContentLoaded', function() {
-    const heading = document.getElementById('eventsHeading');
-    
-    const headingObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          heading.classList.add('visible');
+          
+          if (memberCount) {
+            let start = 0;
+            const target = 247;
+            const duration = 2000;
+            const step = target / (duration / 16);
+            const interval = setInterval(() => {
+              start += step;
+              if (start >= target) {
+                memberCount.textContent = `✦ ${Math.floor(target)}+ members already here`;
+                clearInterval(interval);
+              } else {
+                memberCount.textContent = `✦ ${Math.floor(start)}+ members already here`;
+              }
+            }, 16);
+          }
         }
       });
     }, { threshold: 0.3 });
-    
-    headingObserver.observe(heading);
-  });
 
-  // ===== data =====
+    observer.observe(card);
+  })();
+
+  // ============================================================
+  // 6. DATA
+  // ============================================================
   const events = [
     { 
       cat:'RUN', tag:'FITNESS', 
       title:'Sunrise 5K', 
       date:'12 JUL, 6:00 AM', 
       loc:'Bengaluru', 
-      img:'event-run.jpg',
+      img:'https://picsum.photos/seed/run/800/600',
       spots: '45 spots left',
       desc: 'Start your Sunday with a refreshing 5K run through the lush greenery of Cubbon Park. All fitness levels welcome! Post-run chai and community breakfast included.'
     },
@@ -1317,7 +1772,7 @@
       title:'Warehouse Sessions Vol. 3', 
       date:'18 JUL, 9:00 PM', 
       loc:'Indiranagar', 
-      img:'event-nights.jpg',
+      img:'https://picsum.photos/seed/night/800/600',
       spots: '120 spots left',
       desc: 'The third edition of our legendary warehouse parties. Expect underground beats, immersive lighting, and a crowd that knows how to move. 18+ only.'
     },
@@ -1326,7 +1781,7 @@
       title:'Creators in Conversation', 
       date:'22 JUL, 5:30 PM', 
       loc:'Koramangala', 
-      img:'event-talks.jpg',
+      img:'https://picsum.photos/seed/talk/800/600',
       spots: '30 spots left',
       desc: 'An intimate evening with Bengaluru\'s most exciting creators. From content to commerce, learn how to turn your passion into a sustainable career. Limited seats!'
     },
@@ -1335,7 +1790,7 @@
       title:'Rooftop Community Mixer', 
       date:'26 JUL, 7:00 PM', 
       loc:'HSR Layout', 
-      img:'event-social.jpg',
+      img:'https://picsum.photos/seed/social/800/600',
       spots: '80 spots left',
       desc: 'Our monthly rooftop mixer returns! Network, make new friends, and enjoy the city skyline. Drinks and snacks provided. Bring your best energy!'
     },
@@ -1344,22 +1799,24 @@
       title:'Weekend Trail Escape', 
       date:'02 AUG, ALL DAY', 
       loc:'Nandi Hills', 
-      img:'event-experiences.jpg',
+      img:'https://picsum.photos/seed/trail/800/600',
       spots: '25 spots left',
       desc: 'A full-day adventure to Nandi Hills. Trekking, breakfast with a view, and connect with nature. This is MESH at its most adventurous. Pack your bags!'
     },
   ];
 
   const photos = [
-    { title:'Evening Beach, March', meta:'3 RUNNERS · VARKALA', tag:'RUN', tilt:-2, img:'vichuphoto.jpg' },
-    { title:'Warehouse Sessions Vol.1', meta:'300+ HEADS · INDIRANAGAR', tag:'NIGHTS', tilt:3, img:'photo-nights-1.jpg' },
-    { title:'Creator Roundtable', meta:'40 CREATORS · KORAMANGALA', tag:'TALKS', tilt:-3, img:'photo-talks-1.jpg' },
-    { title:'Rooftop Mixer, Jan', meta:'80 MEMBERS · HSR LAYOUT', tag:'SOCIAL', tilt:2, img:'photo-social-1.jpg' },
-    { title:'Trail Escape, Nandi Hills', meta:'60 EXPLORERS · WEEKEND TRIP', tag:'EXPERIENCES', tilt:-4, img:'photo-experiences-1.jpg' },
-    { title:'MESH Run Anniversary', meta:'200+ RUNNERS · LALBAGH', tag:'RUN', tilt:4, img:'photo-run-2.jpg' },
+    { title:'Evening Beach, March', meta:'3 RUNNERS · VARKALA', tag:'RUN', tilt:-2, img:'https://picsum.photos/seed/beach/600/500' },
+    { title:'Warehouse Sessions Vol.1', meta:'300+ HEADS · INDIRANAGAR', tag:'NIGHTS', tilt:3, img:'https://picsum.photos/seed/warehouse/600/500' },
+    { title:'Creator Roundtable', meta:'40 CREATORS · KORAMANGALA', tag:'TALKS', tilt:-3, img:'https://picsum.photos/seed/creator/600/500' },
+    { title:'Rooftop Mixer, Jan', meta:'80 MEMBERS · HSR LAYOUT', tag:'SOCIAL', tilt:2, img:'https://picsum.photos/seed/rooftop/600/500' },
+    { title:'Trail Escape, Nandi Hills', meta:'60 EXPLORERS · WEEKEND TRIP', tag:'EXPERIENCES', tilt:-4, img:'https://picsum.photos/seed/trail2/600/500' },
+    { title:'MESH Run Anniversary', meta:'200+ RUNNERS · LALBAGH', tag:'RUN', tilt:4, img:'https://picsum.photos/seed/run2/600/500' },
   ];
 
-  // ===== MODAL =====
+  // ============================================================
+  // 7. MODAL
+  // ============================================================
   const modal = document.getElementById('eventModal');
   const modalClose = document.getElementById('modalClose');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
@@ -1390,7 +1847,9 @@
     if (e.key === 'Escape') closeModal();
   });
 
-  // ===== SWIPE STACK =====
+  // ============================================================
+  // 8. SWIPE STACK
+  // ============================================================
   function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }){
     const wrap = document.getElementById(wrapId);
     const counter = counterId ? document.getElementById(counterId) : null;
@@ -1528,8 +1987,15 @@
           if(!lockedHorizontal){ dragging = false; card.classList.remove('dragging'); return; }
         }
         if(e.cancelable) e.preventDefault();
-        dragX = dx;
-        setPos(entry, 0, dragX);
+        
+        const resistance = 0.7;
+        const dampened = dx * resistance;
+        dragX = dampened;
+        
+        const rotation = dampened / 8;
+        const scale = 1 - Math.min(Math.abs(dampened) / 1200, 0.15);
+        card.style.transform = `translate(${dampened}px, ${dampened/4}px) rotate(${rotation}deg) scale(${scale})`;
+        card.style.opacity = 1 - Math.min(Math.abs(dampened) / 200, 0.3);
       }
       function pointerUp(){
         if(!dragging) return;
@@ -1626,7 +2092,9 @@
     init();
   }
 
-  // ===== events stack =====
+  // ============================================================
+  // 9. EVENTS STACK
+  // ============================================================
   createSwipeStack({
     wrapId:'stackWrap', counterId:'cardCounter', prevBtnId:'prevBtn', nextBtnId:'nextBtn',
     data:events, cardClass:'card',
@@ -1645,7 +2113,9 @@
     onClick: (eventData) => openModal(eventData)
   });
 
-  // ===== photo stack =====
+  // ============================================================
+  // 10. PHOTO STACK
+  // ============================================================
   createSwipeStack({
     wrapId:'photoStackWrap', counterId:'photoCounter', prevBtnId:'photoPrevBtn', nextBtnId:'photoNextBtn',
     data:photos, cardClass:'photo-card',
@@ -1662,18 +2132,15 @@
       alert(`📸 ${photoData.title}\n${photoData.meta}`);
     }
   });
-</script>
 
-<script>
-  // ===== TRIPLE CROSSING MARQUEE (standalone, does not touch other scripts) =====
+  // ============================================================
+  // 11. TRIPLE CROSSING MARQUEE
+  // ============================================================
   (function(){
     const tmWords1 = ['RUN','NIGHT','MEET','TALK','POP'];
     const tmWords2 = ['SHOW UP.','MEET.','CONNECT.','BELONG.','REPEAT.'];
     const tmWords3 = ['"Found my people."','"The city feels smaller."','"I actually showed up."'];
 
-    // Builds one "half" of the track by repeating the word list enough times
-    // that it comfortably exceeds any viewport width, then duplicates that
-    // half once more so the -50% translateX loop never reveals a blank gap.
     function buildHalf(words, sep, repeats){
       let out = '';
       for(let i = 0; i < repeats; i++){
@@ -1693,12 +2160,10 @@
     fillTrack('tmTrack2', tmWords2, '✦', 8);
     fillTrack('tmTrack3', tmWords3, '✦', 8);
   })();
-</script>
 
-<script>
-  // ===== LOCK HERO HEIGHT (prevents mobile toolbar show/hide from resizing
-  // the hero on scroll, which was making the thread background appear to
-  // "zoom" and glitching the marquee strips below it) =====
+  // ============================================================
+  // 12. LOCK HERO HEIGHT
+  // ============================================================
   (function(){
     const hero = document.getElementById('hero');
     if(!hero) return;
@@ -1709,15 +2174,30 @@
 
     lockHeroHeight();
 
-    // Only recompute on real orientation/size changes, never on the
-    // scroll-driven resize events mobile browsers fire when their
-    // address bar collapses or expands.
     let resizeTimer;
     window.addEventListener('orientationchange', function(){
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(lockHeroHeight, 300);
     });
   })();
+
+  // ============================================================
+  // 13. KEYBOARD NAVIGATION
+  // ============================================================
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+    if (e.key === 'ArrowLeft') {
+      document.getElementById('prevBtn')?.click();
+    }
+    if (e.key === 'ArrowRight') {
+      document.getElementById('nextBtn')?.click();
+    }
+  });
+
+  console.log('🚀 MESH — Left-Aligned Hero');
+  console.log('✨ Clean. Bold. Grounded.');
 </script>
 </body>
 </html>
