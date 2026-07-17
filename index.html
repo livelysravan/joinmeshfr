@@ -1606,6 +1606,39 @@
   })();
 
   // ============================================================
+  // 2b. STABILIZE HERO BACKGROUND HEIGHT (fixes "zoom" on iOS scroll)
+  // ============================================================
+  (function() {
+    const heroGrid = document.getElementById('heroGrid');
+    if (!heroGrid) return;
+
+    // The hero-grid SVG uses preserveAspectRatio="xMidYMid slice", so any
+    // change to its own box height makes it re-crop/rescale — which reads
+    // as a "zoom". On iOS Safari, the address bar hiding/showing while you
+    // scroll causes 100svh containers to shift height in real time, and
+    // since hero-grid is absolutely positioned (inset:0) inside .hero, it
+    // was inheriting that shift. Locking hero-grid's own height (not
+    // .hero's — that stays flexible for correct page layout) to a value
+    // set only on load/resize/orientation-change, never on scroll, keeps
+    // the background pattern visually stable while scrolling.
+    function lockHeroGridHeight() {
+      heroGrid.style.height = window.innerHeight + 'px';
+    }
+
+    lockHeroGridHeight();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(lockHeroGridHeight, 150);
+    }, { passive: true });
+    window.addEventListener('orientationchange', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(lockHeroGridHeight, 300);
+    });
+  })();
+
+  // ============================================================
   // 3. CRED-STYLE SCROLL TYPOGRAPHY
   // ============================================================
   (function() {
@@ -2095,19 +2128,13 @@
   })();
 
   // ============================================================
-  // 11. LOCK HERO HEIGHT
+  // 11. HERO SECTION HEIGHT
   // ============================================================
-  (function(){
-    const hero = document.getElementById('hero');
-    if(!hero) return;
-
-    // NOTE: previously this pinned hero min-height to a stale
-    // window.innerHeight snapshot in px, which drifted out of sync with
-    // mobile browser chrome (URL bar show/hide) and caused the hero to
-    // visibly jump or leave a gap on scroll. We rely on `100svh` (already
-    // set in CSS with a `100vh` fallback) which mobile browsers keep in
-    // sync automatically, and drop the JS override entirely.
-  })();
+  // .hero itself intentionally has no JS height override — it relies on
+  // CSS `100svh` (with `100vh` fallback) so mobile browser chrome changes
+  // don't cause layout gaps below the hero. Only the decorative background
+  // SVG's box is locked separately (see section 2b above) to stop it from
+  // visually rescaling during scroll.
 
   // ============================================================
   // 12. KEYBOARD NAVIGATION
