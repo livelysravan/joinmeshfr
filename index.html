@@ -11,12 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   
-  <!-- Open Graph -->
-  <meta property="og:title" content="MESH — Meet. Connect. Belong." />
-  <meta property="og:description" content="A community for the curious. Events, connections, and belonging." />
-  <meta property="og:image" content="og-image.jpg" />
-  <meta name="theme-color" content="#241D22" />
-  
   <style>
     /* ============================================================ */
     /* RESET & BASE */
@@ -34,25 +28,6 @@
       overflow-x: hidden;
       width: 100%;
       -webkit-font-smoothing: antialiased;
-    }
-    
-    /* ============================================================ */
-    /* TYPOGRAPHY — Only 2 Fonts */
-    /* ============================================================ */
-    .display-font { 
-      font-family: 'Archivo Black', sans-serif; 
-      text-transform: uppercase; 
-      letter-spacing: -0.02em; 
-    }
-    .body-font { 
-      font-family: 'Space Grotesk', sans-serif; 
-    }
-    .label {
-      font-family: 'Space Grotesk', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 600;
-      font-size: 0.75rem;
     }
     
     a { color: inherit; text-decoration: none; }
@@ -73,7 +48,7 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      height: 72px; padding: 0 32px;
+      height: 72px; padding: 0 24px;
       backdrop-filter: blur(20px);
       background: rgba(36,29,34,0.85);
       border-bottom: 1px solid rgba(74,53,53,0.3);
@@ -96,8 +71,8 @@
       overflow: hidden;
       background: #7BCBC5;
       color: #241D22;
-      padding: 12px 28px;
-      font-size: 13px;
+      padding: 12px 24px;
+      font-size: 12px;
       font-family: 'Space Grotesk', sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -106,33 +81,14 @@
       border: none;
       cursor: pointer;
     }
-    .nav-cta::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255,255,255,0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s ease, height 0.6s ease;
-    }
     .nav-cta:hover {
       background: #edeae1;
       transform: scale(1.05);
       box-shadow: 0 8px 25px rgba(123,203,197,0.3);
     }
-    .nav-cta:hover::after {
-      width: 300px;
-      height: 300px;
-    }
-    .nav-cta:active {
-      transform: scale(0.95);
-    }
 
     /* ============================================================ */
-    /* HERO — Left-Aligned, Ultra Clean */
+    /* HERO */
     /* ============================================================ */
     .hero {
       position: relative;
@@ -159,9 +115,8 @@
       z-index: 0;
     }
     @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
+      0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
     
     .hero-grid {
@@ -169,6 +124,7 @@
       mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
       overflow: hidden;
       will-change: transform;
+      opacity: 0.5;
     }
     .hero-grid svg { width: 100%; height: 100%; }
     .hero-grid .thread { fill: none; stroke: #6a4f4f; stroke-linecap: round; }
@@ -184,7 +140,6 @@
       width: 100%;
     }
     
-    /* ===== HERO WORDS — Left-Aligned ===== */
     .hero-words {
       display: flex;
       flex-direction: column;
@@ -195,7 +150,7 @@
     .hero-word {
       font-family: 'Archivo Black', sans-serif;
       font-size: clamp(3.5rem, 14vw, 11rem);
-      line-height: 0.9;
+      line-height: 0.88;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       background: linear-gradient(135deg, #edeae1 30%, #7BCBC5 50%, #edeae1 70%);
@@ -212,10 +167,10 @@
       animation: shimmerText 4s ease-in-out infinite, wordReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
     }
     .hero-word:nth-child(2) {
-      animation: shimmerText 4s ease-in-out infinite, wordReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+      animation: shimmerText 4s ease-in-out infinite, wordReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards;
     }
     .hero-word:nth-child(3) {
-      animation: shimmerText 4s ease-in-out infinite, wordReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+      animation: shimmerText 4s ease-in-out infinite, wordReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards;
     }
     
     @keyframes shimmerText {
@@ -242,17 +197,17 @@
     }
 
     /* ============================================================ */
-    /* SINGLE MARQUEE — Clean Minimal */
+    /* SINGLE MARQUEE — Larger on Mobile */
     /* ============================================================ */
     .single-marquee {
       position: relative;
       background: #241D22;
       padding: 24px 0 28px;
       overflow: hidden;
-      isolation: isolate;
-      transform: translateZ(0);
       border-top: 1px solid rgba(123,203,197,0.08);
       border-bottom: 1px solid rgba(123,203,197,0.08);
+      transform: translateZ(0);
+      will-change: transform;
     }
     
     .sm-track {
@@ -261,17 +216,19 @@
       width: max-content;
       animation: smScroll 60s linear infinite;
       will-change: transform;
+      transform: translateZ(0);
     }
     
     .sm-track span {
       display: inline-block;
       white-space: nowrap;
-      padding: 0 24px;
+      padding: 0 20px;
+      flex-shrink: 0;
     }
     
     .sm-word {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(1.2rem, 2.8vw, 2.4rem);
+      font-size: clamp(1.2rem, 3.5vw, 2.6rem);
       text-transform: uppercase;
       letter-spacing: -0.01em;
       background: linear-gradient(135deg, #edeae1 40%, #7BCBC5 70%, #edeae1 100%);
@@ -285,7 +242,7 @@
     
     .sm-sep {
       color: #7BCBC5;
-      font-size: clamp(0.9rem, 1.8vw, 1.6rem);
+      font-size: clamp(0.9rem, 2.2vw, 1.8rem);
       opacity: 0.4;
       padding: 0 4px;
       font-family: 'Space Grotesk', sans-serif;
@@ -296,28 +253,15 @@
       to { transform: translateX(-50%); }
     }
     
-    /* ============================================================ */
-    /* RESPONSIVE MARQUEE */
-    /* ============================================================ */
-    @media (max-width: 860px) {
-      .single-marquee { padding: 16px 0 20px; }
-      .sm-track span { padding: 0 14px; }
-      .sm-word { font-size: clamp(1rem, 3.5vw, 1.6rem); }
-      .sm-sep { font-size: clamp(0.8rem, 2.5vw, 1.2rem); }
-    }
-    
-    @media (max-width: 480px) {
-      .single-marquee { padding: 12px 0 16px; }
-      .sm-track span { padding: 0 10px; }
-      .sm-word { font-size: clamp(0.85rem, 3vw, 1.2rem); }
-      .sm-sep { font-size: clamp(0.7rem, 2vw, 1rem); }
+    .single-marquee:hover .sm-track {
+      animation-duration: 45s;
     }
 
     /* ============================================================ */
-    /* CRED-STYLE SCROLL TYPOGRAPHY */
+    /* CRED-STYLE SCROLL TYPOGRAPHY — Fixed Size */
     /* ============================================================ */
     .about-typography {
-      padding: 100px 32px 120px;
+      padding: 120px 32px 140px;
       background: #241D22;
       position: relative;
       overflow: hidden;
@@ -351,7 +295,7 @@
       display: block;
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 300;
-      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-size: clamp(2.2rem, 6vw, 5rem);
       line-height: 1.3;
       color: rgba(237, 234, 225, 0.12);
       transition: color 0.1s ease, transform 0.3s ease;
@@ -364,15 +308,15 @@
     }
     .typo-spacer {
       display: block;
-      height: 20px;
+      height: 24px;
     }
     .typo-progress {
       position: fixed;
-      right: 30px;
+      right: 40px;
       top: 50%;
       transform: translateY(-50%);
       width: 3px;
-      height: 150px;
+      height: 200px;
       background: rgba(255,255,255,0.05);
       border-radius: 4px;
       z-index: 50;
@@ -390,20 +334,9 @@
       transition: height 0.1s ease;
       box-shadow: 0 0 20px rgba(123,203,197,0.3);
     }
-    @media (max-width: 860px) {
-      .about-typography { padding: 80px 20px 100px; }
-      .typo-line { font-size: clamp(1.6rem, 4.5vw, 2.8rem); }
-      .typo-progress { right: 16px; height: 120px; }
-    }
-    @media (max-width: 480px) {
-      .about-typography { padding: 60px 16px 80px; }
-      .typo-line { font-size: clamp(1.2rem, 4vw, 2rem); }
-      .typo-progress { right: 12px; height: 100px; width: 2px; }
-      .typo-spacer { height: 12px; }
-    }
 
     /* ============================================================ */
-    /* EVENTS */
+    /* EVENTS — Instagram Post Size Cards */
     /* ============================================================ */
     .events {
       padding: 60px 32px 40px;
@@ -425,7 +358,7 @@
     }
     .events .section-head h2 {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-size: clamp(2.2rem, 5vw, 4rem);
       text-transform: uppercase;
       letter-spacing: -0.02em;
       opacity: 0;
@@ -452,7 +385,7 @@
     }
     .stack-controls .count {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
+      font-size: 14px;
       color: #a89191;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -464,13 +397,13 @@
       gap: 12px;
     }
     .arrow-btn {
-      width: 52px;
-      height: 52px;
+      width: 56px;
+      height: 56px;
       border: 1px solid #edeae1;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 20px;
       cursor: pointer;
       background: transparent;
       color: #edeae1;
@@ -478,26 +411,9 @@
       position: relative;
       overflow: hidden;
     }
-    .arrow-btn::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: #7BCBC5;
-      transform: scale(0);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      border-radius: 50%;
-    }
     .arrow-btn:hover {
       border-color: #7BCBC5;
       transform: scale(1.1);
-    }
-    .arrow-btn:hover::after {
-      transform: scale(1);
-    }
-    .arrow-btn:hover span {
-      position: relative;
-      z-index: 1;
-      color: #241D22;
     }
     .arrow-btn:active {
       transform: scale(0.92);
@@ -507,14 +423,14 @@
       position: relative;
       width: 100%;
       max-width: 400px;
-      height: clamp(380px, 60vw, 500px);
+      height: clamp(420px, 65vw, 540px);
       justify-self: center;
       perspective: 1200px;
       touch-action: pan-y;
     }
 
     /* ============================================================ */
-    /* CARD */
+    /* CARD — Instagram Post Format (Portrait) */
     /* ============================================================ */
     .card {
       position: absolute;
@@ -578,7 +494,7 @@
     }
     .card-body h3 {
       font-family: 'Archivo Black', sans-serif;
-      font-size: 20px;
+      font-size: 22px;
       margin-bottom: 4px;
       letter-spacing: -0.01em;
       color: #edeae1;
@@ -589,7 +505,7 @@
       justify-content: space-between;
       align-items: center;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 10px;
+      font-size: 11px;
       color: #a89191;
       flex-wrap: wrap;
       gap: 6px;
@@ -604,20 +520,20 @@
       padding: 3px 10px;
       border-radius: 12px;
       border: 1px solid rgba(123,203,197,0.2);
-      font-size: 8px;
+      font-size: 9px;
       letter-spacing: 0.06em;
       font-weight: 600;
     }
     .card-meta .date {
       color: #edeae1;
-      font-size: 11px;
+      font-size: 12px;
     }
 
     /* ============================================================ */
     /* COMMUNITY CARD */
     /* ============================================================ */
     .community-card-section {
-      padding: 50px 24px 70px;
+      padding: 60px 24px 80px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -640,7 +556,7 @@
       background: #2d2429;
       border: 1px solid rgba(123,203,197,0.15);
       border-radius: 16px;
-      padding: 40px 32px;
+      padding: 48px 36px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -652,27 +568,17 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .community-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(123,203,197,0.03) 0%, transparent 70%);
-      pointer-events: none;
-    }
     .community-card .card-icon {
-      font-size: 28px;
-      margin-bottom: 14px;
+      font-size: 32px;
+      margin-bottom: 16px;
       display: block;
     }
     .community-card h3 {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
       font-weight: 400;
       color: #edeae1;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       letter-spacing: -0.02em;
       text-transform: uppercase;
     }
@@ -681,10 +587,10 @@
     }
     .community-card p {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 14px;
+      font-size: 15px;
       color: #a89191;
       line-height: 1.6;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       max-width: 360px;
       margin-left: auto;
       margin-right: auto;
@@ -695,9 +601,9 @@
       display: inline-block;
       background: #7BCBC5;
       color: #241D22;
-      padding: 12px 36px;
+      padding: 14px 40px;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-weight: 600;
@@ -707,35 +613,16 @@
       position: relative;
       z-index: 1;
     }
-    .community-card .community-cta::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255,255,255,0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s ease, height 0.6s ease;
-    }
     .community-card .community-cta:hover {
       background: #edeae1;
       transform: scale(1.05);
       box-shadow: 0 8px 30px rgba(123,203,197,0.3);
     }
-    .community-card .community-cta:hover::after {
-      width: 400px;
-      height: 400px;
-    }
-    .community-card .community-cta:active {
-      transform: scale(0.95);
-    }
     .community-card .member-count {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       color: #7BCBC5;
-      margin-top: 16px;
+      margin-top: 20px;
       display: block;
       opacity: 0.6;
       text-transform: uppercase;
@@ -744,10 +631,10 @@
     }
 
     /* ============================================================ */
-    /* PHOTO MARQUEE — Two Rows, No Overlays */
+    /* PHOTO MARQUEE — Two Rows, Different Photos */
     /* ============================================================ */
     .photo-marquee-section {
-      padding: 50px 0 60px;
+      padding: 60px 0 80px;
       position: relative;
       background: #241D22;
       overflow: hidden;
@@ -775,7 +662,7 @@
     
     .photo-marquee-header {
       max-width: 1240px;
-      margin: 0 auto 36px;
+      margin: 0 auto 48px;
       padding: 0 32px;
       display: flex;
       justify-content: space-between;
@@ -785,29 +672,27 @@
     }
     .photo-marquee-header h2 {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-size: clamp(2.2rem, 5vw, 4rem);
       text-transform: uppercase;
       letter-spacing: -0.02em;
     }
     .photo-marquee-header p {
       color: #a89191;
-      font-size: 13px;
+      font-size: 14px;
       font-family: 'Space Grotesk', sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       font-weight: 500;
     }
     
-    /* ===== MARQUEE WRAPPER ===== */
     .photo-marquee-wrap {
       position: relative;
       overflow: hidden;
-      padding: 8px 0;
+      padding: 12px 0;
       mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
       -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
     }
     
-    /* ===== TOP ROW — Moves Left ===== */
     .photo-marquee-track--left {
       display: flex;
       gap: 16px;
@@ -816,7 +701,6 @@
       will-change: transform;
     }
     
-    /* ===== BOTTOM ROW — Moves Right ===== */
     .photo-marquee-track--right {
       display: flex;
       gap: 16px;
@@ -839,8 +723,7 @@
     }
     .photo-marquee-item:hover {
       transform: scale(1.03);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 2px rgba(123,203,197,0.15);
-      z-index: 2;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
     }
     .photo-marquee-item img {
       width: 100%;
@@ -861,37 +744,13 @@
       from { transform: translateX(-50%); }
       to { transform: translateX(0); }
     }
-    
-    /* ===== RESPONSIVE PHOTO MARQUEE ===== */
-    @media (max-width: 860px) {
-      .photo-marquee-section { padding: 40px 0 50px; }
-      .photo-marquee-header { padding: 0 20px; margin-bottom: 28px; }
-      .photo-marquee-item { width: 200px; height: 240px; }
-      .photo-marquee-track--left,
-      .photo-marquee-track--right { gap: 12px; }
-      .photo-marquee-track--right { margin-top: 12px; }
-      .photo-marquee-track--left { animation-duration: 40s; }
-      .photo-marquee-track--right { animation-duration: 45s; }
-    }
-    
-    @media (max-width: 480px) {
-      .photo-marquee-section { padding: 30px 0 40px; }
-      .photo-marquee-header { margin-bottom: 20px; }
-      .photo-marquee-item { width: 150px; height: 190px; border-radius: 10px; }
-      .photo-marquee-track--left,
-      .photo-marquee-track--right { gap: 10px; }
-      .photo-marquee-track--right { margin-top: 10px; }
-      .photo-marquee-track--left { animation-duration: 30s; }
-      .photo-marquee-track--right { animation-duration: 35s; }
-    }
 
     /* ============================================================ */
     /* FOOTER */
     /* ============================================================ */
     footer {
-      padding: 50px 32px 32px;
+      padding: 60px 32px 40px;
       border-top: 1px solid rgba(74,53,53,0.3);
-      margin-top: 0;
       position: relative;
       overflow: hidden;
     }
@@ -917,13 +776,13 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 28px;
+      gap: 32px;
     }
     .foot-col h4 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 10px;
+      font-size: 11px;
       color: #a89191;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-weight: 600;
@@ -932,17 +791,17 @@
     .foot-col h4::after {
       content: '';
       position: absolute;
-      bottom: -5px;
+      bottom: -6px;
       left: 0;
-      width: 18px;
+      width: 20px;
       height: 2px;
       background: #7BCBC5;
       border-radius: 1px;
     }
     .foot-col a {
       display: block;
-      font-size: 13px;
-      margin-bottom: 8px;
+      font-size: 14px;
+      margin-bottom: 10px;
       color: #edeae1;
       font-family: 'Space Grotesk', sans-serif;
       transition: all 0.3s ease;
@@ -958,23 +817,23 @@
     }
     .foot-col a:hover {
       color: #7BCBC5;
-      padding-left: 18px;
+      padding-left: 20px;
     }
     .foot-col a:hover::before {
       opacity: 1;
-      margin-right: 6px;
+      margin-right: 8px;
     }
     .foot-bottom {
       max-width: 1240px;
-      margin: 48px auto 0;
-      padding-top: 20px;
+      margin: 60px auto 0;
+      padding-top: 24px;
       border-top: 1px solid rgba(74,53,53,0.3);
       display: flex;
       justify-content: space-between;
-      font-size: 11px;
+      font-size: 12px;
       color: #a89191;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       font-family: 'Space Grotesk', sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -993,13 +852,8 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      animation: fadeIn 0.3s ease;
     }
     .modal-overlay.active { display: flex; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
     .modal {
       background: rgba(58, 47, 53, 0.95);
       backdrop-filter: blur(20px);
@@ -1010,31 +864,26 @@
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
-      padding: 32px;
+      padding: 36px;
       position: relative;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(123,203,197,0.1);
-      animation: modalSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    @keyframes modalSlide {
-      from { opacity: 0; transform: translateY(40px) scale(0.96); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8);
     }
     .modal-close {
-      position: absolute; top: 14px; right: 18px;
-      font-size: 24px; cursor: pointer;
+      position: absolute; top: 16px; right: 20px;
+      font-size: 28px; cursor: pointer;
       color: #a89191;
       transition: all 0.3s ease;
       background: none; border: none;
       font-family: 'Space Grotesk', sans-serif;
-      padding: 6px;
+      padding: 8px;
       line-height: 1;
     }
     .modal-close:hover { color: #edeae1; transform: rotate(90deg); }
     .modal .modal-img {
-      width: 100%; height: 180px;
+      width: 100%; height: 200px;
       background-size: cover; background-position: center;
       border-radius: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       position: relative;
       overflow: hidden;
     }
@@ -1049,49 +898,49 @@
       background: rgba(123,203,197,0.2);
       color: #7BCBC5;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 10px;
-      padding: 3px 10px;
+      font-size: 11px;
+      padding: 4px 12px;
       border-radius: 4px;
       letter-spacing: 0.06em;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       text-transform: uppercase;
       font-weight: 600;
     }
     .modal h2 {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
-      margin-bottom: 10px;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      margin-bottom: 12px;
       letter-spacing: -0.02em;
       text-transform: uppercase;
     }
     .modal .modal-meta {
-      display: flex; gap: 18px;
+      display: flex; gap: 20px;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       color: #a89191;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       font-weight: 500;
     }
-    .modal .modal-meta span { display: flex; align-items: center; gap: 5px; }
+    .modal .modal-meta span { display: flex; align-items: center; gap: 6px; }
     .modal .modal-desc {
       color: #c9c4b8;
       line-height: 1.6;
-      margin-bottom: 24px;
-      font-size: 14px;
+      margin-bottom: 28px;
+      font-size: 15px;
       font-family: 'Space Grotesk', sans-serif;
     }
     .modal .modal-actions {
-      display: flex; gap: 14px; flex-wrap: wrap;
+      display: flex; gap: 16px; flex-wrap: wrap;
     }
     .modal .modal-actions .btn {
       flex: 1; 
       justify-content: center;
-      padding: 12px 20px;
+      padding: 14px 24px;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-weight: 600;
@@ -1120,7 +969,7 @@
     }
 
     /* ============================================================ */
-    /* RESPONSIVE — Global */
+    /* RESPONSIVE — Mobile */
     /* ============================================================ */
     @media (max-width: 860px) {
       .stack-area {
@@ -1135,50 +984,81 @@
       .stack-wrap {
         order: 1;
         max-width: 100%;
-        height: clamp(420px, 65vw, 500px);
+        height: clamp(420px, 70vw, 500px);
       }
-      .events, footer, nav, .hero {
+      .events, footer, .hero {
         padding-left: 20px;
         padding-right: 20px;
       }
+      .photo-marquee-header {
+        padding: 0 20px;
+      }
       .community-card-section {
-        padding: 32px 20px 50px;
+        padding: 40px 20px 60px;
       }
       .community-card {
-        padding: 32px 24px;
+        padding: 36px 28px;
       }
       .modal {
         padding: 24px;
-        margin: 12px;
+        margin: 16px;
       }
-      .arrow-row {
-        display: flex !important;
+      .about-typography {
+        padding: 80px 20px 100px;
+      }
+      .typo-line {
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+      }
+      .typo-progress {
+        right: 16px;
+        height: 120px;
+        top: 50%;
       }
       .hero-word {
-        font-size: clamp(2.8rem, 10vw, 5rem);
+        font-size: clamp(3rem, 10vw, 5rem);
       }
-      .hero {
-        padding: 100px 20px 60px;
+      .photo-marquee-item {
+        width: 200px;
+        height: 240px;
       }
-      .events {
-        padding: 40px 20px 30px;
+      .photo-marquee-track--left,
+      .photo-marquee-track--right {
+        gap: 12px;
       }
-      .events .section-head {
-        margin-bottom: 32px;
-      }
-      .stack-controls .count {
-        font-size: 12px;
-      }
-      .arrow-btn {
-        width: 48px;
-        height: 48px;
-        font-size: 16px;
-      }
+      .photo-marquee-track--left { animation-duration: 40s; }
+      .photo-marquee-track--right { animation-duration: 45s; }
       .card-body h3 {
         font-size: 18px;
       }
       .card-body {
         padding: 20px 20px 22px;
+      }
+      .arrow-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+      }
+      .nav-cta {
+        padding: 10px 18px;
+        font-size: 11px;
+      }
+      .logo-mark img {
+        height: 90px;
+      }
+      nav.scrolled .logo-mark img {
+        height: 60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stack-wrap {
+        height: clamp(380px, 75vw, 460px);
+      }
+      .card-body h3 {
+        font-size: 16px;
+      }
+      .card-body {
+        padding: 16px 16px 18px;
       }
       .card-meta {
         font-size: 9px;
@@ -1186,39 +1066,19 @@
       .card-meta .date {
         font-size: 10px;
       }
-    }
-
-    @media (max-width: 480px) {
-      .stack-wrap {
-        max-width: 100%;
-        height: clamp(360px, 70vw, 440px);
+      .photo-marquee-item {
+        width: 150px;
+        height: 190px;
+        border-radius: 10px;
       }
-      .modal .modal-actions {
-        flex-direction: column;
+      .photo-marquee-track--left,
+      .photo-marquee-track--right {
+        gap: 10px;
       }
-      .events {
-        padding: 30px 14px 20px;
-      }
-      .community-card-section {
-        padding: 24px 14px 40px;
-      }
-      .community-card {
-        padding: 24px 18px;
-      }
-      .community-card h3 {
-        font-size: 1.2rem;
-      }
-      .community-card p {
-        font-size: 13px;
-        margin-bottom: 18px;
-      }
-      .community-card .community-cta {
-        padding: 10px 24px;
-        font-size: 11px;
-        width: 100%;
-      }
+      .photo-marquee-track--left { animation-duration: 30s; }
+      .photo-marquee-track--right { animation-duration: 35s; }
       .hero-word {
-        font-size: clamp(2.2rem, 8vw, 3.2rem);
+        font-size: clamp(2.5rem, 8vw, 3.5rem);
       }
       .hero-words {
         gap: 0.02em;
@@ -1226,11 +1086,56 @@
       .hero {
         padding: 80px 16px 50px;
       }
-      .scroll-indicator {
-        bottom: 24px;
+      .sm-word {
+        font-size: clamp(0.9rem, 3.5vw, 1.4rem);
+      }
+      .sm-track span {
+        padding: 0 12px;
+      }
+      .single-marquee {
+        padding: 14px 0 18px;
+      }
+      .sm-sep {
+        font-size: clamp(0.7rem, 2vw, 1rem);
+      }
+      .typo-line {
+        font-size: clamp(1.4rem, 4.5vw, 2rem);
+      }
+      .typo-progress {
+        right: 12px;
+        height: 100px;
+        width: 2px;
+      }
+      .about-typography {
+        padding: 60px 16px 80px;
+      }
+      .typo-spacer {
+        height: 16px;
+      }
+      .community-card {
+        padding: 28px 20px;
+      }
+      .community-card h3 {
+        font-size: 1.4rem;
+      }
+      .community-card p {
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+      .community-card .community-cta {
+        padding: 12px 28px;
+        font-size: 12px;
+        width: 100%;
+      }
+      .community-card-section {
+        padding: 30px 14px 50px;
+      }
+      .photo-marquee-section {
+        padding: 40px 0 50px;
       }
       .photo-marquee-header {
         padding: 0 14px;
+        margin-bottom: 28px;
       }
       .photo-marquee-header h2 {
         font-size: clamp(1.6rem, 5vw, 2.2rem);
@@ -1238,31 +1143,52 @@
       .photo-marquee-header p {
         font-size: 11px;
       }
+      .photo-marquee-wrap {
+        padding: 6px 0;
+      }
       footer {
-        padding: 32px 16px 24px;
+        padding: 40px 16px 28px;
       }
       .foot-inner {
-        gap: 20px;
+        gap: 24px;
       }
       .foot-col a {
-        font-size: 12px;
+        font-size: 13px;
       }
       .foot-bottom {
         font-size: 10px;
-        margin-top: 32px;
+        margin-top: 40px;
         padding-top: 16px;
       }
       .modal {
-        padding: 18px;
+        padding: 20px;
       }
       .modal .modal-img {
-        height: 140px;
+        height: 160px;
       }
       .modal h2 {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
       }
       .modal .modal-desc {
-        font-size: 13px;
+        font-size: 14px;
+      }
+      .modal .modal-actions {
+        flex-direction: column;
+      }
+      .arrow-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+      }
+      .stack-controls .count {
+        font-size: 12px;
+      }
+      .scroll-indicator {
+        bottom: 24px;
+      }
+      .scroll-indicator svg {
+        width: 20px;
+        height: 32px;
       }
     }
   </style>
@@ -1441,7 +1367,7 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SINGLE MARQUEE — RUN · TALK · SOCIALIZE · EXPERIENCE -->
+<!-- SINGLE MARQUEE -->
 <!-- ============================================================ -->
 <section class="single-marquee">
   <div class="sm-track" id="smTrack">
@@ -1510,7 +1436,7 @@
 <!-- ============================================================ -->
 <section class="community-card-section" id="community">
   <div class="community-card" id="communityCard">
-    <span class="card-icon">💬</span>
+    <span class="card-icon"></span>
     <h3>Join the <span>MESH</span> community</h3>
     <p>Get event updates, last-minute changes, and connect with 200+ members on WhatsApp.</p>
     <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="community-cta">Join WhatsApp →</a>
@@ -1519,7 +1445,7 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- PHOTO MARQUEE — Two Rows, No Overlays -->
+<!-- PHOTO MARQUEE — Two Rows, Different Photos -->
 <!-- ============================================================ -->
 <section class="photo-marquee-section" id="photoMarquee">
   <div class="photo-marquee-header">
@@ -1532,7 +1458,7 @@
     <div class="photo-marquee-track--left" id="photoTrackLeft"></div>
   </div>
   
-  <!-- Row 2: Moves Right -->
+  <!-- Row 2: Moves Right — Different Photos -->
   <div class="photo-marquee-wrap">
     <div class="photo-marquee-track--right" id="photoTrackRight"></div>
   </div>
@@ -1544,19 +1470,19 @@
 <footer>
   <div class="foot-inner">
     <div class="foot-col">
-      <h4 class="mono">Explore</h4>
+      <h4>Explore</h4>
       <a href="#events">Events</a>
       <a href="#about">About</a>
       <a href="#">Membership</a>
     </div>
     <div class="foot-col">
-      <h4 class="mono">Chapters</h4>
+      <h4>Chapters</h4>
       <a href="#">Bengaluru</a>
       <a href="#">Kochi — soon</a>
       <a href="#">Delhi — soon</a>
     </div>
     <div class="foot-col">
-      <h4 class="mono">Follow</h4>
+      <h4>Follow</h4>
       <a href="#">Instagram</a>
       <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer">WhatsApp Community</a>
     </div>
@@ -1619,11 +1545,18 @@
     const heroGrid = document.getElementById('heroGrid');
     if (!heroGrid) return;
 
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const opacity = Math.max(1 - scrolled / 800, 0.3);
-      heroGrid.style.transform = `translateY(${scrolled * 0.15}px) scale(${1 + scrolled * 0.0001})`;
-      heroGrid.style.opacity = opacity;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.pageYOffset;
+          const opacity = Math.max(1 - scrolled / 600, 0.3);
+          heroGrid.style.transform = `translateY(${scrolled * 0.1}px)`;
+          heroGrid.style.opacity = opacity;
+          ticking = false;
+        });
+        ticking = true;
+      }
     });
   })();
 
@@ -1777,7 +1710,8 @@
     },
   ];
 
-  const photoData = [
+  // Separate photo sets for each row
+  const photoDataLeft = [
     { title: 'Evening Beach, March', meta: '3 RUNNERS · VARKALA', tag: 'RUN', img: 'https://picsum.photos/seed/beach/600/500' },
     { title: 'Warehouse Sessions Vol.1', meta: '300+ HEADS · INDIRANAGAR', tag: 'NIGHTS', img: 'https://picsum.photos/seed/warehouse/600/500' },
     { title: 'Creator Roundtable', meta: '40 CREATORS · KORAMANGALA', tag: 'TALKS', img: 'https://picsum.photos/seed/creator/600/500' },
@@ -1788,8 +1722,19 @@
     { title: 'Night Run, Dec', meta: '80 RUNNERS · CUBBON PARK', tag: 'RUN', img: 'https://picsum.photos/seed/nightrun/600/500' },
   ];
 
+  const photoDataRight = [
+    { title: 'Morning Ride, Feb', meta: '15 CYCLISTS · CUBBON PARK', tag: 'RUN', img: 'https://picsum.photos/seed/ride/600/500' },
+    { title: 'Live Music Night', meta: '200+ HEADS · INDIRANAGAR', tag: 'NIGHTS', img: 'https://picsum.photos/seed/live/600/500' },
+    { title: 'Founder’s Talk', meta: '50 FOUNDERS · KORAMANGALA', tag: 'TALKS', img: 'https://picsum.photos/seed/founder/600/500' },
+    { title: 'Beach Cleanup', meta: '100 VOLUNTEERS · VARKALA', tag: 'SOCIAL', img: 'https://picsum.photos/seed/cleanup/600/500' },
+    { title: 'Weekend Trek', meta: '45 TREKKERS · NANDI HILLS', tag: 'EXPERIENCES', img: 'https://picsum.photos/seed/trek/600/500' },
+    { title: 'City Run, Jan', meta: '150 RUNNERS · LALBAGH', tag: 'RUN', img: 'https://picsum.photos/seed/cityrun/600/500' },
+    { title: 'Art & Culture Meet', meta: '80 CREATIVES · INDIRANAGAR', tag: 'TALKS', img: 'https://picsum.photos/seed/art/600/500' },
+    { title: 'Sunset Social, March', meta: '90 MEMBERS · HSR LAYOUT', tag: 'SOCIAL', img: 'https://picsum.photos/seed/sunset2/600/500' },
+  ];
+
   // ============================================================
-  // 6. PHOTO MARQUEE — Two Rows
+  // 6. PHOTO MARQUEE — Two Rows, Different Photos
   // ============================================================
   (function() {
     const leftTrack = document.getElementById('photoTrackLeft');
@@ -1804,10 +1749,12 @@
       `;
     }
 
-    // Duplicate photos for seamless infinite scroll
-    const html = photoData.map(p => buildPhotoHTML(p)).join('') + photoData.map(p => buildPhotoHTML(p)).join('');
-    leftTrack.innerHTML = html;
-    rightTrack.innerHTML = html;
+    // Duplicate for seamless infinite scroll
+    const leftHTML = photoDataLeft.map(p => buildPhotoHTML(p)).join('') + photoDataLeft.map(p => buildPhotoHTML(p)).join('');
+    const rightHTML = photoDataRight.map(p => buildPhotoHTML(p)).join('') + photoDataRight.map(p => buildPhotoHTML(p)).join('');
+    
+    leftTrack.innerHTML = leftHTML;
+    rightTrack.innerHTML = rightHTML;
   })();
 
   // ============================================================
@@ -2110,7 +2057,24 @@
   });
 
   // ============================================================
-  // 10. LOCK HERO HEIGHT
+  // 10. SCROLL ANIMATION FOR HEADINGS
+  // ============================================================
+  (function() {
+    const heading = document.getElementById('eventsHeading');
+    
+    const headingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          heading.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    headingObserver.observe(heading);
+  })();
+
+  // ============================================================
+  // 11. LOCK HERO HEIGHT
   // ============================================================
   (function(){
     const hero = document.getElementById('hero');
@@ -2130,7 +2094,7 @@
   })();
 
   // ============================================================
-  // 11. KEYBOARD NAVIGATION
+  // 12. KEYBOARD NAVIGATION
   // ============================================================
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -2144,8 +2108,8 @@
     }
   });
 
-  console.log('🚀 MESH — Clean & Responsive');
-  console.log('📸 Two-row photo marquee, no overlays');
+  console.log('🚀 MESH — Fully Fixed');
+  console.log('📸 Two rows with different photos');
 </script>
 </body>
 </html>
