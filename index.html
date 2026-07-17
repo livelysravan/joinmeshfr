@@ -68,82 +68,6 @@
     }
 
     /* ============================================================ */
-    /* LOADER */
-    /* ============================================================ */
-    .loader {
-      position: fixed;
-      inset: 0;
-      background: #241D22;
-      z-index: 99999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
-    }
-    .loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .loader-logo {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 4rem;
-      color: #7BCBC5;
-      letter-spacing: 0.1em;
-      animation: loaderPulse 1.5s ease-in-out infinite;
-      position: relative;
-    }
-    .loader-logo span {
-      display: inline-block;
-      animation: loaderLetter 1.5s ease-in-out infinite;
-    }
-    .loader-logo span:nth-child(1) { animation-delay: 0s; }
-    .loader-logo span:nth-child(2) { animation-delay: 0.1s; }
-    .loader-logo span:nth-child(3) { animation-delay: 0.2s; }
-    .loader-logo span:nth-child(4) { animation-delay: 0.3s; }
-    
-    @keyframes loaderPulse {
-      0%, 100% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.05); opacity: 1; }
-    }
-    @keyframes loaderLetter {
-      0%, 100% { transform: translateY(0) rotate(0); }
-      50% { transform: translateY(-8px) rotate(2deg); }
-    }
-    .loader-bar {
-      width: 200px;
-      height: 2px;
-      background: rgba(123,203,197,0.1);
-      border-radius: 2px;
-      margin-top: 40px;
-      overflow: hidden;
-      position: relative;
-    }
-    .loader-bar::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      width: 0%;
-      background: linear-gradient(90deg, #7BCBC5, #cba7e8);
-      border-radius: 2px;
-      animation: loaderBar 2s ease-in-out forwards;
-    }
-    @keyframes loaderBar {
-      0% { width: 0%; }
-      100% { width: 100%; }
-    }
-    .loader-text {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 10px;
-      color: #a89191;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-top: 16px;
-      opacity: 0.5;
-    }
-
-    /* ============================================================ */
     /* NAVIGATION */
     /* ============================================================ */
     nav {
@@ -1346,17 +1270,6 @@
 <body>
 
 <!-- ============================================================ -->
-<!-- LOADER -->
-<!-- ============================================================ -->
-<div class="loader" id="loader">
-  <div class="loader-logo">
-    <span>M</span><span>E</span><span>S</span><span>H</span>
-  </div>
-  <div class="loader-bar"></div>
-  <div class="loader-text">Loading experience...</div>
-</div>
-
-<!-- ============================================================ -->
 <!-- NOISE -->
 <!-- ============================================================ -->
 <div class="noise"></div>
@@ -1683,17 +1596,7 @@
 <!-- ============================================================ -->
 <script>
   // ============================================================
-  // 1. LOADER
-  // ============================================================
-  (function() {
-    const loader = document.getElementById('loader');
-    setTimeout(() => {
-      loader.classList.add('hidden');
-    }, 2500);
-  })();
-
-  // ============================================================
-  // 2. NAVIGATION SCROLL EFFECT
+  // 1. NAVIGATION SCROLL EFFECT
   // ============================================================
   (function() {
     const nav = document.getElementById('nav');
@@ -1710,7 +1613,7 @@
   })();
 
   // ============================================================
-  // 3. HERO PARALLAX
+  // 2. HERO PARALLAX
   // ============================================================
   (function() {
     const heroGrid = document.getElementById('heroGrid');
@@ -1725,7 +1628,7 @@
   })();
 
   // ============================================================
-  // 4. CRED-STYLE SCROLL TYPOGRAPHY
+  // 3. CRED-STYLE SCROLL TYPOGRAPHY
   // ============================================================
   (function() {
     const lines = document.querySelectorAll('.typo-line');
@@ -1790,7 +1693,7 @@
   })();
 
   // ============================================================
-  // 5. COMMUNITY CARD ANIMATION + COUNTER
+  // 4. COMMUNITY CARD ANIMATION + COUNTER
   // ============================================================
   (function() {
     const card = document.getElementById('communityCard');
@@ -1824,7 +1727,7 @@
   })();
 
   // ============================================================
-  // 6. DATA
+  // 5. DATA
   // ============================================================
   const events = [
     { 
@@ -1886,7 +1789,7 @@
   ];
 
   // ============================================================
-  // 7. PHOTO MARQUEE — Two Rows
+  // 6. PHOTO MARQUEE — Two Rows
   // ============================================================
   (function() {
     const leftTrack = document.getElementById('photoTrackLeft');
@@ -1908,7 +1811,7 @@
   })();
 
   // ============================================================
-  // 8. MODAL
+  // 7. MODAL
   // ============================================================
   const modal = document.getElementById('eventModal');
   const modalClose = document.getElementById('modalClose');
@@ -1941,7 +1844,7 @@
   });
 
   // ============================================================
-  // 9. SWIPE STACK
+  // 8. SWIPE STACK
   // ============================================================
   function createSwipeStack({ wrapId, counterId, prevBtnId, nextBtnId, data, cardClass, renderCard, onClick }){
     const wrap = document.getElementById(wrapId);
@@ -2186,7 +2089,7 @@
   }
 
   // ============================================================
-  // 10. EVENTS STACK
+  // 9. EVENTS STACK
   // ============================================================
   createSwipeStack({
     wrapId:'stackWrap', counterId:'cardCounter', prevBtnId:'prevBtn', nextBtnId:'nextBtn',
@@ -2207,7 +2110,7 @@
   });
 
   // ============================================================
-  // 11. LOCK HERO HEIGHT
+  // 10. LOCK HERO HEIGHT
   // ============================================================
   (function(){
     const hero = document.getElementById('hero');
@@ -2227,7 +2130,7 @@
   })();
 
   // ============================================================
-  // 12. KEYBOARD NAVIGATION
+  // 11. KEYBOARD NAVIGATION
   // ============================================================
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
