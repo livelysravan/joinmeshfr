@@ -142,18 +142,22 @@
     
     .hero-grid {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
       z-index: 0;
       mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
       -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
       overflow: hidden;
       will-change: transform;
       opacity: 0.5;
-      /* FIX: Lock height so iOS doesn't resize it on scroll */
+      /* 🔒 LOCKED HEIGHT — never changes on scroll */
       height: 100vh;
       height: 100svh;
       min-height: 100vh;
       min-height: 100svh;
+      max-height: 100vh;
+      max-height: 100svh;
     }
     .hero-grid svg {
       width: 100%;
@@ -306,7 +310,147 @@
     }
 
     /* ============================================================ */
-    /* CRED-STYLE SCROLL TYPOGRAPHY */
+    /* PHOTO MARQUEE — Two Rows, No Overlays */
+    /* ============================================================ */
+    .photo-marquee-section {
+      padding: 60px 0 80px;
+      position: relative;
+      background: #241D22;
+      overflow: hidden;
+    }
+    .photo-marquee-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
+    }
+    .photo-marquee-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
+    }
+    
+    .photo-marquee-header {
+      max-width: 1240px;
+      margin: 0 auto 48px;
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .photo-marquee-header h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .photo-marquee-header p {
+      color: #a89191;
+      font-size: 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
+    
+    .photo-marquee-wrap {
+      position: relative;
+      overflow: hidden;
+      padding: 12px 0;
+      mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    }
+    
+    .photo-marquee-track--left {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      animation: photoScrollLeft 50s linear infinite;
+      will-change: transform;
+    }
+    
+    .photo-marquee-track--right {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      animation: photoScrollRight 55s linear infinite;
+      will-change: transform;
+      margin-top: 16px;
+    }
+    
+    .photo-marquee-item {
+      flex-shrink: 0;
+      width: 260px;
+      height: 300px;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      background: #2d2429;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .photo-marquee-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+    }
+    .photo-marquee-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .photo-marquee-item:hover img {
+      transform: scale(1.06);
+    }
+    
+    @keyframes photoScrollLeft {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    
+    @keyframes photoScrollRight {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
+    }
+
+    /* ============================================================ */
+    /* RESPONSIVE PHOTO MARQUEE */
+    /* ============================================================ */
+    @media (max-width: 860px) {
+      .photo-marquee-section { padding: 40px 0 50px; }
+      .photo-marquee-header { padding: 0 20px; margin-bottom: 28px; }
+      .photo-marquee-item { width: 200px; height: 240px; }
+      .photo-marquee-track--left,
+      .photo-marquee-track--right { gap: 12px; }
+      .photo-marquee-track--right { margin-top: 12px; }
+      .photo-marquee-track--left { animation-duration: 40s; }
+      .photo-marquee-track--right { animation-duration: 45s; }
+    }
+    
+    @media (max-width: 480px) {
+      .photo-marquee-section { padding: 30px 0 40px; }
+      .photo-marquee-header { margin-bottom: 20px; }
+      .photo-marquee-item { width: 150px; height: 190px; border-radius: 10px; }
+      .photo-marquee-track--left,
+      .photo-marquee-track--right { gap: 10px; }
+      .photo-marquee-track--right { margin-top: 10px; }
+      .photo-marquee-track--left { animation-duration: 30s; }
+      .photo-marquee-track--right { animation-duration: 35s; }
+    }
+
+    /* ============================================================ */
+    /* CRED-STYLE SCROLL TYPOGRAPHY — Earlier Glow + Brighter */
     /* ============================================================ */
     .about-typography {
       padding: 120px 32px 140px;
@@ -679,121 +823,6 @@
     }
 
     /* ============================================================ */
-    /* PHOTO MARQUEE */
-    /* ============================================================ */
-    .photo-marquee-section {
-      padding: 60px 0 80px;
-      position: relative;
-      background: #241D22;
-      overflow: hidden;
-    }
-    .photo-marquee-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
-    }
-    .photo-marquee-section::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(74,53,53,0.5), transparent);
-    }
-    
-    .photo-marquee-header {
-      max-width: 1240px;
-      margin: 0 auto 48px;
-      padding: 0 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .photo-marquee-header h2 {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-    }
-    .photo-marquee-header p {
-      color: #a89191;
-      font-size: 14px;
-      font-family: 'Space Grotesk', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 500;
-    }
-    
-    .photo-marquee-wrap {
-      position: relative;
-      overflow: hidden;
-      padding: 12px 0;
-      mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
-    }
-    
-    .photo-marquee-track--left {
-      display: flex;
-      gap: 16px;
-      width: max-content;
-      animation: photoScrollLeft 50s linear infinite;
-      will-change: transform;
-    }
-    
-    .photo-marquee-track--right {
-      display: flex;
-      gap: 16px;
-      width: max-content;
-      animation: photoScrollRight 55s linear infinite;
-      will-change: transform;
-      margin-top: 16px;
-    }
-    
-    .photo-marquee-item {
-      flex-shrink: 0;
-      width: 260px;
-      height: 300px;
-      border-radius: 14px;
-      overflow: hidden;
-      position: relative;
-      background: #2d2429;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .photo-marquee-item:hover {
-      transform: scale(1.03);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
-    }
-    .photo-marquee-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-    .photo-marquee-item:hover img {
-      transform: scale(1.06);
-    }
-    
-    @keyframes photoScrollLeft {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-    
-    @keyframes photoScrollRight {
-      from { transform: translateX(-50%); }
-      to { transform: translateX(0); }
-    }
-
-    /* ============================================================ */
     /* FOOTER */
     /* ============================================================ */
     footer {
@@ -1067,16 +1096,6 @@
       .hero-word {
         font-size: clamp(3rem, 10vw, 5rem);
       }
-      .photo-marquee-item {
-        width: 200px;
-        height: 240px;
-      }
-      .photo-marquee-track--left,
-      .photo-marquee-track--right {
-        gap: 12px;
-      }
-      .photo-marquee-track--left { animation-duration: 40s; }
-      .photo-marquee-track--right { animation-duration: 45s; }
       .card-body h3 {
         font-size: 18px;
       }
@@ -1116,17 +1135,6 @@
       .card-meta .date {
         font-size: 10px;
       }
-      .photo-marquee-item {
-        width: 150px;
-        height: 190px;
-        border-radius: 10px;
-      }
-      .photo-marquee-track--left,
-      .photo-marquee-track--right {
-        gap: 10px;
-      }
-      .photo-marquee-track--left { animation-duration: 30s; }
-      .photo-marquee-track--right { animation-duration: 35s; }
       .hero-word {
         font-size: clamp(2.5rem, 8vw, 3.5rem);
       }
@@ -1169,11 +1177,11 @@
         padding: 30px 14px 50px;
       }
       .photo-marquee-section {
-        padding: 40px 0 50px;
+        padding: 30px 0 40px;
       }
       .photo-marquee-header {
         padding: 0 14px;
-        margin-bottom: 28px;
+        margin-bottom: 20px;
       }
       .photo-marquee-header h2 {
         font-size: clamp(1.6rem, 5vw, 2.2rem);
@@ -1231,7 +1239,7 @@
     }
 
     /* ============================================================ */
-    /* MOBILE PERFORMANCE TUNING (visual output unchanged) */
+    /* MOBILE PERFORMANCE TUNING */
     /* ============================================================ */
     @media (max-width: 860px) {
       nav, .modal-overlay, .modal {
@@ -1416,7 +1424,7 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SINGLE MARQUEE — Glitch-Free -->
+<!-- SINGLE MARQUEE — RUN · TALK · SOCIALIZE · EXPERIENCE -->
 <!-- ============================================================ -->
 <section class="single-marquee">
   <div class="sm-track" id="smTrack">
@@ -1436,6 +1444,24 @@
     <span class="sm-word">TALK</span><span class="sm-sep">·</span>
     <span class="sm-word">SOCIALIZE</span><span class="sm-sep">·</span>
     <span class="sm-word">EXPERIENCE</span><span class="sm-sep">·</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PHOTO MARQUEE — MOVED UP (Right after marquee) -->
+<!-- ============================================================ -->
+<section class="photo-marquee-section" id="photoMarquee">
+  <div class="photo-marquee-header">
+    <h2></h2>
+    <p></p>
+  </div>
+  
+  <div class="photo-marquee-wrap">
+    <div class="photo-marquee-track--left" id="photoTrackLeft"></div>
+  </div>
+  
+  <div class="photo-marquee-wrap">
+    <div class="photo-marquee-track--right" id="photoTrackRight"></div>
   </div>
 </section>
 
@@ -1494,24 +1520,6 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- PHOTO MARQUEE -->
-<!-- ============================================================ -->
-<section class="photo-marquee-section" id="photoMarquee">
-  <div class="photo-marquee-header">
-    <h2>In The Frame</h2>
-    <p>Moments from the ground so far.</p>
-  </div>
-  
-  <div class="photo-marquee-wrap">
-    <div class="photo-marquee-track--left" id="photoTrackLeft"></div>
-  </div>
-  
-  <div class="photo-marquee-wrap">
-    <div class="photo-marquee-track--right" id="photoTrackRight"></div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
 <!-- FOOTER -->
 <!-- ============================================================ -->
 <footer>
@@ -1565,7 +1573,7 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- JAVASCRIPT — REMOVED lockHeroGridHeight() function -->
+<!-- JAVASCRIPT -->
 <!-- ============================================================ -->
 <script>
   // ============================================================
@@ -1609,7 +1617,7 @@
   })();
 
   // ============================================================
-  // 3. CRED-STYLE SCROLL TYPOGRAPHY
+  // 3. CRED-STYLE SCROLL TYPOGRAPHY — Earlier Glow + Brighter
   // ============================================================
   (function() {
     const lines = document.querySelectorAll('.typo-line');
@@ -1624,7 +1632,7 @@
       
       let progress = 0;
       const topOffset = sectionRect.top;
-      const startPos = windowHeight * 0.3;
+      const startPos = windowHeight * 0.5;
       const endPos = -sectionHeight + windowHeight * 0.7;
       
       if (topOffset < startPos && topOffset > endPos) {
@@ -1646,7 +1654,7 @@
         const lineProgress = (progress * totalLines - index) / 1.5;
         const clampedProgress = Math.min(Math.max(lineProgress, 0), 1);
         const eased = 1 - Math.pow(1 - clampedProgress, 3);
-        const opacity = 0.12 + (eased * 0.88);
+        const opacity = 0.25 + (eased * 0.75);
         
         if (line.textContent.includes('Welcome to MESH.')) {
           line.style.color = `rgba(123, 203, 197, ${opacity})`;
@@ -2101,7 +2109,8 @@
     }
   });
 
-  console.log('🚀 MESH — Default (Hero Background Locked)');
+  console.log('🚀 MESH — New Layout: Photo Marquee moved up');
+  console.log('📸 Hero locked · Typography glowing earlier');
 </script>
 </body>
 </html>
