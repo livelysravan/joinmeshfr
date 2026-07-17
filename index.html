@@ -109,7 +109,7 @@
     }
 
     /* ============================================================ */
-    /* HERO */
+    /* HERO — LOCKED BACKGROUND (NO ZOOM ON MOBILE) */
     /* ============================================================ */
     .hero {
       position: relative;
@@ -141,23 +141,33 @@
     }
     
     .hero-grid {
-      position: absolute; inset: 0; z-index: 0;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
       mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
       overflow: hidden;
       will-change: transform;
       opacity: 0.5;
+      /* FIX: Lock height so iOS doesn't resize it on scroll */
+      height: 100vh;
+      height: 100svh;
+      min-height: 100vh;
+      min-height: 100svh;
     }
-    .hero-grid svg { width: 100%; height: 100%; }
+    .hero-grid svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .hero-grid .thread { fill: none; stroke: #6a4f4f; stroke-linecap: round; }
     .hero-grid .thread-lit { fill: none; stroke: #7BCBC5; stroke-linecap: round; filter: url(#glow); }
     .hero-grid .knot { fill: #7BCBC5; opacity: 0.5; }
     .hero-grid .knot-glow { fill: #7BCBC5; opacity: 0.3; filter: blur(4px); }
 
-    /* CSS-driven drift replaces the old SMIL <animateTransform> — SMIL
-       animations run on the main thread in WebKit/Safari and were a
-       primary cause of the hero freezing on iPhone. This is GPU-composited. */
     .thread-track {
       animation: heroDrift 120s linear infinite;
+      will-change: transform;
     }
     @keyframes heroDrift {
       from { transform: translateX(0); }
@@ -1224,17 +1234,10 @@
     /* MOBILE PERFORMANCE TUNING (visual output unchanged) */
     /* ============================================================ */
     @media (max-width: 860px) {
-      /* backdrop-filter blur is one of the heaviest paint ops on mobile
-         GPUs; halving it on small screens is visually indistinguishable
-         at this element size but removes a major source of scroll jank */
       nav, .modal-overlay, .modal {
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
       }
-      /* Native SVG <feGaussianBlur> filters render on the CPU in WebKit/
-         Safari rather than the GPU, and combined with continuous motion
-         this was the primary cause of the hero freezing on iPhone.
-         Disabling on mobile only — desktop keeps the full glow. */
       .hero-grid .thread-lit { filter: none; }
       .hero-grid .knot-glow { filter: none; opacity: 0.18; }
     }
@@ -1562,7 +1565,7 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- JAVASCRIPT -->
+<!-- JAVASCRIPT — REMOVED lockHeroGridHeight() function -->
 <!-- ============================================================ -->
 <script>
   // ============================================================
@@ -1602,39 +1605,6 @@
         });
         ticking = true;
       }
-    });
-  })();
-
-  // ============================================================
-  // 2b. STABILIZE HERO BACKGROUND HEIGHT (fixes "zoom" on iOS scroll)
-  // ============================================================
-  (function() {
-    const heroGrid = document.getElementById('heroGrid');
-    if (!heroGrid) return;
-
-    // The hero-grid SVG uses preserveAspectRatio="xMidYMid slice", so any
-    // change to its own box height makes it re-crop/rescale — which reads
-    // as a "zoom". On iOS Safari, the address bar hiding/showing while you
-    // scroll causes 100svh containers to shift height in real time, and
-    // since hero-grid is absolutely positioned (inset:0) inside .hero, it
-    // was inheriting that shift. Locking hero-grid's own height (not
-    // .hero's — that stays flexible for correct page layout) to a value
-    // set only on load/resize/orientation-change, never on scroll, keeps
-    // the background pattern visually stable while scrolling.
-    function lockHeroGridHeight() {
-      heroGrid.style.height = window.innerHeight + 'px';
-    }
-
-    lockHeroGridHeight();
-
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(lockHeroGridHeight, 150);
-    }, { passive: true });
-    window.addEventListener('orientationchange', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(lockHeroGridHeight, 300);
     });
   })();
 
@@ -1819,9 +1789,6 @@
     if (!leftTrack || !rightTrack) return;
 
     function buildPhotoHTML(photo) {
-      // Request images sized closer to actual display size (max 260px wide
-      // on any breakpoint) instead of the original 600-800px — same visual
-      // result at this element size, far less data/decode cost on mobile.
       const optimizedSrc = photo.img.replace(/\/(\d+)\/(\d+)$/, '/400/460');
       return `
         <div class="photo-marquee-item">
@@ -1855,9 +1822,6 @@
     document.getElementById('modalSpots').textContent = eventData.spots || 'Limited spots';
     document.getElementById('modalDesc').textContent = eventData.desc || 'Full event details coming soon. Join us for an unforgettable experience!';
     modal.classList.add('active');
-    // iOS Safari ignores overflow:hidden on body while a fixed overlay is
-    // open and still allows background rubber-band scrolling. Pinning the
-    // body with position:fixed at the current offset is the standard fix.
     scrollLockY = window.pageYOffset;
     document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollLockY}px`;
@@ -1943,9 +1907,6 @@
       updateCounter();
     }
 
-    // Unified pointer-event based drag: fixes iOS/Android double-firing of
-    // touch + synthetic mouse events, and the click-vs-drag ambiguity that
-    // separate touch/mouse listener sets previously introduced.
     function enableDrag(entry){
       const card = entry.el;
       let startX = 0, startY = 0, dragX = 0;
@@ -1954,7 +1915,7 @@
       let isDrag = false;
 
       function onPointerDown(e){
-        if (pointerId !== null) return; // already tracking a pointer
+        if (pointerId !== null) return;
         pointerId = e.pointerId;
         startX = e.clientX;
         startY = e.clientY;
@@ -1972,7 +1933,6 @@
           if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
           lockedHorizontal = Math.abs(dx) > Math.abs(dy);
           if (!lockedHorizontal) {
-            // vertical intent — let the page scroll natively, stop tracking
             pointerId = null;
             return;
           }
@@ -2003,7 +1963,6 @@
         } else if (isDrag) {
           setPos(entry, 0, 0);
         } else if (!isDrag && Math.abs(dragX) < 6) {
-          // treat as a tap/click
           if (onClick) onClick(data[entry.dataIndex]);
         }
         isDrag = false;
@@ -2128,16 +2087,7 @@
   })();
 
   // ============================================================
-  // 11. HERO SECTION HEIGHT
-  // ============================================================
-  // .hero itself intentionally has no JS height override — it relies on
-  // CSS `100svh` (with `100vh` fallback) so mobile browser chrome changes
-  // don't cause layout gaps below the hero. Only the decorative background
-  // SVG's box is locked separately (see section 2b above) to stop it from
-  // visually rescaling during scroll.
-
-  // ============================================================
-  // 12. KEYBOARD NAVIGATION
+  // 11. KEYBOARD NAVIGATION
   // ============================================================
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -2151,7 +2101,7 @@
     }
   });
 
-  console.log('🚀 MESH — Glitch-Free Marquee (mobile-optimized)');
+  console.log('🚀 MESH — Default (Hero Background Locked)');
 </script>
 </body>
 </html>
