@@ -9,6 +9,8 @@
   <!-- Fonts — Only 2 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://picsum.photos" />
+  <link rel="dns-prefetch" href="https://picsum.photos" />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   
   <style>
@@ -147,9 +149,20 @@
     }
     .hero-grid svg { width: 100%; height: 100%; }
     .hero-grid .thread { fill: none; stroke: #6a4f4f; stroke-linecap: round; }
-    .hero-grid .thread-lit { fill: none; stroke: #7BCBC5; stroke-linecap: round; }
+    .hero-grid .thread-lit { fill: none; stroke: #7BCBC5; stroke-linecap: round; filter: url(#glow); }
     .hero-grid .knot { fill: #7BCBC5; opacity: 0.5; }
     .hero-grid .knot-glow { fill: #7BCBC5; opacity: 0.3; filter: blur(4px); }
+
+    /* CSS-driven drift replaces the old SMIL <animateTransform> — SMIL
+       animations run on the main thread in WebKit/Safari and were a
+       primary cause of the hero freezing on iPhone. This is GPU-composited. */
+    .thread-track {
+      animation: heroDrift 120s linear infinite;
+    }
+    @keyframes heroDrift {
+      from { transform: translateX(0); }
+      to { transform: translateX(-1440px); }
+    }
     
     .hero-inner {
       position: relative; 
@@ -1218,10 +1231,12 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
       }
-      /* glow filters (feGaussianBlur) on the hero thread SVG are expensive
-         to composite on mobile GPUs while the grid is mid-animation;
-         drop the blur radius instead of removing the glow entirely */
-      .hero-grid .knot-glow { filter: blur(2px); }
+      /* Native SVG <feGaussianBlur> filters render on the CPU in WebKit/
+         Safari rather than the GPU, and combined with continuous motion
+         this was the primary cause of the hero freezing on iPhone.
+         Disabling on mobile only — desktop keeps the full glow. */
+      .hero-grid .thread-lit { filter: none; }
+      .hero-grid .knot-glow { filter: none; opacity: 0.18; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1302,15 +1317,15 @@
           <path class="thread" d="M 14,887 C 142,857 116,697 222,645" style="stroke-width:1.1;opacity:0.61" />
           <path class="thread" d="M 553,-22 C 850,222 1146,468 1425,749" style="stroke-width:1.3;opacity:0.47" />
           <path class="thread" d="M -69,303 C 121,304 282,453 487,413" style="stroke-width:1.2;opacity:0.47" />
-          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:1.3;opacity:0.62" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.5;opacity:0.52" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.4;opacity:0.56" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:1.3;opacity:0.53" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.4;opacity:0.51" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.5;opacity:0.44" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.5;opacity:0.69" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:1.2;opacity:0.57" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.4;opacity:0.45" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:1.3;opacity:0.62"/>
+          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.5;opacity:0.52"/>
+          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.4;opacity:0.56"/>
+          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:1.3;opacity:0.53"/>
+          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.4;opacity:0.51"/>
+          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.5;opacity:0.44"/>
+          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.5;opacity:0.69"/>
+          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:1.2;opacity:0.57"/>
+          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.4;opacity:0.45"/>
           <circle class="knot" cx="521" cy="224" r="3.5" />
           <circle class="knot" cx="697" cy="77" r="4.0" />
           <circle class="knot" cx="899" cy="810" r="3.5" />
@@ -1361,15 +1376,15 @@
           <path class="thread" d="M 14,887 C 142,857 116,697 222,645" style="stroke-width:1.1;opacity:0.61" />
           <path class="thread" d="M 553,-22 C 850,222 1146,468 1425,749" style="stroke-width:1.3;opacity:0.47" />
           <path class="thread" d="M -69,303 C 121,304 282,453 487,413" style="stroke-width:1.2;opacity:0.47" />
-          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:1.3;opacity:0.62" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.5;opacity:0.52" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.4;opacity:0.56" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:1.3;opacity:0.53" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.4;opacity:0.51" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.5;opacity:0.44" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.5;opacity:0.69" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:1.2;opacity:0.57" filter="url(#glow)"/>
-          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.4;opacity:0.45" filter="url(#glow)"/>
+          <path class="thread-lit" d="M 1516,15 C 1464,90 1405,157 1305,173" style="stroke-width:1.3;opacity:0.62"/>
+          <path class="thread-lit" d="M 1502,644 C 1404,578 1322,498 1273,384" style="stroke-width:1.5;opacity:0.52"/>
+          <path class="thread-lit" d="M 201,967 C 252,678 333,397 433,112" style="stroke-width:1.4;opacity:0.56"/>
+          <path class="thread-lit" d="M 644,-39 C 724,215 787,472 786,749" style="stroke-width:1.3;opacity:0.53"/>
+          <path class="thread-lit" d="M 330,882 C 646,797 927,618 1256,540" style="stroke-width:1.4;opacity:0.51"/>
+          <path class="thread-lit" d="M 1531,-76 C 1071,112 587,236 123,454" style="stroke-width:1.5;opacity:0.44"/>
+          <path class="thread-lit" d="M 609,919 C 763,721 997,600 1135,375" style="stroke-width:1.5;opacity:0.69"/>
+          <path class="thread-lit" d="M 1095,877 C 1203,929 1242,803 1327,787" style="stroke-width:1.2;opacity:0.57"/>
+          <path class="thread-lit" d="M 39,21 C 417,197 811,343 1179,569" style="stroke-width:1.4;opacity:0.45"/>
           <circle class="knot" cx="521" cy="224" r="3.5" />
           <circle class="knot" cx="697" cy="77" r="4.0" />
           <circle class="knot" cx="899" cy="810" r="3.5" />
@@ -1385,7 +1400,6 @@
           <circle class="knot-glow" cx="433" cy="112" r="7" />
           <circle class="knot-glow" cx="1135" cy="375" r="8" />
         </g>
-        <animateTransform attributeName="transform" type="translate" from="0 0" to="-1440 0" dur="120s" repeatCount="indefinite" />
       </g>
     </svg>
   </div>
@@ -1772,9 +1786,13 @@
     if (!leftTrack || !rightTrack) return;
 
     function buildPhotoHTML(photo) {
+      // Request images sized closer to actual display size (max 260px wide
+      // on any breakpoint) instead of the original 600-800px — same visual
+      // result at this element size, far less data/decode cost on mobile.
+      const optimizedSrc = photo.img.replace(/\/(\d+)\/(\d+)$/, '/400/460');
       return `
         <div class="photo-marquee-item">
-          <img src="${photo.img}" alt="${photo.title}" loading="lazy" />
+          <img src="${optimizedSrc}" alt="${photo.title}" loading="lazy" decoding="async" />
         </div>
       `;
     }
