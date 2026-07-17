@@ -48,7 +48,7 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      height: 72px; padding: 0 24px;
+      height: 72px; padding: 0 32px;
       backdrop-filter: blur(20px);
       background: rgba(36,29,34,0.85);
       border-bottom: 1px solid rgba(74,53,53,0.3);
@@ -71,8 +71,8 @@
       overflow: hidden;
       background: #7BCBC5;
       color: #241D22;
-      padding: 12px 24px;
-      font-size: 12px;
+      padding: 12px 28px;
+      font-size: 13px;
       font-family: 'Space Grotesk', sans-serif;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -81,10 +81,29 @@
       border: none;
       cursor: pointer;
     }
+    .nav-cta::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
     .nav-cta:hover {
       background: #edeae1;
       transform: scale(1.05);
       box-shadow: 0 8px 25px rgba(123,203,197,0.3);
+    }
+    .nav-cta:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+    .nav-cta:active {
+      transform: scale(0.95);
     }
 
     /* ============================================================ */
@@ -197,7 +216,7 @@
     }
 
     /* ============================================================ */
-    /* SINGLE MARQUEE — Larger on Mobile */
+    /* SINGLE MARQUEE — Glitch-Free, No Hover Effects */
     /* ============================================================ */
     .single-marquee {
       position: relative;
@@ -209,7 +228,7 @@
       transform: translateZ(0);
       will-change: transform;
     }
-    
+
     .sm-track {
       display: flex;
       align-items: center;
@@ -217,15 +236,16 @@
       animation: smScroll 60s linear infinite;
       will-change: transform;
       transform: translateZ(0);
+      backface-visibility: hidden;
     }
-    
+
     .sm-track span {
       display: inline-block;
       white-space: nowrap;
       padding: 0 20px;
       flex-shrink: 0;
     }
-    
+
     .sm-word {
       font-family: 'Archivo Black', sans-serif;
       font-size: clamp(1.2rem, 3.5vw, 2.6rem);
@@ -239,7 +259,7 @@
       animation: shimmerText 4s ease-in-out infinite;
       will-change: background-position;
     }
-    
+
     .sm-sep {
       color: #7BCBC5;
       font-size: clamp(0.9rem, 2.2vw, 1.8rem);
@@ -247,18 +267,30 @@
       padding: 0 4px;
       font-family: 'Space Grotesk', sans-serif;
     }
-    
+
     @keyframes smScroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-50%, 0, 0); }
     }
-    
-    .single-marquee:hover .sm-track {
-      animation-duration: 45s;
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      .single-marquee {
+        padding: 14px 0 18px;
+      }
+      .sm-track span {
+        padding: 0 12px;
+      }
+      .sm-word {
+        font-size: clamp(0.9rem, 3.5vw, 1.4rem);
+      }
+      .sm-sep {
+        font-size: clamp(0.7rem, 2vw, 1rem);
+      }
     }
 
     /* ============================================================ */
-    /* CRED-STYLE SCROLL TYPOGRAPHY — Fixed Size */
+    /* CRED-STYLE SCROLL TYPOGRAPHY */
     /* ============================================================ */
     .about-typography {
       padding: 120px 32px 140px;
@@ -336,7 +368,7 @@
     }
 
     /* ============================================================ */
-    /* EVENTS — Instagram Post Size Cards */
+    /* EVENTS */
     /* ============================================================ */
     .events {
       padding: 60px 32px 40px;
@@ -430,7 +462,7 @@
     }
 
     /* ============================================================ */
-    /* CARD — Instagram Post Format (Portrait) */
+    /* CARD */
     /* ============================================================ */
     .card {
       position: absolute;
@@ -631,7 +663,7 @@
     }
 
     /* ============================================================ */
-    /* PHOTO MARQUEE — Two Rows, Different Photos */
+    /* PHOTO MARQUEE */
     /* ============================================================ */
     .photo-marquee-section {
       padding: 60px 0 80px;
@@ -1086,17 +1118,8 @@
       .hero {
         padding: 80px 16px 50px;
       }
-      .sm-word {
-        font-size: clamp(0.9rem, 3.5vw, 1.4rem);
-      }
-      .sm-track span {
-        padding: 0 12px;
-      }
-      .single-marquee {
-        padding: 14px 0 18px;
-      }
-      .sm-sep {
-        font-size: clamp(0.7rem, 2vw, 1rem);
+      .about-typography {
+        padding: 60px 16px 80px;
       }
       .typo-line {
         font-size: clamp(1.4rem, 4.5vw, 2rem);
@@ -1105,9 +1128,6 @@
         right: 12px;
         height: 100px;
         width: 2px;
-      }
-      .about-typography {
-        padding: 60px 16px 80px;
       }
       .typo-spacer {
         height: 16px;
@@ -1367,7 +1387,7 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SINGLE MARQUEE -->
+<!-- SINGLE MARQUEE — Glitch-Free -->
 <!-- ============================================================ -->
 <section class="single-marquee">
   <div class="sm-track" id="smTrack">
@@ -1445,7 +1465,7 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- PHOTO MARQUEE — Two Rows, Different Photos -->
+<!-- PHOTO MARQUEE -->
 <!-- ============================================================ -->
 <section class="photo-marquee-section" id="photoMarquee">
   <div class="photo-marquee-header">
@@ -1453,12 +1473,10 @@
     <p>Moments from the ground so far.</p>
   </div>
   
-  <!-- Row 1: Moves Left -->
   <div class="photo-marquee-wrap">
     <div class="photo-marquee-track--left" id="photoTrackLeft"></div>
   </div>
   
-  <!-- Row 2: Moves Right — Different Photos -->
   <div class="photo-marquee-wrap">
     <div class="photo-marquee-track--right" id="photoTrackRight"></div>
   </div>
@@ -1710,7 +1728,6 @@
     },
   ];
 
-  // Separate photo sets for each row
   const photoDataLeft = [
     { title: 'Evening Beach, March', meta: '3 RUNNERS · VARKALA', tag: 'RUN', img: 'https://picsum.photos/seed/beach/600/500' },
     { title: 'Warehouse Sessions Vol.1', meta: '300+ HEADS · INDIRANAGAR', tag: 'NIGHTS', img: 'https://picsum.photos/seed/warehouse/600/500' },
@@ -1734,7 +1751,7 @@
   ];
 
   // ============================================================
-  // 6. PHOTO MARQUEE — Two Rows, Different Photos
+  // 6. PHOTO MARQUEE
   // ============================================================
   (function() {
     const leftTrack = document.getElementById('photoTrackLeft');
@@ -1749,7 +1766,6 @@
       `;
     }
 
-    // Duplicate for seamless infinite scroll
     const leftHTML = photoDataLeft.map(p => buildPhotoHTML(p)).join('') + photoDataLeft.map(p => buildPhotoHTML(p)).join('');
     const rightHTML = photoDataRight.map(p => buildPhotoHTML(p)).join('') + photoDataRight.map(p => buildPhotoHTML(p)).join('');
     
@@ -2108,8 +2124,7 @@
     }
   });
 
-  console.log('🚀 MESH — Fully Fixed');
-  console.log('📸 Two rows with different photos');
+  console.log('🚀 MESH — Glitch-Free Marquee');
 </script>
 </body>
 </html>
