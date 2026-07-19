@@ -243,11 +243,11 @@
     }
 
     /* ============================================================ */
-    /* SINGLE MARQUEE — Glitch-Free, No Hover Effects */
+    /* SINGLE MARQUEE — Themed Blue Background + Diamond Icons */
     /* ============================================================ */
     .single-marquee {
       position: relative;
-      background: #241D22;
+      background: #7BCBC5;
       padding: 24px 0 28px;
       overflow: hidden;
       border-top: 1px solid rgba(123,203,197,0.08);
@@ -277,15 +277,17 @@
       font-size: clamp(1.2rem, 3.5vw, 2.6rem);
       text-transform: uppercase;
       letter-spacing: -0.01em;
-      color: #edeae1;
+      color: #241D22;
     }
 
-    .sm-sep {
-      color: #7BCBC5;
-      font-size: clamp(0.9rem, 2.2vw, 1.8rem);
-      opacity: 0.4;
+    .sm-diamond {
+      color: #241D22;
+      font-size: clamp(0.6rem, 1.5vw, 1.2rem);
+      opacity: 0.5;
       padding: 0 4px;
       font-family: 'Space Grotesk', sans-serif;
+      display: inline-block;
+      transform: rotate(45deg);
     }
 
     @keyframes smScroll {
@@ -304,8 +306,8 @@
       .sm-word {
         font-size: clamp(0.9rem, 3.5vw, 1.4rem);
       }
-      .sm-sep {
-        font-size: clamp(0.7rem, 2vw, 1rem);
+      .sm-diamond {
+        font-size: clamp(0.4rem, 1.2vw, 0.8rem);
       }
     }
 
@@ -1428,22 +1430,22 @@
 <!-- ============================================================ -->
 <section class="single-marquee">
   <div class="sm-track" id="smTrack">
-    <span class="sm-word">RUN</span><span class="sm-sep">·</span>
-    <span class="sm-word">TALK</span><span class="sm-sep">·</span>
-    <span class="sm-word">SOCIALIZE</span><span class="sm-sep">·</span>
-    <span class="sm-word">EXPERIENCE</span><span class="sm-sep">·</span>
-    <span class="sm-word">RUN</span><span class="sm-sep">·</span>
-    <span class="sm-word">TALK</span><span class="sm-sep">·</span>
-    <span class="sm-word">SOCIALIZE</span><span class="sm-sep">·</span>
-    <span class="sm-word">EXPERIENCE</span><span class="sm-sep">·</span>
-    <span class="sm-word">RUN</span><span class="sm-sep">·</span>
-    <span class="sm-word">TALK</span><span class="sm-sep">·</span>
-    <span class="sm-word">SOCIALIZE</span><span class="sm-sep">·</span>
-    <span class="sm-word">EXPERIENCE</span><span class="sm-sep">·</span>
-    <span class="sm-word">RUN</span><span class="sm-sep">·</span>
-    <span class="sm-word">TALK</span><span class="sm-sep">·</span>
-    <span class="sm-word">SOCIALIZE</span><span class="sm-sep">·</span>
-    <span class="sm-word">EXPERIENCE</span><span class="sm-sep">·</span>
+    <span class="sm-word">RUN</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">TALK</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">SOCIALIZE</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">EXPERIENCE</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">RUN</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">TALK</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">SOCIALIZE</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">EXPERIENCE</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">RUN</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">TALK</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">SOCIALIZE</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">EXPERIENCE</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">RUN</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">TALK</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">SOCIALIZE</span><span class="sm-diamond">◆</span>
+    <span class="sm-word">EXPERIENCE</span><span class="sm-diamond">◆</span>
   </div>
 </section>
 
@@ -1514,7 +1516,7 @@
     <span class="card-icon"></span>
     <h3>Join the <span>MESH</span> community</h3>
     <p>Get event updates, last-minute changes, and connect with 200+ members on WhatsApp.</p>
-    <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="community-cta">Join WhatsApp →</a>
+    <a href="https://wa.me/919778423214?text=Hey%20MESH!%20Count%20me%20in." target="_blank" rel="noopener noreferrer" class="community-cta">Join WhatsApp Community →</a>
     <span class="member-count" id="memberCount">✦ 0 members already here</span>
   </div>
 </section>
@@ -2109,7 +2111,7 @@
     }
   });
 
-  console.log('🚀 MESH — New Layout: Photo Marquee moved up');
+  console.log('🚀 MESH — Text marquee: Themed blue background + diamond icons');
   console.log('📸 Hero locked · Typography glowing earlier');
 </script>
 </body>
